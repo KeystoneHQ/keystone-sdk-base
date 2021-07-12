@@ -1,0 +1,9 @@
+build
+docs
+coverage
+dist
+*.e2e-bundle.*
+tmp
+*.min.js
+*.bundle.*
+node_modules

@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "target": "es5",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "declaration": true,
+      "strict": true
+    },
+    "lib": ["es2015"],
+    "exclude": ["__tests__"]
+  }

@@ -1,0 +1,3 @@
+[submodule "packages/qr-protocol/crypto-coin-message-protocol"]
+	path = packages/qr-protocol/crypto-coin-message-protocol
+	url = git@github.com:KeystoneHQ/keystone-crypto-coin-message-protocol.git

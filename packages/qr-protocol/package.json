@@ -1,0 +1,46 @@
+{
+  "name": "@keystonehq/qr-protocol",
+  "version": "1.0.0",
+  "description": "QRCode Protocol",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && npx tsc -p tsconfig.json -outDir ./dist && cp -R src/QRProtocolBuf dist/QRProtocolBuf",
+    "test": "jest",
+    "protobuf": "npx pbjs -t static-module -w commonjs -o src/QRProtocolBuf/proto.js crypto-coin-message-protocol/*.proto; npx pbts -o src/QRProtocolBuf/proto.d.ts src/QRProtocolBuf/proto.js",
+    "update-proto-buffer": "git submodule update --remote && npm run protobuf"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "dependencies": {
+    "@ngraveio/bc-ur": "^1.0.0",
+    "@types/crypto-js": "^4.0.1",
+    "crypto-js": "^4.0.0",
+    "protobufjs": "^6.10.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeystoneHQ/keystone-airgaped-base.git"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "__data__"
+    ]
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KeystoneHQ/keystone-airgaped-base/issues"
+  },
+  "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}

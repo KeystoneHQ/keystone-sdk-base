@@ -1,0 +1,24 @@
+{
+  "name": "@keystonehq/eth-keyring",
+  "version": "1.0.0",
+  "description": "eth-keyring interact with keystone",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && npx tsc -p tsconfig.json -outDir ./dist"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "soralit <soralitria@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@keystonehq/sdk": "^1.0.0",
+    "ethereumjs-tx": "^2.1.2",
+    "ethereumjs-util": "^7.0.8",
+    "hdkey": "^2.0.1"
+  }
+}
