@@ -7,6 +7,17 @@ import HDKey from 'hdkey';
 import sdk from '@keystonehq/sdk';
 import { toChecksumAddress, publicToAddress, rlp, toBuffer, unpadBuffer } from 'ethereumjs-util';
 import { Transaction } from 'ethereumjs-tx';
+import {
+    CryptoHDKey,
+    CryptoKeypath,
+    DataType,
+    ETHSignature,
+    EthSignRequest,
+    PathComponent,
+} from '@keystonehq/bc-ur-registry-eth';
+import { SupportedResult } from '@keystonehq/sdk';
+import { encode } from 'bs58check';
+import * as uuid from 'uuid';
 
 const keyringType = 'Air Gaped Device';
 const pathBase = 'm';
@@ -25,31 +36,82 @@ type StoredKeyring = {
 
 type PagedAccount = { address: string; balance: any; index: number };
 
-const readKeyringDescription = async (): Promise<{ xfp: string; xpub: string; hdPath: string }> => {
-    const decodedResult = await sdk.read({
+const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hdPath: string }> => {
+    const decodedResult = await sdk.read([SupportedResult.UR_CRYPTO_HDKEY], {
         title: 'Sync Keystone',
         description: "Please click 'Sync' in Keystone and scan the QR code displayed later",
     });
-    const { type, result } = decodedResult;
-    if (type === 'json') {
-        const { xfp, xpub, path } = JSON.parse(result);
-        if (xfp && xpub && path) {
-            return {
-                xfp,
-                xpub,
-                hdPath: path,
-            };
+    if (decodedResult.status === 'success') {
+        const { result } = decodedResult;
+        const cryptoHDKey = CryptoHDKey.fromCBOR(result.cbor);
+        const hdPath = `m/${cryptoHDKey.getOrigin().getPath()}`;
+        const xfp = cryptoHDKey.getOrigin().getSourceFingerprint()?.toString('hex');
+        if (!xfp) {
+            throw new Error('invalid crypto-hd-key, cannot get source fingerprint');
         }
-    } else if (type === 'none') {
+        const xpub = constructXPub(cryptoHDKey);
+        return {
+            xfp,
+            xpub,
+            hdPath,
+        };
+    } else {
         throw new Error('Reading canceled');
     }
-    throw new Error('Invalid qrcode');
+};
+
+const constructXPub = (cryptoHDKey: CryptoHDKey) => {
+    const version = Buffer.from('0488b21e', 'hex');
+    const depth = cryptoHDKey.getOrigin().getDepth() || cryptoHDKey.getOrigin().getComponents().length;
+    const depthBuffer = Buffer.alloc(1);
+    depthBuffer.writeUInt8(depth);
+    const parentFingerprint = cryptoHDKey.getParentFingerprint();
+    const paths = cryptoHDKey.getOrigin().getComponents();
+    const lastPath = paths[paths.length - 1];
+    const index = lastPath.isHardened() ? lastPath.getIndex()! + 0x80000000 : lastPath.getIndex()!;
+    const indexBuffer = Buffer.alloc(4);
+    indexBuffer.writeUInt32BE(index);
+    const chainCode = cryptoHDKey.getChainCode();
+    const key = cryptoHDKey.getKey();
+    return encode(Buffer.concat([version, depthBuffer, parentFingerprint, indexBuffer, chainCode, key]));
+};
+
+const constructCryptoKeypath = (hdPath: string) => {
+    const paths = hdPath.replace('m/', '').split('/');
+    return new CryptoKeypath(
+        paths.map((path) => {
+            const index = parseInt(path.replace("'", ''));
+            let isHardened = false;
+            if (path.endsWith("'")) {
+                isHardened = true;
+            }
+            return new PathComponent({ index, hardened: isHardened });
+        }),
+    );
+};
+
+const constructEthSignRequest = (
+    address: string,
+    hdPath: string,
+    dataType: DataType,
+    signData: Buffer,
+    signId: string,
+) => {
+    const signPath = constructCryptoKeypath(hdPath);
+    return new EthSignRequest({
+        requestId: Buffer.from(uuid.parse(signId) as Uint8Array),
+        signData,
+        dataType: dataType,
+        chainId: 1,
+        derivationPath: signPath,
+        address,
+    });
 };
 
 class AirGapedKeyring extends EventEmitter {
     static type = keyringType;
     static async getKeyring(): Promise<AirGapedKeyring> {
-        const { xpub, xfp, hdPath } = await readKeyringDescription();
+        const { xfp, xpub, hdPath } = await readKeyringCryptoHDKey();
         return new AirGapedKeyring({
             xfp,
             xpub,
@@ -103,7 +165,7 @@ class AirGapedKeyring extends EventEmitter {
     }
 
     async readKeyring(): Promise<void> {
-        const { xpub, xfp, hdPath } = await readKeyringDescription();
+        const { xpub, xfp, hdPath } = await readKeyringCryptoHDKey();
         this.xfp = xfp;
         this.xpub = xpub;
         this.hdPath = hdPath;
@@ -227,34 +289,30 @@ class AirGapedKeyring extends EventEmitter {
     }
 
     async readSignature(signId: string): Promise<{ r: Buffer; s: Buffer; v: Buffer }> {
-        const signature = await sdk.read({
+        const result = await sdk.read([SupportedResult.UR_ETH_SIGNATURE], {
             title: 'Submit signing result',
             description: 'Please scan signing result QR code displayed on your Keystone',
         });
-        if (signature) {
-            if (signature.type === 'ur') {
-                const { signId: peerSignId, signature: signatureHex } = JSON.parse(
-                    Buffer.from(signature.result, 'hex').toString('utf-8'),
-                );
-                if (peerSignId && signatureHex) {
-                    if (peerSignId !== signId) {
-                        throw new Error('read signature error: mismatched signId');
-                    }
-                    const r = Buffer.from(signatureHex.slice(0, 64), 'hex');
-                    const s = Buffer.from(signatureHex.slice(64, 128), 'hex');
-                    const v = Buffer.from(signatureHex.slice(128), 'hex');
-                    return {
-                        r,
-                        s,
-                        v,
-                    };
-                }
-                throw new Error('invalid signature qrcode');
-            } else {
-                throw new Error('invalid signature qrcode');
+        if (result.status === 'canceled') {
+            throw new Error('read signature canceled');
+        } else {
+            const ethSignature = ETHSignature.fromCBOR(result.result.cbor);
+            const requestIdBuffer = ethSignature.getRequestId();
+            const signature = ethSignature.getSignature();
+            const requestId = uuid.stringify(requestIdBuffer);
+            if (requestId !== signId) {
+                throw new Error('read signature error: mismatched signId');
             }
+            const signatureHex = signature.toString('hex');
+            const r = Buffer.from(signatureHex.slice(0, 64), 'hex');
+            const s = Buffer.from(signatureHex.slice(64, 128), 'hex');
+            const v = Buffer.from(signatureHex.slice(128), 'hex');
+            return {
+                r,
+                s,
+                v,
+            };
         }
-        throw new Error('read signature canceled');
     }
     // tx is an instance of the ethereumjs-transaction class.
 
@@ -273,13 +331,14 @@ class AirGapedKeyring extends EventEmitter {
         const txHex = AirGapedKeyring.serializeTx(tx).toString('hex');
         const hdPath = this._pathFromAddress(address);
         const signId = hash.sha256().update(`${txHex}${hdPath}${this.xfp}`).digest('hex').slice(0, 8);
-        const signPayload = {
-            txHex,
-            xfp: this.xfp,
+        const ethSignRequest = constructEthSignRequest(
+            address,
             hdPath,
+            DataType.transaction,
+            AirGapedKeyring.serializeTx(tx),
             signId,
-        };
-        await sdk.play(Buffer.from(JSON.stringify(signPayload), 'utf-8').toString('hex'), {
+        );
+        await sdk.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Request signing transaction',
             description:
@@ -299,13 +358,14 @@ class AirGapedKeyring extends EventEmitter {
     async signPersonalMessage(withAccount: string, messageHex: string): Promise<string> {
         const hdPath = this._pathFromAddress(withAccount);
         const signId = hash.sha256().update(`${messageHex}${hdPath}${this.xfp}`).digest('hex').slice(0, 8);
-        const signPayload = {
-            messageHex,
-            xfp: this.xfp,
+        const ethSignRequest = constructEthSignRequest(
+            withAccount,
             hdPath,
+            DataType.rawHex,
+            Buffer.from(messageHex, 'hex'),
             signId,
-        };
-        await sdk.play(Buffer.from(JSON.stringify(signPayload), 'utf-8').toString('hex'), {
+        );
+        await sdk.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Request signing message',
             description: 'Please scan the QR code below with Keystone, review message and authorize to sign',
@@ -316,18 +376,15 @@ class AirGapedKeyring extends EventEmitter {
 
     async signTypedData(withAccount: string, typedData: any): Promise<Buffer> {
         const hdPath = this._pathFromAddress(withAccount);
-        const signId = hash
-            .sha256()
-            .update(`${JSON.stringify(typedData)}${hdPath}${this.xfp}`)
-            .digest('hex')
-            .slice(0, 8);
-        const signPayload = {
-            data: typedData,
-            xfp: this.xfp,
+        const signId = uuid.v4();
+        const ethSignRequest = constructEthSignRequest(
+            withAccount,
             hdPath,
+            DataType.typedData,
+            Buffer.from(JSON.stringify(typedData), 'utf-8'),
             signId,
-        };
-        await sdk.play(Buffer.from(JSON.stringify(signPayload), 'utf-8').toString('hex'), {
+        );
+        await sdk.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Request signing typed data',
             description: 'Please scan the QR code below with Keystone, review data and authorize to sign',

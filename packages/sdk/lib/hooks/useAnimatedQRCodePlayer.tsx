@@ -5,46 +5,36 @@ import { Play } from '../types';
 import { EventEmitter } from 'events';
 import { Button } from '../components/Button';
 import { ButtonGroup } from '../components/ButtonGroup';
-import { UR } from '@keystonehq/qr-protocol';
+import { UR, UREncoder } from '@ngraveio/bc-ur';
+
+const DEFAULT_SPEED = 100;
 
 export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
-    const [data, setData] = useState<string>('');
+    const [data, setData] = useState<UR>(new UR(Buffer.from('')));
 
-    const [refreshSpeed, setRefreshSpeed] = useState(500);
+    const [refreshSpeed, setRefreshSpeed] = useState(DEFAULT_SPEED);
     const [hasNext, setHasNext] = useState(false);
     const [title, setTitle] = useState<string | null>(null);
     const [description, setDescription] = useState<string | null>(null);
 
-    const [isPause, setPause] = useState(false);
-
-    const urEncoder = useMemo(() => UR.encodeByUREncoder(Buffer.from(data, 'hex')), [data]);
+    const urEncoder = useMemo(() => new UREncoder(data), [data]);
 
     const [qr, setQR] = useState<string>(urEncoder.nextPart());
 
-    const pause = () => {
-        setPause(true);
-    };
-
-    const play = () => {
-        setPause(false);
-    };
-
     const ee = useMemo(() => new EventEmitter(), []);
     const reset = () => {
-        setData('');
-        setRefreshSpeed(500);
+        setData(new UR(Buffer.from('')));
+        setRefreshSpeed(DEFAULT_SPEED);
     };
 
     useEffect(() => {
-        if (!isPause) {
-            const subscribe = interval(refreshSpeed).subscribe(() => {
-                setQR(urEncoder.nextPart());
-            });
-            return () => {
-                subscribe.unsubscribe();
-            };
-        }
-    }, [refreshSpeed, isPause, urEncoder]);
+        const subscribe = interval(refreshSpeed).subscribe(() => {
+            setQR(urEncoder.nextPart());
+        });
+        return () => {
+            subscribe.unsubscribe();
+        };
+    }, [refreshSpeed, urEncoder]);
 
     const finish = () => {
         ee.emit('finish', true);
@@ -61,9 +51,6 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
             {title && <p>{title}</p>}
             {description && <p>{description}</p>}
             <BaseQRCode size={288} data={qr} />
-            <ButtonGroup>
-                {isPause ? <Button onClick={play}>Play</Button> : <Button onClick={pause}>Pause</Button>}
-            </ButtonGroup>
             <ButtonGroup>
                 <Button onClick={finish}>{hasNext ? 'Continue' : 'Finish'}</Button>
             </ButtonGroup>

@@ -1,10 +1,15 @@
 import { UR } from '@ngraveio/bc-ur';
 
-export type DecodedResult = {
-    type: 'json' | 'ur' | 'text' | 'none';
-    result: string;
-    error?: string;
+type DecodedSuccess = {
+    result: UR;
+    status: 'success';
 };
+
+type DecodedCanceled = {
+    status: 'canceled';
+};
+
+export type DecodedResult = DecodedSuccess | DecodedCanceled;
 
 export type Play = (
     data: UR,
@@ -16,4 +21,14 @@ export type Play = (
     },
 ) => Promise<void>;
 
-export type Read = (options?: { title?: string; description?: string }) => Promise<DecodedResult>;
+export type Read = (
+    expect: SupportedResult[],
+    options?: { title?: string; description?: string },
+) => Promise<DecodedResult>;
+
+export enum SupportedResult {
+    UR_BYTES = 'bytes',
+    UR_CRYPTO_HDKEY = 'crypto-hdkey',
+    UR_ETH_SIGN_REQUEST = 'eth-sign-request',
+    UR_ETH_SIGNATURE = 'eth-signature',
+}

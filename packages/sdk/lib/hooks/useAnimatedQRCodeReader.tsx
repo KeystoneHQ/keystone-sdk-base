@@ -3,10 +3,9 @@ import QrReader from 'react-qr-reader';
 import { EventEmitter } from 'events';
 import { Button } from '../components/Button';
 
-import { Read } from '../types';
+import { Read, SupportedResult } from '../types';
 import { ButtonGroup } from '../components/ButtonGroup';
-
-import { UR } from '@keystonehq/qr-protocol';
+import { UR, URDecoder } from '@ngraveio/bc-ur';
 
 export interface URQRCodeData {
     total: number;
@@ -15,53 +14,30 @@ export interface URQRCodeData {
 }
 
 export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read }] => {
-    const [urDecoder, setURDecoder] = useState(UR.decodeByURDecoder());
+    const [expectTypes, setExpectTypes] = useState<SupportedResult[]>([]);
+    const [urDecoder, setURDecoder] = useState(new URDecoder());
     const [error, setError] = useState('');
     const ee = useMemo(() => new EventEmitter(), []);
     const [title, setTitle] = useState<string | null>(null);
     const [progress, setProgress] = useState(0);
     const [description, setDescription] = useState<string | null>(null);
     const reset = () => {
-        setURDecoder(UR.decodeByURDecoder());
+        setURDecoder(new URDecoder());
         setError('');
     };
 
     const processQRCode = (qr: string) => {
-        try {
-            processJSON(qr);
-        } catch (e1) {
-            try {
-                processUR(qr.toLocaleLowerCase());
-            } catch (e2) {
-                processText(qr);
-            }
-        }
+        processUR(qr);
     };
 
     const handleStop = () => {
         ee.emit('read', {
-            type: 'none',
-            result: '',
+            status: 'canceled',
         });
     };
 
     const handleRetry = () => {
         reset();
-    };
-
-    const processJSON = (data: string) => {
-        JSON.parse(data);
-        ee.emit('read', {
-            type: 'json',
-            result: data,
-        });
-    };
-
-    const processText = (data: string) => {
-        ee.emit('read', {
-            type: 'text',
-            result: data,
-        });
     };
 
     const processUR = (ur: string) => {
@@ -70,11 +46,17 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read }] => {
                 urDecoder.receivePart(ur);
                 setProgress(urDecoder.getProgress());
             } else {
-                const result = urDecoder.result().decodeCBOR().toString('hex');
-                ee.emit('read', {
-                    type: 'ur',
-                    result,
+                const result = urDecoder.resultUR();
+                expectTypes.forEach((et) => {
+                    if (et === result.type) {
+                        ee.emit('read', {
+                            result,
+                            status: 'success',
+                        });
+                        return;
+                    }
                 });
+                throw new Error(`received ur type ${result.type}, but expected [${expectTypes.join(',')}]`);
             }
         } catch (e) {
             setError(e.message);
@@ -115,8 +97,9 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read }] => {
     return [
         element,
         {
-            read: (options) => {
+            read: (expect, options) => {
                 return new Promise((resolve) => {
+                    setExpectTypes(expect);
                     if (options) {
                         options.title && setTitle(options.title);
                         options.description && setDescription(options.description);
