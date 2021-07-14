@@ -16,8 +16,8 @@
   "author": "soralit <soralitria@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry-eth": "^1.0.0",
-    "@keystonehq/sdk": "^1.0.0",
+    "@keystonehq/bc-ur-registry-eth": "^0.1.0",
+    "@keystonehq/sdk": "^0.1.0",
     "bs58check": "^2.1.2",
     "ethereumjs-tx": "^2.1.2",
     "ethereumjs-util": "^7.0.8",
