@@ -15,6 +15,7 @@ export enum DataType {
     transaction = 1,
     typedData = 2,
     rawHex = 3,
+    typedTransaction = 4,
 }
 
 type signRequestProps = {
