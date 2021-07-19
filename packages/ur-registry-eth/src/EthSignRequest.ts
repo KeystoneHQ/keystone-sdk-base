@@ -1,6 +1,8 @@
 import { CryptoKeypath, extend } from '@keystonehq/bc-ur-registry';
-const { RegistryItem, decodeToDataItem, RegistryTypes ,DataItem } = extend;
 import { ExtendedRegistryTypes } from './RegistryType';
+
+const { RegistryItem, decodeToDataItem, RegistryTypes ,DataItem } = extend;
+
 enum Keys {
     requestId = 1,
     signData,
@@ -77,7 +79,7 @@ export class EthSignRequest extends RegistryItem {
         return new DataItem(map);
     };
 
-    public static fromDataItem = (dataItem: DataItem) => {
+    public static fromDataItem = (dataItem) => {
         const map = dataItem.getData();
         const signData = map[Keys.signData];
         const dataType = map[Keys.dataType];
