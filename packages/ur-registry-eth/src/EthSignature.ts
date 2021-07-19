@@ -1,6 +1,5 @@
 import { extend } from '@keystonehq/bc-ur-registry';
-import { DataItem } from '@keystonehq/bc-ur-registry/src/lib';
-const { RegistryItem, RegistryTypes, decodeToDataItem } = extend;
+const { RegistryItem, RegistryTypes, decodeToDataItem, DataItem } = extend;
 import { ExtendedRegistryTypes } from './RegistryType';
 
 enum Keys {
