@@ -4,7 +4,7 @@
   "scripts": {
     "build": "lerna run build",
     "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
-    "test": "jest"
+    "test": "lerna run test"
   },
   "jest": {
     "modulePathIgnorePatterns": ["__data__"]

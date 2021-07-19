@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "npm run clean && npx tsc -p tsconfig.json -outDir ./dist"
+    "build": "npm run clean && npx tsc -p tsconfig.json -outDir ./dist",
+    "test": "jest"
   },
   "publishConfig": {
     "access": "public"

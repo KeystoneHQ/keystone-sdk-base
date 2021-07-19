@@ -1,8 +1,6 @@
 import { extend } from '@keystonehq/bc-ur-registry';
-import { DataItem } from '@keystonehq/bc-ur-registry/src/lib';
-const { RegistryItem, RegistryTypes, decodeToDataItem } = extend;
 import { ExtendedRegistryTypes } from './RegistryType';
-
+const { RegistryItem, RegistryTypes, decodeToDataItem, DataItem } = extend;
 enum Keys {
     requestId = 1,
     signature,
@@ -32,7 +30,7 @@ export class ETHSignature extends RegistryItem {
         return new DataItem(map);
     };
 
-    public static fromDataItem = (dataItem: DataItem) => {
+    public static fromDataItem = (dataItem) => {
         const map = dataItem.getData();
         const signature = map[Keys.signature];
         const requestId = map[Keys.requestId] ? map[Keys.requestId].getData() : undefined;
