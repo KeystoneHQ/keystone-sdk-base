@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install Dependencies
-        run: npx lerna clean && npx lerna bootstrap
+        run: npx lerna clean --yes && npx lerna bootstrap
 
       # Runs a single command using the runners shell
       - name: Compile
