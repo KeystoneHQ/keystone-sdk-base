@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 let initialized = false;
 let read: Read;
 let play: Play;
-let cameraReady: boolean
+let cameraReady: boolean;
 
 const bootstrap = (): void => {
     const htmlBody = document.getElementsByTagName('body').item(0) as HTMLBodyElement;
