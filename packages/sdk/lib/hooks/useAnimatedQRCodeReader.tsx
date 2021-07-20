@@ -13,7 +13,8 @@ export interface URQRCodeData {
     data: string;
 }
 
-export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read }] => {
+export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read, cameraReady: boolean }] => {
+    const [cameraReady, setCameraReady] = useState<boolean>(false)
     const [expectTypes, setExpectTypes] = useState<SupportedResult[]>([]);
     const [urDecoder, setURDecoder] = useState(new URDecoder());
     const [error, setError] = useState('');
@@ -79,6 +80,9 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read }] => {
                         processQRCode(data);
                     }
                 }}
+                onLoad={() => {
+                    setCameraReady(true)
+                }}
                 delay={100}
                 style={{ width: '100%' }}
                 onError={(e) => {
@@ -110,6 +114,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read }] => {
                     });
                 });
             },
+            cameraReady
         },
     ];
 };

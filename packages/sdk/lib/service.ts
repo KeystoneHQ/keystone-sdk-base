@@ -5,6 +5,9 @@ import { Play, Read } from './types';
 import Modal from 'react-modal';
 
 let initialized = false;
+let read: Read;
+let play: Play;
+let cameraReady: boolean;
 
 const bootstrap = (): void => {
     const htmlBody = document.getElementsByTagName('body').item(0) as HTMLBodyElement;
@@ -15,27 +18,26 @@ const bootstrap = (): void => {
     ReactDOM.render(React.createElement(Root), sdkDiv);
 };
 
-const setup = (r: Read, p: Play) => {
+export const setupSdk = (r: Read, p: Play, status: boolean) => {
     initialized = true;
     read = r;
     play = p;
+    cameraReady = status;
 };
 
-let read: Read;
-
-let play: Play;
-
-export default {
+const sdk = {
     bootstrap,
-    setup,
-    makeService: () => {
+    getSdk: () => {
         if (initialized) {
             return {
                 read,
                 play,
+                cameraReady
             };
         } else {
             throw new Error('SDK is not initialized');
         }
     },
-};
+}
+
+export default sdk;

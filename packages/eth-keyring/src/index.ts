@@ -4,7 +4,7 @@ import hash from 'hash.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import HDKey from 'hdkey';
-import sdk from '@keystonehq/sdk';
+import sdk, {SupportedResult} from '@keystonehq/sdk';
 import { toChecksumAddress, publicToAddress, rlp, toBuffer, unpadBuffer } from 'ethereumjs-util';
 import { Transaction } from 'ethereumjs-tx';
 import {
@@ -15,7 +15,6 @@ import {
     EthSignRequest,
     PathComponent,
 } from '@keystonehq/bc-ur-registry-eth';
-import { SupportedResult } from '@keystonehq/sdk';
 import { encode } from 'bs58check';
 import * as uuid from 'uuid';
 
@@ -36,8 +35,11 @@ type StoredKeyring = {
 
 type PagedAccount = { address: string; balance: any; index: number };
 
+sdk.bootstrap();
+const keystoneSDK =sdk.getSdk();
+
 const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hdPath: string }> => {
-    const decodedResult = await sdk.read([SupportedResult.UR_CRYPTO_HDKEY], {
+    const decodedResult = await keystoneSDK.read([SupportedResult.UR_CRYPTO_HDKEY], {
         title: 'Sync Keystone',
         description: "Please click 'Sync' in Keystone and scan the QR code displayed later",
     });
@@ -289,7 +291,7 @@ class AirGapedKeyring extends EventEmitter {
     }
 
     async readSignature(signId: string): Promise<{ r: Buffer; s: Buffer; v: Buffer }> {
-        const result = await sdk.read([SupportedResult.UR_ETH_SIGNATURE], {
+        const result = await keystoneSDK.read([SupportedResult.UR_ETH_SIGNATURE], {
             title: 'Submit signing result',
             description: 'Please scan signing result QR code displayed on your Keystone',
         });
@@ -338,7 +340,7 @@ class AirGapedKeyring extends EventEmitter {
             AirGapedKeyring.serializeTx(tx),
             signId,
         );
-        await sdk.play(ethSignRequest.toUR(), {
+        await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Request signing transaction',
             description:
@@ -365,7 +367,7 @@ class AirGapedKeyring extends EventEmitter {
             Buffer.from(messageHex, 'hex'),
             signId,
         );
-        await sdk.play(ethSignRequest.toUR(), {
+        await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Request signing message',
             description: 'Please scan the QR code below with Keystone, review message and authorize to sign',
@@ -384,7 +386,7 @@ class AirGapedKeyring extends EventEmitter {
             Buffer.from(JSON.stringify(typedData), 'utf-8'),
             signId,
         );
-        await sdk.play(ethSignRequest.toUR(), {
+        await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Request signing typed data',
             description: 'Please scan the QR code below with Keystone, review data and authorize to sign',
