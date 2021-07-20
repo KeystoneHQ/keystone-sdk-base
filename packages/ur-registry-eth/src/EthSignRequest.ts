@@ -1,7 +1,7 @@
-import { CryptoKeypath, extend } from '@keystonehq/bc-ur-registry';
+import { CryptoKeypath, extend, DataItem } from '@keystonehq/bc-ur-registry';
 import { ExtendedRegistryTypes } from './RegistryType';
 
-const { RegistryItem, decodeToDataItem, RegistryTypes ,DataItem } = extend;
+const { RegistryItem, decodeToDataItem, RegistryTypes } = extend;
 
 enum Keys {
     requestId = 1,

@@ -10,7 +10,7 @@ import { UR, UREncoder } from '@ngraveio/bc-ur';
 const DEFAULT_SPEED = 100;
 
 export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
-    const [data, setData] = useState<UR>(new UR(Buffer.from('')));
+    const [data, setData] = useState<UR>(new UR(Buffer.from('NO DATA', 'utf-8')));
 
     const [refreshSpeed, setRefreshSpeed] = useState(DEFAULT_SPEED);
     const [hasNext, setHasNext] = useState(false);

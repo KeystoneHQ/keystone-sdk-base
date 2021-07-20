@@ -5,7 +5,7 @@ import { Button } from '../components/Button';
 
 import { Read, SupportedResult } from '../types';
 import { ButtonGroup } from '../components/ButtonGroup';
-import { UR, URDecoder } from '@ngraveio/bc-ur';
+import { URDecoder } from '@ngraveio/bc-ur';
 
 export interface URQRCodeData {
     total: number;
