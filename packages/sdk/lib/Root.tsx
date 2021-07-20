@@ -1,8 +1,8 @@
-import service from './service';
+import {setupSdk} from './service';
 import { useController } from './hooks/useController';
 
 export default () => {
-    const [Controller, { read, play }] = useController();
-    service.setup(read, play);
+    const [Controller, { read, play, cameraReady }] = useController();
+    setupSdk(read, play, cameraReady);
     return Controller;
 };

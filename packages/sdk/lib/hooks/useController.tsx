@@ -20,12 +20,13 @@ export const useController = (): [
     {
         play: Play;
         read: Read;
+        cameraReady: boolean;
     },
 ] => {
     const [visible, setVisible] = useState(false);
     const [mode, setMode] = useState<'read' | 'play'>('play');
     const [AnimatedQRCodePlayer, { play }] = useAnimatedQRCodePlayer();
-    const [AnimatedQRCodeReader, { read }] = useAnimatedQRCodeReader();
+    const [AnimatedQRCodeReader, { read, cameraReady }] = useAnimatedQRCodeReader();
     const reset = () => {
         setVisible(false);
         setMode('play');
@@ -67,6 +68,7 @@ export const useController = (): [
                 reset();
                 return result;
             },
+            cameraReady,
         },
     ];
 };
