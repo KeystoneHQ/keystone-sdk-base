@@ -318,7 +318,7 @@ class AirGapedKeyring extends EventEmitter {
         const hdPath = this._pathFromAddress(address);
         const chainId = tx.getChainId()
         const requestId = uuid.v4();
-        const requestIdBuffer = Buffer.from(uuid.parse(requestId))
+        const requestIdBuffer = Buffer.from(uuid.parse(requestId) as Uint8Array)
         const ethSignRequest = constructEthSignRequest(
             requestIdBuffer,
             address,
@@ -347,7 +347,7 @@ class AirGapedKeyring extends EventEmitter {
     async signPersonalMessage(withAccount: string, messageHex: string): Promise<string> {
         const hdPath = this._pathFromAddress(withAccount);
         const requestId = uuid.v4();
-        const requestIdBuffer = Buffer.from(uuid.parse(requestId))
+        const requestIdBuffer = Buffer.from(uuid.parse(requestId) as Uint8Array)
         const ethSignRequest = constructEthSignRequest(
             requestIdBuffer,
             withAccount,
@@ -367,7 +367,7 @@ class AirGapedKeyring extends EventEmitter {
     async signTypedData(withAccount: string, typedData: any): Promise<Buffer> {
         const hdPath = this._pathFromAddress(withAccount);
         const requestId = uuid.v4();
-        const requestIdBuffer = Buffer.from(uuid.parse(requestId))
+        const requestIdBuffer = Buffer.from(uuid.parse(requestId) as Uint8Array)
         const ethSignRequest = constructEthSignRequest(
             requestIdBuffer,
             withAccount,
