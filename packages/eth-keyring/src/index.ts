@@ -15,7 +15,6 @@ import {
     EthSignRequest,
     PathComponent,
 } from '@keystonehq/bc-ur-registry-eth';
-import { encode } from 'bs58check';
 import * as uuid from 'uuid';
 
 const keyringType = 'Air Gaped Device';
@@ -51,7 +50,7 @@ const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hd
         if (!xfp) {
             throw new Error('invalid crypto-hd-key, cannot get source fingerprint');
         }
-        const xpub = constructXPub(cryptoHDKey);
+        const xpub =  cryptoHDKey.getBip32Key();
         return {
             xfp,
             xpub,
@@ -60,22 +59,6 @@ const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hd
     } else {
         throw new Error('Reading canceled');
     }
-};
-
-const constructXPub = (cryptoHDKey: CryptoHDKey) => {
-    const version = Buffer.from('0488b21e', 'hex');
-    const depth = cryptoHDKey.getOrigin().getDepth() || cryptoHDKey.getOrigin().getComponents().length;
-    const depthBuffer = Buffer.alloc(1);
-    depthBuffer.writeUInt8(depth);
-    const parentFingerprint = cryptoHDKey.getParentFingerprint();
-    const paths = cryptoHDKey.getOrigin().getComponents();
-    const lastPath = paths[paths.length - 1];
-    const index = lastPath.isHardened() ? lastPath.getIndex()! + 0x80000000 : lastPath.getIndex()!;
-    const indexBuffer = Buffer.alloc(4);
-    indexBuffer.writeUInt32BE(index);
-    const chainCode = cryptoHDKey.getChainCode();
-    const key = cryptoHDKey.getKey();
-    return encode(Buffer.concat([version, depthBuffer, parentFingerprint, indexBuffer, chainCode, key]));
 };
 
 const constructCryptoKeypath = (hdPath: string) => {
@@ -93,18 +76,19 @@ const constructCryptoKeypath = (hdPath: string) => {
 };
 
 const constructEthSignRequest = (
+    requestId: Buffer,
     address: string,
     hdPath: string,
     dataType: DataType,
     signData: Buffer,
-    signId: string,
+    chainId?: number,
 ) => {
     const signPath = constructCryptoKeypath(hdPath);
     return new EthSignRequest({
-        requestId: Buffer.from(uuid.parse(signId) as Uint8Array),
+        requestId,
         signData,
         dataType: dataType,
-        chainId: 1,
+        chainId: chainId,
         derivationPath: signPath,
         address,
     });
@@ -290,7 +274,7 @@ class AirGapedKeyring extends EventEmitter {
         this.accounts = this.accounts.filter((a) => a.toLowerCase() !== address.toLowerCase());
     }
 
-    async readSignature(signId: string): Promise<{ r: Buffer; s: Buffer; v: Buffer }> {
+    async readSignature(sendRequestID: string): Promise<{ r: Buffer; s: Buffer; v: Buffer }> {
         const result = await keystoneSDK.read([SupportedResult.UR_ETH_SIGNATURE], {
             title: 'Submit signing result',
             description: 'Please scan signing result QR code displayed on your Keystone',
@@ -302,8 +286,8 @@ class AirGapedKeyring extends EventEmitter {
             const requestIdBuffer = ethSignature.getRequestId();
             const signature = ethSignature.getSignature();
             const requestId = uuid.stringify(requestIdBuffer);
-            if (requestId !== signId) {
-                throw new Error('read signature error: mismatched signId');
+            if (requestId !== sendRequestID) {
+                throw new Error('read signature error: mismatched requestId');
             }
             const signatureHex = signature.toString('hex');
             const r = Buffer.from(signatureHex.slice(0, 64), 'hex');
@@ -319,6 +303,7 @@ class AirGapedKeyring extends EventEmitter {
     // tx is an instance of the ethereumjs-transaction class.
 
     private static serializeTx(tx: Transaction): Buffer {
+        // need use EIP-155 
         const items = [
             ...tx.raw.slice(0, 6),
             toBuffer(tx.getChainId()),
@@ -330,15 +315,17 @@ class AirGapedKeyring extends EventEmitter {
     }
 
     async signTransaction(address: string, tx: Transaction): Promise<Transaction> {
-        const txHex = AirGapedKeyring.serializeTx(tx).toString('hex');
         const hdPath = this._pathFromAddress(address);
-        const signId = hash.sha256().update(`${txHex}${hdPath}${this.xfp}`).digest('hex').slice(0, 8);
+        const chainId = tx.getChainId()
+        const requestId = uuid.v4();
+        const requestIdBuffer = Buffer.from(uuid.parse(requestId) as Uint8Array)
         const ethSignRequest = constructEthSignRequest(
+            requestIdBuffer,
             address,
             hdPath,
             DataType.transaction,
             AirGapedKeyring.serializeTx(tx),
-            signId,
+            chainId,
         );
         await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
@@ -346,7 +333,7 @@ class AirGapedKeyring extends EventEmitter {
             description:
                 'Please scan the QR code below with Keystone, review transaction information and authorize to sign',
         });
-        const { r, s, v } = await this.readSignature(signId);
+        const { r, s, v } = await this.readSignature(requestId);
         tx.r = r;
         tx.s = s;
         tx.v = v;
@@ -359,39 +346,41 @@ class AirGapedKeyring extends EventEmitter {
 
     async signPersonalMessage(withAccount: string, messageHex: string): Promise<string> {
         const hdPath = this._pathFromAddress(withAccount);
-        const signId = hash.sha256().update(`${messageHex}${hdPath}${this.xfp}`).digest('hex').slice(0, 8);
+        const requestId = uuid.v4();
+        const requestIdBuffer = Buffer.from(uuid.parse(requestId) as Uint8Array)
         const ethSignRequest = constructEthSignRequest(
+            requestIdBuffer,
             withAccount,
             hdPath,
             DataType.rawHex,
             Buffer.from(messageHex, 'hex'),
-            signId,
         );
         await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Request signing message',
             description: 'Please scan the QR code below with Keystone, review message and authorize to sign',
         });
-        const { r, s, v } = await this.readSignature(signId);
+        const { r, s, v } = await this.readSignature(requestId);
         return '0x' + r + s + v;
     }
 
     async signTypedData(withAccount: string, typedData: any): Promise<Buffer> {
         const hdPath = this._pathFromAddress(withAccount);
-        const signId = uuid.v4();
+        const requestId = uuid.v4();
+        const requestIdBuffer = Buffer.from(uuid.parse(requestId) as Uint8Array)
         const ethSignRequest = constructEthSignRequest(
+            requestIdBuffer,
             withAccount,
             hdPath,
             DataType.typedData,
             Buffer.from(JSON.stringify(typedData), 'utf-8'),
-            signId,
         );
         await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Request signing typed data',
             description: 'Please scan the QR code below with Keystone, review data and authorize to sign',
         });
-        const { r, s, v } = await this.readSignature(signId);
+        const { r, s, v } = await this.readSignature(requestId);
         return Buffer.concat([r, s, v]);
     }
 
