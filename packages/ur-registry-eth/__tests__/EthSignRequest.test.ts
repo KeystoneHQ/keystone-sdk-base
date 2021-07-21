@@ -12,7 +12,7 @@ describe('eth-sign-request', () => {
             new PathComponent({ index: 1, hardened: true }),
             new PathComponent({ index: 0, hardened: false }),
             new PathComponent({ index: 1, hardened: false }),
-          ]);
+          ], Buffer.from('12345678', 'hex'));
 
         // const ethRequestId = uuid.v4(); 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d as example
         const ethRequestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
@@ -28,11 +28,24 @@ describe('eth-sign-request', () => {
 
         const cborHex = ethSignRequest.toCBOR().toString('hex');
         const ur = ethSignRequest.toUREncoder(1000).nextPart();
-        expect(ur).toBe('ur:eth-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoyadlecsdwykadykadykaewkadwkknztwfje')
+        expect(ur).toBe('ur:eth-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfkswdtklffd')
         const ethSignRequstDecoded = EthSignRequest.fromCBOR(Buffer.from(cborHex, 'hex'));
         expect(uuid.stringify(ethSignRequest.getRequestId())).toBe(ethRequestId);
         expect(ethSignRequstDecoded.getChainId()).toBe(1);
         expect(ethSignRequstDecoded.getDataType()).toBe(1);
         expect(ethSignRequstDecoded.getSignData().toString("hex")).toEqual("f849808609184e72a00082271094000000000000000000000000000000000000000080a47f7465737432000000000000000000000000000000000000000000000000000000600057808080");    
+    })
+
+    it('should construct an ethSignRequest object from string', () => {
+        const hdPath = "M/44'/1'/1'/0/1";
+        const xfp = '12345678';
+        const rlpData = Buffer.from('f849808609184e72a00082271094000000000000000000000000000000000000000080a47f7465737432000000000000000000000000000000000000000000000000000000600057808080', 'hex')
+        const ethRequestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+
+        const ethRequest = EthSignRequest.constructETHRequest(rlpData, DataType.transaction, hdPath, xfp,ethRequestId,1)
+
+        const ur = ethRequest.toUREncoder(1000).nextPart();
+        expect(ur).toBe('ur:eth-sign-request/onadtpdafyndcawmgtaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlkzolbyaaeaeaeaeaeaewkcsdwykadykadykaewkadwkaocybgeehfksnlytlndp')
+
     })
 })

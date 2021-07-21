@@ -1,4 +1,4 @@
-import { CryptoKeypath, extend, DataItem } from '@keystonehq/bc-ur-registry';
+import { CryptoKeypath, extend, DataItem, PathComponent } from '@keystonehq/bc-ur-registry';
 import { ExtendedRegistryTypes } from './RegistryType';
 
 const { RegistryItem, decodeToDataItem, RegistryTypes } = extend;
@@ -103,5 +103,28 @@ export class EthSignRequest extends RegistryItem {
     public static fromCBOR = (_cborPayload: Buffer) => {
         const dataItem = decodeToDataItem(_cborPayload);
         return EthSignRequest.fromDataItem(dataItem);
+    };
+
+    public static constructETHRequest(signData: Buffer, signDataType: DataType, hdPath: string, xfp: string, uuidString?: string, chainId?: number) {
+        const paths = hdPath.replace('[m|M]/', '').split('/');
+        const hdpathObject = new CryptoKeypath(
+            paths.map((path) => {
+                const index = parseInt(path.replace("'", ''));
+                let isHardened = false;
+                if (path.endsWith("'")) {
+                    isHardened = true;
+                }
+                return new PathComponent({ index, hardened: isHardened });
+            }),
+            Buffer.from(xfp, 'hex')
+        );
+        
+        return new EthSignRequest({
+            requestId: uuidString ? Buffer.from(uuidString, 'hex') : undefined,
+            signData,
+            dataType: signDataType,
+            derivationPath: hdpathObject,
+            chainId
+        })
     };
 }
