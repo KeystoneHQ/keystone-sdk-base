@@ -23,7 +23,7 @@ type signRequestProps = {
     requestId?: Buffer;
     signData: Buffer;
     dataType: DataType;
-    chainId: number;
+    chainId?: number;
     derivationPath: CryptoKeypath;
     address?: string;
 };
@@ -67,10 +67,12 @@ export class EthSignRequest extends RegistryItem {
         if (this.address) {
             map[Keys.address] = this.address;
         }
+        if(this.chainId) {
+            map[Keys.chainId] = this.chainId
+        }
 
         map[Keys.signData] = this.signData;
         map[Keys.dataType] = this.dataType;
-        map[Keys.chainId] = this.chainId;
 
         const keyPath = this.derivationPath.toDataItem();
         keyPath.setTag(this.derivationPath.getRegistryType().getTag());
@@ -83,8 +85,8 @@ export class EthSignRequest extends RegistryItem {
         const map = dataItem.getData();
         const signData = map[Keys.signData];
         const dataType = map[Keys.dataType];
-        const chainId = map[Keys.chainId];
         const derivationPath = CryptoKeypath.fromDataItem(map[Keys.derivationPath]);
+        const chainId = map[Keys.chainId] ? map[Keys.chainId] : undefined;
         const address = map[Keys.address] ? map[Keys.address] : undefined;
         const requestId = map[Keys.requestId] ? map[Keys.requestId].getData() : undefined;
 
