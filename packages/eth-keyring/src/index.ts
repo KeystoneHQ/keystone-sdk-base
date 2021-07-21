@@ -4,7 +4,7 @@ import hash from 'hash.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import HDKey from 'hdkey';
-import sdk, {SupportedResult} from '@keystonehq/sdk';
+import sdk, { SupportedResult } from '@keystonehq/sdk';
 import { toChecksumAddress, publicToAddress, rlp, toBuffer, unpadBuffer } from 'ethereumjs-util';
 import { Transaction } from 'ethereumjs-tx';
 import {
@@ -36,7 +36,7 @@ type StoredKeyring = {
 type PagedAccount = { address: string; balance: any; index: number };
 
 sdk.bootstrap();
-const keystoneSDK =sdk.getSdk();
+const keystoneSDK = sdk.getSdk();
 
 const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hdPath: string }> => {
     const decodedResult = await keystoneSDK.read([SupportedResult.UR_CRYPTO_HDKEY], {
@@ -98,13 +98,14 @@ const constructEthSignRequest = (
     dataType: DataType,
     signData: Buffer,
     signId: string,
+    chainId?: number,
 ) => {
     const signPath = constructCryptoKeypath(hdPath);
     return new EthSignRequest({
         requestId: Buffer.from(uuid.parse(signId) as Uint8Array),
         signData,
         dataType: dataType,
-        chainId: 1,
+        chainId: chainId || 1,
         derivationPath: signPath,
         address,
     });
@@ -339,6 +340,7 @@ class AirGapedKeyring extends EventEmitter {
             DataType.transaction,
             AirGapedKeyring.serializeTx(tx),
             signId,
+            tx.getChainId(),
         );
         await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
