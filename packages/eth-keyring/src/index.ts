@@ -15,7 +15,6 @@ import {
     EthSignRequest,
     PathComponent,
 } from '@keystonehq/bc-ur-registry-eth';
-import { encode } from 'bs58check';
 import * as uuid from 'uuid';
 
 const keyringType = 'Air Gaped Device';
@@ -51,7 +50,7 @@ const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hd
         if (!xfp) {
             throw new Error('invalid crypto-hd-key, cannot get source fingerprint');
         }
-        const xpub = constructXPub(cryptoHDKey);
+        const xpub =  cryptoHDKey.getBip32Key();
         return {
             xfp,
             xpub,
@@ -60,22 +59,6 @@ const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hd
     } else {
         throw new Error('Reading canceled');
     }
-};
-
-const constructXPub = (cryptoHDKey: CryptoHDKey) => {
-    const version = Buffer.from('0488b21e', 'hex');
-    const depth = cryptoHDKey.getOrigin().getDepth() || cryptoHDKey.getOrigin().getComponents().length;
-    const depthBuffer = Buffer.alloc(1);
-    depthBuffer.writeUInt8(depth);
-    const parentFingerprint = cryptoHDKey.getParentFingerprint();
-    const paths = cryptoHDKey.getOrigin().getComponents();
-    const lastPath = paths[paths.length - 1];
-    const index = lastPath.isHardened() ? lastPath.getIndex()! + 0x80000000 : lastPath.getIndex()!;
-    const indexBuffer = Buffer.alloc(4);
-    indexBuffer.writeUInt32BE(index);
-    const chainCode = cryptoHDKey.getChainCode();
-    const key = cryptoHDKey.getKey();
-    return encode(Buffer.concat([version, depthBuffer, parentFingerprint, indexBuffer, chainCode, key]));
 };
 
 const constructCryptoKeypath = (hdPath: string) => {
