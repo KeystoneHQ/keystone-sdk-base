@@ -2,6 +2,7 @@
   "name": "keystone-airgaped-base",
   "private": true,
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
     "test": "lerna run test"
