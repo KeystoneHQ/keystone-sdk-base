@@ -23,6 +23,15 @@
   "author": "soralit <soralitria@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry": "^0.4.2"
+    "@keystonehq/bc-ur-registry": "^0.4.2",
+    "bip32": "^2.0.6",
+    "bs58check": "^2.1.2",
+    "ethereumjs-tx": "^2.1.2",
+    "ethereumjs-util": "^7.0.8",
+    "hdkey": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/bs58check": "^2.1.0",
+    "@types/uuid": "^8.3.1"
   }
 }

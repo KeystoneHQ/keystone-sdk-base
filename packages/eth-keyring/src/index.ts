@@ -389,6 +389,7 @@ class AirGapedKeyring extends EventEmitter {
     _addressFromIndex(pb: string, i: number): string {
         this.checkKeyring();
         if (!this.hdk) {
+            // @ts-ignore
             this.hdk = HDKey.fromExtendedKey(this.xpub);
         }
         const dkey = this.hdk.derive(`${pb}/0/${i}`);

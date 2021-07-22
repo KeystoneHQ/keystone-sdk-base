@@ -11,4 +11,4 @@ cbor.patchTags(
 export { EthSignRequest, DataType } from './EthSignRequest';
 export { ETHSignature } from './EthSignature';
 
-export * as utils from './utlis'
+export { generateAddressfromXpub } from './utlis'

@@ -9,7 +9,10 @@
     "test": "lerna run test"
   },
   "jest": {
-    "modulePathIgnorePatterns": ["__data__"]
+    "modulePathIgnorePatterns": [
+      "__data__"
+    ],
+    "testEnvironment": "node"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.9.6",
