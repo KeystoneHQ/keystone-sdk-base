@@ -106,7 +106,7 @@ export class EthSignRequest extends RegistryItem {
     };
 
     public static constructETHRequest(signData: Buffer, signDataType: DataType, hdPath: string, xfp: string, uuidString?: string, chainId?: number, address?: string) {
-        const paths = hdPath.replace('[m|M]/', '').split('/');
+        const paths = hdPath.replace(/[m|M]\//, '').split('/');
         const hdpathObject = new CryptoKeypath(
             paths.map((path) => {
                 const index = parseInt(path.replace("'", ''));
