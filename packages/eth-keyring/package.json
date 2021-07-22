@@ -1,6 +1,6 @@
 {
     "name": "@keystonehq/eth-keyring",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "eth-keyring interact with keystone",
     "main": "dist/index.js",
     "types": "src/index.ts",
