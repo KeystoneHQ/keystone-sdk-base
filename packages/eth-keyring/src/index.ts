@@ -257,7 +257,7 @@ class AirGapedKeyring extends EventEmitter {
             description: 'Please scan signing result QR code displayed on your Keystone',
         });
         if (result.status === 'canceled') {
-            throw new Error('read signature canceled');
+            throw new Error('#ktek_error[read-cancel]: read signature canceled');
         } else {
             const ethSignature = ETHSignature.fromCBOR(result.result.cbor);
             const requestIdBuffer = ethSignature.getRequestId();
