@@ -75,25 +75,6 @@ const constructCryptoKeypath = (hdPath: string) => {
     );
 };
 
-const constructEthSignRequest = (
-    requestId: Buffer,
-    address: string,
-    hdPath: string,
-    dataType: DataType,
-    signData: Buffer,
-    chainId?: number,
-) => {
-    const signPath = constructCryptoKeypath(hdPath);
-    return new EthSignRequest({
-        requestId,
-        signData,
-        dataType: dataType,
-        chainId: chainId,
-        derivationPath: signPath,
-        address,
-    });
-};
-
 class AirGapedKeyring extends EventEmitter {
     static type = keyringType;
     static async getKeyring(): Promise<AirGapedKeyring> {

@@ -25,7 +25,7 @@ type signRequestProps = {
     dataType: DataType;
     chainId?: number;
     derivationPath: CryptoKeypath;
-    address?: string;
+    address?: Buffer;
 };
 
 export class EthSignRequest extends RegistryItem {
@@ -34,7 +34,7 @@ export class EthSignRequest extends RegistryItem {
     private dataType: DataType;
     private chainId: number;
     private derivationPath: CryptoKeypath;
-    private address: string;
+    private address: Buffer;
 
     getRegistryType = () => ExtendedRegistryTypes.ETH_SIGN_REQUEST;
 
@@ -118,14 +118,14 @@ export class EthSignRequest extends RegistryItem {
             }),
             Buffer.from(xfp, 'hex')
         );
-
+        
         return new EthSignRequest({
             requestId: uuidString ? Buffer.from(uuidString, 'hex') : undefined,
             signData,
             dataType: signDataType,
             derivationPath: hdpathObject,
             chainId,
-            address
+            address: address ? Buffer.from(address, 'hex') : undefined
         });
     }
 }
