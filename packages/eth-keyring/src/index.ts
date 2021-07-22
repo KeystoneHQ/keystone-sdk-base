@@ -1,8 +1,4 @@
 import { EventEmitter } from 'events';
-import hash from 'hash.js';
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import HDKey from 'hdkey';
 import sdk, {SupportedResult} from '@keystonehq/sdk';
 import { toChecksumAddress, publicToAddress, rlp, toBuffer, unpadBuffer } from 'ethereumjs-util';
