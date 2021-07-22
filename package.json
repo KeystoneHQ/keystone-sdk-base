@@ -2,12 +2,17 @@
   "name": "keystone-airgaped-base",
   "private": true,
   "scripts": {
+    "clean": "lerna clean",
+    "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
     "test": "lerna run test"
   },
   "jest": {
-    "modulePathIgnorePatterns": ["__data__"]
+    "modulePathIgnorePatterns": [
+      "__data__"
+    ],
+    "testEnvironment": "node"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.9.6",

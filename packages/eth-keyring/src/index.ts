@@ -318,15 +318,15 @@ class AirGapedKeyring extends EventEmitter {
         const hdPath = this._pathFromAddress(address);
         const chainId = tx.getChainId()
         const requestId = uuid.v4();
-        const requestIdBuffer = Buffer.from(uuid.parse(requestId) as Uint8Array)
-        const ethSignRequest = constructEthSignRequest(
-            requestIdBuffer,
-            address,
-            hdPath,
-            DataType.transaction,
+        const ethSignRequest = EthSignRequest.constructETHRequest(
             AirGapedKeyring.serializeTx(tx),
-            chainId,
-        );
+            DataType.transaction,
+            hdPath,
+            this.xfp,
+            requestId,
+            chainId
+        )
+
         await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Request signing transaction',
@@ -347,13 +347,14 @@ class AirGapedKeyring extends EventEmitter {
     async signPersonalMessage(withAccount: string, messageHex: string): Promise<string> {
         const hdPath = this._pathFromAddress(withAccount);
         const requestId = uuid.v4();
-        const requestIdBuffer = Buffer.from(uuid.parse(requestId) as Uint8Array)
-        const ethSignRequest = constructEthSignRequest(
-            requestIdBuffer,
-            withAccount,
-            hdPath,
-            DataType.rawHex,
+        const ethSignRequest = EthSignRequest.constructETHRequest(
             Buffer.from(messageHex, 'hex'),
+            DataType.rawHex,
+            hdPath,
+            this.xfp,
+            requestId,
+            undefined,
+            withAccount,                        
         );
         await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
@@ -367,13 +368,14 @@ class AirGapedKeyring extends EventEmitter {
     async signTypedData(withAccount: string, typedData: any): Promise<Buffer> {
         const hdPath = this._pathFromAddress(withAccount);
         const requestId = uuid.v4();
-        const requestIdBuffer = Buffer.from(uuid.parse(requestId) as Uint8Array)
-        const ethSignRequest = constructEthSignRequest(
-            requestIdBuffer,
-            withAccount,
-            hdPath,
-            DataType.typedData,
+        const ethSignRequest = EthSignRequest.constructETHRequest(
             Buffer.from(JSON.stringify(typedData), 'utf-8'),
+            DataType.typedData,
+            hdPath,
+            this.xfp,
+            requestId,
+            undefined,
+            withAccount,
         );
         await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
@@ -387,6 +389,7 @@ class AirGapedKeyring extends EventEmitter {
     _addressFromIndex(pb: string, i: number): string {
         this.checkKeyring();
         if (!this.hdk) {
+            // @ts-ignore
             this.hdk = HDKey.fromExtendedKey(this.xpub);
         }
         const dkey = this.hdk.derive(`${pb}/0/${i}`);
