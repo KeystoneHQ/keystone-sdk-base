@@ -66,7 +66,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         const ethSignRequest = EthSignRequest.constructETHRequest(
             unsignedBuffer,
             DataType.transaction,
-            findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `M${this.hdpath}`),
+            findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`),
             this.xfp,
             uuid.v4(),
             this._networkId,
@@ -94,7 +94,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         const requestId = uuid.v4()
         const ethSignRequest = EthSignRequest.constructETHRequest(dataHex, 
             DataType.rawHex,             
-            findHDpatfromAddress(address, this.xpub, this.accountNumber, `M${this.hdpath}`),
+            findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`),
             this.xfp,
             uuid.v4(),
             undefined,
@@ -116,7 +116,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         const requestId = uuid.v4()
         const ethSignRequest = EthSignRequest.constructETHRequest(dataHex, 
             DataType.typedData,             
-            findHDpatfromAddress(address, this.xpub, this.accountNumber, `M${this.hdpath}`),
+            findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`),
             this.xfp,
             uuid.v4(),
             undefined,
