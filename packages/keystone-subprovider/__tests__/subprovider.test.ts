@@ -52,7 +52,7 @@ describe('Keystone Subprovider', () => {
           ])
     })
 
-    it('should do some testing', async () => {
+    it('should generate the txhex', async () => {
         const txParams = {
             nonce: '0x00',
             gasPrice: '0x09184e72a000',
@@ -71,4 +71,59 @@ describe('Keystone Subprovider', () => {
         const txHex = await provider.signTransactionAsync(txParams)
         expect(txHex).toEqual('0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f746573743200000000000000000000000000000000000000000000000000000060005725a06d19ce88a3272c2d8cb8ca6a58bf1e72f63d4adc6163b25256b0f6a4e7841066a04c857185f395e590dfa7bc7a08fd675aa1127802f204eae7cdcfa6e1797840d0')
     })
+
+
+    it('should throw error if the chainId is missmatched', async () => {
+        const txParams = {
+            nonce: '0x00',
+            gasPrice: '0x09184e72a000',
+            gas: '0x2710',
+            to: '0x0000000000000000000000000000000000000000',
+            value: '0x00',
+            data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057',
+            from: '0x9858EfFD232B4033E47d90003D41EC34EcaEda94',
+            chainId: 2
+          }
+
+        const provider = new KeystoneSubprovider({
+            networkId: 1
+        })
+
+        try{
+            await provider.signTransactionAsync(txParams)
+        }catch(e) {
+            expect(e.message).toBe('inconsistent chainId')
+        }
+    })
+
+    it('should get the signature from personlMessage', async () => {
+        const provider = new KeystoneSubprovider({
+            networkId: 1
+        })
+
+        const signature = await provider.signPersonalMessageAsync('68656c6c6f', '0x9858EfFD232B4033E47d90003D41EC34EcaEda94')
+        expect(signature).toBe('0x6d19ce88a3272c2d8cb8ca6a58bf1e72f63d4adc6163b25256b0f6a4e78410664c857185f395e590dfa7bc7a08fd675aa1127802f204eae7cdcfa6e1797840d025')
+    })
+
+    it('should verify personal message data is hex', async () => {
+        const provider = new KeystoneSubprovider({
+            networkId: 1
+        })
+        try {
+            await provider.signPersonalMessageAsync('hello', '0x9858EfFD232B4033E47d90003D41EC34EcaEda94')
+        } catch(e) {
+            expect(e.message).toBe('data is not a hexString')
+        }    
+    })
+
+    it('should get the signature from typedData', async () => {
+        const provider = new KeystoneSubprovider({
+            networkId: 1
+        })
+
+        const signature = await provider.signTypedDataAsync('0x9858EfFD232B4033E47d90003D41EC34EcaEda94', 'helloworld')
+        expect(signature).toBe('0x6d19ce88a3272c2d8cb8ca6a58bf1e72f63d4adc6163b25256b0f6a4e78410664c857185f395e590dfa7bc7a08fd675aa1127802f204eae7cdcfa6e1797840d025')
+    })
+
+    
 })
