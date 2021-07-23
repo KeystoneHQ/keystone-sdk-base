@@ -6,7 +6,6 @@ import { Read, SupportedResult } from '../types';
 import { ButtonGroup } from '../components/ButtonGroup';
 import { URDecoder } from '@ngraveio/bc-ur';
 
-
 const QrReader = React.lazy(() => import("react-qr-reader"));
 
 export interface URQRCodeData {
