@@ -266,15 +266,15 @@ class AirGapedKeyring extends EventEmitter {
             const ethSignature = ETHSignature.fromCBOR(result.result.cbor);
             const requestIdBuffer = ethSignature.getRequestId();
             const signature = ethSignature.getSignature();
-            const requestId = uuid.stringify(requestIdBuffer);
-            if (requestId !== sendRequestID) {
-                throw new Error('read signature error: mismatched requestId');
+            if(requestIdBuffer) {
+                const requestId = uuid.stringify(requestIdBuffer);
+                if (requestId !== sendRequestID) {
+                    throw new Error('read signature error: mismatched requestId');
+                }
             }
-            const signatureHex = signature.toString('hex');
-            signature.slice(0,32)
             const r = signature.slice(0,32)
-            const s = Buffer.from(signatureHex.slice(64, 128), 'hex');
-            const v = Buffer.from(signatureHex.slice(128), 'hex');
+            const s = signature.slice(32, 64)
+            const v = signature.slice(64, 65)
             return {
                 r,
                 s,

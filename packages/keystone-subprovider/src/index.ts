@@ -12,6 +12,13 @@ type KeystoneSubproviderConfigs = {
     networkId: number;
 }
 
+const assertIsHexString = (data: string) => {
+    if(Buffer.from(data, 'hex').toString('hex') === data.toLowerCase()) {
+        return true
+    }
+    throw new Error('data is not a hexString')
+}
+
 export default class KeystoneSubprovider extends BaseWalletSubprovider {
     private readonly _networkId: number;
     private readonly keystoneSdk: any;
@@ -47,6 +54,9 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     }
 
     public async signTransactionAsync(txParams: PartialTxParams): Promise<string> {
+        if(txParams.chainId !== this._networkId) {
+            throw new Error('inconsistent chainId')
+        }
         if (!this.synced) {
             await this.getAccountsAsync()
         }
@@ -63,12 +73,12 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         let value = tx.getMessageToSign(false)
         const unsignedBuffer = rlp.encode(value)
         let requestId = uuid.v4();
-        const hdPath = findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`)
+        const addressPath = findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`)
         
         const ethSignRequest = EthSignRequest.constructETHRequest(
             unsignedBuffer,
             DataType.transaction,
-            hdPath,
+            addressPath,
             this.xfp,
             requestId,
             this._networkId,
@@ -92,13 +102,21 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     }
 
     public async signPersonalMessageAsync(data: string, address: string): Promise<string> {
+        if(!this.synced) {
+            await this.getAccountsAsync()
+        }
+
+        assertIsHexString(data)
+        
         const dataHex = Buffer.from(data, 'hex');
         const requestId = uuid.v4()
-        const ethSignRequest = EthSignRequest.constructETHRequest(dataHex, 
+        const addressPath = findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`)
+        const ethSignRequest = EthSignRequest.constructETHRequest(
+            dataHex, 
             DataType.personalMessage,             
-            findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`),
+            addressPath,
             this.xfp,
-            uuid.v4(),
+            requestId,
             undefined,
             address
         )
@@ -115,13 +133,18 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
 
     public async signTypedDataAsync(address: string, typedData: any): Promise<string> {
         // the typed data is an json string which encoded to Bytes
+        if(!this.synced) {
+            await this.getAccountsAsync()
+        }
         const dataHex = Buffer.from(typedData, 'utf-8');
         const requestId = uuid.v4()
-        const ethSignRequest = EthSignRequest.constructETHRequest(dataHex, 
+        const addressPath = findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`)
+        const ethSignRequest = EthSignRequest.constructETHRequest(
+            dataHex, 
             DataType.typedData,             
-            findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`),
+            addressPath,
             this.xfp,
-            uuid.v4(),
+            requestId,
             undefined,
             address
         )
