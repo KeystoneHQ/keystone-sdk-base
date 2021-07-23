@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
       "target": "es5",
-      "module": "esnext",
+      "module": "umd",
       "moduleResolution": "node",
       "allowSyntheticDefaultImports": true,
       "allowJs": true,
