@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/keystone-subprovider",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "> TODO: description",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
@@ -42,5 +42,5 @@
     "ethereumjs-util": "^7.0.10",
     "uuid": "^8.3.2"
   },
-  "gitHead": "ddc9822be83812c4bec27b744f9958d4f30497f9"
+  "gitHead": "a26355cd9cf012c2baff78ff68a6c25fb2de7e9a"
 }
