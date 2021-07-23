@@ -1,5 +1,6 @@
 import { CryptoKeypath, extend, DataItem, PathComponent } from '@keystonehq/bc-ur-registry';
 import { ExtendedRegistryTypes } from './RegistryType';
+import * as uuid from 'uuid';
 
 const { RegistryItem, decodeToDataItem, RegistryTypes } = extend;
 
@@ -68,7 +69,7 @@ export class EthSignRequest extends RegistryItem {
             map[Keys.address] = this.address;
         }
         if (this.chainId) {
-            map[Keys.chainId] = this.chainId
+            map[Keys.chainId] = this.chainId;
         }
 
         map[Keys.signData] = this.signData;
@@ -105,7 +106,15 @@ export class EthSignRequest extends RegistryItem {
         return EthSignRequest.fromDataItem(dataItem);
     };
 
-    public static constructETHRequest(signData: Buffer, signDataType: DataType, hdPath: string, xfp: string, uuidString?: string, chainId?: number, address?: string) {
+    public static constructETHRequest(
+        signData: Buffer,
+        signDataType: DataType,
+        hdPath: string,
+        xfp: string,
+        uuidString?: string,
+        chainId?: number,
+        address?: string,
+    ) {
         const paths = hdPath.replace(/[m|M]\//, '').split('/');
         const hdpathObject = new CryptoKeypath(
             paths.map((path) => {
@@ -116,11 +125,11 @@ export class EthSignRequest extends RegistryItem {
                 }
                 return new PathComponent({ index, hardened: isHardened });
             }),
-            Buffer.from(xfp, 'hex')
+            Buffer.from(xfp, 'hex'),
         );
         
         return new EthSignRequest({
-            requestId: uuidString ? Buffer.from(uuidString, 'hex') : undefined,
+            requestId: uuidString ? Buffer.from(uuid.parse(uuidString) as Uint8Array) : undefined,
             signData,
             dataType: signDataType,
             derivationPath: hdpathObject,

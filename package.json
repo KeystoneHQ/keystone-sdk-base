@@ -27,5 +27,8 @@
     "lerna": "^3.21.0",
     "prettier": "^2.1.2",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }

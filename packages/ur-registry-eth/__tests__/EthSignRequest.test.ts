@@ -44,7 +44,7 @@ describe('eth-sign-request', () => {
 
         const ethRequest = EthSignRequest.constructETHRequest(rlpData, DataType.transaction, hdPath, xfp,ethRequestId,1)
         const ur = ethRequest.toUREncoder(1000).nextPart();
-        expect(ur).toBe('ur:eth-sign-request/onadtpdafyndcawmgtaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfkschhknnhn')
+        expect(ur).toBe('ur:eth-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfkswdtklffd')
 
     })
 })
