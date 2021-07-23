@@ -1,11 +1,10 @@
 {
     "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
+      "target": "es6",
+      "module": "es6",
       "moduleResolution": "node",
       "allowSyntheticDefaultImports": true,
       "allowJs": true,
-      "importHelpers": true,
       "alwaysStrict": true,
       "sourceMap": true,
       "skipLibCheck": true,
