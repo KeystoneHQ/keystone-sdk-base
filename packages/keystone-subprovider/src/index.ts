@@ -93,7 +93,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         const dataHex = Buffer.from(data, 'hex');
         const requestId = uuid.v4()
         const ethSignRequest = EthSignRequest.constructETHRequest(dataHex, 
-            DataType.rawHex,             
+            DataType.personalMessage,             
             findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`),
             this.xfp,
             uuid.v4(),
@@ -107,7 +107,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
             description: 'Please scan the QR code below with Keystone, review message and authorize to sign',
         });
         const { r, s, v } = await this.readSignature(requestId);
-        return Buffer.concat([r, s, v]).toString('hex')
+        return `0x${Buffer.concat([r, s, v]).toString('hex')}`
     }
 
 
@@ -129,8 +129,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
             description: 'Please scan the QR code below with Keystone, review message and authorize to sign',
         });
         const { r, s, v } = await this.readSignature(requestId);
-        return Buffer.concat([r, s, v]).toString('hex')
-
+        return `0x${Buffer.concat([r, s, v]).toString('hex')}`
     }
 
     private async readSignature(sendRequestID: string): Promise<{ r: Buffer; s: Buffer; v: Buffer }> {
