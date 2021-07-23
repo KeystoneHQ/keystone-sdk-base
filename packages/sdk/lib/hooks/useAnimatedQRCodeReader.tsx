@@ -1,11 +1,13 @@
-import React, { useMemo, useState } from 'react';
-import QrReader from 'react-qr-reader';
+import React, { useMemo, useState, Suspense } from 'react';
 import { EventEmitter } from 'events';
 import { Button } from '../components/Button';
 
 import { Read, SupportedResult } from '../types';
 import { ButtonGroup } from '../components/ButtonGroup';
 import { URDecoder } from '@ngraveio/bc-ur';
+
+
+const QrReader = React.lazy(() => import("react-qr-reader"));
 
 export interface URQRCodeData {
     total: number;
@@ -76,6 +78,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
         >
             {title && <p>{title}</p>}
             {description && <p>{description}</p>}
+            <Suspense fallback={<div/>}>
             <QrReader
                 onScan={(data: any) => {
                     if (data) {
@@ -90,7 +93,9 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                 onError={(e) => {
                     setError(e.message);
                 }}
-            />
+            />    
+            </Suspense>
+            
             <p>Current Progress: {(progress * 100).toFixed(0)} %</p>
             <ButtonGroup>
                 <Button onClick={handleStop}>Close</Button>
