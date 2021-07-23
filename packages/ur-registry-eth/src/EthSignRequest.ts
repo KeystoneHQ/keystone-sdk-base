@@ -15,7 +15,7 @@ enum Keys {
 export enum DataType {
     transaction = 1,
     typedData = 2,
-    rawHex = 3,
+    personalMessage = 3,
     typedTransaction = 4,
 }
 

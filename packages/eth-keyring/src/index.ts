@@ -349,7 +349,7 @@ class AirGapedKeyring extends EventEmitter {
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
             Buffer.from(messageHex, 'hex'),
-            DataType.rawHex,
+            DataType.personalMessage,
             hdPath,
             this.xfp,
             requestId,
