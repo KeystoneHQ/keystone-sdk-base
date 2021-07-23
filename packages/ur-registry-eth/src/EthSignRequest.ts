@@ -127,14 +127,14 @@ export class EthSignRequest extends RegistryItem {
             }),
             Buffer.from(xfp, 'hex'),
         );
-        
+
         return new EthSignRequest({
             requestId: uuidString ? Buffer.from(uuid.parse(uuidString) as Uint8Array) : undefined,
             signData,
             dataType: signDataType,
             derivationPath: hdpathObject,
             chainId,
-            address: address ? Buffer.from(address, 'hex') : undefined
+            address: address ? Buffer.from(address.replace('0x', ''), 'hex') : undefined,
         });
     }
 }
