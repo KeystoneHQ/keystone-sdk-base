@@ -13,8 +13,8 @@ export interface URQRCodeData {
     data: string;
 }
 
-export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read, cameraReady: boolean }] => {
-    const [cameraReady, setCameraReady] = useState<boolean>(false)
+export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean }] => {
+    const [cameraReady, setCameraReady] = useState<boolean>(false);
     const [expectTypes, setExpectTypes] = useState<SupportedResult[]>([]);
     const [urDecoder, setURDecoder] = useState(new URDecoder());
     const [error, setError] = useState('');
@@ -48,8 +48,10 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read, cameraRea
                 setProgress(urDecoder.getProgress());
             } else {
                 const result = urDecoder.resultUR();
+                let foundExpected = false;
                 expectTypes.forEach((et) => {
                     if (et === result.type) {
+                        foundExpected = true;
                         ee.emit('read', {
                             result,
                             status: 'success',
@@ -57,7 +59,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read, cameraRea
                         return;
                     }
                 });
-                throw new Error(`received ur type ${result.type}, but expected [${expectTypes.join(',')}]`);
+                if (!foundExpected) throw new Error(`received ur type ${result.type}, but expected [${expectTypes.join(',')}]`);
             }
         } catch (e) {
             setError(e.message);
@@ -81,7 +83,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read, cameraRea
                     }
                 }}
                 onLoad={() => {
-                    setCameraReady(true)
+                    setCameraReady(true);
                 }}
                 delay={100}
                 style={{ width: '100%' }}
@@ -114,7 +116,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read, cameraRea
                     });
                 });
             },
-            cameraReady
+            cameraReady,
         },
     ];
 };

@@ -1,12 +1,10 @@
 {
-  "command": {
-    "bootstrap": {
-      "hoist": true,
-      "npmClientArgs": ["--no-package-lock", "--no-ci"]
-    }
-  },
-  "packages": [
-    "packages/*"
-  ],
-  "version": "independent"
+    "command": {
+        "bootstrap": {
+            "hoist": true,
+            "npmClientArgs": ["--no-package-lock", "--no-ci"]
+        }
+    },
+    "packages": ["packages/eth-keyring", "packages/qr-protocol", "packages/sdk", "packages/ur-registry-eth"],
+    "version": "independent"
 }

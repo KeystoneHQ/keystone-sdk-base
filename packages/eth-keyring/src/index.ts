@@ -1,10 +1,6 @@
 import { EventEmitter } from 'events';
-import hash from 'hash.js';
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import HDKey from 'hdkey';
-import sdk, {SupportedResult} from '@keystonehq/sdk';
+import sdk, { SupportedResult } from '@keystonehq/sdk';
 import { toChecksumAddress, publicToAddress, rlp, toBuffer, unpadBuffer } from 'ethereumjs-util';
 import { Transaction } from 'ethereumjs-tx';
 import {
@@ -35,7 +31,7 @@ type StoredKeyring = {
 type PagedAccount = { address: string; balance: any; index: number };
 
 sdk.bootstrap();
-const keystoneSDK =sdk.getSdk();
+const keystoneSDK = sdk.getSdk();
 
 const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hdPath: string }> => {
     const decodedResult = await keystoneSDK.read([SupportedResult.UR_CRYPTO_HDKEY], {
@@ -50,7 +46,7 @@ const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hd
         if (!xfp) {
             throw new Error('invalid crypto-hd-key, cannot get source fingerprint');
         }
-        const xpub =  cryptoHDKey.getBip32Key();
+        const xpub = cryptoHDKey.getBip32Key();
         return {
             xfp,
             xpub,
@@ -261,7 +257,7 @@ class AirGapedKeyring extends EventEmitter {
             description: 'Please scan signing result QR code displayed on your Keystone',
         });
         if (result.status === 'canceled') {
-            throw new Error('read signature canceled');
+            throw new Error('#ktek_error[read-cancel]: read signature canceled');
         } else {
             const ethSignature = ETHSignature.fromCBOR(result.result.cbor);
             const requestIdBuffer = ethSignature.getRequestId();
@@ -285,7 +281,7 @@ class AirGapedKeyring extends EventEmitter {
     // tx is an instance of the ethereumjs-transaction class.
 
     private static serializeTx(tx: Transaction): Buffer {
-        // need use EIP-155 
+        // need use EIP-155
         const items = [
             ...tx.raw.slice(0, 6),
             toBuffer(tx.getChainId()),
@@ -298,7 +294,7 @@ class AirGapedKeyring extends EventEmitter {
 
     async signTransaction(address: string, tx: Transaction): Promise<Transaction> {
         const hdPath = this._pathFromAddress(address);
-        const chainId = tx.getChainId()
+        const chainId = tx.getChainId();
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
             AirGapedKeyring.serializeTx(tx),
@@ -306,8 +302,8 @@ class AirGapedKeyring extends EventEmitter {
             hdPath,
             this.xfp,
             requestId,
-            chainId
-        )
+            chainId,
+        );
 
         await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
@@ -336,7 +332,7 @@ class AirGapedKeyring extends EventEmitter {
             this.xfp,
             requestId,
             undefined,
-            withAccount,                        
+            withAccount,
         );
         await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
@@ -344,10 +340,10 @@ class AirGapedKeyring extends EventEmitter {
             description: 'Please scan the QR code below with Keystone, review message and authorize to sign',
         });
         const { r, s, v } = await this.readSignature(requestId);
-        return '0x' + r + s + v;
+        return '0x' + Buffer.concat([r, s, v]).toString('hex');
     }
 
-    async signTypedData(withAccount: string, typedData: any): Promise<Buffer> {
+    async signTypedData(withAccount: string, typedData: any): Promise<string> {
         const hdPath = this._pathFromAddress(withAccount);
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
@@ -365,7 +361,7 @@ class AirGapedKeyring extends EventEmitter {
             description: 'Please scan the QR code below with Keystone, review data and authorize to sign',
         });
         const { r, s, v } = await this.readSignature(requestId);
-        return Buffer.concat([r, s, v]);
+        return '0x' + Buffer.concat([r, s, v]).toString('hex');
     }
 
     _addressFromIndex(pb: string, i: number): string {

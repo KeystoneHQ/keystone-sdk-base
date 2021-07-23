@@ -43,9 +43,8 @@ describe('eth-sign-request', () => {
         const ethRequestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
 
         const ethRequest = EthSignRequest.constructETHRequest(rlpData, DataType.transaction, hdPath, xfp,ethRequestId,1)
-
         const ur = ethRequest.toUREncoder(1000).nextPart();
-        expect(ur).toBe('ur:eth-sign-request/onadtpdafyndcawmgtaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlkzolbyaaeaeaeaeaeaewkcsdwykadykadykaewkadwkaocybgeehfksnlytlndp')
+        expect(ur).toBe('ur:eth-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfkswdtklffd')
 
     })
 })

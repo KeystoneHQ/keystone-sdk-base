@@ -23,7 +23,7 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
 
     const ee = useMemo(() => new EventEmitter(), []);
     const reset = () => {
-        setData(new UR(Buffer.from('')));
+        setData(new UR(Buffer.from('NO DATA', 'utf-8')));
         setRefreshSpeed(DEFAULT_SPEED);
     };
 
