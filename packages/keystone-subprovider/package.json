@@ -18,6 +18,8 @@
     "url": "git+https://github.com/KeystoneHQ/keystone-airgaped-base.git"
   },
   "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && npx tsc -p tsconfig.json -outDir ./dist",
     "test": "jest"
   },
   "bugs": {
