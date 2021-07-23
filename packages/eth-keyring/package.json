@@ -1,6 +1,6 @@
 {
     "name": "@keystonehq/eth-keyring",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "eth-keyring interact with keystone",
     "main": "dist/index.js",
     "types": "src/index.ts",
@@ -18,7 +18,7 @@
     "author": "soralit <soralitria@gmail.com>",
     "license": "ISC",
     "dependencies": {
-        "@keystonehq/bc-ur-registry-eth": "^0.3.1",
+        "@keystonehq/bc-ur-registry-eth": "^0.3.2",
         "@keystonehq/sdk": "^0.3.6",
         "bs58check": "^2.1.2",
         "ethereumjs-tx": "^2.1.2",
