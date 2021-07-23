@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/keystone-connector",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "> TODO: description",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
@@ -8,11 +8,12 @@
   "main": "dist/index.js",
   "types": "src/index.ts",
   "directories": {
-    "lib": "lib",
+    "lib": "src",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "src",
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -32,5 +33,6 @@
     "@web3-react/abstract-connector": "^6.0.7",
     "@web3-react/types": "^6.0.7",
     "web3-provider-engine": "^16.0.3"
-  }
+  },
+  "gitHead": "a05fe3351532446c62e3f798e4d36ccaae68f204"
 }

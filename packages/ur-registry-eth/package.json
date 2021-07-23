@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-eth",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "bc-ur-registry extension for ETH",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -34,5 +34,6 @@
   "devDependencies": {
     "@types/bs58check": "^2.1.0",
     "@types/uuid": "^8.3.1"
-  }
+  },
+  "gitHead": "a05fe3351532446c62e3f798e4d36ccaae68f204"
 }
