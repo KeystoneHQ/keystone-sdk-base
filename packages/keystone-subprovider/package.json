@@ -40,5 +40,6 @@
     "@keystonehq/sdk": "^0.3.8",
     "ethereumjs-util": "^7.0.10",
     "uuid": "^8.3.2"
-  }
+  },
+  "gitHead": "04aedbd3c95e2222d1675afc5d8b8fe49d253140"
 }
