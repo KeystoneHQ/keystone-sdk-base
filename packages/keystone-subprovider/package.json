@@ -14,6 +14,9 @@
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KeystoneHQ/keystone-airgaped-base.git"
@@ -41,5 +44,5 @@
     "ethereumjs-util": "^7.0.10",
     "uuid": "^8.3.2"
   },
-  "gitHead": "04aedbd3c95e2222d1675afc5d8b8fe49d253140"
+  "gitHead": "1cd91831c144cf1c33c941c5e6ed91ef2af43bcd"
 }
