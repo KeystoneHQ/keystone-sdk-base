@@ -4,7 +4,7 @@ import sdk, { SupportedResult } from '@keystonehq/sdk';
 import Common from '@ethereumjs/common';
 import { Transaction } from '@ethereumjs/tx';
 import { rlp } from 'ethereumjs-util';
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 import { CryptoHDKey, generateAddressfromXpub, findHDpatfromAddress, EthSignRequest, DataType, ETHSignature } from '@keystonehq/bc-ur-registry-eth';
 
 
@@ -48,7 +48,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
 
     public async signTransactionAsync(txParams: PartialTxParams): Promise<string> {
         if (!this.synced) {
-            await this._syncWithKeystone()
+            await this.getAccountsAsync()
         }
         const _txParams = {
             to: txParams.to,
@@ -62,13 +62,15 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         let tx = Transaction.fromTxData(_txParams, { common: this._common })
         let value = tx.getMessageToSign(false)
         const unsignedBuffer = rlp.encode(value)
-        let requestId = uuid.v4()
+        let requestId = uuid.v4();
+        const hdPath = findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`)
+        
         const ethSignRequest = EthSignRequest.constructETHRequest(
             unsignedBuffer,
             DataType.transaction,
-            findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`),
+            hdPath,
             this.xfp,
-            uuid.v4(),
+            requestId,
             this._networkId,
             txParams.from
         )
@@ -112,6 +114,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
 
 
     public async signTypedDataAsync(address: string, typedData: any): Promise<string> {
+        // the typed data is an json string which encoded to Bytes
         const dataHex = Buffer.from(typedData, 'utf-8');
         const requestId = uuid.v4()
         const ethSignRequest = EthSignRequest.constructETHRequest(dataHex, 
@@ -143,14 +146,16 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
             const ethSignature = ETHSignature.fromCBOR(result.result.cbor);
             const requestIdBuffer = ethSignature.getRequestId();
             const signature = ethSignature.getSignature();
-            const requestId = uuid.stringify(requestIdBuffer);
-            if (requestId !== sendRequestID) {
-                throw new Error('read signature error: mismatched requestId');
+            if(requestIdBuffer) {
+                const requestId = uuid.stringify(requestIdBuffer);
+                if (requestId && requestId !== sendRequestID) {
+                    throw new Error('read signature error: mismatched requestId');
+                }
+
             }
-            const signatureHex = signature.toString('hex');
-            const r = Buffer.from(signatureHex.slice(0, 64), 'hex');
-            const s = Buffer.from(signatureHex.slice(64, 128), 'hex');
-            const v = Buffer.from(signatureHex.slice(128), 'hex');
+            const r = signature.slice(0,32)
+            const s = signature.slice(32,64)
+            const v = signature.slice(64,65)
             return {
                 r,
                 s,

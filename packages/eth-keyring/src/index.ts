@@ -271,7 +271,8 @@ class AirGapedKeyring extends EventEmitter {
                 throw new Error('read signature error: mismatched requestId');
             }
             const signatureHex = signature.toString('hex');
-            const r = Buffer.from(signatureHex.slice(0, 64), 'hex');
+            signature.slice(0,32)
+            const r = signature.slice(0,32)
             const s = Buffer.from(signatureHex.slice(64, 128), 'hex');
             const v = Buffer.from(signatureHex.slice(128), 'hex');
             return {
