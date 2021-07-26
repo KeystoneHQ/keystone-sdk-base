@@ -20,7 +20,8 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "npm run clean && npx tsc -p tsconfig.json -outDir ./dist",
+    "start": "tsdx watch",
+    "build": "tsdx build",
     "test": "jest --passWithNoTests"
   },
   "bugs": {

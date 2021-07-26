@@ -1,11 +1,24 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "esModuleInterop": true,
         "target": "es5",
-        "moduleResolution": "node",
+        "module": "esnext",
+        "lib": ["dom", "esnext"],
+        "importHelpers": true,
+        "declaration": true,
         "sourceMap": true,
-        "skipLibCheck": true
+        "strict": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "noImplicitAny": false,
+        "strictNullChecks": false,
+        "strictFunctionTypes": true,
+        "noImplicitThis": false,
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "jsx": "react",
     },
-    "lib": ["es2015"]
 }

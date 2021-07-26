@@ -30,6 +30,7 @@ export class KeystoneConnetor extends AbstractConnector {
         this.chainId = chainId;
         this.pollingInterval = pollingInterval;
         this.requestTimeoutMs = requestTimeoutMs;
+        this.url = url;
     }
     
 
