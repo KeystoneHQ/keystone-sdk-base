@@ -3,7 +3,7 @@ import { BaseWalletSubprovider } from './baseWalletSubprovider';
 import sdk, { SupportedResult } from '@keystonehq/sdk';
 import Common from '@ethereumjs/common';
 import { Transaction } from '@ethereumjs/tx';
-import { rlp } from 'ethereumjs-util';
+import { rlp, BN } from 'ethereumjs-util';
 import * as uuid from 'uuid';
 import { CryptoHDKey, generateAddressfromXpub, findHDpatfromAddress, EthSignRequest, DataType, ETHSignature } from '@keystonehq/bc-ur-registry-eth';
 
@@ -69,9 +69,14 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
             value: txParams.value,
         };
 
-        let tx = Transaction.fromTxData(_txParams, { common: this._common })
-        let value = tx.getMessageToSign(false)
-        const unsignedBuffer = rlp.encode(value)
+        let tx = Transaction.fromTxData(_txParams, { common: this._common, freeze: false })
+        //@ts-ignore
+        tx.v = new BN(tx.common.chainId())
+        // @ts-ignore
+        tx.r = new BN(0)
+        // @ts-ignore
+        tx.s = new BN(0)
+        const unsignedBuffer = tx.serialize()
         let requestId = uuid.v4();
         const addressPath = findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`)
         
@@ -94,9 +99,9 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         const { r, s, v } = await this.readSignature(requestId);
         const signeTx = Transaction.fromTxData({
             ..._txParams,
-            r: `0x${r.toString('hex')}`,
-            s: `0x${s.toString('hex')}`,
-            v: `0x${v.toString('hex')}`
+            r,
+            s,
+            v
         }, { common: this._common })
         return `0x${signeTx.serialize().toString('hex')}`;
     }
