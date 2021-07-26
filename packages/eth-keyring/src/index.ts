@@ -1,15 +1,13 @@
 import { EventEmitter } from 'events';
 import HDKey from 'hdkey';
 import sdk, { SupportedResult } from '@keystonehq/sdk';
-import { toChecksumAddress, publicToAddress, rlp, toBuffer, unpadBuffer } from 'ethereumjs-util';
-import { Transaction } from 'ethereumjs-tx';
+import { toChecksumAddress, publicToAddress, BN} from 'ethereumjs-util';
+import { Transaction } from '@ethereumjs/tx';
 import {
     CryptoHDKey,
-    CryptoKeypath,
     DataType,
     ETHSignature,
     EthSignRequest,
-    PathComponent,
 } from '@keystonehq/bc-ur-registry-eth';
 import * as uuid from 'uuid';
 
@@ -57,20 +55,6 @@ const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hd
     }
 };
 
-const constructCryptoKeypath = (hdPath: string) => {
-    const paths = hdPath.replace('m/', '').split('/');
-    return new CryptoKeypath(
-        paths.map((path) => {
-            const index = parseInt(path.replace("'", ''));
-            let isHardened = false;
-            if (path.endsWith("'")) {
-                isHardened = true;
-            }
-            return new PathComponent({ index, hardened: isHardened });
-        }),
-    );
-};
-
 class AirGapedKeyring extends EventEmitter {
     static type = keyringType;
     static async getKeyring(): Promise<AirGapedKeyring> {
@@ -103,7 +87,6 @@ class AirGapedKeyring extends EventEmitter {
     private xfp: string;
     private xpub: string;
     private hdPath: string;
-    private type: string;
     private accounts: string[];
     private currentAccount: number;
     private page: number;
@@ -119,7 +102,6 @@ class AirGapedKeyring extends EventEmitter {
         this.hdPath = '';
         this.page = 0;
         this.perPage = 5;
-        this.type = keyringType;
         this.accounts = [];
         this.currentAccount = 0;
         this.paths = {};
@@ -282,19 +264,18 @@ class AirGapedKeyring extends EventEmitter {
 
     private static serializeTx(tx: Transaction): Buffer {
         // need use EIP-155
-        const items = [
-            ...tx.raw.slice(0, 6),
-            toBuffer(tx.getChainId()),
-            // TODO: stripping zeros should probably be a responsibility of the rlp module
-            unpadBuffer(toBuffer(0)),
-            unpadBuffer(toBuffer(0)),
-        ];
-        return rlp.encode(items);
+        // @ts-ignore
+        tx.v = new BN(tx.common.chainId())
+        // @ts-ignore
+        tx.r = new BN(0)
+        // @ts-ignore
+        tx.s = new BN(0)
+        return tx.serialize()
     }
 
     async signTransaction(address: string, tx: Transaction): Promise<Transaction> {
         const hdPath = this._pathFromAddress(address);
-        const chainId = tx.getChainId();
+        const chainId = tx.common.chainId();
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
             AirGapedKeyring.serializeTx(tx),
@@ -311,11 +292,21 @@ class AirGapedKeyring extends EventEmitter {
             description:
                 'Please scan the QR code below with Keystone, review transaction information and authorize to sign',
         });
+
+
         const { r, s, v } = await this.readSignature(requestId);
-        tx.r = r;
-        tx.s = s;
-        tx.v = v;
-        return tx;
+        const txJson = tx.toJSON()
+        return Transaction.fromTxData({
+            to: txJson['to'],
+            gasLimit: txJson['gasLimit'],
+            gasPrice: txJson['gasPrice'],
+            data: txJson['data'],
+            nonce: txJson['nonce'],
+            value: txJson['value'],
+            r,
+            s,
+            v,
+        }, {common: tx.common})
     }
 
     signMessage(withAccount: string, data: string): Promise<string> {

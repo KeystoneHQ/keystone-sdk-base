@@ -29,6 +29,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "tsdx": "^0.14.1",
     "uuid": "^8.3.2"
   }
 }
