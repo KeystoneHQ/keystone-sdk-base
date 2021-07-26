@@ -8,11 +8,12 @@
   "main": "dist/index.js",
   "types": "src/index.ts",
   "directories": {
-    "lib": "lib",
+    "lib": "src",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "src",
+    "dist"
   ],
   "repository": {
     "type": "git",
