@@ -1,7 +1,7 @@
-import { extend, DataItem } from '@keystonehq/bc-ur-registry';
+import { extend, DataItem, RegistryItem } from '@keystonehq/bc-ur-registry';
 import { ExtendedRegistryTypes } from './RegistryType';
 
-const { RegistryItem, RegistryTypes, decodeToDataItem } = extend;
+const { RegistryTypes, decodeToDataItem } = extend;
 
 enum Keys {
     requestId = 1,

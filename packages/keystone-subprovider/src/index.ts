@@ -3,7 +3,7 @@ import { BaseWalletSubprovider } from './baseWalletSubprovider';
 import sdk, { SupportedResult } from '@keystonehq/sdk';
 import Common from '@ethereumjs/common';
 import { Transaction } from '@ethereumjs/tx';
-import { rlp, BN } from 'ethereumjs-util';
+import { BN } from 'ethereumjs-util';
 import * as uuid from 'uuid';
 import { CryptoHDKey, generateAddressfromXpub, findHDpatfromAddress, EthSignRequest, DataType, ETHSignature } from '@keystonehq/bc-ur-registry-eth';
 

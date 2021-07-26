@@ -1,24 +1,12 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "allowSyntheticDefaultImports": true,
-      "allowJs": true,
-      "importHelpers": true,
-      "alwaysStrict": true,
-      "sourceMap": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "noFallthroughCasesInSwitch": true,
-      "noImplicitReturns": true,
-      "noImplicitAny": false,
-      "noImplicitThis": false,
-      "strictNullChecks": false,
-      "removeComments": true,
-      "esModuleInterop": true,
-      "outDir": "./dist" 
+  "extends": "../../tsconfig.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "*": ["src/*", "node_modules/*"]
     },
-    "lib": ["es2015"],
-    "include": ["src/**/*"]
-  }
+    "typeRoots": ["node_modules/@0x/typescript-typings/types", "node_modules/@types"]
+  },
+}
