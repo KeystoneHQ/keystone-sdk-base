@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/sdk",
-  "version": "0.3.6",
+  "version": "0.4.3",
   "description": "Keystone airgaped wallet SDK",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
@@ -8,10 +8,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
-    "lib": "lib",
+    "lib": "src",
     "test": "__tests__"
   },
   "files": [
+    "src",
     "dist"
   ],
   "repository": {
@@ -20,8 +21,9 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "npm run clean && npx tsc -p tsconfig.json -outDir ./dist",
-    "build:watch": "npm run clean && npx tsc -w -p tsconfig.json -outDir ./dist"
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "jest --passWithNoTests"
   },
   "bugs": {
     "url": "https://github.com/KeystoneHQ/keystone-airgaped-base/issues"

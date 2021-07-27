@@ -1,8 +1,8 @@
-import { CryptoKeypath, extend, DataItem, PathComponent } from '@keystonehq/bc-ur-registry';
+import { CryptoKeypath, extend, DataItem, PathComponent, RegistryItem } from '@keystonehq/bc-ur-registry';
 import { ExtendedRegistryTypes } from './RegistryType';
 import * as uuid from 'uuid';
 
-const { RegistryItem, decodeToDataItem, RegistryTypes } = extend;
+const { decodeToDataItem, RegistryTypes } = extend;
 
 enum Keys {
     requestId = 1,
@@ -39,7 +39,7 @@ export class EthSignRequest extends RegistryItem {
 
     getRegistryType = () => ExtendedRegistryTypes.ETH_SIGN_REQUEST;
 
-    constructor(private args: signRequestProps) {
+    constructor(args: signRequestProps) {
         super();
         this.setupData(args);
     }
