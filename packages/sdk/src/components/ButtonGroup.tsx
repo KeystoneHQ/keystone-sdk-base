@@ -5,6 +5,7 @@ export const ButtonGroup: FunctionComponent = (props) => {
         <div
             style={{
                 width: '100%',
+                marginTop: '1rem',
                 display: 'flex',
                 flexDirection: 'row-reverse',
                 alignItems: 'center',

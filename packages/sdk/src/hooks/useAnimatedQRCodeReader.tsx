@@ -77,7 +77,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
             }}
         >
             {title && <p style={{fontSize: '1.25rem', fontWeight: 'bold'}}>{title}</p>}
-            {description && <p style={{fontSize: '1rem'}}>{description}</p>}
+            {description && <p style={{fontSize: '1rem', textAlign:'center'}}>{description}</p>}
             <Suspense fallback={<div/>}>
             <QrReader
                 onScan={(data: any) => {
