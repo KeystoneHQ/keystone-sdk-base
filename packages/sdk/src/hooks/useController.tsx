@@ -51,20 +51,17 @@ export const useController = (): [
     return [
         element,
         {
-            play: async (
-                data,
-                options,
-            ) => {
+            play: async (data, options) => {
                 setVisible(true);
                 setMode('play');
                 await play(data, options);
                 reset();
                 return;
             },
-            read: async (options) => {
+            read: async (expect, options) => {
                 setVisible(true);
                 setMode('read');
-                const result = await read(options);
+                const result = await read(expect, options);
                 reset();
                 return result;
             },

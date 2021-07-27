@@ -9,8 +9,11 @@ import { UR, UREncoder } from '@ngraveio/bc-ur';
 
 const DEFAULT_SPEED = 100;
 
+const DEFAULT_UR = new UR(Buffer.from('NO DATA', 'utf-8'));
+
 export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
-    const [data, setData] = useState<UR>(new UR(Buffer.from('NO DATA', 'utf-8')));
+    const [data, setData] = useState<UR>(DEFAULT_UR);
+    const [shouldShow, setShouldShow] = useState(false);
 
     const [refreshSpeed, setRefreshSpeed] = useState(DEFAULT_SPEED);
     const [hasNext, setHasNext] = useState(false);
@@ -23,9 +26,16 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
 
     const ee = useMemo(() => new EventEmitter(), []);
     const reset = () => {
-        setData(new UR(Buffer.from('NO DATA', 'utf-8')));
+        setData(DEFAULT_UR);
+        setShouldShow(false);
         setRefreshSpeed(DEFAULT_SPEED);
     };
+
+    useEffect(() => {
+        if (urEncoder.cbor.toString('hex') !== DEFAULT_UR.cbor.toString('hex')) {
+            setShouldShow(true);
+        }
+    }, [urEncoder]);
 
     useEffect(() => {
         const subscribe = interval(refreshSpeed).subscribe(() => {
@@ -40,7 +50,7 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
         ee.emit('finish', true);
     };
 
-    const element = (
+    const element = shouldShow ? (
         <div
             style={{
                 display: 'flex',
@@ -55,6 +65,8 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
                 <Button onClick={finish}>{hasNext ? 'Continue' : 'Finish'}</Button>
             </ButtonGroup>
         </div>
+    ) : (
+        <div></div>
     );
 
     return [
