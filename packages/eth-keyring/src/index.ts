@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import HDKey from 'hdkey';
 import sdk, { SupportedResult } from '@keystonehq/sdk';
-import { toChecksumAddress, publicToAddress, BN} from 'ethereumjs-util';
+import { toChecksumAddress, publicToAddress, BN, stripHexPrefix} from 'ethereumjs-util';
 import { Transaction } from '@ethereumjs/tx';
 import {
     CryptoHDKey,
@@ -314,10 +314,11 @@ class AirGapedKeyring extends EventEmitter {
     }
 
     async signPersonalMessage(withAccount: string, messageHex: string): Promise<string> {
+        let usignedHex= stripHexPrefix(messageHex);
         const hdPath = this._pathFromAddress(withAccount);
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
-            Buffer.from(messageHex, 'hex'),
+            Buffer.from(usignedHex, 'hex'),
             DataType.personalMessage,
             hdPath,
             this.xfp,
