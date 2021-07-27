@@ -101,7 +101,7 @@ describe('Keystone Subprovider', () => {
             networkId: 1
         })
 
-        const signature = await provider.signPersonalMessageAsync('68656c6c6f', '0x9858EfFD232B4033E47d90003D41EC34EcaEda94')
+        const signature = await provider.signPersonalMessageAsync('0x68656c6c6f', '0x9858EfFD232B4033E47d90003D41EC34EcaEda94')
         expect(signature).toBe('0x6d19ce88a3272c2d8cb8ca6a58bf1e72f63d4adc6163b25256b0f6a4e78410664c857185f395e590dfa7bc7a08fd675aa1127802f204eae7cdcfa6e1797840d025')
     })
 
@@ -112,7 +112,7 @@ describe('Keystone Subprovider', () => {
         try {
             await provider.signPersonalMessageAsync('hello', '0x9858EfFD232B4033E47d90003D41EC34EcaEda94')
         } catch(e) {
-            expect(e.message).toBe('data is not a hexString')
+            expect(e.message).toBe('Expected unsigendData to be of type HexString, encountered: 0xhello')
         }    
     })
 

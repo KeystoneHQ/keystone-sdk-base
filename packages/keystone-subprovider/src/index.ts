@@ -1,22 +1,16 @@
+import { assert } from '@0x/assert';
 import { PartialTxParams } from '@0x/subproviders';
 import { BaseWalletSubprovider } from './baseWalletSubprovider';
 import sdk, { SupportedResult } from '@keystonehq/sdk';
 import Common from '@ethereumjs/common';
 import { Transaction } from '@ethereumjs/tx';
-import { BN } from 'ethereumjs-util';
+import { BN, stripHexPrefix, addHexPrefix } from 'ethereumjs-util';
 import * as uuid from 'uuid';
 import { CryptoHDKey, generateAddressfromXpub, findHDpatfromAddress, EthSignRequest, DataType, ETHSignature } from '@keystonehq/bc-ur-registry-eth';
 
 
 type KeystoneSubproviderConfigs = {
     networkId: number;
-}
-
-const assertIsHexString = (data: string) => {
-    if(Buffer.from(data, 'hex').toString('hex') === data.toLowerCase()) {
-        return true
-    }
-    throw new Error('data is not a hexString')
 }
 
 export default class KeystoneSubprovider extends BaseWalletSubprovider {
@@ -110,10 +104,11 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         if(!this.synced) {
             await this.getAccountsAsync()
         }
-
-        assertIsHexString(data)
         
-        const dataHex = Buffer.from(data, 'hex');
+        let unsigendData = addHexPrefix(data);
+        assert.isHexString('unsigendData', unsigendData)
+        unsigendData = stripHexPrefix(unsigendData)
+        const dataHex = Buffer.from(unsigendData, 'hex');
         const requestId = uuid.v4()
         const addressPath = findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`)
         const ethSignRequest = EthSignRequest.constructETHRequest(
