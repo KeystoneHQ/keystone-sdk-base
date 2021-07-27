@@ -76,8 +76,8 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                 alignItems: 'center',
             }}
         >
-            {title && <p>{title}</p>}
-            {description && <p>{description}</p>}
+            {title && <p style={{fontSize: '1.25rem', fontWeight: 'bold'}}>{title}</p>}
+            {description && <p style={{fontSize: '1rem'}}>{description}</p>}
             <Suspense fallback={<div/>}>
             <QrReader
                 onScan={(data: any) => {
@@ -96,12 +96,13 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
             />    
             </Suspense>
             
-            <p>Current Progress: {(progress * 100).toFixed(0)} %</p>
+            <p>{(progress * 100).toFixed(0)} %</p>
+            {error && <p style={{ color: 'red', fontSize: '1rem' }}>{error}</p>}
             <ButtonGroup>
                 <Button onClick={handleStop}>Close</Button>
                 {error && <Button onClick={handleRetry}>Retry</Button>}
             </ButtonGroup>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            
         </div>
     );
 

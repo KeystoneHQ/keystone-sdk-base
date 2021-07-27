@@ -8,7 +8,7 @@ export const ButtonGroup: FunctionComponent = (props) => {
                 display: 'flex',
                 flexDirection: 'row-reverse',
                 alignItems: 'center',
-                justifyContent: 'flex-start',
+                justifyContent: 'center',
             }}
         >
             {props.children}

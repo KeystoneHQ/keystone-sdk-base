@@ -10,8 +10,11 @@ const customStyles = {
         left: '50%',
         right: 'auto',
         bottom: 'auto',
+        borderRadius: '10px',
+        width: '37rem',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
+        postion: 'relative'
     },
 };
 
@@ -33,11 +36,14 @@ export const useController = (): [
     };
     const element = (
         <Modal isOpen={visible} style={customStyles}>
+            <div onClick={() => setVisible(false)}>
+                <img style={{ position: "absolute", top: '1rem', right: '1rem' }} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAADKADAAQAAAABAAAADAAAAAATDPpdAAAAmklEQVQoFZWRwQ3DIAwAa4brJPBP80hnaD/lD5N0iYxEfRVBxBGRwsvgO2PZklJaReTrvX/eTk7O+VVKuTtgDRYVPyOeHAysAFV40jCGEB69aHN/YSRZGK4JVuKu5/DrToDoqnI9tOh4vXJ2Qlc96kSY2lTfWs0m9DCT0r3MSkUrXR9r3eBCNbuDrY/td23z7Vg3wQhGIgcD+wPGY2fPvHuWagAAAABJRU5ErkJggg=="/>
+            </div>
             <div
                 style={{
-                    width: 320,
+                    width: '35rem',
                     boxSizing: 'border-box',
-                    padding: 16,
+                    padding: 18,
                     flex: 1,
                     flexDirection: 'column',
                     alignItems: 'center',
