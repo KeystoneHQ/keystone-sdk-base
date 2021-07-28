@@ -5,6 +5,9 @@ import { useAnimatedQRCodeReader } from './useAnimatedQRCodeReader';
 import { Play, Read } from '../types';
 
 const customStyles = {
+    overlay: {
+        zIndex: 999
+    },
     content: {
         top: '50%',
         left: '50%',
