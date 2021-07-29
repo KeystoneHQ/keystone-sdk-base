@@ -6,13 +6,12 @@
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
   "license": "ISC",
   "main": "dist/index.js",
-  "types": "src/index.ts",
+  "types": "dist/index.d.ts",
   "directories": {
     "lib": "src",
     "test": "__tests__"
   },
   "files": [
-    "src",
     "dist"
   ],
   "repository": {
