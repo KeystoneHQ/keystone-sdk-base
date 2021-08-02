@@ -5,9 +5,11 @@ import KeystoneSubprovider from '@keystonehq/keystone-subprovider'
 import CacheSubprovider from 'web3-provider-engine/subproviders/cache.js'
 import { RPCSubprovider } from '@0x/subproviders/lib/src/subproviders/rpc_subprovider'
 
+const DEFAULT_RPC = 'https://mainnet.infura.io/v3/1ef55d552de6419386f927559b13e052'
+
 interface KeystoneConnetorArguments {
     chainId: number,
-    url: string,
+    url?: string,
     pollingInterval?: number
     requestTimeoutMs?: number
 }
@@ -30,7 +32,7 @@ export class KeystoneConnetor extends AbstractConnector {
         this.chainId = chainId;
         this.pollingInterval = pollingInterval;
         this.requestTimeoutMs = requestTimeoutMs;
-        this.url = url;
+        this.url = url? url: DEFAULT_RPC;
     }
     
 
@@ -62,6 +64,10 @@ export class KeystoneConnetor extends AbstractConnector {
     }
     public deactivate() {
         this.provider.stop()
+    }
+
+    public async close() {
+        this.deactivate();
     }
     
 }
