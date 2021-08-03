@@ -26,7 +26,7 @@ export type Read = (
     options?: { title?: string; description?: string, renderInitial?: {
         walletMode: string,
         link: string
-    } },
+    }, URTypeErrorMessage?: string },
 ) => Promise<DecodedResult>;
 
 export enum SupportedResult {

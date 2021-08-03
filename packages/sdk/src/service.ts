@@ -8,7 +8,6 @@ let initialized = false;
 let read: Read;
 let play: Play;
 let cameraReady: boolean;
-let showError: Function;
 
 const bootstrap = (): void => {
     const htmlBody = document.getElementsByTagName('body').item(0) as HTMLBodyElement;
@@ -19,12 +18,11 @@ const bootstrap = (): void => {
     ReactDOM.render(React.createElement(Root), sdkDiv);
 };
 
-export const setupSdk = (r: Read, p: Play, status: boolean, setError: (msg: string) => void) => {
+export const setupSdk = (r: Read, p: Play, status: boolean) => {
     initialized = true;
     read = r;
     play = p;
     cameraReady = status;
-    showError = setError;
 };
 
 const sdk = {
@@ -35,7 +33,6 @@ const sdk = {
                 read,
                 play,
                 cameraReady,
-                showError
             };
         } else {
             throw new Error('SDK is not initialized');

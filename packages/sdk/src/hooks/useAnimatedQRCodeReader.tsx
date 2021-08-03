@@ -16,7 +16,8 @@ export interface URQRCodeData {
     data: string;
 }
 
-export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean; showError: (msg: string) => void }] => {
+export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean;}] => {
+    let URTypeErrorMessage: string = '';
     const [cameraReady, setCameraReady] = useState<boolean>(false);
     const [expectTypes, setExpectTypes] = useState<SupportedResult[]>([]);
     const [urDecoder, setURDecoder] = useState(new URDecoder());
@@ -28,10 +29,11 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
     const reset = () => {
         setURDecoder(new URDecoder());
         setError('');
+        URTypeErrorMessage = '';
     };
 
-    const processQRCode = (qr: string) => {
-        processUR(qr);
+    const processQRCode = (qr: string, errorMessgeOnURType: string) => {
+        processUR(qr, errorMessgeOnURType);
     };
 
     const handleStop = () => {
@@ -44,7 +46,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
         reset();
     };
 
-    const processUR = (ur: string) => {
+    const processUR = (ur: string, errorMessgeOnURType: string) => {
         try {
             if (!urDecoder.isComplete()) {
                 urDecoder.receivePart(ur);
@@ -66,7 +68,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
             }
         } catch (e) {
             if (e instanceof URTypeError) {
-                ee.emit('error', e)
+                setError(errorMessgeOnURType)
             } else {
                 setError(e.message);
             }
@@ -87,7 +89,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
             <QrReader
                 onScan={(data: any) => {
                     if (data) {
-                        processQRCode(data);
+                        processQRCode(data, URTypeErrorMessage);
                     }
                 }}
                 onLoad={() => {
@@ -115,22 +117,19 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
         element,
         {
             read: (expect, options) => {
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve) => {
                     setExpectTypes(expect);
                     if (options) {
                         options.title && setTitle(options.title);
                         options.description && setDescription(options.description);
+                        URTypeErrorMessage = options.URTypeErrorMessage ? options.URTypeErrorMessage : '' ;
                     }
                     ee.once('read', (result) => {
                         reset();
                         resolve(result);
                     });
-                    ee.once('error', e => {
-                        reject(e)
-                    });
                 });
             },
-            showError: (errorMessage) => setError(errorMessage),
             cameraReady,
         },
     ];

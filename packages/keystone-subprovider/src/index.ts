@@ -1,7 +1,7 @@
 import { assert } from '@0x/assert';
 import { PartialTxParams } from '@0x/subproviders';
 import { BaseWalletSubprovider } from './baseWalletSubprovider';
-import sdk, { SupportedResult, URTypeError } from '@keystonehq/sdk';
+import sdk, { SupportedResult } from '@keystonehq/sdk';
 import Common from '@ethereumjs/common';
 import { Transaction } from '@ethereumjs/tx';
 import { BN, stripHexPrefix, addHexPrefix } from 'ethereumjs-util';
@@ -37,20 +37,14 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     }
 
     public async getAccountsAsync(numberOfAddress: number = 10): Promise<string[]> {
-        try {
-            if (!this.synced) {
-                await this._syncWithKeystone();
-    
-            }
-            const accounts = this.genereateAddresses(numberOfAddress)
-    
-            this.accountNumber = accounts.length;
-            return accounts
-        } catch (e) {
-            console.error(e)
-            return []
+        if (!this.synced) {
+            await this._syncWithKeystone();
+
         }
-        
+        const accounts = this.genereateAddresses(numberOfAddress)
+
+        this.accountNumber = accounts.length;
+        return accounts
     }
 
     public async signTransactionAsync(txParams: PartialTxParams): Promise<string> {
@@ -194,39 +188,31 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     }
 
     private async _syncWithKeystone() {
-        try {
-            const decodedResult = await this.keystoneSdk.read([SupportedResult.UR_CRYPTO_HDKEY], {
-                title: 'Sync Keystone',
-                description: "Please scan the QR code displayed on your Keystone",
-                renderInitial: {
-                    walletMode:'Web3',
-                    link: "https://keyst.one/defi"
-                },
-                onError: "The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again ( Keystone firmware V1.3.0 or newer required)."
-            });
-            if (decodedResult.status === 'success') {
-                const { result } = decodedResult;
-                const cryptoHDKey = CryptoHDKey.fromCBOR(result.cbor);
-                const hdPath = `m/${cryptoHDKey.getOrigin().getPath()}`;
-                const xfp = cryptoHDKey.getOrigin().getSourceFingerprint()?.toString('hex');
-                if (!xfp) {
-                    throw new Error('invalid crypto-hd-key, cannot get source fingerprint');
-                }
-                const xpub = cryptoHDKey.getBip32Key();
-                this.hdpath = hdPath;
-                this.xfp = xfp;
-                this.xpub = xpub;
-                this.synced = true;
-            } else {
-                throw new Error('Reading canceled');
+        const decodedResult = await this.keystoneSdk.read([SupportedResult.UR_CRYPTO_HDKEY], {
+            title: 'Sync Keystone',
+            description: "Please scan the QR code displayed on your Keystone",
+            renderInitial: {
+                walletMode:'Web3',
+                link: "https://keyst.one/defi"
+            },
+            URTypeErrorMessage: "The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again ( Keystone firmware V1.3.0 or newer required)."
+        });
+        if (decodedResult.status === 'success') {
+            const { result } = decodedResult;
+            const cryptoHDKey = CryptoHDKey.fromCBOR(result.cbor);
+            const hdPath = `m/${cryptoHDKey.getOrigin().getPath()}`;
+            const xfp = cryptoHDKey.getOrigin().getSourceFingerprint()?.toString('hex');
+            if (!xfp) {
+                throw new Error('invalid crypto-hd-key, cannot get source fingerprint');
             }
-        } catch(e) {
-            if(e instanceof URTypeError) {
-                this.keystoneSdk.showError('The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again ( Keystone firmware V1.3.0 or newer required).')
-            } 
-            throw e
-        }
-        
+            const xpub = cryptoHDKey.getBip32Key();
+            this.hdpath = hdPath;
+            this.xfp = xfp;
+            this.xpub = xpub;
+            this.synced = true;
+        } else {
+            throw new Error('Reading canceled');
+        }        
     }
 
     private genereateAddresses(numberOfAddress: number) {
