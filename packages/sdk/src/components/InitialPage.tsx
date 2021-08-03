@@ -17,7 +17,7 @@ export const InitialPage = (props:{walletMode:string, link: string, onButtonClic
                 <li style={{marginBottom: '0.75rem'}}> 4. Select account and check your watch-only wallet</li>
             </ul>
             <div style={{marginBottom: '1rem'}}>
-            <a style={{marginTop: '1.25rem', color:'#784FFE', textDecoration: 'none'}} href={props.link}>Click here to view detailed tutorial</a>
+            <a style={{marginTop: '1.25rem', color:'#784FFE', textDecoration: 'none'}} href={props.link} target="_blank">Click here to view detailed tutorial</a>
             </div>
             <Button onClick={props.onButtonClick}>Sync Keystone</Button>    
         </div>   
