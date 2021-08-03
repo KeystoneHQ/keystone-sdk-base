@@ -11,10 +11,10 @@ export const InitialPage = (props:{walletMode:string, link: string, onButtonClic
                     Sync Keystone</div>
             </div>
             <ul style={{marginTop: '2rem', listStyleType: 'none', padding: 0, fontSize: '1rem'}}>
-                <li style={{marginBottom: '0.75rem'}}>1. Open Keystone</li>
-                <li style={{marginBottom: '0.75rem'}}>{`2. Select Watch-only wallet(Companion App) as ${props.walletMode}`}</li>
-                <li style={{marginBottom: '0.75rem'}}> 3. Click “Scan Keystone” button and scan the QR Code displayed on Keystone</li>
-                <li style={{marginBottom: '0.75rem'}}> 4. Select Account</li>
+                <li style={{marginBottom: '0.75rem'}}>1. Turn on your Keystone hardware device</li>
+                <li style={{marginBottom: '0.75rem'}}>{`2. Select your "${props.walletMode}" as your Watch-only wallet(Companion App)`}</li>
+                <li style={{marginBottom: '0.75rem'}}> 3. Press the "Scan Keystone" button and scan the QR Code displayed on your Keystone hardware wallet</li>
+                <li style={{marginBottom: '0.75rem'}}> 4. Select account and check your watch-only wallet</li>
             </ul>
             <div style={{marginBottom: '1rem'}}>
             <a style={{marginTop: '1.25rem', color:'#784FFE', textDecoration: 'none'}} href={props.link}>Click here to view detailed tutorial</a>

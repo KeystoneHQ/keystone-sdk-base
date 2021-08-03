@@ -191,9 +191,10 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         const decodedResult = await this.keystoneSdk.read([SupportedResult.UR_CRYPTO_HDKEY], {
             title: 'Sync Keystone',
             description: "Please click 'Sync' in Keystone and scan the QR code displayed later",
-        }, {
-            walletMode: 'Web3',
-            link: "https://keyst.one/defi"
+            renderInitial: {
+                walletMode:'Web3',
+                link: "https://keyst.one/defi"
+            }
         });
         if (decodedResult.status === 'success') {
             const { result } = decodedResult;

@@ -87,6 +87,7 @@ export const useController = (): [
                     return result;    
                 } else {
                     setMode('read');
+                    setVisible(true);
                     const result = await read(expect, options);
                     reset();
                     return result;    
