@@ -47,11 +47,8 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
             this.accountNumber = accounts.length;
             return accounts
         } catch (e) {
-            if(e instanceof URTypeError) {
-                console.error(e)
-            } else {
-                return []
-            }
+            console.error(e)
+            return []
         }
         
     }
