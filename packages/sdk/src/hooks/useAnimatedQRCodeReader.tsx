@@ -67,8 +67,9 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
         } catch (e) {
             if (e instanceof URTypeError) {
                 ee.emit('error', e)
+            } else {
+                setError(e.message);
             }
-            setError(e.message);
         }
     };
 
