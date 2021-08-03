@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { useAnimatedQRCodePlayer } from './useAnimatedQRCodePlayer';
 import { useAnimatedQRCodeReader } from './useAnimatedQRCodeReader';
 import { Play, Read } from '../types';
+import { InitialPage } from '../components/InitialPage';
 
 const customStyles = {
     overlay: {
@@ -30,6 +31,9 @@ export const useController = (): [
     },
 ] => {
     const [visible, setVisible] = useState(false);
+    const [initial, setInitial] = useState(false);
+    const [walletMode, setWalltMode] = useState("");
+    const [link, setLink] = useState("");
     const [mode, setMode] = useState<'read' | 'play'>('play');
     const [AnimatedQRCodePlayer, { play }] = useAnimatedQRCodePlayer();
     const [AnimatedQRCodeReader, { read, cameraReady }] = useAnimatedQRCodeReader();
@@ -37,6 +41,10 @@ export const useController = (): [
         setVisible(false);
         setMode('play');
     };
+
+    const goToRead = () => {
+        setMode('read')
+    }
     const element = (
         <Modal isOpen={visible} style={customStyles}>
             <div onClick={() => setVisible(false)}>
@@ -53,7 +61,8 @@ export const useController = (): [
                     justifyContent: 'center',
                 }}
             >
-                {mode === 'read' ? AnimatedQRCodeReader : AnimatedQRCodePlayer}
+                {initial ? <InitialPage  walletMode={walletMode} link={link} onButtonClick={goToRead}/>: null}
+                {!initial && mode === 'read' ? AnimatedQRCodeReader : AnimatedQRCodePlayer}
             </div>
         </Modal>
     );
@@ -68,11 +77,20 @@ export const useController = (): [
                 return;
             },
             read: async (expect, options) => {
-                setVisible(true);
-                setMode('read');
-                const result = await read(expect, options);
-                reset();
-                return result;
+                if(options.renderInitial) {
+                    setInitial(true);
+                    setWalltMode(options.renderInitial.walletMode);
+                    setLink(options.renderInitial.link);
+                    setVisible(true);
+                    const result = await read(expect, options);
+                    reset();
+                    return result;    
+                } else {
+                    setMode('read');
+                    const result = await read(expect, options);
+                    reset();
+                    return result;    
+                }
             },
             cameraReady,
         },

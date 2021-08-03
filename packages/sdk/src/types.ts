@@ -23,7 +23,10 @@ export type Play = (
 
 export type Read = (
     expect: SupportedResult[],
-    options?: { title?: string; description?: string },
+    options?: { title?: string; description?: string, renderInitial?: {
+        walletMode: string,
+        link: string
+    } },
 ) => Promise<DecodedResult>;
 
 export enum SupportedResult {
