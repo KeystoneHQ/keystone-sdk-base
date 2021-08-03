@@ -66,7 +66,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
             }
         } catch (e) {
             if (e instanceof URTypeError) {
-                throw e
+                ee.emit('error', e)
             }
             setError(e.message);
         }
@@ -114,7 +114,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
         element,
         {
             read: (expect, options) => {
-                return new Promise((resolve) => {
+                return new Promise((resolve, reject) => {
                     setExpectTypes(expect);
                     if (options) {
                         options.title && setTitle(options.title);
@@ -123,6 +123,9 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                     ee.once('read', (result) => {
                         reset();
                         resolve(result);
+                    });
+                    ee.once('error', e => {
+                        reject(e)
                     });
                 });
             },
