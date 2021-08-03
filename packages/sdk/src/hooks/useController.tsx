@@ -43,6 +43,7 @@ export const useController = (): [
     };
 
     const goToRead = () => {
+        setInitial(false)
         setMode('read')
     }
     const element = (
