@@ -20,7 +20,7 @@
     "dependencies": {
         "@ethereumjs/tx": "3.0.0",
         "@keystonehq/bc-ur-registry-eth": "^0.6.3-alpha.0",
-        "@keystonehq/sdk": "^0.5.6",
+        "@keystonehq/sdk": "^0.6.3-alpha.6",
         "bs58check": "^2.1.2",
         "ethereumjs-util": "^7.0.8",
         "hdkey": "^2.0.1",
