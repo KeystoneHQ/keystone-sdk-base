@@ -29,7 +29,6 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
     const reset = () => {
         setURDecoder(new URDecoder());
         setError('');
-        URTypeErrorMessage = '';
     };
 
     const processQRCode = (qr: string, errorMessgeOnURType: string) => {
