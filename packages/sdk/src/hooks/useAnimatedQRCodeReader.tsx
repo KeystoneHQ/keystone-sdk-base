@@ -16,8 +16,9 @@ export interface URQRCodeData {
     data: string;
 }
 
+let URTypeErrorMessage: string = '';
+
 export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean;}] => {
-    let URTypeErrorMessage: string = '';
     const [cameraReady, setCameraReady] = useState<boolean>(false);
     const [expectTypes, setExpectTypes] = useState<SupportedResult[]>([]);
     const [urDecoder, setURDecoder] = useState(new URDecoder());
