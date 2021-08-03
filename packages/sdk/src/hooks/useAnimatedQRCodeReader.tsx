@@ -1,6 +1,7 @@
 import React, { useMemo, useState, Suspense } from 'react';
 import { EventEmitter } from 'events';
 import { Button } from '../components/Button';
+import { URTypeError } from '../error';
 
 import { Read, SupportedResult } from '../types';
 import { ButtonGroup } from '../components/ButtonGroup';
@@ -15,7 +16,7 @@ export interface URQRCodeData {
     data: string;
 }
 
-export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean }] => {
+export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean; showError: (msg: string) => void }] => {
     const [cameraReady, setCameraReady] = useState<boolean>(false);
     const [expectTypes, setExpectTypes] = useState<SupportedResult[]>([]);
     const [urDecoder, setURDecoder] = useState(new URDecoder());
@@ -61,9 +62,12 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                         return;
                     }
                 });
-                if (!foundExpected) throw new Error(`received ur type ${result.type}, but expected [${expectTypes.join(',')}]`);
+                if (!foundExpected) throw new URTypeError(`received ur type ${result.type}, but expected [${expectTypes.join(',')}]`);
             }
         } catch (e) {
+            if (e instanceof URTypeError) {
+                throw e
+            }
             setError(e.message);
         }
     };
@@ -122,6 +126,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                     });
                 });
             },
+            showError: (errorMessage) => setError(errorMessage),
             cameraReady,
         },
     ];
