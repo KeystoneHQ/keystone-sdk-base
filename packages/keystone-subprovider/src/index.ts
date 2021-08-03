@@ -37,14 +37,23 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     }
 
     public async getAccountsAsync(numberOfAddress: number = 10): Promise<string[]> {
-        if (!this.synced) {
-            await this._syncWithKeystone();
-
+        try {
+            if (!this.synced) {
+                await this._syncWithKeystone();
+    
+            }
+            const accounts = this.genereateAddresses(numberOfAddress)
+    
+            this.accountNumber = accounts.length;
+            return accounts
+        } catch (e) {
+            if(e instanceof URTypeError) {
+                console.error(e)
+            } else {
+                return []
+            }
         }
-        const accounts = this.genereateAddresses(numberOfAddress)
-
-        this.accountNumber = accounts.length;
-        return accounts
+        
     }
 
     public async signTransactionAsync(txParams: PartialTxParams): Promise<string> {
@@ -217,9 +226,8 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         } catch(e) {
             if(e instanceof URTypeError) {
                 this.keystoneSdk.showError('The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again ( Keystone firmware V1.3.0 or newer required).')
-            } else {
-                throw e
-            }
+            } 
+            throw e
         }
         
     }
