@@ -1,6 +1,7 @@
 import React, { useMemo, useState, Suspense } from 'react';
 import { EventEmitter } from 'events';
 import { Button } from '../components/Button';
+import { URTypeError } from '../error';
 
 import { Read, SupportedResult } from '../types';
 import { ButtonGroup } from '../components/ButtonGroup';
@@ -15,7 +16,9 @@ export interface URQRCodeData {
     data: string;
 }
 
-export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean }] => {
+let URTypeErrorMessage: string = '';
+
+export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean;}] => {
     const [cameraReady, setCameraReady] = useState<boolean>(false);
     const [expectTypes, setExpectTypes] = useState<SupportedResult[]>([]);
     const [urDecoder, setURDecoder] = useState(new URDecoder());
@@ -29,8 +32,8 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
         setError('');
     };
 
-    const processQRCode = (qr: string) => {
-        processUR(qr);
+    const processQRCode = (qr: string, errorMessgeOnURType: string) => {
+        processUR(qr, errorMessgeOnURType);
     };
 
     const handleStop = () => {
@@ -43,7 +46,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
         reset();
     };
 
-    const processUR = (ur: string) => {
+    const processUR = (ur: string, errorMessgeOnURType: string) => {
         try {
             if (!urDecoder.isComplete()) {
                 urDecoder.receivePart(ur);
@@ -61,10 +64,14 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                         return;
                     }
                 });
-                if (!foundExpected) throw new Error(`received ur type ${result.type}, but expected [${expectTypes.join(',')}]`);
+                if (!foundExpected) throw new URTypeError(`received ur type ${result.type}, but expected [${expectTypes.join(',')}]`);
             }
         } catch (e) {
-            setError(e.message);
+            if (e instanceof URTypeError) {
+                setError(errorMessgeOnURType)
+            } else {
+                setError(e.message);
+            }
         }
     };
 
@@ -82,7 +89,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
             <QrReader
                 onScan={(data: any) => {
                     if (data) {
-                        processQRCode(data);
+                        processQRCode(data, URTypeErrorMessage);
                     }
                 }}
                 onLoad={() => {
@@ -115,6 +122,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                     if (options) {
                         options.title && setTitle(options.title);
                         options.description && setDescription(options.description);
+                        URTypeErrorMessage = options.URTypeErrorMessage ? options.URTypeErrorMessage : '' ;
                     }
                     ee.once('read', (result) => {
                         reset();

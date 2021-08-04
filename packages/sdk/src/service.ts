@@ -32,7 +32,7 @@ const sdk = {
             return {
                 read,
                 play,
-                cameraReady
+                cameraReady,
             };
         } else {
             throw new Error('SDK is not initialized');
