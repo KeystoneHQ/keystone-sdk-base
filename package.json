@@ -5,6 +5,7 @@
 		"clean": "lerna clean",
 		"bootstrap": "lerna bootstrap",
 		"build": "lerna run build",
+		"start": "lerna run start",
 		"prepare": "npm run clean && npm run bootstrap && npm run build",
 		"lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
 		"test": "lerna run test"
