@@ -60,6 +60,7 @@ export const useController = (): [
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    color: '#002237'
                 }}
             >
                 {initial ? <InitialPage  walletMode={walletMode} link={link} onButtonClick={goToRead}/>: null}

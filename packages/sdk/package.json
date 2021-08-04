@@ -20,7 +20,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "start": "tsdx watch",
+    "start": "webpack serve --open",
     "build": "tsdx build",
     "test": "jest --passWithNoTests"
   },
@@ -42,5 +42,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.3.2",
+    "webpack": "^5.48.0",
+    "webpack-cli": "^4.7.2"
   }
 }
