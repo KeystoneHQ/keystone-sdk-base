@@ -8,28 +8,30 @@ import { RPCSubprovider } from '@0x/subproviders/lib/src/subproviders/rpc_subpro
 const DEFAULT_RPC = 'https://mainnet.infura.io/v3/1ef55d552de6419386f927559b13e052'
 
 interface KeystoneConnectorArguments {
-    chainId: number,
+    supportedChainIds: number[],
     url?: string,
     pollingInterval?: number
     requestTimeoutMs?: number
 }
 
 export class KeystoneConnector extends AbstractConnector {
-    private readonly chainId: number
+    private activeChainId: number
     private readonly url: string
+    private activeKeyProvider: KeystoneSubprovider
+    private activeRPCProvider: RPCSubprovider
     private readonly pollingInterval?: number
     private readonly requestTimeoutMs?: number
 
     private provider: any
 
     constructor({
-        chainId,
+        supportedChainIds,
         url,
         pollingInterval,
         requestTimeoutMs,
     }: KeystoneConnectorArguments) {
-        super({ supportedChainIds:  [chainId]})
-        this.chainId = chainId;
+        super({ supportedChainIds})
+        this.activeChainId = supportedChainIds[0];
         this.pollingInterval = pollingInterval;
         this.requestTimeoutMs = requestTimeoutMs;
         this.url = url? url: DEFAULT_RPC;
@@ -39,25 +41,27 @@ export class KeystoneConnector extends AbstractConnector {
     public async activate(): Promise<ConnectorUpdate> {
         if (!this.provider) {
             const engine = new Web3ProviderEngine({ pollingInterval: this.pollingInterval })
+            this.activeKeyProvider = new KeystoneSubprovider({
+                networkId: this.activeChainId,
+              });
             engine.addProvider(
-              new KeystoneSubprovider({
-                networkId: this.chainId,
-              })
+              this.activeKeyProvider
             )
             engine.addProvider(new CacheSubprovider())
-            engine.addProvider(new RPCSubprovider(this.url, this.requestTimeoutMs))
+            this.activeRPCProvider = new RPCSubprovider(this.url, this.requestTimeoutMs)
+            engine.addProvider(this.activeRPCProvider)
             this.provider = engine
           }
       
           this.provider.start()
       
-          return { provider: this.provider, chainId: this.chainId }
+          return { provider: this.provider, chainId: this.activeChainId }
     }
     public async getProvider(): Promise<Web3ProviderEngine> {
         return this.provider
     }
     public async getChainId(): Promise<number> {
-        return this.chainId
+        return this.activeChainId
     }
     public async getAccount(): Promise<string> {
         return this.provider._providers[0].getAccountsAsync(1).then((accounts: string[]): string => accounts[0])
@@ -68,6 +72,21 @@ export class KeystoneConnector extends AbstractConnector {
 
     public async close() {
         this.deactivate();
+    }
+
+
+    private switchChain(chainId: number, rpc: string) {
+        this.provider.stop()
+        this.provider.removeProvider(this.activeKeyProvider)
+        this.provider.removeProvider(this.activeRPCProvider)
+        this.activeChainId = chainId
+        this.activeKeyProvider = new KeystoneSubprovider({
+            networkId: this.activeChainId
+        })
+        this.activeRPCProvider = new RPCSubprovider(rpc, this.requestTimeoutMs)
+        this.provider.addProvider(this.activeKeyProvider)
+        this.provider.addProvider(this.activeRPCProvider)
+        this.provider.start()
     }
     
 }
