@@ -7,14 +7,14 @@ import { RPCSubprovider } from '@0x/subproviders/lib/src/subproviders/rpc_subpro
 
 const DEFAULT_RPC = 'https://mainnet.infura.io/v3/1ef55d552de6419386f927559b13e052'
 
-interface KeystoneConnetorArguments {
+interface KeystoneConnectorArguments {
     chainId: number,
     url?: string,
     pollingInterval?: number
     requestTimeoutMs?: number
 }
 
-export class KeystoneConnetor extends AbstractConnector {
+export class KeystoneConnector extends AbstractConnector {
     private readonly chainId: number
     private readonly url: string
     private readonly pollingInterval?: number
@@ -27,7 +27,7 @@ export class KeystoneConnetor extends AbstractConnector {
         url,
         pollingInterval,
         requestTimeoutMs,
-    }: KeystoneConnetorArguments) {
+    }: KeystoneConnectorArguments) {
         super({ supportedChainIds:  [chainId]})
         this.chainId = chainId;
         this.pollingInterval = pollingInterval;
