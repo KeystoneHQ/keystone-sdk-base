@@ -67,7 +67,6 @@ export const useController = (): [
             <div
                 style={{
                     width: '35rem',
-                    boxSizing: 'border-box',
                     padding: 18,
                     flex: 1,
                     flexDirection: 'column',

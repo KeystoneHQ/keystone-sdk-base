@@ -5,6 +5,7 @@ import { URTypeError } from '../error';
 
 import { Read, SupportedResult } from '../types';
 import { ButtonGroup } from '../components/ButtonGroup';
+import { LoadingSpinner } from '../components/LoadingSpinner'
 import { URDecoder } from '@ngraveio/bc-ur';
 
 
@@ -18,7 +19,7 @@ export interface URQRCodeData {
 
 let URTypeErrorMessage: string = '';
 
-export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean;}] => {
+export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean; }] => {
     const [cameraReady, setCameraReady] = useState<boolean>(false);
     const [expectTypes, setExpectTypes] = useState<SupportedResult[]>([]);
     const [urDecoder, setURDecoder] = useState(new URDecoder());
@@ -83,33 +84,33 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                 alignItems: 'center',
             }}
         >
-            {title && <p style={{fontSize: '1.25rem', fontWeight: 'bold'}}>{title}</p>}
-            {description && <p style={{fontSize: '1rem', textAlign:'center'}}>{description}</p>}
-            <Suspense fallback={<div/>}>
-            <QrReader
-                onScan={(data: any) => {
-                    if (data) {
-                        processQRCode(data, URTypeErrorMessage);
-                    }
-                }}
-                onLoad={() => {
-                    setCameraReady(true);
-                }}
-                delay={100}
-                style={{ width: '100%' }}
-                onError={(e) => {
-                    setError(e.message);
-                }}
-            />    
+            {title && <p style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>{title}</p>}
+            {description && <p style={{ fontSize: '1rem', textAlign: 'center' }}>{description}</p>}
+            <Suspense fallback={<div />}>
+                <div style={{position: 'relative', width: '100%'}}>
+                    {!cameraReady ? <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}><LoadingSpinner /></div> : null}
+                    <QrReader
+                        onScan={(data: any) => {
+                            if (data) {
+                                setCameraReady(true);
+                                processQRCode(data, URTypeErrorMessage);
+                            }
+                        }}
+                        delay={100}
+                        style={{ width: '100%' }}
+                        onError={(e) => {
+                            setError(e.message);
+                        }}
+                    />
+                </div>
             </Suspense>
-            
             <p>{(progress * 100).toFixed(0)} %</p>
             {error && <p style={{ color: 'red', fontSize: '1rem' }}>{error}</p>}
             <ButtonGroup>
                 <Button onClick={handleStop}>Close</Button>
                 {error && <Button onClick={handleRetry}>Retry</Button>}
             </ButtonGroup>
-            
+
         </div>
     );
 
@@ -122,7 +123,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                     if (options) {
                         options.title && setTitle(options.title);
                         options.description && setDescription(options.description);
-                        URTypeErrorMessage = options.URTypeErrorMessage ? options.URTypeErrorMessage : '' ;
+                        URTypeErrorMessage = options.URTypeErrorMessage ? options.URTypeErrorMessage : '';
                     }
                     ee.once('read', (result) => {
                         reset();
