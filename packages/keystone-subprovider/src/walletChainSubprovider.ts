@@ -4,11 +4,15 @@ import { Callback, ErrorCallback, Subprovider } from '@0x/subproviders';
 
 
 export class WalletChainSubprovider extends Subprovider {
-    private onChainChange: Function
+    private onAddChain: Function
+    private onUpdateChain: Function
+    private onSwitchChain: Function
 
-    constructor(onChainChange){
+    constructor(onAddChain, onUpdateChain, onSwitchChain){
         super();
-        this.onChainChange = onChainChange
+        this.onAddChain = onAddChain
+        this.onUpdateChain = onUpdateChain
+        this.onSwitchChain = onSwitchChain
     }
     
     public async handleRequest(payload: JSONRPCRequestPayload, next: Callback, end: ErrorCallback): Promise<void> {
