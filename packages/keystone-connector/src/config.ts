@@ -43,7 +43,7 @@ export const SUPPORTED_NETWORKS: {
         symbol: 'ETH',
         decimals: 18,
       },
-      rpcUrls: ['https://mainnet.infura.io/v3'],
+      rpcUrls: ['https://mainnet.infura.io/v3/1ef55d552de6419386f927559b13e052'],
       blockExplorerUrls: ['https://etherscan.com'],
     },
     [ChainId.FANTOM]: {
