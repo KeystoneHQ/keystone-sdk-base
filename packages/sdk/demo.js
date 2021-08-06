@@ -1,4 +1,6 @@
 import sdk, {SupportedResult} from './dist/index'
+import {URDecoder} from '@ngraveio/bc-ur' 
+
 
 sdk.bootstrap()
 
@@ -18,4 +20,15 @@ const showRead = async () => {
     console.log(decodedResult)
 }
 
-showRead().then(console.log)
+// showRead().then(console.log)
+
+const showPlay = async () => {
+    const ur = 'ur:eth-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfkswdtklffd';
+    await keystonehqSdk.play(URDecoder.decode(ur), {
+        hasNext: true,
+        title: 'Scan with your Keystone',
+        description: 'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature',
+    });
+}
+
+showPlay().then(console.log)

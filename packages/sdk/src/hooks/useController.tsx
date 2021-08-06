@@ -31,30 +31,42 @@ export const useController = (): [
     },
 ] => {
     const [visible, setVisible] = useState(false);
-    const [initial, setInitial] = useState(false);
     const [walletMode, setWalltMode] = useState("");
     const [link, setLink] = useState("");
-    const [mode, setMode] = useState<'read' | 'play'>('play');
+    const [mode, setMode] = useState<'read' | 'play' | 'initial' | null>(null);
     const [AnimatedQRCodePlayer, { play }] = useAnimatedQRCodePlayer();
     const [AnimatedQRCodeReader, { read, cameraReady }] = useAnimatedQRCodeReader();
     const reset = () => {
+        setMode(null);
+        setLink('');
+        setWalltMode('');
         setVisible(false);
-        setMode('play');
     };
 
     const goToRead = () => {
-        setInitial(false)
         setMode('read')
     }
+
+    const renderPannel = (pageMode: string) => {
+        if(pageMode==="initial") {
+            return <InitialPage  walletMode={walletMode} link={link} onButtonClick={goToRead}/>
+        } else if (pageMode === 'read') {
+            return AnimatedQRCodeReader
+        } else if (pageMode === 'play') {
+            return AnimatedQRCodePlayer
+        } else {
+            return null
+        }
+    }
+
     const element = (
         <Modal isOpen={visible} style={customStyles}>
-            <div onClick={() => setVisible(false)}>
+            <div onClick={reset}>
                 <img style={{ position: "absolute", top: '1rem', right: '1rem' }} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAADKADAAQAAAABAAAADAAAAAATDPpdAAAAmklEQVQoFZWRwQ3DIAwAa4brJPBP80hnaD/lD5N0iYxEfRVBxBGRwsvgO2PZklJaReTrvX/eTk7O+VVKuTtgDRYVPyOeHAysAFV40jCGEB69aHN/YSRZGK4JVuKu5/DrToDoqnI9tOh4vXJ2Qlc96kSY2lTfWs0m9DCT0r3MSkUrXR9r3eBCNbuDrY/td23z7Vg3wQhGIgcD+wPGY2fPvHuWagAAAABJRU5ErkJggg=="/>
             </div>
             <div
                 style={{
                     width: '35rem',
-                    boxSizing: 'border-box',
                     padding: 18,
                     flex: 1,
                     flexDirection: 'column',
@@ -63,8 +75,7 @@ export const useController = (): [
                     color: '#002237'
                 }}
             >
-                {initial ? <InitialPage  walletMode={walletMode} link={link} onButtonClick={goToRead}/>: null}
-                {!initial && mode === 'read' ? AnimatedQRCodeReader : AnimatedQRCodePlayer}
+                {renderPannel(mode)}
             </div>
         </Modal>
     );
@@ -80,9 +91,9 @@ export const useController = (): [
             },
             read: async (expect, options) => {
                 if(options.renderInitial) {
-                    setInitial(true);
                     setWalltMode(options.renderInitial.walletMode);
                     setLink(options.renderInitial.link);
+                    setMode('initial');
                     setVisible(true);
                     const result = await read(expect, options);
                     reset();

@@ -62,7 +62,7 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
             <BaseQRCode size={288} data={qr} />
             {description && <p style={{fontSize: '1rem', textAlign:'center'}}>{description}</p>}
             <ButtonGroup>
-                <Button onClick={finish}>{hasNext ? 'Continue' : 'Finish'}</Button>
+                <Button onClick={finish}>{hasNext ? 'Scan Keystone' : 'Finish'}</Button>
             </ButtonGroup>
         </div>
     ) : (
