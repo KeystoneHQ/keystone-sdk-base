@@ -5,6 +5,12 @@
             "npmClientArgs": ["--no-package-lock", "--no-ci"]
         }
     },
-    "packages": ["packages/*"],
+    "packages": [
+        "packages/sdk",
+        "packages/eth-keyring",
+        "packages/keystone-connector",
+        "packages/keystone-subprovider",
+        "packages/ur-registry-eth"
+    ],
     "version": "independent"
 }

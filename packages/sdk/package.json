@@ -38,7 +38,8 @@
     "react-dom": "16.13.1",
     "react-modal": "^3.12.1",
     "react-qr-reader": "^2.2.1",
-    "rxjs": "^6.6.3"
+    "rxjs": "^6.6.3",
+    "tsdx": "^0.14.1"
   },
   "publishConfig": {
     "access": "public"

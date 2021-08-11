@@ -10,7 +10,8 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "npm run clean && npx tsc -p tsconfig.json -outDir ./dist && cp -R src/QRProtocolBuf dist/QRProtocolBuf",
+    "copy": "mkdir dist/QRProtocolBuf && cp -R src/QRProtocolBuf dist/QRProtocolBuf",
+    "build": "tsdx build && npm run copy",
     "test": "jest",
     "protobuf": "npx pbjs -t static-module -w commonjs -o src/QRProtocolBuf/proto.js crypto-coin-message-protocol/*.proto; npx pbts -o src/QRProtocolBuf/proto.d.ts src/QRProtocolBuf/proto.js",
     "update-proto-buffer": "git submodule update --remote && npm run protobuf"
@@ -21,7 +22,8 @@
   ],
   "dependencies": {
     "@ngraveio/bc-ur": "^1.0.0",
-    "protobufjs": "^6.10.1"
+    "protobufjs": "^6.10.1",
+    "tsdx": "^0.14.1"
   },
   "repository": {
     "type": "git",
