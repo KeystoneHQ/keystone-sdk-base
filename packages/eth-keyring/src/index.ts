@@ -1,15 +1,11 @@
 import { EventEmitter } from 'events';
 import HDKey from 'hdkey';
 import sdk, { SupportedResult } from '@keystonehq/sdk';
-import { toChecksumAddress, publicToAddress, BN, stripHexPrefix} from 'ethereumjs-util';
+import { toChecksumAddress, publicToAddress, BN, stripHexPrefix } from 'ethereumjs-util';
 import { Transaction } from '@ethereumjs/tx';
-import {
-    CryptoHDKey,
-    DataType,
-    ETHSignature,
-    EthSignRequest,
-} from '@keystonehq/bc-ur-registry-eth';
+import { CryptoHDKey, DataType, ETHSignature, EthSignRequest } from '@keystonehq/bc-ur-registry-eth';
 import * as uuid from 'uuid';
+import { PlayStatus, ReadStatus } from '@keystonehq/sdk';
 
 const keyringType = 'Air Gaped Device';
 const pathBase = 'm';
@@ -34,14 +30,15 @@ const keystoneSDK = sdk.getSdk();
 const readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hdPath: string }> => {
     const decodedResult = await keystoneSDK.read([SupportedResult.UR_CRYPTO_HDKEY], {
         title: 'Sync Keystone',
-        description: "Please scan the QR code displayed on your Keystone",
+        description: 'Please scan the QR code displayed on your Keystone',
         renderInitial: {
-                walletMode:'Web3',
-                link: "https://keyst.one/defi"
+            walletMode: 'Web3',
+            link: 'https://keyst.one/defi',
         },
-        URTypeErrorMessage: "The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again ( Keystone firmware V1.3.0 or newer required)."
+        URTypeErrorMessage:
+            'The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again ( Keystone firmware V1.3.0 or newer required).',
     });
-    if (decodedResult.status === 'success') {
+    if (decodedResult.status === ReadStatus.success) {
         const { result } = decodedResult;
         const cryptoHDKey = CryptoHDKey.fromCBOR(result.cbor);
         const hdPath = `m/${cryptoHDKey.getOrigin().getPath()}`;
@@ -243,21 +240,21 @@ class AirGapedKeyring extends EventEmitter {
             title: 'Scan Keystone',
             description: 'Please scan the QR code displayed on your Keystone',
         });
-        if (result.status === 'canceled') {
+        if (result.status === ReadStatus.canceled) {
             throw new Error('#ktek_error[read-cancel]: read signature canceled');
         } else {
             const ethSignature = ETHSignature.fromCBOR(result.result.cbor);
             const requestIdBuffer = ethSignature.getRequestId();
             const signature = ethSignature.getSignature();
-            if(requestIdBuffer) {
+            if (requestIdBuffer) {
                 const requestId = uuid.stringify(requestIdBuffer);
                 if (requestId !== sendRequestID) {
                     throw new Error('read signature error: mismatched requestId');
                 }
             }
-            const r = signature.slice(0,32)
-            const s = signature.slice(32, 64)
-            const v = signature.slice(64, 65)
+            const r = signature.slice(0, 32);
+            const s = signature.slice(32, 64);
+            const v = signature.slice(64, 65);
             return {
                 r,
                 s,
@@ -270,12 +267,12 @@ class AirGapedKeyring extends EventEmitter {
     private static serializeTx(tx: Transaction): Buffer {
         // need use EIP-155
         // @ts-ignore
-        tx.v = new BN(tx.common.chainId())
+        tx.v = new BN(tx.common.chainId());
         // @ts-ignore
-        tx.r = new BN(0)
+        tx.r = new BN(0);
         // @ts-ignore
-        tx.s = new BN(0)
-        return tx.serialize()
+        tx.s = new BN(0);
+        return tx.serialize();
     }
 
     async signTransaction(address: string, tx: Transaction): Promise<Transaction> {
@@ -291,27 +288,31 @@ class AirGapedKeyring extends EventEmitter {
             chainId,
         );
 
-        await keystoneSDK.play(ethSignRequest.toUR(), {
+        const status = await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Scan with your Keystone',
             description:
-                'After your Keystone has signed the transaction, click on "Scan Keystone" to receive the signature'
+                'After your Keystone has signed the transaction, click on "Scan Keystone" to receive the signature',
         });
 
+        if (status === PlayStatus.canceled) throw new Error('#ktek_error[play-cancel]: play canceled');
 
         const { r, s, v } = await this.readSignature(requestId);
-        const txJson = tx.toJSON()
-        return Transaction.fromTxData({
-            to: txJson['to'],
-            gasLimit: txJson['gasLimit'],
-            gasPrice: txJson['gasPrice'],
-            data: txJson['data'],
-            nonce: txJson['nonce'],
-            value: txJson['value'],
-            r,
-            s,
-            v,
-        }, {common: tx.common})
+        const txJson = tx.toJSON();
+        return Transaction.fromTxData(
+            {
+                to: txJson['to'],
+                gasLimit: txJson['gasLimit'],
+                gasPrice: txJson['gasPrice'],
+                data: txJson['data'],
+                nonce: txJson['nonce'],
+                value: txJson['value'],
+                r,
+                s,
+                v,
+            },
+            { common: tx.common },
+        );
     }
 
     signMessage(withAccount: string, data: string): Promise<string> {
@@ -319,7 +320,7 @@ class AirGapedKeyring extends EventEmitter {
     }
 
     async signPersonalMessage(withAccount: string, messageHex: string): Promise<string> {
-        let usignedHex= stripHexPrefix(messageHex);
+        let usignedHex = stripHexPrefix(messageHex);
         const hdPath = this._pathFromAddress(withAccount);
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
@@ -331,11 +332,13 @@ class AirGapedKeyring extends EventEmitter {
             undefined,
             withAccount,
         );
-        await keystoneSDK.play(ethSignRequest.toUR(), {
+        const status = await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Scan with your Keystone',
-            description: 'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature',
+            description:
+                'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature',
         });
+        if (status === PlayStatus.canceled) throw new Error('#ktek_error[play-cancel]: play canceled');
         const { r, s, v } = await this.readSignature(requestId);
         return '0x' + Buffer.concat([r, s, v]).toString('hex');
     }
@@ -352,11 +355,12 @@ class AirGapedKeyring extends EventEmitter {
             undefined,
             withAccount,
         );
-        await keystoneSDK.play(ethSignRequest.toUR(), {
+        const status = await keystoneSDK.play(ethSignRequest.toUR(), {
             hasNext: true,
             title: 'Scan with your Keystone',
             description: 'After your Keystone has signed this data, click on "Scan Keystone" to receive the signature',
         });
+        if (status === PlayStatus.canceled) throw new Error('#ktek_error[play-cancel]: play canceled');
         const { r, s, v } = await this.readSignature(requestId);
         return '0x' + Buffer.concat([r, s, v]).toString('hex');
     }
