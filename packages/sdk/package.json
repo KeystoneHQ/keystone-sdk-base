@@ -22,7 +22,9 @@
     "clean": "rm -rf ./dist",
     "start": "webpack serve --open",
     "build": "tsdx build",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "bugs": {
     "url": "https://github.com/KeystoneHQ/keystone-airgaped-base/issues"
@@ -44,6 +46,12 @@
     "access": "public"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@storybook/addon-actions": "^6.3.6",
+    "@storybook/addon-essentials": "^6.3.6",
+    "@storybook/addon-links": "^6.3.6",
+    "@storybook/react": "^6.3.6",
+    "babel-loader": "^8.2.2",
     "html-webpack-plugin": "^5.3.2",
     "webpack": "^5.48.0",
     "webpack-cli": "^4.7.2",
