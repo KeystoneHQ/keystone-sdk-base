@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/metamask-airgapped-keyring",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "airgapped eth keyring for metamask",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
@@ -26,7 +26,7 @@
     "build": "tsdx build"
   },
   "dependencies": {
-    "@keystonehq/base-eth-keyring": "^0.0.3",
+    "@keystonehq/base-eth-keyring": "^0.0.4",
     "@keystonehq/bc-ur-registry-eth": "^0.6.8"
   },
   "bugs": {
