@@ -4,7 +4,6 @@ import { JSONRPCRequestPayload, JSONRPCResponsePayload } from 'ethereum-types';
 
 import { Callback, ErrorCallback, PartialTxParams, Subprovider } from '@0x/subproviders';
 
-
 export enum WalletSubproviderErrors {
     AddressNotFound = 'ADDRESS_NOT_FOUND',
     DataMissingForSignPersonalMessage = 'DATA_MISSING_FOR_SIGN_PERSONAL_MESSAGE',
