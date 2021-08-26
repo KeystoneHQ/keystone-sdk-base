@@ -11,7 +11,8 @@
         "packages/keystone-connector",
         "packages/keystone-subprovider",
         "packages/ur-registry-eth",
-        "packages/base-eth-keyring"
+        "packages/base-eth-keyring",
+        "packages/metamask-airgapped-keyring"
     ],
     "version": "independent"
 }
