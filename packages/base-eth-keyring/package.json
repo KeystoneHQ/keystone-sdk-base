@@ -17,6 +17,9 @@
     "type": "git",
     "url": "git+https://github.com/KeystoneHQ/keystone-airgaped-base.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "rm -rf ./dist",
     "start": "tsdx watch",
