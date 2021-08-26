@@ -1,7 +1,6 @@
 import { CryptoKeypath, PathComponent } from '../src';
 import { CryptoHDKey, generateAddressfromXpub } from '../src';
 
-
 describe('CryptoHDKey', () => {
     it('test it can generate hd key for eth hd key', () => {
         const xfp = Buffer.from('e9181cf3', 'hex');
@@ -29,8 +28,5 @@ describe('CryptoHDKey', () => {
         expect(ur).toBe(
             'ur:crypto-hdkey/oxaxhdclaowdverokopdinhseeroisyalksaykctjshedprnuyjyfgrovawewftyghceglrpkgaahdcxtplfjsluknfwlaisaxwypalbjylswzamcxhscyuyloztmwfnldlgskpyptgsdecfamtaaddyoeadlncsdwykcsfnykaeykaocywlcscewfaycytedmfeayghlptnin',
         );
-
-
-
     });
 });

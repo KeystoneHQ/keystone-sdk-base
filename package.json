@@ -7,10 +7,10 @@
         "build": "lerna run build",
         "start": "lerna run start",
         "prepare": "npm run clean && npm run bootstrap && npm run build",
-        "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
+        "lint": "eslint '*/**/*.ts' --quiet --fix",
         "prettier:check": "yarn prettier --check",
         "prettier:fix": "yarn prettier --write",
-        "prettier": "prettier './src/**/*.{js,jsx,ts,tsx}'",
+        "prettier": "prettier '*/**/*.{js,jsx,ts,tsx}'",
         "test": "lerna run test"
     },
     "jest": {

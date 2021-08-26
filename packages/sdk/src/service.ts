@@ -38,6 +38,6 @@ const sdk = {
             throw new Error('SDK is not initialized');
         }
     },
-}
+};
 
 export default sdk;
