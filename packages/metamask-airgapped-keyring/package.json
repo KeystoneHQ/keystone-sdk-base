@@ -26,7 +26,7 @@
     "build": "tsdx build"
   },
   "dependencies": {
-    "@keystonehq/base-eth-keyring": "^0.0.2",
+    "@keystonehq/base-eth-keyring": "^0.0.3",
     "@keystonehq/bc-ur-registry-eth": "^0.6.8"
   },
   "bugs": {
