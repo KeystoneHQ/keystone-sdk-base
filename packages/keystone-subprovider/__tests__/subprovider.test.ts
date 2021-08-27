@@ -36,7 +36,10 @@ jest.mock('@keystonehq/sdk', () => {
             },
             play: async (a, b) => Promise.resolve(1),
         }),
-        SupportedResult,
+        SupportedResult: {
+            UR_CRYPTO_HDKEY: 'crypto-hdkey',
+            UR_ETH_SIGNATURE: 'eth-signature',
+        },
     };
 });
 
@@ -81,6 +84,27 @@ describe('Keystone Subprovider', () => {
             '0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f746573743200000000000000000000000000000000000000000000000000000060005725a06d19ce88a3272c2d8cb8ca6a58bf1e72f63d4adc6163b25256b0f6a4e7841066a04c857185f395e590dfa7bc7a08fd675aa1127802f204eae7cdcfa6e1797840d0',
         );
     });
+
+    it('shoudld generate the eip1559 txhex', async () => {
+        const eip1559TxData = {
+            from: '0x9858EfFD232B4033E47d90003D41EC34EcaEda94',
+            nonce:353,
+            value:61901619,
+            gasLimit:32593,
+            maxPriorityFeePerGas:38850,
+            maxFeePerGas:136295,
+            to:"0x000000000000000000000000000000000000aaaa",
+        }
+
+        const provider = new KeystoneSubprovider({
+            networkId: 1,
+        });
+
+        const txHex = provider.signEIP1559TransactionAsync(eip1559TxData)
+
+        console.log(txHex);
+        
+    })
 
     it('should throw error if the chainId is missmatched', async () => {
         const txParams = {

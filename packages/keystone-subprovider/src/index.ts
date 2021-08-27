@@ -2,8 +2,8 @@ import { assert } from '@0x/assert';
 import { PartialTxParams } from '@0x/subproviders';
 import { BaseWalletSubprovider } from './baseWalletSubprovider';
 import sdk, { SupportedResult } from '@keystonehq/sdk';
-import Common from '@ethereumjs/common';
-import { Transaction } from '@ethereumjs/tx';
+import Common, {Hardfork} from '@ethereumjs/common';
+import { Transaction, FeeMarketEIP1559Transaction,FeeMarketEIP1559TxData } from '@ethereumjs/tx';
 import { BN, stripHexPrefix, addHexPrefix } from 'ethereumjs-util';
 import * as uuid from 'uuid';
 import {
@@ -18,6 +18,8 @@ import {
 type KeystoneSubproviderConfigs = {
     networkId: number;
 };
+
+type EIP1559TxParams = FeeMarketEIP1559TxData & { from: string };
 
 export default class KeystoneSubprovider extends BaseWalletSubprovider {
     private readonly _networkId: number;
@@ -93,7 +95,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
                 'After your Keystone has signed the transaction, click on "Scan Keystone" to receive the signature',
         });
         const { r, s, v } = await this.readSignature(requestId);
-        const signeTx = Transaction.fromTxData(
+        const signedTx = Transaction.fromTxData(
             {
                 ..._txParams,
                 r,
@@ -102,7 +104,44 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
             },
             { common: this._common },
         );
-        return `0x${signeTx.serialize().toString('hex')}`;
+        return `0x${signedTx.serialize().toString('hex')}`;
+    }
+
+    public async signEIP1559TransactionAsync(txParams: EIP1559TxParams ): Promise<string> {
+        if (!this.synced) {
+            await this.getAccountsAsync();
+        }
+
+        const common = Common.forCustomChain('mainnet', { chainId: this._networkId }, Hardfork.London);
+        const eip1559Tx = FeeMarketEIP1559Transaction.fromTxData(txParams, {common})
+        const unsignedBuffer = Buffer.from(eip1559Tx.getMessageToSign(false));
+        const requestId = uuid.v4();
+        const addressPath = findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`);
+
+        console.log('-------------', unsignedBuffer)
+        const ethSignRequest = EthSignRequest.constructETHRequest(
+            unsignedBuffer,
+            DataType.typedTransaction,
+            addressPath,
+            this.xfp,   
+            requestId,
+            this._networkId,
+            txParams.from,
+        );
+
+        console.log(ethSignRequest.toUREncoder(1000).nextPart());
+    
+        await this.keystoneSdk.play(ethSignRequest.toUR(), {
+            hasNext: true,
+            title: 'Scan with your Keystone',
+            description:
+                'After your Keystone has signed the transaction, click on "Scan Keystone" to receive the signature',
+        });
+
+        const { r, s, v } = await this.readSignature(requestId);
+        const numberV = v.readUInt8(0);
+        const signedTx = eip1559Tx._processSignature(numberV, r, s)
+        return `0x${signedTx.serialize().toString('hex')}`;
     }
 
     public async signPersonalMessageAsync(data: string, address: string): Promise<string> {
