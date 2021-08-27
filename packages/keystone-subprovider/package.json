@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@0x/subproviders": "^6.5.4",
-    "@ethereumjs/common": "2.0.0",
-    "@ethereumjs/tx": "3.0.0",
+    "@ethereumjs/common": "2.4.0",
+    "@ethereumjs/tx": "3.3.0",
     "@keystonehq/bc-ur-registry-eth": "^0.6.8",
     "@keystonehq/sdk": "^0.7.8",
     "ethereumjs-util": "^7.0.8",

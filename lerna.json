@@ -6,8 +6,7 @@
         }
     },
     "packages": [
-        "packages/base-eth-keyring",
-        "packages/metamask-airgapped-keyring"
+        "packages/*"
     ],
     "version": "independent"
 }
