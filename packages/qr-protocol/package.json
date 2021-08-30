@@ -13,7 +13,7 @@
     "copy": "mkdir dist/QRProtocolBuf && cp -R src/QRProtocolBuf dist/QRProtocolBuf",
     "build": "tsdx build && npm run copy",
     "test": "jest",
-    "protobuf": "npx pbjs -t static-module -w commonjs -o src/QRProtocolBuf/proto.js crypto-coin-message-protocol/*.proto; npx pbts -o src/QRProtocolBuf/proto.d.ts src/QRProtocolBuf/proto.js",
+    "protobuf": "npx pbjs -t static-module -w es6 -o src/QRProtocolBuf/proto.js crypto-coin-message-protocol/*.proto; npx pbts -o src/QRProtocolBuf/proto.d.ts src/QRProtocolBuf/proto.js",
     "update-proto-buffer": "git submodule update --remote && npm run protobuf"
   },
   "files": [
