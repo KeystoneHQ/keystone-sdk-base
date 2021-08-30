@@ -1,29 +1,32 @@
-import * as $protobuf from 'protobufjs';
+import * as $protobuf from "protobufjs";
 /** Namespace protoc. */
 export namespace protoc {
+
     /** Properties of a Base. */
     interface IBase {
+
         /** Base version */
-        version?: number | null;
+        version?: (number|null);
 
         /** Base description */
-        description?: string | null;
+        description?: (string|null);
 
         /** Base data */
-        data?: protoc.IPayload | null;
+        data?: (protoc.IPayload|null);
 
         /** Base hotVersion */
-        hotVersion?: number | null;
+        hotVersion?: (number|null);
 
         /** Base coldVersion */
-        coldVersion?: number | null;
+        coldVersion?: (number|null);
 
         /** Base deviceType */
-        deviceType?: string | null;
+        deviceType?: (string|null);
     }
 
     /** Represents a Base. */
     class Base implements IBase {
+
         /**
          * Constructs a new Base.
          * @param [properties] Properties to set
@@ -37,19 +40,19 @@ export namespace protoc {
         public description: string;
 
         /** Base data. */
-        public data?: protoc.IPayload | null;
+        public data?: (protoc.IPayload|null);
 
         /** Base hotVersion. */
-        public hotVersion: number;
+        public hotVersion?: (number|null);
 
         /** Base coldVersion. */
-        public coldVersion: number;
+        public coldVersion?: (number|null);
 
         /** Base deviceType. */
         public deviceType: string;
 
         /** Base Content. */
-        public Content?: 'hotVersion' | 'coldVersion';
+        public Content?: ("hotVersion"|"coldVersion");
 
         /**
          * Creates a new Base instance using the specified properties.
@@ -82,7 +85,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Base;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Base;
 
         /**
          * Decodes a Base message from the specified reader or buffer, length delimited.
@@ -91,14 +94,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Base;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Base;
 
         /**
          * Verifies a Base message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Base message from a plain object. Also converts values to their respective internal types.
@@ -124,30 +127,32 @@ export namespace protoc {
 
     /** Properties of a Payload. */
     interface IPayload {
+
         /** Payload type */
-        type?: protoc.Payload.Type | null;
+        type?: (protoc.Payload.Type|null);
 
         /** Payload xfp */
-        xfp?: string | null;
+        xfp?: (string|null);
 
         /** Payload sync */
-        sync?: protoc.ISync | null;
+        sync?: (protoc.ISync|null);
 
         /** Payload signTx */
-        signTx?: protoc.ISignTransaction | null;
+        signTx?: (protoc.ISignTransaction|null);
 
         /** Payload signMsg */
-        signMsg?: protoc.ISignMessage | null;
+        signMsg?: (protoc.ISignMessage|null);
 
         /** Payload verifyAddr */
-        verifyAddr?: protoc.IVerifyAddress | null;
+        verifyAddr?: (protoc.IVerifyAddress|null);
 
         /** Payload signTxResult */
-        signTxResult?: protoc.ISignTransactionResult | null;
+        signTxResult?: (protoc.ISignTransactionResult|null);
     }
 
     /** Represents a Payload. */
     class Payload implements IPayload {
+
         /**
          * Constructs a new Payload.
          * @param [properties] Properties to set
@@ -161,22 +166,22 @@ export namespace protoc {
         public xfp: string;
 
         /** Payload sync. */
-        public sync?: protoc.ISync | null;
+        public sync?: (protoc.ISync|null);
 
         /** Payload signTx. */
-        public signTx?: protoc.ISignTransaction | null;
+        public signTx?: (protoc.ISignTransaction|null);
 
         /** Payload signMsg. */
-        public signMsg?: protoc.ISignMessage | null;
+        public signMsg?: (protoc.ISignMessage|null);
 
         /** Payload verifyAddr. */
-        public verifyAddr?: protoc.IVerifyAddress | null;
+        public verifyAddr?: (protoc.IVerifyAddress|null);
 
         /** Payload signTxResult. */
-        public signTxResult?: protoc.ISignTransactionResult | null;
+        public signTxResult?: (protoc.ISignTransactionResult|null);
 
         /** Payload Content. */
-        public Content?: 'sync' | 'signTx' | 'signMsg' | 'verifyAddr' | 'signTxResult';
+        public Content?: ("sync"|"signTx"|"signMsg"|"verifyAddr"|"signTxResult");
 
         /**
          * Creates a new Payload instance using the specified properties.
@@ -209,7 +214,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Payload;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Payload;
 
         /**
          * Decodes a Payload message from the specified reader or buffer, length delimited.
@@ -218,14 +223,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Payload;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Payload;
 
         /**
          * Verifies a Payload message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Payload message from a plain object. Also converts values to their respective internal types.
@@ -250,6 +255,7 @@ export namespace protoc {
     }
 
     namespace Payload {
+
         /** Type enum. */
         enum Type {
             TYPE_RESERVE = 0,
@@ -261,27 +267,29 @@ export namespace protoc {
             TYPE_SIGN_ETH_MULTI_SIG_MSG = 6,
             TYPE_VERIFY_ADDRESS = 7,
             TYPE_STAKING = 8,
-            TYPE_SIGN_TX_RESULT = 9,
+            TYPE_SIGN_TX_RESULT = 9
         }
     }
 
     /** Properties of an Account. */
     interface IAccount {
+
         /** Account hdPath */
-        hdPath?: string | null;
+        hdPath?: (string|null);
 
         /** Account xPub */
-        xPub?: string | null;
+        xPub?: (string|null);
 
         /** Account addressLength */
-        addressLength?: number | null;
+        addressLength?: (number|null);
 
         /** Account isMultiSign */
-        isMultiSign?: boolean | null;
+        isMultiSign?: (boolean|null);
     }
 
     /** Represents an Account. */
     class Account implements IAccount {
+
         /**
          * Constructs a new Account.
          * @param [properties] Properties to set
@@ -331,7 +339,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Account;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Account;
 
         /**
          * Decodes an Account message from the specified reader or buffer, length delimited.
@@ -340,14 +348,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Account;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Account;
 
         /**
          * Verifies an Account message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an Account message from a plain object. Also converts values to their respective internal types.
@@ -373,18 +381,20 @@ export namespace protoc {
 
     /** Properties of a Coin. */
     interface ICoin {
+
         /** Coin coinCode */
-        coinCode?: string | null;
+        coinCode?: (string|null);
 
         /** Coin active */
-        active?: boolean | null;
+        active?: (boolean|null);
 
         /** Coin accounts */
-        accounts?: protoc.IAccount[] | null;
+        accounts?: (protoc.IAccount[]|null);
     }
 
     /** Represents a Coin. */
     class Coin implements ICoin {
+
         /**
          * Constructs a new Coin.
          * @param [properties] Properties to set
@@ -431,7 +441,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Coin;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Coin;
 
         /**
          * Decodes a Coin message from the specified reader or buffer, length delimited.
@@ -440,14 +450,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Coin;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Coin;
 
         /**
          * Verifies a Coin message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Coin message from a plain object. Also converts values to their respective internal types.
@@ -473,12 +483,14 @@ export namespace protoc {
 
     /** Properties of a Sync. */
     interface ISync {
+
         /** Sync coins */
-        coins?: protoc.ICoin[] | null;
+        coins?: (protoc.ICoin[]|null);
     }
 
     /** Represents a Sync. */
     class Sync implements ISync {
+
         /**
          * Constructs a new Sync.
          * @param [properties] Properties to set
@@ -519,7 +531,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Sync;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Sync;
 
         /**
          * Decodes a Sync message from the specified reader or buffer, length delimited.
@@ -528,14 +540,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Sync;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Sync;
 
         /**
          * Verifies a Sync message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Sync message from a plain object. Also converts values to their respective internal types.
@@ -561,72 +573,74 @@ export namespace protoc {
 
     /** Properties of a SignTransaction. */
     interface ISignTransaction {
+
         /** SignTransaction coinCode */
-        coinCode?: string | null;
+        coinCode?: (string|null);
 
         /** SignTransaction signId */
-        signId?: string | null;
+        signId?: (string|null);
 
         /** SignTransaction hdPath */
-        hdPath?: string | null;
+        hdPath?: (string|null);
 
         /** SignTransaction timestamp */
-        timestamp?: number | Long | null;
+        timestamp?: (number|Long|null);
 
         /** SignTransaction decimal */
-        decimal?: number | null;
+        decimal?: (number|null);
 
         /** SignTransaction btcTx */
-        btcTx?: protoc.IBtcTx | null;
+        btcTx?: (protoc.IBtcTx|null);
 
         /** SignTransaction ethTx */
-        ethTx?: protoc.IEthTx | null;
+        ethTx?: (protoc.IEthTx|null);
 
         /** SignTransaction tronTx */
-        tronTx?: protoc.ITronTx | null;
+        tronTx?: (protoc.ITronTx|null);
 
         /** SignTransaction etcTx */
-        etcTx?: protoc.IEtcTx | null;
+        etcTx?: (protoc.IEtcTx|null);
 
         /** SignTransaction bchTx */
-        bchTx?: protoc.IBchTx | null;
+        bchTx?: (protoc.IBchTx|null);
 
         /** SignTransaction dashTx */
-        dashTx?: protoc.IDashTx | null;
+        dashTx?: (protoc.IDashTx|null);
 
         /** SignTransaction ltcTx */
-        ltcTx?: protoc.ILtcTx | null;
+        ltcTx?: (protoc.ILtcTx|null);
 
         /** SignTransaction dcrTx */
-        dcrTx?: protoc.IDcrTx | null;
+        dcrTx?: (protoc.IDcrTx|null);
 
         /** SignTransaction xzcTx */
-        xzcTx?: protoc.IXzcTx | null;
+        xzcTx?: (protoc.IXzcTx|null);
 
         /** SignTransaction xrpTx */
-        xrpTx?: protoc.IXrpTx | null;
+        xrpTx?: (protoc.IXrpTx|null);
 
         /** SignTransaction iostTx */
-        iostTx?: protoc.IIostTx | null;
+        iostTx?: (protoc.IIostTx|null);
 
         /** SignTransaction omniTx */
-        omniTx?: protoc.IOmniTx | null;
+        omniTx?: (protoc.IOmniTx|null);
 
         /** SignTransaction eosTx */
-        eosTx?: protoc.IEosTx | null;
+        eosTx?: (protoc.IEosTx|null);
 
         /** SignTransaction dotTx */
-        dotTx?: protoc.IDotTx | null;
+        dotTx?: (protoc.IDotTx|null);
 
         /** SignTransaction ksmTx */
-        ksmTx?: protoc.IKsmTx | null;
+        ksmTx?: (protoc.IKsmTx|null);
 
         /** SignTransaction cfxTx */
-        cfxTx?: protoc.ICfxTx | null;
+        cfxTx?: (protoc.ICfxTx|null);
     }
 
     /** Represents a SignTransaction. */
     class SignTransaction implements ISignTransaction {
+
         /**
          * Constructs a new SignTransaction.
          * @param [properties] Properties to set
@@ -643,77 +657,61 @@ export namespace protoc {
         public hdPath: string;
 
         /** SignTransaction timestamp. */
-        public timestamp: number | Long;
+        public timestamp: (number|Long);
 
         /** SignTransaction decimal. */
         public decimal: number;
 
         /** SignTransaction btcTx. */
-        public btcTx?: protoc.IBtcTx | null;
+        public btcTx?: (protoc.IBtcTx|null);
 
         /** SignTransaction ethTx. */
-        public ethTx?: protoc.IEthTx | null;
+        public ethTx?: (protoc.IEthTx|null);
 
         /** SignTransaction tronTx. */
-        public tronTx?: protoc.ITronTx | null;
+        public tronTx?: (protoc.ITronTx|null);
 
         /** SignTransaction etcTx. */
-        public etcTx?: protoc.IEtcTx | null;
+        public etcTx?: (protoc.IEtcTx|null);
 
         /** SignTransaction bchTx. */
-        public bchTx?: protoc.IBchTx | null;
+        public bchTx?: (protoc.IBchTx|null);
 
         /** SignTransaction dashTx. */
-        public dashTx?: protoc.IDashTx | null;
+        public dashTx?: (protoc.IDashTx|null);
 
         /** SignTransaction ltcTx. */
-        public ltcTx?: protoc.ILtcTx | null;
+        public ltcTx?: (protoc.ILtcTx|null);
 
         /** SignTransaction dcrTx. */
-        public dcrTx?: protoc.IDcrTx | null;
+        public dcrTx?: (protoc.IDcrTx|null);
 
         /** SignTransaction xzcTx. */
-        public xzcTx?: protoc.IXzcTx | null;
+        public xzcTx?: (protoc.IXzcTx|null);
 
         /** SignTransaction xrpTx. */
-        public xrpTx?: protoc.IXrpTx | null;
+        public xrpTx?: (protoc.IXrpTx|null);
 
         /** SignTransaction iostTx. */
-        public iostTx?: protoc.IIostTx | null;
+        public iostTx?: (protoc.IIostTx|null);
 
         /** SignTransaction omniTx. */
-        public omniTx?: protoc.IOmniTx | null;
+        public omniTx?: (protoc.IOmniTx|null);
 
         /** SignTransaction eosTx. */
-        public eosTx?: protoc.IEosTx | null;
+        public eosTx?: (protoc.IEosTx|null);
 
         /** SignTransaction dotTx. */
-        public dotTx?: protoc.IDotTx | null;
+        public dotTx?: (protoc.IDotTx|null);
 
         /** SignTransaction ksmTx. */
-        public ksmTx?: protoc.IKsmTx | null;
+        public ksmTx?: (protoc.IKsmTx|null);
 
         /** SignTransaction cfxTx. */
-        public cfxTx?: protoc.ICfxTx | null;
+        public cfxTx?: (protoc.ICfxTx|null);
 
         /** SignTransaction Transaction. */
-        public Transaction?:
-            | 'btcTx'
-            | 'ethTx'
-            | 'tronTx'
-            | 'etcTx'
-            | 'bchTx'
-            | 'dashTx'
-            | 'ltcTx'
-            | 'dcrTx'
-            | 'xzcTx'
-            | 'xrpTx'
-            | 'iostTx'
-            | 'omniTx'
-            | 'eosTx'
-            | 'dotTx'
-            | 'ksmTx'
-            | 'cfxTx';
+        public Transaction?: ("btcTx"|"ethTx"|"tronTx"|"etcTx"|"bchTx"|"dashTx"|"ltcTx"|"dcrTx"|"xzcTx"|"xrpTx"|"iostTx"|"omniTx"|"eosTx"|"dotTx"|"ksmTx"|"cfxTx");
 
         /**
          * Creates a new SignTransaction instance using the specified properties.
@@ -746,7 +744,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.SignTransaction;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.SignTransaction;
 
         /**
          * Decodes a SignTransaction message from the specified reader or buffer, length delimited.
@@ -755,14 +753,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.SignTransaction;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.SignTransaction;
 
         /**
          * Verifies a SignTransaction message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a SignTransaction message from a plain object. Also converts values to their respective internal types.
@@ -777,10 +775,7 @@ export namespace protoc {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(
-            message: protoc.SignTransaction,
-            options?: $protobuf.IConversionOptions,
-        ): { [k: string]: any };
+        public static toObject(message: protoc.SignTransaction, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SignTransaction to JSON.
@@ -791,27 +786,29 @@ export namespace protoc {
 
     /** Properties of a BtcTx. */
     interface IBtcTx {
+
         /** BtcTx fee */
-        fee?: number | Long | null;
+        fee?: (number|Long|null);
 
         /** BtcTx dustThreshold */
-        dustThreshold?: number | null;
+        dustThreshold?: (number|null);
 
         /** BtcTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** BtcTx inputs */
-        inputs?: protoc.IInput[] | null;
+        inputs?: (protoc.IInput[]|null);
 
         /** BtcTx outputs */
-        outputs?: protoc.IOutput[] | null;
+        outputs?: (protoc.IOutput[]|null);
 
         /** BtcTx omni */
-        omni?: protoc.IOmni | null;
+        omni?: (protoc.IOmni|null);
     }
 
     /** Represents a BtcTx. */
     class BtcTx implements IBtcTx {
+
         /**
          * Constructs a new BtcTx.
          * @param [properties] Properties to set
@@ -819,7 +816,7 @@ export namespace protoc {
         constructor(properties?: protoc.IBtcTx);
 
         /** BtcTx fee. */
-        public fee: number | Long;
+        public fee: (number|Long);
 
         /** BtcTx dustThreshold. */
         public dustThreshold: number;
@@ -834,7 +831,7 @@ export namespace protoc {
         public outputs: protoc.IOutput[];
 
         /** BtcTx omni. */
-        public omni?: protoc.IOmni | null;
+        public omni?: (protoc.IOmni|null);
 
         /**
          * Creates a new BtcTx instance using the specified properties.
@@ -867,7 +864,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.BtcTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.BtcTx;
 
         /**
          * Decodes a BtcTx message from the specified reader or buffer, length delimited.
@@ -876,14 +873,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.BtcTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.BtcTx;
 
         /**
          * Verifies a BtcTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a BtcTx message from a plain object. Also converts values to their respective internal types.
@@ -909,21 +906,23 @@ export namespace protoc {
 
     /** Properties of an Omni. */
     interface IOmni {
+
         /** Omni to */
-        to?: string | null;
+        to?: (string|null);
 
         /** Omni changeAddress */
-        changeAddress?: string | null;
+        changeAddress?: (string|null);
 
         /** Omni omniAmount */
-        omniAmount?: number | Long | null;
+        omniAmount?: (number|Long|null);
 
         /** Omni propertyId */
-        propertyId?: number | null;
+        propertyId?: (number|null);
     }
 
     /** Represents an Omni. */
     class Omni implements IOmni {
+
         /**
          * Constructs a new Omni.
          * @param [properties] Properties to set
@@ -937,7 +936,7 @@ export namespace protoc {
         public changeAddress: string;
 
         /** Omni omniAmount. */
-        public omniAmount: number | Long;
+        public omniAmount: (number|Long);
 
         /** Omni propertyId. */
         public propertyId: number;
@@ -973,7 +972,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Omni;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Omni;
 
         /**
          * Decodes an Omni message from the specified reader or buffer, length delimited.
@@ -982,14 +981,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Omni;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Omni;
 
         /**
          * Verifies an Omni message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an Omni message from a plain object. Also converts values to their respective internal types.
@@ -1015,21 +1014,23 @@ export namespace protoc {
 
     /** Properties of an Input. */
     interface IInput {
+
         /** Input hash */
-        hash?: string | null;
+        hash?: (string|null);
 
         /** Input index */
-        index?: number | null;
+        index?: (number|null);
 
         /** Input utxo */
-        utxo?: protoc.Iutxo | null;
+        utxo?: (protoc.Iutxo|null);
 
         /** Input ownerKeyPath */
-        ownerKeyPath?: string | null;
+        ownerKeyPath?: (string|null);
     }
 
     /** Represents an Input. */
     class Input implements IInput {
+
         /**
          * Constructs a new Input.
          * @param [properties] Properties to set
@@ -1043,7 +1044,7 @@ export namespace protoc {
         public index: number;
 
         /** Input utxo. */
-        public utxo?: protoc.Iutxo | null;
+        public utxo?: (protoc.Iutxo|null);
 
         /** Input ownerKeyPath. */
         public ownerKeyPath: string;
@@ -1079,7 +1080,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Input;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Input;
 
         /**
          * Decodes an Input message from the specified reader or buffer, length delimited.
@@ -1088,14 +1089,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Input;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Input;
 
         /**
          * Verifies an Input message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an Input message from a plain object. Also converts values to their respective internal types.
@@ -1121,18 +1122,20 @@ export namespace protoc {
 
     /** Properties of an utxo. */
     interface Iutxo {
+
         /** utxo publicKey */
-        publicKey?: string | null;
+        publicKey?: (string|null);
 
         /** utxo script */
-        script?: string | null;
+        script?: (string|null);
 
         /** utxo value */
-        value?: number | Long | null;
+        value?: (number|Long|null);
     }
 
     /** Represents an utxo. */
     class utxo implements Iutxo {
+
         /**
          * Constructs a new utxo.
          * @param [properties] Properties to set
@@ -1146,7 +1149,7 @@ export namespace protoc {
         public script: string;
 
         /** utxo value. */
-        public value: number | Long;
+        public value: (number|Long);
 
         /**
          * Creates a new utxo instance using the specified properties.
@@ -1179,7 +1182,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.utxo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.utxo;
 
         /**
          * Decodes an utxo message from the specified reader or buffer, length delimited.
@@ -1188,14 +1191,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.utxo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.utxo;
 
         /**
          * Verifies an utxo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an utxo message from a plain object. Also converts values to their respective internal types.
@@ -1221,21 +1224,23 @@ export namespace protoc {
 
     /** Properties of an Output. */
     interface IOutput {
+
         /** Output address */
-        address?: string | null;
+        address?: (string|null);
 
         /** Output value */
-        value?: number | Long | null;
+        value?: (number|Long|null);
 
         /** Output isChange */
-        isChange?: boolean | null;
+        isChange?: (boolean|null);
 
         /** Output changeAddressPath */
-        changeAddressPath?: string | null;
+        changeAddressPath?: (string|null);
     }
 
     /** Represents an Output. */
     class Output implements IOutput {
+
         /**
          * Constructs a new Output.
          * @param [properties] Properties to set
@@ -1246,7 +1251,7 @@ export namespace protoc {
         public address: string;
 
         /** Output value. */
-        public value: number | Long;
+        public value: (number|Long);
 
         /** Output isChange. */
         public isChange: boolean;
@@ -1285,7 +1290,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Output;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Output;
 
         /**
          * Decodes an Output message from the specified reader or buffer, length delimited.
@@ -1294,14 +1299,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Output;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Output;
 
         /**
          * Verifies an Output message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an Output message from a plain object. Also converts values to their respective internal types.
@@ -1327,30 +1332,32 @@ export namespace protoc {
 
     /** Properties of an EthTx. */
     interface IEthTx {
+
         /** EthTx to */
-        to?: string | null;
+        to?: (string|null);
 
         /** EthTx value */
-        value?: string | null;
+        value?: (string|null);
 
         /** EthTx gasPrice */
-        gasPrice?: string | null;
+        gasPrice?: (string|null);
 
         /** EthTx gasLimit */
-        gasLimit?: string | null;
+        gasLimit?: (string|null);
 
         /** EthTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** EthTx nonce */
-        nonce?: number | null;
+        nonce?: (number|null);
 
         /** EthTx override */
-        override?: protoc.EthTx.IOverride | null;
+        override?: (protoc.EthTx.IOverride|null);
     }
 
     /** Represents an EthTx. */
     class EthTx implements IEthTx {
+
         /**
          * Constructs a new EthTx.
          * @param [properties] Properties to set
@@ -1376,7 +1383,7 @@ export namespace protoc {
         public nonce: number;
 
         /** EthTx override. */
-        public override?: protoc.EthTx.IOverride | null;
+        public override?: (protoc.EthTx.IOverride|null);
 
         /**
          * Creates a new EthTx instance using the specified properties.
@@ -1409,7 +1416,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.EthTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.EthTx;
 
         /**
          * Decodes an EthTx message from the specified reader or buffer, length delimited.
@@ -1418,14 +1425,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.EthTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.EthTx;
 
         /**
          * Verifies an EthTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an EthTx message from a plain object. Also converts values to their respective internal types.
@@ -1450,23 +1457,26 @@ export namespace protoc {
     }
 
     namespace EthTx {
+
         /** Properties of an Override. */
         interface IOverride {
+
             /** Override decimals */
-            decimals?: number | null;
+            decimals?: (number|null);
 
             /** Override tokenShortName */
-            tokenShortName?: string | null;
+            tokenShortName?: (string|null);
 
             /** Override tokenFullName */
-            tokenFullName?: string | null;
+            tokenFullName?: (string|null);
 
             /** Override contractAddress */
-            contractAddress?: string | null;
+            contractAddress?: (string|null);
         }
 
         /** Represents an Override. */
         class Override implements IOverride {
+
             /**
              * Constructs a new Override.
              * @param [properties] Properties to set
@@ -1516,7 +1526,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.EthTx.Override;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.EthTx.Override;
 
             /**
              * Decodes an Override message from the specified reader or buffer, length delimited.
@@ -1525,14 +1535,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.EthTx.Override;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.EthTx.Override;
 
             /**
              * Verifies an Override message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates an Override message from a plain object. Also converts values to their respective internal types.
@@ -1547,10 +1557,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.EthTx.Override,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.EthTx.Override, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Override to JSON.
@@ -1562,27 +1569,29 @@ export namespace protoc {
 
     /** Properties of an EtcTx. */
     interface IEtcTx {
+
         /** EtcTx to */
-        to?: string | null;
+        to?: (string|null);
 
         /** EtcTx value */
-        value?: string | null;
+        value?: (string|null);
 
         /** EtcTx gasPrice */
-        gasPrice?: string | null;
+        gasPrice?: (string|null);
 
         /** EtcTx gasLimit */
-        gasLimit?: string | null;
+        gasLimit?: (string|null);
 
         /** EtcTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** EtcTx nonce */
-        nonce?: number | null;
+        nonce?: (number|null);
     }
 
     /** Represents an EtcTx. */
     class EtcTx implements IEtcTx {
+
         /**
          * Constructs a new EtcTx.
          * @param [properties] Properties to set
@@ -1638,7 +1647,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.EtcTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.EtcTx;
 
         /**
          * Decodes an EtcTx message from the specified reader or buffer, length delimited.
@@ -1647,14 +1656,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.EtcTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.EtcTx;
 
         /**
          * Verifies an EtcTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an EtcTx message from a plain object. Also converts values to their respective internal types.
@@ -1680,18 +1689,20 @@ export namespace protoc {
 
     /** Properties of a LatestBlock. */
     interface ILatestBlock {
+
         /** LatestBlock hash */
-        hash?: string | null;
+        hash?: (string|null);
 
         /** LatestBlock number */
-        number?: number | null;
+        number?: (number|null);
 
         /** LatestBlock timestamp */
-        timestamp?: number | Long | null;
+        timestamp?: (number|Long|null);
     }
 
     /** Represents a LatestBlock. */
     class LatestBlock implements ILatestBlock {
+
         /**
          * Constructs a new LatestBlock.
          * @param [properties] Properties to set
@@ -1705,7 +1716,7 @@ export namespace protoc {
         public number: number;
 
         /** LatestBlock timestamp. */
-        public timestamp: number | Long;
+        public timestamp: (number|Long);
 
         /**
          * Creates a new LatestBlock instance using the specified properties.
@@ -1738,7 +1749,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.LatestBlock;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.LatestBlock;
 
         /**
          * Decodes a LatestBlock message from the specified reader or buffer, length delimited.
@@ -1747,14 +1758,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.LatestBlock;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.LatestBlock;
 
         /**
          * Verifies a LatestBlock message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a LatestBlock message from a plain object. Also converts values to their respective internal types.
@@ -1769,10 +1780,7 @@ export namespace protoc {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(
-            message: protoc.LatestBlock,
-            options?: $protobuf.IConversionOptions,
-        ): { [k: string]: any };
+        public static toObject(message: protoc.LatestBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this LatestBlock to JSON.
@@ -1783,18 +1791,20 @@ export namespace protoc {
 
     /** Properties of an Override. */
     interface IOverride {
+
         /** Override tokenShortName */
-        tokenShortName?: string | null;
+        tokenShortName?: (string|null);
 
         /** Override tokenFullName */
-        tokenFullName?: string | null;
+        tokenFullName?: (string|null);
 
         /** Override decimals */
-        decimals?: number | null;
+        decimals?: (number|null);
     }
 
     /** Represents an Override. */
     class Override implements IOverride {
+
         /**
          * Constructs a new Override.
          * @param [properties] Properties to set
@@ -1841,7 +1851,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Override;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Override;
 
         /**
          * Decodes an Override message from the specified reader or buffer, length delimited.
@@ -1850,14 +1860,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Override;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Override;
 
         /**
          * Verifies an Override message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an Override message from a plain object. Also converts values to their respective internal types.
@@ -1883,36 +1893,38 @@ export namespace protoc {
 
     /** Properties of a TronTx. */
     interface ITronTx {
+
         /** TronTx token */
-        token?: string | null;
+        token?: (string|null);
 
         /** TronTx contractAddress */
-        contractAddress?: string | null;
+        contractAddress?: (string|null);
 
         /** TronTx from */
-        from?: string | null;
+        from?: (string|null);
 
         /** TronTx to */
-        to?: string | null;
+        to?: (string|null);
 
         /** TronTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** TronTx value */
-        value?: string | null;
+        value?: (string|null);
 
         /** TronTx latestBlock */
-        latestBlock?: protoc.ILatestBlock | null;
+        latestBlock?: (protoc.ILatestBlock|null);
 
         /** TronTx override */
-        override?: protoc.IOverride | null;
+        override?: (protoc.IOverride|null);
 
         /** TronTx fee */
-        fee?: number | null;
+        fee?: (number|null);
     }
 
     /** Represents a TronTx. */
     class TronTx implements ITronTx {
+
         /**
          * Constructs a new TronTx.
          * @param [properties] Properties to set
@@ -1938,10 +1950,10 @@ export namespace protoc {
         public value: string;
 
         /** TronTx latestBlock. */
-        public latestBlock?: protoc.ILatestBlock | null;
+        public latestBlock?: (protoc.ILatestBlock|null);
 
         /** TronTx override. */
-        public override?: protoc.IOverride | null;
+        public override?: (protoc.IOverride|null);
 
         /** TronTx fee. */
         public fee: number;
@@ -1977,7 +1989,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.TronTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.TronTx;
 
         /**
          * Decodes a TronTx message from the specified reader or buffer, length delimited.
@@ -1986,14 +1998,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.TronTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.TronTx;
 
         /**
          * Verifies a TronTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a TronTx message from a plain object. Also converts values to their respective internal types.
@@ -2019,24 +2031,26 @@ export namespace protoc {
 
     /** Properties of a BchTx. */
     interface IBchTx {
+
         /** BchTx fee */
-        fee?: number | Long | null;
+        fee?: (number|Long|null);
 
         /** BchTx dustThreshold */
-        dustThreshold?: number | null;
+        dustThreshold?: (number|null);
 
         /** BchTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** BchTx inputs */
-        inputs?: protoc.BchTx.IInput[] | null;
+        inputs?: (protoc.BchTx.IInput[]|null);
 
         /** BchTx outputs */
-        outputs?: protoc.IOutput[] | null;
+        outputs?: (protoc.IOutput[]|null);
     }
 
     /** Represents a BchTx. */
     class BchTx implements IBchTx {
+
         /**
          * Constructs a new BchTx.
          * @param [properties] Properties to set
@@ -2044,7 +2058,7 @@ export namespace protoc {
         constructor(properties?: protoc.IBchTx);
 
         /** BchTx fee. */
-        public fee: number | Long;
+        public fee: (number|Long);
 
         /** BchTx dustThreshold. */
         public dustThreshold: number;
@@ -2089,7 +2103,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.BchTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.BchTx;
 
         /**
          * Decodes a BchTx message from the specified reader or buffer, length delimited.
@@ -2098,14 +2112,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.BchTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.BchTx;
 
         /**
          * Verifies a BchTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a BchTx message from a plain object. Also converts values to their respective internal types.
@@ -2130,26 +2144,29 @@ export namespace protoc {
     }
 
     namespace BchTx {
+
         /** Properties of an Input. */
         interface IInput {
+
             /** Input hash */
-            hash?: string | null;
+            hash?: (string|null);
 
             /** Input index */
-            index?: number | null;
+            index?: (number|null);
 
             /** Input value */
-            value?: number | Long | null;
+            value?: (number|Long|null);
 
             /** Input pubkey */
-            pubkey?: string | null;
+            pubkey?: (string|null);
 
             /** Input ownerKeyPath */
-            ownerKeyPath?: string | null;
+            ownerKeyPath?: (string|null);
         }
 
         /** Represents an Input. */
         class Input implements IInput {
+
             /**
              * Constructs a new Input.
              * @param [properties] Properties to set
@@ -2163,7 +2180,7 @@ export namespace protoc {
             public index: number;
 
             /** Input value. */
-            public value: number | Long;
+            public value: (number|Long);
 
             /** Input pubkey. */
             public pubkey: string;
@@ -2202,7 +2219,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.BchTx.Input;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.BchTx.Input;
 
             /**
              * Decodes an Input message from the specified reader or buffer, length delimited.
@@ -2211,14 +2228,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.BchTx.Input;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.BchTx.Input;
 
             /**
              * Verifies an Input message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates an Input message from a plain object. Also converts values to their respective internal types.
@@ -2233,10 +2250,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.BchTx.Input,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.BchTx.Input, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Input to JSON.
@@ -2248,24 +2262,26 @@ export namespace protoc {
 
     /** Properties of a DashTx. */
     interface IDashTx {
+
         /** DashTx fee */
-        fee?: number | Long | null;
+        fee?: (number|Long|null);
 
         /** DashTx dustThreshold */
-        dustThreshold?: number | null;
+        dustThreshold?: (number|null);
 
         /** DashTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** DashTx inputs */
-        inputs?: protoc.DashTx.IInput[] | null;
+        inputs?: (protoc.DashTx.IInput[]|null);
 
         /** DashTx outputs */
-        outputs?: protoc.IOutput[] | null;
+        outputs?: (protoc.IOutput[]|null);
     }
 
     /** Represents a DashTx. */
     class DashTx implements IDashTx {
+
         /**
          * Constructs a new DashTx.
          * @param [properties] Properties to set
@@ -2273,7 +2289,7 @@ export namespace protoc {
         constructor(properties?: protoc.IDashTx);
 
         /** DashTx fee. */
-        public fee: number | Long;
+        public fee: (number|Long);
 
         /** DashTx dustThreshold. */
         public dustThreshold: number;
@@ -2318,7 +2334,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.DashTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.DashTx;
 
         /**
          * Decodes a DashTx message from the specified reader or buffer, length delimited.
@@ -2327,14 +2343,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.DashTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.DashTx;
 
         /**
          * Verifies a DashTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a DashTx message from a plain object. Also converts values to their respective internal types.
@@ -2359,26 +2375,29 @@ export namespace protoc {
     }
 
     namespace DashTx {
+
         /** Properties of an Input. */
         interface IInput {
+
             /** Input hash */
-            hash?: string | null;
+            hash?: (string|null);
 
             /** Input index */
-            index?: number | null;
+            index?: (number|null);
 
             /** Input value */
-            value?: number | Long | null;
+            value?: (number|Long|null);
 
             /** Input pubkey */
-            pubkey?: string | null;
+            pubkey?: (string|null);
 
             /** Input ownerKeyPath */
-            ownerKeyPath?: string | null;
+            ownerKeyPath?: (string|null);
         }
 
         /** Represents an Input. */
         class Input implements IInput {
+
             /**
              * Constructs a new Input.
              * @param [properties] Properties to set
@@ -2392,7 +2411,7 @@ export namespace protoc {
             public index: number;
 
             /** Input value. */
-            public value: number | Long;
+            public value: (number|Long);
 
             /** Input pubkey. */
             public pubkey: string;
@@ -2431,7 +2450,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.DashTx.Input;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.DashTx.Input;
 
             /**
              * Decodes an Input message from the specified reader or buffer, length delimited.
@@ -2440,14 +2459,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.DashTx.Input;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.DashTx.Input;
 
             /**
              * Verifies an Input message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates an Input message from a plain object. Also converts values to their respective internal types.
@@ -2462,10 +2481,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.DashTx.Input,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.DashTx.Input, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Input to JSON.
@@ -2477,24 +2493,26 @@ export namespace protoc {
 
     /** Properties of a LtcTx. */
     interface ILtcTx {
+
         /** LtcTx fee */
-        fee?: number | Long | null;
+        fee?: (number|Long|null);
 
         /** LtcTx dustThreshold */
-        dustThreshold?: number | null;
+        dustThreshold?: (number|null);
 
         /** LtcTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** LtcTx inputs */
-        inputs?: protoc.IInput[] | null;
+        inputs?: (protoc.IInput[]|null);
 
         /** LtcTx outputs */
-        outputs?: protoc.IOutput[] | null;
+        outputs?: (protoc.IOutput[]|null);
     }
 
     /** Represents a LtcTx. */
     class LtcTx implements ILtcTx {
+
         /**
          * Constructs a new LtcTx.
          * @param [properties] Properties to set
@@ -2502,7 +2520,7 @@ export namespace protoc {
         constructor(properties?: protoc.ILtcTx);
 
         /** LtcTx fee. */
-        public fee: number | Long;
+        public fee: (number|Long);
 
         /** LtcTx dustThreshold. */
         public dustThreshold: number;
@@ -2547,7 +2565,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.LtcTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.LtcTx;
 
         /**
          * Decodes a LtcTx message from the specified reader or buffer, length delimited.
@@ -2556,14 +2574,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.LtcTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.LtcTx;
 
         /**
          * Verifies a LtcTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a LtcTx message from a plain object. Also converts values to their respective internal types.
@@ -2589,27 +2607,29 @@ export namespace protoc {
 
     /** Properties of a DcrTx. */
     interface IDcrTx {
+
         /** DcrTx fee */
-        fee?: number | Long | null;
+        fee?: (number|Long|null);
 
         /** DcrTx to */
-        to?: string | null;
+        to?: (string|null);
 
         /** DcrTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** DcrTx amount */
-        amount?: number | Long | null;
+        amount?: (number|Long|null);
 
         /** DcrTx inputs */
-        inputs?: protoc.DcrTx.IInput[] | null;
+        inputs?: (protoc.DcrTx.IInput[]|null);
 
         /** DcrTx changeAddress */
-        changeAddress?: string | null;
+        changeAddress?: (string|null);
     }
 
     /** Represents a DcrTx. */
     class DcrTx implements IDcrTx {
+
         /**
          * Constructs a new DcrTx.
          * @param [properties] Properties to set
@@ -2617,7 +2637,7 @@ export namespace protoc {
         constructor(properties?: protoc.IDcrTx);
 
         /** DcrTx fee. */
-        public fee: number | Long;
+        public fee: (number|Long);
 
         /** DcrTx to. */
         public to: string;
@@ -2626,7 +2646,7 @@ export namespace protoc {
         public memo: string;
 
         /** DcrTx amount. */
-        public amount: number | Long;
+        public amount: (number|Long);
 
         /** DcrTx inputs. */
         public inputs: protoc.DcrTx.IInput[];
@@ -2665,7 +2685,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.DcrTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.DcrTx;
 
         /**
          * Decodes a DcrTx message from the specified reader or buffer, length delimited.
@@ -2674,14 +2694,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.DcrTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.DcrTx;
 
         /**
          * Verifies a DcrTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a DcrTx message from a plain object. Also converts values to their respective internal types.
@@ -2706,23 +2726,26 @@ export namespace protoc {
     }
 
     namespace DcrTx {
+
         /** Properties of an Input. */
         interface IInput {
+
             /** Input address */
-            address?: string | null;
+            address?: (string|null);
 
             /** Input txId */
-            txId?: string | null;
+            txId?: (string|null);
 
             /** Input outputIndex */
-            outputIndex?: number | null;
+            outputIndex?: (number|null);
 
             /** Input atoms */
-            atoms?: number | Long | null;
+            atoms?: (number|Long|null);
         }
 
         /** Represents an Input. */
         class Input implements IInput {
+
             /**
              * Constructs a new Input.
              * @param [properties] Properties to set
@@ -2739,7 +2762,7 @@ export namespace protoc {
             public outputIndex: number;
 
             /** Input atoms. */
-            public atoms: number | Long;
+            public atoms: (number|Long);
 
             /**
              * Creates a new Input instance using the specified properties.
@@ -2772,7 +2795,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.DcrTx.Input;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.DcrTx.Input;
 
             /**
              * Decodes an Input message from the specified reader or buffer, length delimited.
@@ -2781,14 +2804,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.DcrTx.Input;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.DcrTx.Input;
 
             /**
              * Verifies an Input message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates an Input message from a plain object. Also converts values to their respective internal types.
@@ -2803,10 +2826,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.DcrTx.Input,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.DcrTx.Input, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Input to JSON.
@@ -2818,27 +2838,29 @@ export namespace protoc {
 
     /** Properties of a XzcTx. */
     interface IXzcTx {
+
         /** XzcTx fee */
-        fee?: number | Long | null;
+        fee?: (number|Long|null);
 
         /** XzcTx to */
-        to?: string | null;
+        to?: (string|null);
 
         /** XzcTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** XzcTx amount */
-        amount?: number | Long | null;
+        amount?: (number|Long|null);
 
         /** XzcTx inputs */
-        inputs?: protoc.XzcTx.IInput[] | null;
+        inputs?: (protoc.XzcTx.IInput[]|null);
 
         /** XzcTx changeAddress */
-        changeAddress?: string | null;
+        changeAddress?: (string|null);
     }
 
     /** Represents a XzcTx. */
     class XzcTx implements IXzcTx {
+
         /**
          * Constructs a new XzcTx.
          * @param [properties] Properties to set
@@ -2846,7 +2868,7 @@ export namespace protoc {
         constructor(properties?: protoc.IXzcTx);
 
         /** XzcTx fee. */
-        public fee: number | Long;
+        public fee: (number|Long);
 
         /** XzcTx to. */
         public to: string;
@@ -2855,7 +2877,7 @@ export namespace protoc {
         public memo: string;
 
         /** XzcTx amount. */
-        public amount: number | Long;
+        public amount: (number|Long);
 
         /** XzcTx inputs. */
         public inputs: protoc.XzcTx.IInput[];
@@ -2894,7 +2916,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.XzcTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.XzcTx;
 
         /**
          * Decodes a XzcTx message from the specified reader or buffer, length delimited.
@@ -2903,14 +2925,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.XzcTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.XzcTx;
 
         /**
          * Verifies a XzcTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a XzcTx message from a plain object. Also converts values to their respective internal types.
@@ -2935,23 +2957,26 @@ export namespace protoc {
     }
 
     namespace XzcTx {
+
         /** Properties of an Input. */
         interface IInput {
+
             /** Input address */
-            address?: string | null;
+            address?: (string|null);
 
             /** Input txId */
-            txId?: string | null;
+            txId?: (string|null);
 
             /** Input outputIndex */
-            outputIndex?: number | null;
+            outputIndex?: (number|null);
 
             /** Input satoshis */
-            satoshis?: number | Long | null;
+            satoshis?: (number|Long|null);
         }
 
         /** Represents an Input. */
         class Input implements IInput {
+
             /**
              * Constructs a new Input.
              * @param [properties] Properties to set
@@ -2968,7 +2993,7 @@ export namespace protoc {
             public outputIndex: number;
 
             /** Input satoshis. */
-            public satoshis: number | Long;
+            public satoshis: (number|Long);
 
             /**
              * Creates a new Input instance using the specified properties.
@@ -3001,7 +3026,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.XzcTx.Input;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.XzcTx.Input;
 
             /**
              * Decodes an Input message from the specified reader or buffer, length delimited.
@@ -3010,14 +3035,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.XzcTx.Input;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.XzcTx.Input;
 
             /**
              * Verifies an Input message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates an Input message from a plain object. Also converts values to their respective internal types.
@@ -3032,10 +3057,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.XzcTx.Input,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.XzcTx.Input, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Input to JSON.
@@ -3047,30 +3069,32 @@ export namespace protoc {
 
     /** Properties of a XrpTx. */
     interface IXrpTx {
+
         /** XrpTx to */
-        to?: string | null;
+        to?: (string|null);
 
         /** XrpTx amount */
-        amount?: number | Long | null;
+        amount?: (number|Long|null);
 
         /** XrpTx changeAddress */
-        changeAddress?: string | null;
+        changeAddress?: (string|null);
 
         /** XrpTx fee */
-        fee?: number | Long | null;
+        fee?: (number|Long|null);
 
         /** XrpTx sequence */
-        sequence?: number | Long | null;
+        sequence?: (number|Long|null);
 
         /** XrpTx tag */
-        tag?: number | Long | null;
+        tag?: (number|Long|null);
 
         /** XrpTx memo */
-        memo?: string | null;
+        memo?: (string|null);
     }
 
     /** Represents a XrpTx. */
     class XrpTx implements IXrpTx {
+
         /**
          * Constructs a new XrpTx.
          * @param [properties] Properties to set
@@ -3081,19 +3105,19 @@ export namespace protoc {
         public to: string;
 
         /** XrpTx amount. */
-        public amount: number | Long;
+        public amount: (number|Long);
 
         /** XrpTx changeAddress. */
         public changeAddress: string;
 
         /** XrpTx fee. */
-        public fee: number | Long;
+        public fee: (number|Long);
 
         /** XrpTx sequence. */
-        public sequence: number | Long;
+        public sequence: (number|Long);
 
         /** XrpTx tag. */
-        public tag: number | Long;
+        public tag: (number|Long);
 
         /** XrpTx memo. */
         public memo: string;
@@ -3129,7 +3153,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.XrpTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.XrpTx;
 
         /**
          * Decodes a XrpTx message from the specified reader or buffer, length delimited.
@@ -3138,14 +3162,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.XrpTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.XrpTx;
 
         /**
          * Verifies a XrpTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a XrpTx message from a plain object. Also converts values to their respective internal types.
@@ -3171,33 +3195,35 @@ export namespace protoc {
 
     /** Properties of an IostTx. */
     interface IIostTx {
+
         /** IostTx tokenName */
-        tokenName?: string | null;
+        tokenName?: (string|null);
 
         /** IostTx from */
-        from?: string | null;
+        from?: (string|null);
 
         /** IostTx to */
-        to?: string | null;
+        to?: (string|null);
 
         /** IostTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** IostTx amount */
-        amount?: string | null;
+        amount?: (string|null);
 
         /** IostTx timestamp */
-        timestamp?: number | Long | null;
+        timestamp?: (number|Long|null);
 
         /** IostTx expiration */
-        expiration?: number | null;
+        expiration?: (number|null);
 
         /** IostTx config */
-        config?: protoc.IostTx.IConfig | null;
+        config?: (protoc.IostTx.IConfig|null);
     }
 
     /** Represents an IostTx. */
     class IostTx implements IIostTx {
+
         /**
          * Constructs a new IostTx.
          * @param [properties] Properties to set
@@ -3220,13 +3246,13 @@ export namespace protoc {
         public amount: string;
 
         /** IostTx timestamp. */
-        public timestamp: number | Long;
+        public timestamp: (number|Long);
 
         /** IostTx expiration. */
         public expiration: number;
 
         /** IostTx config. */
-        public config?: protoc.IostTx.IConfig | null;
+        public config?: (protoc.IostTx.IConfig|null);
 
         /**
          * Creates a new IostTx instance using the specified properties.
@@ -3259,7 +3285,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.IostTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.IostTx;
 
         /**
          * Decodes an IostTx message from the specified reader or buffer, length delimited.
@@ -3268,14 +3294,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.IostTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.IostTx;
 
         /**
          * Verifies an IostTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an IostTx message from a plain object. Also converts values to their respective internal types.
@@ -3300,23 +3326,26 @@ export namespace protoc {
     }
 
     namespace IostTx {
+
         /** Properties of a Config. */
         interface IConfig {
+
             /** Config gasRatio */
-            gasRatio?: number | Long | null;
+            gasRatio?: (number|Long|null);
 
             /** Config gasLimit */
-            gasLimit?: number | Long | null;
+            gasLimit?: (number|Long|null);
 
             /** Config delay */
-            delay?: number | null;
+            delay?: (number|null);
 
             /** Config defaultLimit */
-            defaultLimit?: string | null;
+            defaultLimit?: (string|null);
         }
 
         /** Represents a Config. */
         class Config implements IConfig {
+
             /**
              * Constructs a new Config.
              * @param [properties] Properties to set
@@ -3324,10 +3353,10 @@ export namespace protoc {
             constructor(properties?: protoc.IostTx.IConfig);
 
             /** Config gasRatio. */
-            public gasRatio: number | Long;
+            public gasRatio: (number|Long);
 
             /** Config gasLimit. */
-            public gasLimit: number | Long;
+            public gasLimit: (number|Long);
 
             /** Config delay. */
             public delay: number;
@@ -3366,7 +3395,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.IostTx.Config;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.IostTx.Config;
 
             /**
              * Decodes a Config message from the specified reader or buffer, length delimited.
@@ -3375,14 +3404,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.IostTx.Config;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.IostTx.Config;
 
             /**
              * Verifies a Config message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates a Config message from a plain object. Also converts values to their respective internal types.
@@ -3397,10 +3426,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.IostTx.Config,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.IostTx.Config, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Config to JSON.
@@ -3412,33 +3438,35 @@ export namespace protoc {
 
     /** Properties of an OmniTx. */
     interface IOmniTx {
+
         /** OmniTx fee */
-        fee?: number | Long | null;
+        fee?: (number|Long|null);
 
         /** OmniTx dustThreshold */
-        dustThreshold?: number | null;
+        dustThreshold?: (number|null);
 
         /** OmniTx memo */
-        memo?: string | null;
+        memo?: (string|null);
 
         /** OmniTx inputs */
-        inputs?: protoc.OmniTx.IInput[] | null;
+        inputs?: (protoc.OmniTx.IInput[]|null);
 
         /** OmniTx to */
-        to?: string | null;
+        to?: (string|null);
 
         /** OmniTx changeAddress */
-        changeAddress?: string | null;
+        changeAddress?: (string|null);
 
         /** OmniTx omniAmount */
-        omniAmount?: number | Long | null;
+        omniAmount?: (number|Long|null);
 
         /** OmniTx propertyId */
-        propertyId?: number | null;
+        propertyId?: (number|null);
     }
 
     /** Represents an OmniTx. */
     class OmniTx implements IOmniTx {
+
         /**
          * Constructs a new OmniTx.
          * @param [properties] Properties to set
@@ -3446,7 +3474,7 @@ export namespace protoc {
         constructor(properties?: protoc.IOmniTx);
 
         /** OmniTx fee. */
-        public fee: number | Long;
+        public fee: (number|Long);
 
         /** OmniTx dustThreshold. */
         public dustThreshold: number;
@@ -3464,7 +3492,7 @@ export namespace protoc {
         public changeAddress: string;
 
         /** OmniTx omniAmount. */
-        public omniAmount: number | Long;
+        public omniAmount: (number|Long);
 
         /** OmniTx propertyId. */
         public propertyId: number;
@@ -3500,7 +3528,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.OmniTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.OmniTx;
 
         /**
          * Decodes an OmniTx message from the specified reader or buffer, length delimited.
@@ -3509,14 +3537,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.OmniTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.OmniTx;
 
         /**
          * Verifies an OmniTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an OmniTx message from a plain object. Also converts values to their respective internal types.
@@ -3541,23 +3569,26 @@ export namespace protoc {
     }
 
     namespace OmniTx {
+
         /** Properties of an Input. */
         interface IInput {
+
             /** Input hash */
-            hash?: string | null;
+            hash?: (string|null);
 
             /** Input index */
-            index?: number | null;
+            index?: (number|null);
 
             /** Input utxo */
-            utxo?: protoc.OmniTx.Iutxo | null;
+            utxo?: (protoc.OmniTx.Iutxo|null);
 
             /** Input ownerKeyPath */
-            ownerKeyPath?: string | null;
+            ownerKeyPath?: (string|null);
         }
 
         /** Represents an Input. */
         class Input implements IInput {
+
             /**
              * Constructs a new Input.
              * @param [properties] Properties to set
@@ -3571,7 +3602,7 @@ export namespace protoc {
             public index: number;
 
             /** Input utxo. */
-            public utxo?: protoc.OmniTx.Iutxo | null;
+            public utxo?: (protoc.OmniTx.Iutxo|null);
 
             /** Input ownerKeyPath. */
             public ownerKeyPath: string;
@@ -3607,7 +3638,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.OmniTx.Input;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.OmniTx.Input;
 
             /**
              * Decodes an Input message from the specified reader or buffer, length delimited.
@@ -3616,14 +3647,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.OmniTx.Input;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.OmniTx.Input;
 
             /**
              * Verifies an Input message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates an Input message from a plain object. Also converts values to their respective internal types.
@@ -3638,10 +3669,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.OmniTx.Input,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.OmniTx.Input, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Input to JSON.
@@ -3652,18 +3680,20 @@ export namespace protoc {
 
         /** Properties of an utxo. */
         interface Iutxo {
+
             /** utxo publicKey */
-            publicKey?: string | null;
+            publicKey?: (string|null);
 
             /** utxo script */
-            script?: string | null;
+            script?: (string|null);
 
             /** utxo value */
-            value?: number | Long | null;
+            value?: (number|Long|null);
         }
 
         /** Represents an utxo. */
         class utxo implements Iutxo {
+
             /**
              * Constructs a new utxo.
              * @param [properties] Properties to set
@@ -3677,7 +3707,7 @@ export namespace protoc {
             public script: string;
 
             /** utxo value. */
-            public value: number | Long;
+            public value: (number|Long);
 
             /**
              * Creates a new utxo instance using the specified properties.
@@ -3710,7 +3740,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.OmniTx.utxo;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.OmniTx.utxo;
 
             /**
              * Decodes an utxo message from the specified reader or buffer, length delimited.
@@ -3719,14 +3749,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.OmniTx.utxo;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.OmniTx.utxo;
 
             /**
              * Verifies an utxo message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates an utxo message from a plain object. Also converts values to their respective internal types.
@@ -3741,10 +3771,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.OmniTx.utxo,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.OmniTx.utxo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this utxo to JSON.
@@ -3756,21 +3783,23 @@ export namespace protoc {
 
     /** Properties of an EosTx. */
     interface IEosTx {
+
         /** EosTx type */
-        type?: string | null;
+        type?: (string|null);
 
         /** EosTx tokenAccount */
-        tokenAccount?: string | null;
+        tokenAccount?: (string|null);
 
         /** EosTx data */
-        data?: protoc.EosTx.IData | null;
+        data?: (protoc.EosTx.IData|null);
 
         /** EosTx header */
-        header?: protoc.EosTx.IHeader | null;
+        header?: (protoc.EosTx.IHeader|null);
     }
 
     /** Represents an EosTx. */
     class EosTx implements IEosTx {
+
         /**
          * Constructs a new EosTx.
          * @param [properties] Properties to set
@@ -3784,10 +3813,10 @@ export namespace protoc {
         public tokenAccount: string;
 
         /** EosTx data. */
-        public data?: protoc.EosTx.IData | null;
+        public data?: (protoc.EosTx.IData|null);
 
         /** EosTx header. */
-        public header?: protoc.EosTx.IHeader | null;
+        public header?: (protoc.EosTx.IHeader|null);
 
         /**
          * Creates a new EosTx instance using the specified properties.
@@ -3820,7 +3849,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.EosTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.EosTx;
 
         /**
          * Decodes an EosTx message from the specified reader or buffer, length delimited.
@@ -3829,14 +3858,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.EosTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.EosTx;
 
         /**
          * Verifies an EosTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an EosTx message from a plain object. Also converts values to their respective internal types.
@@ -3861,32 +3890,35 @@ export namespace protoc {
     }
 
     namespace EosTx {
+
         /** Properties of a Data. */
         interface IData {
+
             /** Data from */
-            from?: string | null;
+            from?: (string|null);
 
             /** Data to */
-            to?: string | null;
+            to?: (string|null);
 
             /** Data amount */
-            amount?: number | Long | null;
+            amount?: (number|Long|null);
 
             /** Data symbol */
-            symbol?: string | null;
+            symbol?: (string|null);
 
             /** Data memo */
-            memo?: string | null;
+            memo?: (string|null);
 
             /** Data fee */
-            fee?: number | Long | null;
+            fee?: (number|Long|null);
 
             /** Data decimal */
-            decimal?: number | null;
+            decimal?: (number|null);
         }
 
         /** Represents a Data. */
         class Data implements IData {
+
             /**
              * Constructs a new Data.
              * @param [properties] Properties to set
@@ -3900,7 +3932,7 @@ export namespace protoc {
             public to: string;
 
             /** Data amount. */
-            public amount: number | Long;
+            public amount: (number|Long);
 
             /** Data symbol. */
             public symbol: string;
@@ -3909,7 +3941,7 @@ export namespace protoc {
             public memo: string;
 
             /** Data fee. */
-            public fee: number | Long;
+            public fee: (number|Long);
 
             /** Data decimal. */
             public decimal: number;
@@ -3945,7 +3977,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.EosTx.Data;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.EosTx.Data;
 
             /**
              * Decodes a Data message from the specified reader or buffer, length delimited.
@@ -3954,14 +3986,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.EosTx.Data;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.EosTx.Data;
 
             /**
              * Verifies a Data message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates a Data message from a plain object. Also converts values to their respective internal types.
@@ -3976,10 +4008,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.EosTx.Data,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.EosTx.Data, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Data to JSON.
@@ -3990,21 +4019,23 @@ export namespace protoc {
 
         /** Properties of a Header. */
         interface IHeader {
+
             /** Header time */
-            time?: number | Long | null;
+            time?: (number|Long|null);
 
             /** Header expireInSeconds */
-            expireInSeconds?: number | null;
+            expireInSeconds?: (number|null);
 
             /** Header refBlockNum */
-            refBlockNum?: number | Long | null;
+            refBlockNum?: (number|Long|null);
 
             /** Header refBlockPrefix */
-            refBlockPrefix?: number | Long | null;
+            refBlockPrefix?: (number|Long|null);
         }
 
         /** Represents a Header. */
         class Header implements IHeader {
+
             /**
              * Constructs a new Header.
              * @param [properties] Properties to set
@@ -4012,16 +4043,16 @@ export namespace protoc {
             constructor(properties?: protoc.EosTx.IHeader);
 
             /** Header time. */
-            public time: number | Long;
+            public time: (number|Long);
 
             /** Header expireInSeconds. */
             public expireInSeconds: number;
 
             /** Header refBlockNum. */
-            public refBlockNum: number | Long;
+            public refBlockNum: (number|Long);
 
             /** Header refBlockPrefix. */
-            public refBlockPrefix: number | Long;
+            public refBlockPrefix: (number|Long);
 
             /**
              * Creates a new Header instance using the specified properties.
@@ -4054,7 +4085,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.EosTx.Header;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.EosTx.Header;
 
             /**
              * Decodes a Header message from the specified reader or buffer, length delimited.
@@ -4063,14 +4094,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.EosTx.Header;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.EosTx.Header;
 
             /**
              * Verifies a Header message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates a Header message from a plain object. Also converts values to their respective internal types.
@@ -4085,10 +4116,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.EosTx.Header,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.EosTx.Header, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Header to JSON.
@@ -4100,42 +4128,44 @@ export namespace protoc {
 
     /** Properties of a DotTx. */
     interface IDotTx {
+
         /** DotTx value */
-        value?: number | Long | null;
+        value?: (number|Long|null);
 
         /** DotTx dest */
-        dest?: string | null;
+        dest?: (string|null);
 
         /** DotTx blockHash */
-        blockHash?: string | null;
+        blockHash?: (string|null);
 
         /** DotTx nonce */
-        nonce?: number | Long | null;
+        nonce?: (number|Long|null);
 
         /** DotTx tip */
-        tip?: number | Long | null;
+        tip?: (number|Long|null);
 
         /** DotTx transactionVersion */
-        transactionVersion?: number | Long | null;
+        transactionVersion?: (number|Long|null);
 
         /** DotTx specVersion */
-        specVersion?: number | Long | null;
+        specVersion?: (number|Long|null);
 
         /** DotTx validityPeriod */
-        validityPeriod?: number | Long | null;
+        validityPeriod?: (number|Long|null);
 
         /** DotTx implVersion */
-        implVersion?: number | Long | null;
+        implVersion?: (number|Long|null);
 
         /** DotTx authoringVersion */
-        authoringVersion?: number | Long | null;
+        authoringVersion?: (number|Long|null);
 
         /** DotTx blockNumber */
-        blockNumber?: number | null;
+        blockNumber?: (number|null);
     }
 
     /** Represents a DotTx. */
     class DotTx implements IDotTx {
+
         /**
          * Constructs a new DotTx.
          * @param [properties] Properties to set
@@ -4143,7 +4173,7 @@ export namespace protoc {
         constructor(properties?: protoc.IDotTx);
 
         /** DotTx value. */
-        public value: number | Long;
+        public value: (number|Long);
 
         /** DotTx dest. */
         public dest: string;
@@ -4152,25 +4182,25 @@ export namespace protoc {
         public blockHash: string;
 
         /** DotTx nonce. */
-        public nonce: number | Long;
+        public nonce: (number|Long);
 
         /** DotTx tip. */
-        public tip: number | Long;
+        public tip: (number|Long);
 
         /** DotTx transactionVersion. */
-        public transactionVersion: number | Long;
+        public transactionVersion: (number|Long);
 
         /** DotTx specVersion. */
-        public specVersion: number | Long;
+        public specVersion: (number|Long);
 
         /** DotTx validityPeriod. */
-        public validityPeriod: number | Long;
+        public validityPeriod: (number|Long);
 
         /** DotTx implVersion. */
-        public implVersion: number | Long;
+        public implVersion: (number|Long);
 
         /** DotTx authoringVersion. */
-        public authoringVersion: number | Long;
+        public authoringVersion: (number|Long);
 
         /** DotTx blockNumber. */
         public blockNumber: number;
@@ -4206,7 +4236,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.DotTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.DotTx;
 
         /**
          * Decodes a DotTx message from the specified reader or buffer, length delimited.
@@ -4215,14 +4245,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.DotTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.DotTx;
 
         /**
          * Verifies a DotTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a DotTx message from a plain object. Also converts values to their respective internal types.
@@ -4248,42 +4278,44 @@ export namespace protoc {
 
     /** Properties of a KsmTx. */
     interface IKsmTx {
+
         /** KsmTx value */
-        value?: number | Long | null;
+        value?: (number|Long|null);
 
         /** KsmTx dest */
-        dest?: string | null;
+        dest?: (string|null);
 
         /** KsmTx blockHash */
-        blockHash?: string | null;
+        blockHash?: (string|null);
 
         /** KsmTx nonce */
-        nonce?: number | Long | null;
+        nonce?: (number|Long|null);
 
         /** KsmTx tip */
-        tip?: number | Long | null;
+        tip?: (number|Long|null);
 
         /** KsmTx transactionVersion */
-        transactionVersion?: number | Long | null;
+        transactionVersion?: (number|Long|null);
 
         /** KsmTx specVersion */
-        specVersion?: number | Long | null;
+        specVersion?: (number|Long|null);
 
         /** KsmTx validityPeriod */
-        validityPeriod?: number | Long | null;
+        validityPeriod?: (number|Long|null);
 
         /** KsmTx implVersion */
-        implVersion?: number | Long | null;
+        implVersion?: (number|Long|null);
 
         /** KsmTx authoringVersion */
-        authoringVersion?: number | Long | null;
+        authoringVersion?: (number|Long|null);
 
         /** KsmTx blockNumber */
-        blockNumber?: number | null;
+        blockNumber?: (number|null);
     }
 
     /** Represents a KsmTx. */
     class KsmTx implements IKsmTx {
+
         /**
          * Constructs a new KsmTx.
          * @param [properties] Properties to set
@@ -4291,7 +4323,7 @@ export namespace protoc {
         constructor(properties?: protoc.IKsmTx);
 
         /** KsmTx value. */
-        public value: number | Long;
+        public value: (number|Long);
 
         /** KsmTx dest. */
         public dest: string;
@@ -4300,25 +4332,25 @@ export namespace protoc {
         public blockHash: string;
 
         /** KsmTx nonce. */
-        public nonce: number | Long;
+        public nonce: (number|Long);
 
         /** KsmTx tip. */
-        public tip: number | Long;
+        public tip: (number|Long);
 
         /** KsmTx transactionVersion. */
-        public transactionVersion: number | Long;
+        public transactionVersion: (number|Long);
 
         /** KsmTx specVersion. */
-        public specVersion: number | Long;
+        public specVersion: (number|Long);
 
         /** KsmTx validityPeriod. */
-        public validityPeriod: number | Long;
+        public validityPeriod: (number|Long);
 
         /** KsmTx implVersion. */
-        public implVersion: number | Long;
+        public implVersion: (number|Long);
 
         /** KsmTx authoringVersion. */
-        public authoringVersion: number | Long;
+        public authoringVersion: (number|Long);
 
         /** KsmTx blockNumber. */
         public blockNumber: number;
@@ -4354,7 +4386,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.KsmTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.KsmTx;
 
         /**
          * Decodes a KsmTx message from the specified reader or buffer, length delimited.
@@ -4363,14 +4395,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.KsmTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.KsmTx;
 
         /**
          * Verifies a KsmTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a KsmTx message from a plain object. Also converts values to their respective internal types.
@@ -4396,39 +4428,41 @@ export namespace protoc {
 
     /** Properties of a CfxTx. */
     interface ICfxTx {
+
         /** CfxTx to */
-        to?: string | null;
+        to?: (string|null);
 
         /** CfxTx value */
-        value?: string | null;
+        value?: (string|null);
 
         /** CfxTx gasPrice */
-        gasPrice?: string | null;
+        gasPrice?: (string|null);
 
         /** CfxTx gas */
-        gas?: string | null;
+        gas?: (string|null);
 
         /** CfxTx nonce */
-        nonce?: number | null;
+        nonce?: (number|null);
 
         /** CfxTx storageLimit */
-        storageLimit?: string | null;
+        storageLimit?: (string|null);
 
         /** CfxTx epochHeight */
-        epochHeight?: string | null;
+        epochHeight?: (string|null);
 
         /** CfxTx chainId */
-        chainId?: string | null;
+        chainId?: (string|null);
 
         /** CfxTx contractAddress */
-        contractAddress?: string | null;
+        contractAddress?: (string|null);
 
         /** CfxTx override */
-        override?: protoc.CfxTx.IOverride | null;
+        override?: (protoc.CfxTx.IOverride|null);
     }
 
     /** Represents a CfxTx. */
     class CfxTx implements ICfxTx {
+
         /**
          * Constructs a new CfxTx.
          * @param [properties] Properties to set
@@ -4463,7 +4497,7 @@ export namespace protoc {
         public contractAddress: string;
 
         /** CfxTx override. */
-        public override?: protoc.CfxTx.IOverride | null;
+        public override?: (protoc.CfxTx.IOverride|null);
 
         /**
          * Creates a new CfxTx instance using the specified properties.
@@ -4496,7 +4530,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.CfxTx;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.CfxTx;
 
         /**
          * Decodes a CfxTx message from the specified reader or buffer, length delimited.
@@ -4505,14 +4539,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.CfxTx;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.CfxTx;
 
         /**
          * Verifies a CfxTx message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CfxTx message from a plain object. Also converts values to their respective internal types.
@@ -4537,23 +4571,26 @@ export namespace protoc {
     }
 
     namespace CfxTx {
+
         /** Properties of an Override. */
         interface IOverride {
+
             /** Override decimals */
-            decimals?: number | null;
+            decimals?: (number|null);
 
             /** Override tokenShortName */
-            tokenShortName?: string | null;
+            tokenShortName?: (string|null);
 
             /** Override tokenFullName */
-            tokenFullName?: string | null;
+            tokenFullName?: (string|null);
 
             /** Override contractAddress */
-            contractAddress?: string | null;
+            contractAddress?: (string|null);
         }
 
         /** Represents an Override. */
         class Override implements IOverride {
+
             /**
              * Constructs a new Override.
              * @param [properties] Properties to set
@@ -4603,7 +4640,7 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.CfxTx.Override;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.CfxTx.Override;
 
             /**
              * Decodes an Override message from the specified reader or buffer, length delimited.
@@ -4612,14 +4649,14 @@ export namespace protoc {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.CfxTx.Override;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.CfxTx.Override;
 
             /**
              * Verifies an Override message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-            public static verify(message: { [k: string]: any }): string | null;
+            public static verify(message: { [k: string]: any }): (string|null);
 
             /**
              * Creates an Override message from a plain object. Also converts values to their respective internal types.
@@ -4634,10 +4671,7 @@ export namespace protoc {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(
-                message: protoc.CfxTx.Override,
-                options?: $protobuf.IConversionOptions,
-            ): { [k: string]: any };
+            public static toObject(message: protoc.CfxTx.Override, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this Override to JSON.
@@ -4649,18 +4683,20 @@ export namespace protoc {
 
     /** Properties of a SignMessage. */
     interface ISignMessage {
+
         /** SignMessage coinCode */
-        coinCode?: string | null;
+        coinCode?: (string|null);
 
         /** SignMessage hdPath */
-        hdPath?: string | null;
+        hdPath?: (string|null);
 
         /** SignMessage message */
-        message?: string | null;
+        message?: (string|null);
     }
 
     /** Represents a SignMessage. */
     class SignMessage implements ISignMessage {
+
         /**
          * Constructs a new SignMessage.
          * @param [properties] Properties to set
@@ -4707,7 +4743,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.SignMessage;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.SignMessage;
 
         /**
          * Decodes a SignMessage message from the specified reader or buffer, length delimited.
@@ -4716,14 +4752,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.SignMessage;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.SignMessage;
 
         /**
          * Verifies a SignMessage message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a SignMessage message from a plain object. Also converts values to their respective internal types.
@@ -4738,10 +4774,7 @@ export namespace protoc {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(
-            message: protoc.SignMessage,
-            options?: $protobuf.IConversionOptions,
-        ): { [k: string]: any };
+        public static toObject(message: protoc.SignMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SignMessage to JSON.
@@ -4752,18 +4785,20 @@ export namespace protoc {
 
     /** Properties of a VerifyAddress. */
     interface IVerifyAddress {
+
         /** VerifyAddress coinType */
-        coinType?: number | null;
+        coinType?: (number|null);
 
         /** VerifyAddress addressIndex */
-        addressIndex?: number | null;
+        addressIndex?: (number|null);
 
         /** VerifyAddress address */
-        address?: string | null;
+        address?: (string|null);
     }
 
     /** Represents a VerifyAddress. */
     class VerifyAddress implements IVerifyAddress {
+
         /**
          * Constructs a new VerifyAddress.
          * @param [properties] Properties to set
@@ -4810,7 +4845,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.VerifyAddress;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.VerifyAddress;
 
         /**
          * Decodes a VerifyAddress message from the specified reader or buffer, length delimited.
@@ -4819,14 +4854,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.VerifyAddress;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.VerifyAddress;
 
         /**
          * Verifies a VerifyAddress message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a VerifyAddress message from a plain object. Also converts values to their respective internal types.
@@ -4841,10 +4876,7 @@ export namespace protoc {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(
-            message: protoc.VerifyAddress,
-            options?: $protobuf.IConversionOptions,
-        ): { [k: string]: any };
+        public static toObject(message: protoc.VerifyAddress, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this VerifyAddress to JSON.
@@ -4855,18 +4887,20 @@ export namespace protoc {
 
     /** Properties of a SignTransactionResult. */
     interface ISignTransactionResult {
+
         /** SignTransactionResult signId */
-        signId?: string | null;
+        signId?: (string|null);
 
         /** SignTransactionResult txId */
-        txId?: string | null;
+        txId?: (string|null);
 
         /** SignTransactionResult rawTx */
-        rawTx?: string | null;
+        rawTx?: (string|null);
     }
 
     /** Represents a SignTransactionResult. */
     class SignTransactionResult implements ISignTransactionResult {
+
         /**
          * Constructs a new SignTransactionResult.
          * @param [properties] Properties to set
@@ -4903,10 +4937,7 @@ export namespace protoc {
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(
-            message: protoc.ISignTransactionResult,
-            writer?: $protobuf.Writer,
-        ): $protobuf.Writer;
+        public static encodeDelimited(message: protoc.ISignTransactionResult, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SignTransactionResult message from the specified reader or buffer.
@@ -4916,7 +4947,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.SignTransactionResult;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.SignTransactionResult;
 
         /**
          * Decodes a SignTransactionResult message from the specified reader or buffer, length delimited.
@@ -4925,14 +4956,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.SignTransactionResult;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.SignTransactionResult;
 
         /**
          * Verifies a SignTransactionResult message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a SignTransactionResult message from a plain object. Also converts values to their respective internal types.
@@ -4947,10 +4978,7 @@ export namespace protoc {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(
-            message: protoc.SignTransactionResult,
-            options?: $protobuf.IConversionOptions,
-        ): { [k: string]: any };
+        public static toObject(message: protoc.SignTransactionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SignTransactionResult to JSON.
@@ -4961,24 +4989,26 @@ export namespace protoc {
 
     /** Properties of a DashStaking. */
     interface IDashStaking {
+
         /** DashStaking coinCode */
-        coinCode?: string | null;
+        coinCode?: (string|null);
 
         /** DashStaking hdPath */
-        hdPath?: string | null;
+        hdPath?: (string|null);
 
         /** DashStaking mnid */
-        mnid?: string | null;
+        mnid?: (string|null);
 
         /** DashStaking address */
-        address?: string | null;
+        address?: (string|null);
 
         /** DashStaking message */
-        message?: string | null;
+        message?: (string|null);
     }
 
     /** Represents a DashStaking. */
     class DashStaking implements IDashStaking {
+
         /**
          * Constructs a new DashStaking.
          * @param [properties] Properties to set
@@ -5031,7 +5061,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.DashStaking;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.DashStaking;
 
         /**
          * Decodes a DashStaking message from the specified reader or buffer, length delimited.
@@ -5040,14 +5070,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.DashStaking;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.DashStaking;
 
         /**
          * Verifies a DashStaking message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a DashStaking message from a plain object. Also converts values to their respective internal types.
@@ -5062,10 +5092,7 @@ export namespace protoc {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(
-            message: protoc.DashStaking,
-            options?: $protobuf.IConversionOptions,
-        ): { [k: string]: any };
+        public static toObject(message: protoc.DashStaking, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this DashStaking to JSON.
@@ -5076,12 +5103,14 @@ export namespace protoc {
 
     /** Properties of a Staking. */
     interface IStaking {
+
         /** Staking dash */
-        dash?: protoc.IDashStaking | null;
+        dash?: (protoc.IDashStaking|null);
     }
 
     /** Represents a Staking. */
     class Staking implements IStaking {
+
         /**
          * Constructs a new Staking.
          * @param [properties] Properties to set
@@ -5089,10 +5118,10 @@ export namespace protoc {
         constructor(properties?: protoc.IStaking);
 
         /** Staking dash. */
-        public dash?: protoc.IDashStaking | null;
+        public dash?: (protoc.IDashStaking|null);
 
         /** Staking data. */
-        public data?: 'dash';
+        public data?: "dash";
 
         /**
          * Creates a new Staking instance using the specified properties.
@@ -5125,7 +5154,7 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: $protobuf.Reader | Uint8Array, length?: number): protoc.Staking;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protoc.Staking;
 
         /**
          * Decodes a Staking message from the specified reader or buffer, length delimited.
@@ -5134,14 +5163,14 @@ export namespace protoc {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: $protobuf.Reader | Uint8Array): protoc.Staking;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protoc.Staking;
 
         /**
          * Verifies a Staking message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): string | null;
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Staking message from a plain object. Also converts values to their respective internal types.
