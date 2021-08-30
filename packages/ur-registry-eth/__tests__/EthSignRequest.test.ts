@@ -29,11 +29,12 @@ describe('eth-sign-request', () => {
 
         const cborHex = ethSignRequest.toCBOR().toString('hex');
         const ur = ethSignRequest.toUREncoder(1000).nextPart();
-        expect(ur).toBe('ur:eth-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfkswdtklffd')
+        expect(ur).toBe('ur:eth-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfksatisjnihjyhsjnhsjkjetlnndant')
         const ethSignRequstDecoded = EthSignRequest.fromCBOR(Buffer.from(cborHex, 'hex'));
         expect(uuid.stringify(ethSignRequest.getRequestId())).toBe(ethRequestId);
         expect(ethSignRequstDecoded.getChainId()).toBe(1);
         expect(ethSignRequstDecoded.getDataType()).toBe(1);
+        expect(ethSignRequest.getOrigin()).toBe('metamask');
         expect(ethSignRequstDecoded.getSignData().toString("hex")).toEqual("f849808609184e72a00082271094000000000000000000000000000000000000000080a47f7465737432000000000000000000000000000000000000000000000000000000600057808080");    
     })
 
