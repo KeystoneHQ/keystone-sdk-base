@@ -11,6 +11,7 @@ enum Keys {
     chainId,
     derivationPath,
     address,
+    origin
 }
 
 export enum DataType {
@@ -27,6 +28,7 @@ type signRequestProps = {
     chainId?: number;
     derivationPath: CryptoKeypath;
     address?: Buffer;
+    origin?: String;
 };
 
 export class EthSignRequest extends RegistryItem {
@@ -36,6 +38,7 @@ export class EthSignRequest extends RegistryItem {
     private chainId: number;
     private derivationPath: CryptoKeypath;
     private address: Buffer;
+    private origin: String;
 
     getRegistryType = () => ExtendedRegistryTypes.ETH_SIGN_REQUEST;
 
@@ -51,6 +54,7 @@ export class EthSignRequest extends RegistryItem {
         this.chainId = args.chainId;
         this.derivationPath = args.derivationPath;
         this.address = args.address;
+        this.origin = args.origin;
     };
 
     public getRequestId = () => this.requestId;
@@ -59,6 +63,7 @@ export class EthSignRequest extends RegistryItem {
     public getChainId = () => this.chainId;
     public getDerivationPath = () => this.derivationPath.getPath();
     public getSignRequestAddress = () => this.address;
+    public getOrigin = () => this.origin;
 
     public toDataItem = () => {
         const map = {};
@@ -70,6 +75,10 @@ export class EthSignRequest extends RegistryItem {
         }
         if (this.chainId) {
             map[Keys.chainId] = this.chainId;
+        }
+
+        if(this.origin) {
+            map[Keys.origin] = this.origin;
         }
 
         map[Keys.signData] = this.signData;
@@ -90,6 +99,7 @@ export class EthSignRequest extends RegistryItem {
         const chainId = map[Keys.chainId] ? map[Keys.chainId] : undefined;
         const address = map[Keys.address] ? map[Keys.address] : undefined;
         const requestId = map[Keys.requestId] ? map[Keys.requestId].getData() : undefined;
+        const origin = map[Keys.origin] ? map[Keys.origin] : undefined;
 
         return new EthSignRequest({
             requestId,
@@ -98,6 +108,7 @@ export class EthSignRequest extends RegistryItem {
             chainId,
             derivationPath,
             address,
+            origin
         });
     };
 
@@ -114,6 +125,7 @@ export class EthSignRequest extends RegistryItem {
         uuidString?: string,
         chainId?: number,
         address?: string,
+        origin?: string,
     ) {
         const paths = hdPath.replace(/[m|M]\//, '').split('/');
         const hdpathObject = new CryptoKeypath(
@@ -135,6 +147,7 @@ export class EthSignRequest extends RegistryItem {
             derivationPath: hdpathObject,
             chainId,
             address: address ? Buffer.from(address.replace('0x', ''), 'hex') : undefined,
+            origin: origin || undefined,
         });
     }
 }

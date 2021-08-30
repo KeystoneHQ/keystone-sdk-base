@@ -23,7 +23,8 @@ describe('eth-sign-request', () => {
             dataType: DataType.transaction,
             chainId: 1,
             derivationPath: signKeyPath,
-            requestId: Buffer.from(idBuffer)
+            requestId: Buffer.from(idBuffer),
+            origin: 'metamask'
         })
 
         const cborHex = ethSignRequest.toCBOR().toString('hex');

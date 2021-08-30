@@ -48,9 +48,6 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     }
 
     public async signTransactionAsync(txParams: PartialTxParams): Promise<string> {
-        if(txParams.chainId !== this._networkId) {
-            console.log('chainId is not match')
-        }
         if (!this.synced) {
             await this.getAccountsAsync()
         }
