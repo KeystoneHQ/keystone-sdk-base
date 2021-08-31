@@ -54,7 +54,7 @@ export class MetamaskInteractionProvider extends EventEmitter implements Interac
     };
 
     cancelReadCryptoHDKey = () => {
-        this.emit('keystone-sycn_cancel');
+        this.emit('keystone-sync_cancel');
     };
 
     requestSignature = (
