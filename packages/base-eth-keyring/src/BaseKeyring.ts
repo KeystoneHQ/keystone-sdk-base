@@ -5,7 +5,7 @@ import { DataType, EthSignRequest } from '@keystonehq/bc-ur-registry-eth';
 import * as uuid from 'uuid';
 import { InteractionProvider } from './InteractionProvider';
 
-const keyringType = 'Keystone Air Gaped Device';
+const keyringType = 'QR Hardware Wallet Device';
 const pathBase = 'm';
 const MAX_INDEX = 1000;
 
@@ -69,7 +69,7 @@ export class BaseKeyring {
         };
     };
 
-    private requestSignature = async (
+    protected requestSignature = async (
         _requestId: string,
         signRequest: EthSignRequest,
         requestTitle?: string,
@@ -90,7 +90,7 @@ export class BaseKeyring {
         }
         const r = signature.slice(0, 32);
         const s = signature.slice(32, 64);
-        const v = signature.slice(64, 65);
+        const v = signature.slice(64);
         return {
             r,
             s,
@@ -105,7 +105,7 @@ export class BaseKeyring {
         this.hdPath = hdPath;
     }
 
-    private checkKeyring() {
+    protected checkKeyring() {
         if (!this.xfp || !this.xpub || !this.hdPath) {
             throw new Error('keyring not fulfilled, please call function `readKeyring` firstly');
         }

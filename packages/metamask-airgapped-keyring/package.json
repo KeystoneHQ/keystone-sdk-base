@@ -26,8 +26,11 @@
     "build": "tsdx build"
   },
   "dependencies": {
+    "@ethereumjs/tx": "^3.3.0",
     "@keystonehq/base-eth-keyring": "^0.0.5-alpha.0",
-    "@keystonehq/bc-ur-registry-eth": "^0.6.8"
+    "@keystonehq/bc-ur-registry-eth": "^0.6.8",
+    "rlp": "^2.2.6",
+    "uuid": "^8.3.2"
   },
   "bugs": {
     "url": "https://github.com/KeystoneHQ/keystone-airgaped-base/issues"

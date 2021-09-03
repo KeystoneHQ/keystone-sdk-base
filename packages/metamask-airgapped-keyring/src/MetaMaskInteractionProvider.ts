@@ -1,7 +1,7 @@
 import { InteractionProvider } from '@keystonehq/base-eth-keyring';
 import { EventEmitter } from 'events';
 import { ObservableStore } from '@metamask/obs-store';
-import { CryptoHDKey } from '@keystonehq/bc-ur-registry';       
+import { CryptoHDKey } from '@keystonehq/bc-ur-registry';
 import { EthSignRequest, ETHSignature } from '@keystonehq/bc-ur-registry-eth';
 import * as uuid from 'uuid';
 
