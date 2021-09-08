@@ -1,5 +1,5 @@
 import { EthSignRequest, CryptoHDKey, ETHSignature } from '@keystonehq/bc-ur-registry-eth';
-import { InteractionProvider } from '../InteractionProvider';
+import { InteractionProvider } from '@keystonehq/base-eth-keyring';
 import sdk, { SupportedResult, ReadStatus, PlayStatus } from '@keystonehq/sdk';
 
 export class DefaultInteractionProvider implements InteractionProvider {

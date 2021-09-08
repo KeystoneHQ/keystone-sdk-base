@@ -1,5 +1,5 @@
 import { DefaultInteractionProvider } from './DefaultInteractionProvider';
-import { BaseKeyring } from '../BaseKeyring';
+import { BaseKeyring } from '@keystonehq/base-eth-keyring';
 
 export class DefaultKeyring extends BaseKeyring {
     static type = BaseKeyring.type;
