@@ -1,14 +1,15 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-import * as $protobuf from "protobufjs/minimal";
+import * as $protobuf from 'protobufjs/minimal';
 
 // Common aliases
-const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
+const $Reader = $protobuf.Reader,
+    $Writer = $protobuf.Writer,
+    $util = $protobuf.util;
 
 // Exported root namespace
-const $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
+const $root = $protobuf.roots['default'] || ($protobuf.roots['default'] = {});
 
-export const protoc = $root.protoc = (() => {
-
+export const protoc = ($root.protoc = (() => {
     /**
      * Namespace protoc.
      * @exports protoc
@@ -16,8 +17,7 @@ export const protoc = $root.protoc = (() => {
      */
     const protoc = {};
 
-    protoc.Base = (function() {
-
+    protoc.Base = (function () {
         /**
          * Properties of a Base.
          * @memberof protoc
@@ -41,8 +41,7 @@ export const protoc = $root.protoc = (() => {
         function Base(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -59,7 +58,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Base
          * @instance
          */
-        Base.prototype.description = "";
+        Base.prototype.description = '';
 
         /**
          * Base data.
@@ -91,7 +90,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Base
          * @instance
          */
-        Base.prototype.deviceType = "";
+        Base.prototype.deviceType = '';
 
         // OneOf field names bound to virtual getters and setters
         let $oneOfFields;
@@ -102,9 +101,9 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Base
          * @instance
          */
-        Object.defineProperty(Base.prototype, "Content", {
-            get: $util.oneOfGetter($oneOfFields = ["hotVersion", "coldVersion"]),
-            set: $util.oneOfSetter($oneOfFields)
+        Object.defineProperty(Base.prototype, 'Content', {
+            get: $util.oneOfGetter(($oneOfFields = ['hotVersion', 'coldVersion'])),
+            set: $util.oneOfSetter($oneOfFields),
         });
 
         /**
@@ -129,20 +128,19 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Base.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.version);
-            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
-            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
-                $root.protoc.Payload.encode(message.data, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.hotVersion != null && Object.hasOwnProperty.call(message, "hotVersion"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.hotVersion);
-            if (message.coldVersion != null && Object.hasOwnProperty.call(message, "coldVersion"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.coldVersion);
-            if (message.deviceType != null && Object.hasOwnProperty.call(message, "deviceType"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.deviceType);
+            if (!writer) writer = $Writer.create();
+            if (message.version != null && Object.hasOwnProperty.call(message, 'version'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int32(message.version);
+            if (message.description != null && Object.hasOwnProperty.call(message, 'description'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.description);
+            if (message.data != null && Object.hasOwnProperty.call(message, 'data'))
+                $root.protoc.Payload.encode(message.data, writer.uint32(/* id 3, wireType 2 =*/ 26).fork()).ldelim();
+            if (message.hotVersion != null && Object.hasOwnProperty.call(message, 'hotVersion'))
+                writer.uint32(/* id 4, wireType 0 =*/ 32).int32(message.hotVersion);
+            if (message.coldVersion != null && Object.hasOwnProperty.call(message, 'coldVersion'))
+                writer.uint32(/* id 5, wireType 0 =*/ 40).int32(message.coldVersion);
+            if (message.deviceType != null && Object.hasOwnProperty.call(message, 'deviceType'))
+                writer.uint32(/* id 6, wireType 2 =*/ 50).string(message.deviceType);
             return writer;
         };
 
@@ -171,33 +169,33 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Base.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Base();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Base();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.version = reader.int32();
-                    break;
-                case 2:
-                    message.description = reader.string();
-                    break;
-                case 3:
-                    message.data = $root.protoc.Payload.decode(reader, reader.uint32());
-                    break;
-                case 4:
-                    message.hotVersion = reader.int32();
-                    break;
-                case 5:
-                    message.coldVersion = reader.int32();
-                    break;
-                case 6:
-                    message.deviceType = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.version = reader.int32();
+                        break;
+                    case 2:
+                        message.description = reader.string();
+                        break;
+                    case 3:
+                        message.data = $root.protoc.Payload.decode(reader, reader.uint32());
+                        break;
+                    case 4:
+                        message.hotVersion = reader.int32();
+                        break;
+                    case 5:
+                        message.coldVersion = reader.int32();
+                        break;
+                    case 6:
+                        message.deviceType = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -214,8 +212,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Base.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -228,35 +225,27 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Base.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
             let properties = {};
-            if (message.version != null && message.hasOwnProperty("version"))
-                if (!$util.isInteger(message.version))
-                    return "version: integer expected";
-            if (message.description != null && message.hasOwnProperty("description"))
-                if (!$util.isString(message.description))
-                    return "description: string expected";
-            if (message.data != null && message.hasOwnProperty("data")) {
+            if (message.version != null && message.hasOwnProperty('version'))
+                if (!$util.isInteger(message.version)) return 'version: integer expected';
+            if (message.description != null && message.hasOwnProperty('description'))
+                if (!$util.isString(message.description)) return 'description: string expected';
+            if (message.data != null && message.hasOwnProperty('data')) {
                 let error = $root.protoc.Payload.verify(message.data);
-                if (error)
-                    return "data." + error;
+                if (error) return 'data.' + error;
             }
-            if (message.hotVersion != null && message.hasOwnProperty("hotVersion")) {
+            if (message.hotVersion != null && message.hasOwnProperty('hotVersion')) {
                 properties.Content = 1;
-                if (!$util.isInteger(message.hotVersion))
-                    return "hotVersion: integer expected";
+                if (!$util.isInteger(message.hotVersion)) return 'hotVersion: integer expected';
             }
-            if (message.coldVersion != null && message.hasOwnProperty("coldVersion")) {
-                if (properties.Content === 1)
-                    return "Content: multiple values";
+            if (message.coldVersion != null && message.hasOwnProperty('coldVersion')) {
+                if (properties.Content === 1) return 'Content: multiple values';
                 properties.Content = 1;
-                if (!$util.isInteger(message.coldVersion))
-                    return "coldVersion: integer expected";
+                if (!$util.isInteger(message.coldVersion)) return 'coldVersion: integer expected';
             }
-            if (message.deviceType != null && message.hasOwnProperty("deviceType"))
-                if (!$util.isString(message.deviceType))
-                    return "deviceType: string expected";
+            if (message.deviceType != null && message.hasOwnProperty('deviceType'))
+                if (!$util.isString(message.deviceType)) return 'deviceType: string expected';
             return null;
         };
 
@@ -269,24 +258,17 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Base} Base
          */
         Base.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Base)
-                return object;
+            if (object instanceof $root.protoc.Base) return object;
             let message = new $root.protoc.Base();
-            if (object.version != null)
-                message.version = object.version | 0;
-            if (object.description != null)
-                message.description = String(object.description);
+            if (object.version != null) message.version = object.version | 0;
+            if (object.description != null) message.description = String(object.description);
             if (object.data != null) {
-                if (typeof object.data !== "object")
-                    throw TypeError(".protoc.Base.data: object expected");
+                if (typeof object.data !== 'object') throw TypeError('.protoc.Base.data: object expected');
                 message.data = $root.protoc.Payload.fromObject(object.data);
             }
-            if (object.hotVersion != null)
-                message.hotVersion = object.hotVersion | 0;
-            if (object.coldVersion != null)
-                message.coldVersion = object.coldVersion | 0;
-            if (object.deviceType != null)
-                message.deviceType = String(object.deviceType);
+            if (object.hotVersion != null) message.hotVersion = object.hotVersion | 0;
+            if (object.coldVersion != null) message.coldVersion = object.coldVersion | 0;
+            if (object.deviceType != null) message.deviceType = String(object.deviceType);
             return message;
         };
 
@@ -300,32 +282,28 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Base.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
                 object.version = 0;
-                object.description = "";
+                object.description = '';
                 object.data = null;
-                object.deviceType = "";
+                object.deviceType = '';
             }
-            if (message.version != null && message.hasOwnProperty("version"))
-                object.version = message.version;
-            if (message.description != null && message.hasOwnProperty("description"))
+            if (message.version != null && message.hasOwnProperty('version')) object.version = message.version;
+            if (message.description != null && message.hasOwnProperty('description'))
                 object.description = message.description;
-            if (message.data != null && message.hasOwnProperty("data"))
+            if (message.data != null && message.hasOwnProperty('data'))
                 object.data = $root.protoc.Payload.toObject(message.data, options);
-            if (message.hotVersion != null && message.hasOwnProperty("hotVersion")) {
+            if (message.hotVersion != null && message.hasOwnProperty('hotVersion')) {
                 object.hotVersion = message.hotVersion;
-                if (options.oneofs)
-                    object.Content = "hotVersion";
+                if (options.oneofs) object.Content = 'hotVersion';
             }
-            if (message.coldVersion != null && message.hasOwnProperty("coldVersion")) {
+            if (message.coldVersion != null && message.hasOwnProperty('coldVersion')) {
                 object.coldVersion = message.coldVersion;
-                if (options.oneofs)
-                    object.Content = "coldVersion";
+                if (options.oneofs) object.Content = 'coldVersion';
             }
-            if (message.deviceType != null && message.hasOwnProperty("deviceType"))
+            if (message.deviceType != null && message.hasOwnProperty('deviceType'))
                 object.deviceType = message.deviceType;
             return object;
         };
@@ -344,8 +322,7 @@ export const protoc = $root.protoc = (() => {
         return Base;
     })();
 
-    protoc.Payload = (function() {
-
+    protoc.Payload = (function () {
         /**
          * Properties of a Payload.
          * @memberof protoc
@@ -370,8 +347,7 @@ export const protoc = $root.protoc = (() => {
         function Payload(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -388,7 +364,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Payload
          * @instance
          */
-        Payload.prototype.xfp = "";
+        Payload.prototype.xfp = '';
 
         /**
          * Payload sync.
@@ -439,9 +415,9 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Payload
          * @instance
          */
-        Object.defineProperty(Payload.prototype, "Content", {
-            get: $util.oneOfGetter($oneOfFields = ["sync", "signTx", "signMsg", "verifyAddr", "signTxResult"]),
-            set: $util.oneOfSetter($oneOfFields)
+        Object.defineProperty(Payload.prototype, 'Content', {
+            get: $util.oneOfGetter(($oneOfFields = ['sync', 'signTx', 'signMsg', 'verifyAddr', 'signTxResult'])),
+            set: $util.oneOfSetter($oneOfFields),
         });
 
         /**
@@ -466,22 +442,33 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Payload.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
-            if (message.xfp != null && Object.hasOwnProperty.call(message, "xfp"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.xfp);
-            if (message.sync != null && Object.hasOwnProperty.call(message, "sync"))
-                $root.protoc.Sync.encode(message.sync, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.signTx != null && Object.hasOwnProperty.call(message, "signTx"))
-                $root.protoc.SignTransaction.encode(message.signTx, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.signMsg != null && Object.hasOwnProperty.call(message, "signMsg"))
-                $root.protoc.SignMessage.encode(message.signMsg, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.verifyAddr != null && Object.hasOwnProperty.call(message, "verifyAddr"))
-                $root.protoc.VerifyAddress.encode(message.verifyAddr, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.signTxResult != null && Object.hasOwnProperty.call(message, "signTxResult"))
-                $root.protoc.SignTransactionResult.encode(message.signTxResult, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (!writer) writer = $Writer.create();
+            if (message.type != null && Object.hasOwnProperty.call(message, 'type'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int32(message.type);
+            if (message.xfp != null && Object.hasOwnProperty.call(message, 'xfp'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.xfp);
+            if (message.sync != null && Object.hasOwnProperty.call(message, 'sync'))
+                $root.protoc.Sync.encode(message.sync, writer.uint32(/* id 3, wireType 2 =*/ 26).fork()).ldelim();
+            if (message.signTx != null && Object.hasOwnProperty.call(message, 'signTx'))
+                $root.protoc.SignTransaction.encode(
+                    message.signTx,
+                    writer.uint32(/* id 4, wireType 2 =*/ 34).fork(),
+                ).ldelim();
+            if (message.signMsg != null && Object.hasOwnProperty.call(message, 'signMsg'))
+                $root.protoc.SignMessage.encode(
+                    message.signMsg,
+                    writer.uint32(/* id 5, wireType 2 =*/ 42).fork(),
+                ).ldelim();
+            if (message.verifyAddr != null && Object.hasOwnProperty.call(message, 'verifyAddr'))
+                $root.protoc.VerifyAddress.encode(
+                    message.verifyAddr,
+                    writer.uint32(/* id 6, wireType 2 =*/ 50).fork(),
+                ).ldelim();
+            if (message.signTxResult != null && Object.hasOwnProperty.call(message, 'signTxResult'))
+                $root.protoc.SignTransactionResult.encode(
+                    message.signTxResult,
+                    writer.uint32(/* id 7, wireType 2 =*/ 58).fork(),
+                ).ldelim();
             return writer;
         };
 
@@ -510,36 +497,36 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Payload.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Payload();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Payload();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.type = reader.int32();
-                    break;
-                case 2:
-                    message.xfp = reader.string();
-                    break;
-                case 3:
-                    message.sync = $root.protoc.Sync.decode(reader, reader.uint32());
-                    break;
-                case 4:
-                    message.signTx = $root.protoc.SignTransaction.decode(reader, reader.uint32());
-                    break;
-                case 5:
-                    message.signMsg = $root.protoc.SignMessage.decode(reader, reader.uint32());
-                    break;
-                case 6:
-                    message.verifyAddr = $root.protoc.VerifyAddress.decode(reader, reader.uint32());
-                    break;
-                case 7:
-                    message.signTxResult = $root.protoc.SignTransactionResult.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.type = reader.int32();
+                        break;
+                    case 2:
+                        message.xfp = reader.string();
+                        break;
+                    case 3:
+                        message.sync = $root.protoc.Sync.decode(reader, reader.uint32());
+                        break;
+                    case 4:
+                        message.signTx = $root.protoc.SignTransaction.decode(reader, reader.uint32());
+                        break;
+                    case 5:
+                        message.signMsg = $root.protoc.SignMessage.decode(reader, reader.uint32());
+                        break;
+                    case 6:
+                        message.verifyAddr = $root.protoc.VerifyAddress.decode(reader, reader.uint32());
+                        break;
+                    case 7:
+                        message.signTxResult = $root.protoc.SignTransactionResult.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -556,8 +543,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Payload.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -570,74 +556,63 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Payload.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
             let properties = {};
-            if (message.type != null && message.hasOwnProperty("type"))
+            if (message.type != null && message.hasOwnProperty('type'))
                 switch (message.type) {
-                default:
-                    return "type: enum value expected";
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                    break;
+                    default:
+                        return 'type: enum value expected';
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        break;
                 }
-            if (message.xfp != null && message.hasOwnProperty("xfp"))
-                if (!$util.isString(message.xfp))
-                    return "xfp: string expected";
-            if (message.sync != null && message.hasOwnProperty("sync")) {
+            if (message.xfp != null && message.hasOwnProperty('xfp'))
+                if (!$util.isString(message.xfp)) return 'xfp: string expected';
+            if (message.sync != null && message.hasOwnProperty('sync')) {
                 properties.Content = 1;
                 {
                     let error = $root.protoc.Sync.verify(message.sync);
-                    if (error)
-                        return "sync." + error;
+                    if (error) return 'sync.' + error;
                 }
             }
-            if (message.signTx != null && message.hasOwnProperty("signTx")) {
-                if (properties.Content === 1)
-                    return "Content: multiple values";
+            if (message.signTx != null && message.hasOwnProperty('signTx')) {
+                if (properties.Content === 1) return 'Content: multiple values';
                 properties.Content = 1;
                 {
                     let error = $root.protoc.SignTransaction.verify(message.signTx);
-                    if (error)
-                        return "signTx." + error;
+                    if (error) return 'signTx.' + error;
                 }
             }
-            if (message.signMsg != null && message.hasOwnProperty("signMsg")) {
-                if (properties.Content === 1)
-                    return "Content: multiple values";
+            if (message.signMsg != null && message.hasOwnProperty('signMsg')) {
+                if (properties.Content === 1) return 'Content: multiple values';
                 properties.Content = 1;
                 {
                     let error = $root.protoc.SignMessage.verify(message.signMsg);
-                    if (error)
-                        return "signMsg." + error;
+                    if (error) return 'signMsg.' + error;
                 }
             }
-            if (message.verifyAddr != null && message.hasOwnProperty("verifyAddr")) {
-                if (properties.Content === 1)
-                    return "Content: multiple values";
+            if (message.verifyAddr != null && message.hasOwnProperty('verifyAddr')) {
+                if (properties.Content === 1) return 'Content: multiple values';
                 properties.Content = 1;
                 {
                     let error = $root.protoc.VerifyAddress.verify(message.verifyAddr);
-                    if (error)
-                        return "verifyAddr." + error;
+                    if (error) return 'verifyAddr.' + error;
                 }
             }
-            if (message.signTxResult != null && message.hasOwnProperty("signTxResult")) {
-                if (properties.Content === 1)
-                    return "Content: multiple values";
+            if (message.signTxResult != null && message.hasOwnProperty('signTxResult')) {
+                if (properties.Content === 1) return 'Content: multiple values';
                 properties.Content = 1;
                 {
                     let error = $root.protoc.SignTransactionResult.verify(message.signTxResult);
-                    if (error)
-                        return "signTxResult." + error;
+                    if (error) return 'signTxResult.' + error;
                 }
             }
             return null;
@@ -652,76 +627,71 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Payload} Payload
          */
         Payload.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Payload)
-                return object;
+            if (object instanceof $root.protoc.Payload) return object;
             let message = new $root.protoc.Payload();
             switch (object.type) {
-            case "TYPE_RESERVE":
-            case 0:
-                message.type = 0;
-                break;
-            case "TYPE_SYNC":
-            case 1:
-                message.type = 1;
-                break;
-            case "TYPE_SIGN_TX":
-            case 2:
-                message.type = 2;
-                break;
-            case "TYPE_SIGN_MSG":
-            case 3:
-                message.type = 3;
-                break;
-            case "TYPE_SIGN_MULTI_SIG":
-            case 4:
-                message.type = 4;
-                break;
-            case "TYPE_SYNC_MULTI_SIG_MSG":
-            case 5:
-                message.type = 5;
-                break;
-            case "TYPE_SIGN_ETH_MULTI_SIG_MSG":
-            case 6:
-                message.type = 6;
-                break;
-            case "TYPE_VERIFY_ADDRESS":
-            case 7:
-                message.type = 7;
-                break;
-            case "TYPE_STAKING":
-            case 8:
-                message.type = 8;
-                break;
-            case "TYPE_SIGN_TX_RESULT":
-            case 9:
-                message.type = 9;
-                break;
+                case 'TYPE_RESERVE':
+                case 0:
+                    message.type = 0;
+                    break;
+                case 'TYPE_SYNC':
+                case 1:
+                    message.type = 1;
+                    break;
+                case 'TYPE_SIGN_TX':
+                case 2:
+                    message.type = 2;
+                    break;
+                case 'TYPE_SIGN_MSG':
+                case 3:
+                    message.type = 3;
+                    break;
+                case 'TYPE_SIGN_MULTI_SIG':
+                case 4:
+                    message.type = 4;
+                    break;
+                case 'TYPE_SYNC_MULTI_SIG_MSG':
+                case 5:
+                    message.type = 5;
+                    break;
+                case 'TYPE_SIGN_ETH_MULTI_SIG_MSG':
+                case 6:
+                    message.type = 6;
+                    break;
+                case 'TYPE_VERIFY_ADDRESS':
+                case 7:
+                    message.type = 7;
+                    break;
+                case 'TYPE_STAKING':
+                case 8:
+                    message.type = 8;
+                    break;
+                case 'TYPE_SIGN_TX_RESULT':
+                case 9:
+                    message.type = 9;
+                    break;
             }
-            if (object.xfp != null)
-                message.xfp = String(object.xfp);
+            if (object.xfp != null) message.xfp = String(object.xfp);
             if (object.sync != null) {
-                if (typeof object.sync !== "object")
-                    throw TypeError(".protoc.Payload.sync: object expected");
+                if (typeof object.sync !== 'object') throw TypeError('.protoc.Payload.sync: object expected');
                 message.sync = $root.protoc.Sync.fromObject(object.sync);
             }
             if (object.signTx != null) {
-                if (typeof object.signTx !== "object")
-                    throw TypeError(".protoc.Payload.signTx: object expected");
+                if (typeof object.signTx !== 'object') throw TypeError('.protoc.Payload.signTx: object expected');
                 message.signTx = $root.protoc.SignTransaction.fromObject(object.signTx);
             }
             if (object.signMsg != null) {
-                if (typeof object.signMsg !== "object")
-                    throw TypeError(".protoc.Payload.signMsg: object expected");
+                if (typeof object.signMsg !== 'object') throw TypeError('.protoc.Payload.signMsg: object expected');
                 message.signMsg = $root.protoc.SignMessage.fromObject(object.signMsg);
             }
             if (object.verifyAddr != null) {
-                if (typeof object.verifyAddr !== "object")
-                    throw TypeError(".protoc.Payload.verifyAddr: object expected");
+                if (typeof object.verifyAddr !== 'object')
+                    throw TypeError('.protoc.Payload.verifyAddr: object expected');
                 message.verifyAddr = $root.protoc.VerifyAddress.fromObject(object.verifyAddr);
             }
             if (object.signTxResult != null) {
-                if (typeof object.signTxResult !== "object")
-                    throw TypeError(".protoc.Payload.signTxResult: object expected");
+                if (typeof object.signTxResult !== 'object')
+                    throw TypeError('.protoc.Payload.signTxResult: object expected');
                 message.signTxResult = $root.protoc.SignTransactionResult.fromObject(object.signTxResult);
             }
             return message;
@@ -737,41 +707,34 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Payload.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.type = options.enums === String ? "TYPE_RESERVE" : 0;
-                object.xfp = "";
+                object.type = options.enums === String ? 'TYPE_RESERVE' : 0;
+                object.xfp = '';
             }
-            if (message.type != null && message.hasOwnProperty("type"))
+            if (message.type != null && message.hasOwnProperty('type'))
                 object.type = options.enums === String ? $root.protoc.Payload.Type[message.type] : message.type;
-            if (message.xfp != null && message.hasOwnProperty("xfp"))
-                object.xfp = message.xfp;
-            if (message.sync != null && message.hasOwnProperty("sync")) {
+            if (message.xfp != null && message.hasOwnProperty('xfp')) object.xfp = message.xfp;
+            if (message.sync != null && message.hasOwnProperty('sync')) {
                 object.sync = $root.protoc.Sync.toObject(message.sync, options);
-                if (options.oneofs)
-                    object.Content = "sync";
+                if (options.oneofs) object.Content = 'sync';
             }
-            if (message.signTx != null && message.hasOwnProperty("signTx")) {
+            if (message.signTx != null && message.hasOwnProperty('signTx')) {
                 object.signTx = $root.protoc.SignTransaction.toObject(message.signTx, options);
-                if (options.oneofs)
-                    object.Content = "signTx";
+                if (options.oneofs) object.Content = 'signTx';
             }
-            if (message.signMsg != null && message.hasOwnProperty("signMsg")) {
+            if (message.signMsg != null && message.hasOwnProperty('signMsg')) {
                 object.signMsg = $root.protoc.SignMessage.toObject(message.signMsg, options);
-                if (options.oneofs)
-                    object.Content = "signMsg";
+                if (options.oneofs) object.Content = 'signMsg';
             }
-            if (message.verifyAddr != null && message.hasOwnProperty("verifyAddr")) {
+            if (message.verifyAddr != null && message.hasOwnProperty('verifyAddr')) {
                 object.verifyAddr = $root.protoc.VerifyAddress.toObject(message.verifyAddr, options);
-                if (options.oneofs)
-                    object.Content = "verifyAddr";
+                if (options.oneofs) object.Content = 'verifyAddr';
             }
-            if (message.signTxResult != null && message.hasOwnProperty("signTxResult")) {
+            if (message.signTxResult != null && message.hasOwnProperty('signTxResult')) {
                 object.signTxResult = $root.protoc.SignTransactionResult.toObject(message.signTxResult, options);
-                if (options.oneofs)
-                    object.Content = "signTxResult";
+                if (options.oneofs) object.Content = 'signTxResult';
             }
             return object;
         };
@@ -802,26 +765,26 @@ export const protoc = $root.protoc = (() => {
          * @property {number} TYPE_STAKING=8 TYPE_STAKING value
          * @property {number} TYPE_SIGN_TX_RESULT=9 TYPE_SIGN_TX_RESULT value
          */
-        Payload.Type = (function() {
-            const valuesById = {}, values = Object.create(valuesById);
-            values[valuesById[0] = "TYPE_RESERVE"] = 0;
-            values[valuesById[1] = "TYPE_SYNC"] = 1;
-            values[valuesById[2] = "TYPE_SIGN_TX"] = 2;
-            values[valuesById[3] = "TYPE_SIGN_MSG"] = 3;
-            values[valuesById[4] = "TYPE_SIGN_MULTI_SIG"] = 4;
-            values[valuesById[5] = "TYPE_SYNC_MULTI_SIG_MSG"] = 5;
-            values[valuesById[6] = "TYPE_SIGN_ETH_MULTI_SIG_MSG"] = 6;
-            values[valuesById[7] = "TYPE_VERIFY_ADDRESS"] = 7;
-            values[valuesById[8] = "TYPE_STAKING"] = 8;
-            values[valuesById[9] = "TYPE_SIGN_TX_RESULT"] = 9;
+        Payload.Type = (function () {
+            const valuesById = {},
+                values = Object.create(valuesById);
+            values[(valuesById[0] = 'TYPE_RESERVE')] = 0;
+            values[(valuesById[1] = 'TYPE_SYNC')] = 1;
+            values[(valuesById[2] = 'TYPE_SIGN_TX')] = 2;
+            values[(valuesById[3] = 'TYPE_SIGN_MSG')] = 3;
+            values[(valuesById[4] = 'TYPE_SIGN_MULTI_SIG')] = 4;
+            values[(valuesById[5] = 'TYPE_SYNC_MULTI_SIG_MSG')] = 5;
+            values[(valuesById[6] = 'TYPE_SIGN_ETH_MULTI_SIG_MSG')] = 6;
+            values[(valuesById[7] = 'TYPE_VERIFY_ADDRESS')] = 7;
+            values[(valuesById[8] = 'TYPE_STAKING')] = 8;
+            values[(valuesById[9] = 'TYPE_SIGN_TX_RESULT')] = 9;
             return values;
         })();
 
         return Payload;
     })();
 
-    protoc.Account = (function() {
-
+    protoc.Account = (function () {
         /**
          * Properties of an Account.
          * @memberof protoc
@@ -843,8 +806,7 @@ export const protoc = $root.protoc = (() => {
         function Account(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -853,7 +815,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Account
          * @instance
          */
-        Account.prototype.hdPath = "";
+        Account.prototype.hdPath = '';
 
         /**
          * Account xPub.
@@ -861,7 +823,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Account
          * @instance
          */
-        Account.prototype.xPub = "";
+        Account.prototype.xPub = '';
 
         /**
          * Account addressLength.
@@ -901,16 +863,15 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Account.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.hdPath != null && Object.hasOwnProperty.call(message, "hdPath"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hdPath);
-            if (message.xPub != null && Object.hasOwnProperty.call(message, "xPub"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.xPub);
-            if (message.addressLength != null && Object.hasOwnProperty.call(message, "addressLength"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.addressLength);
-            if (message.isMultiSign != null && Object.hasOwnProperty.call(message, "isMultiSign"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isMultiSign);
+            if (!writer) writer = $Writer.create();
+            if (message.hdPath != null && Object.hasOwnProperty.call(message, 'hdPath'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.hdPath);
+            if (message.xPub != null && Object.hasOwnProperty.call(message, 'xPub'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.xPub);
+            if (message.addressLength != null && Object.hasOwnProperty.call(message, 'addressLength'))
+                writer.uint32(/* id 3, wireType 0 =*/ 24).int32(message.addressLength);
+            if (message.isMultiSign != null && Object.hasOwnProperty.call(message, 'isMultiSign'))
+                writer.uint32(/* id 4, wireType 0 =*/ 32).bool(message.isMultiSign);
             return writer;
         };
 
@@ -939,27 +900,27 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Account.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Account();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Account();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.hdPath = reader.string();
-                    break;
-                case 2:
-                    message.xPub = reader.string();
-                    break;
-                case 3:
-                    message.addressLength = reader.int32();
-                    break;
-                case 4:
-                    message.isMultiSign = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.hdPath = reader.string();
+                        break;
+                    case 2:
+                        message.xPub = reader.string();
+                        break;
+                    case 3:
+                        message.addressLength = reader.int32();
+                        break;
+                    case 4:
+                        message.isMultiSign = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -976,8 +937,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Account.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -990,20 +950,15 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Account.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.hdPath != null && message.hasOwnProperty("hdPath"))
-                if (!$util.isString(message.hdPath))
-                    return "hdPath: string expected";
-            if (message.xPub != null && message.hasOwnProperty("xPub"))
-                if (!$util.isString(message.xPub))
-                    return "xPub: string expected";
-            if (message.addressLength != null && message.hasOwnProperty("addressLength"))
-                if (!$util.isInteger(message.addressLength))
-                    return "addressLength: integer expected";
-            if (message.isMultiSign != null && message.hasOwnProperty("isMultiSign"))
-                if (typeof message.isMultiSign !== "boolean")
-                    return "isMultiSign: boolean expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.hdPath != null && message.hasOwnProperty('hdPath'))
+                if (!$util.isString(message.hdPath)) return 'hdPath: string expected';
+            if (message.xPub != null && message.hasOwnProperty('xPub'))
+                if (!$util.isString(message.xPub)) return 'xPub: string expected';
+            if (message.addressLength != null && message.hasOwnProperty('addressLength'))
+                if (!$util.isInteger(message.addressLength)) return 'addressLength: integer expected';
+            if (message.isMultiSign != null && message.hasOwnProperty('isMultiSign'))
+                if (typeof message.isMultiSign !== 'boolean') return 'isMultiSign: boolean expected';
             return null;
         };
 
@@ -1016,17 +971,12 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Account} Account
          */
         Account.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Account)
-                return object;
+            if (object instanceof $root.protoc.Account) return object;
             let message = new $root.protoc.Account();
-            if (object.hdPath != null)
-                message.hdPath = String(object.hdPath);
-            if (object.xPub != null)
-                message.xPub = String(object.xPub);
-            if (object.addressLength != null)
-                message.addressLength = object.addressLength | 0;
-            if (object.isMultiSign != null)
-                message.isMultiSign = Boolean(object.isMultiSign);
+            if (object.hdPath != null) message.hdPath = String(object.hdPath);
+            if (object.xPub != null) message.xPub = String(object.xPub);
+            if (object.addressLength != null) message.addressLength = object.addressLength | 0;
+            if (object.isMultiSign != null) message.isMultiSign = Boolean(object.isMultiSign);
             return message;
         };
 
@@ -1040,22 +990,19 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Account.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.hdPath = "";
-                object.xPub = "";
+                object.hdPath = '';
+                object.xPub = '';
                 object.addressLength = 0;
                 object.isMultiSign = false;
             }
-            if (message.hdPath != null && message.hasOwnProperty("hdPath"))
-                object.hdPath = message.hdPath;
-            if (message.xPub != null && message.hasOwnProperty("xPub"))
-                object.xPub = message.xPub;
-            if (message.addressLength != null && message.hasOwnProperty("addressLength"))
+            if (message.hdPath != null && message.hasOwnProperty('hdPath')) object.hdPath = message.hdPath;
+            if (message.xPub != null && message.hasOwnProperty('xPub')) object.xPub = message.xPub;
+            if (message.addressLength != null && message.hasOwnProperty('addressLength'))
                 object.addressLength = message.addressLength;
-            if (message.isMultiSign != null && message.hasOwnProperty("isMultiSign"))
+            if (message.isMultiSign != null && message.hasOwnProperty('isMultiSign'))
                 object.isMultiSign = message.isMultiSign;
             return object;
         };
@@ -1074,8 +1021,7 @@ export const protoc = $root.protoc = (() => {
         return Account;
     })();
 
-    protoc.Coin = (function() {
-
+    protoc.Coin = (function () {
         /**
          * Properties of a Coin.
          * @memberof protoc
@@ -1097,8 +1043,7 @@ export const protoc = $root.protoc = (() => {
             this.accounts = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -1107,7 +1052,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Coin
          * @instance
          */
-        Coin.prototype.coinCode = "";
+        Coin.prototype.coinCode = '';
 
         /**
          * Coin active.
@@ -1147,15 +1092,17 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Coin.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.coinCode != null && Object.hasOwnProperty.call(message, "coinCode"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.coinCode);
-            if (message.active != null && Object.hasOwnProperty.call(message, "active"))
-                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.active);
+            if (!writer) writer = $Writer.create();
+            if (message.coinCode != null && Object.hasOwnProperty.call(message, 'coinCode'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.coinCode);
+            if (message.active != null && Object.hasOwnProperty.call(message, 'active'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).bool(message.active);
             if (message.accounts != null && message.accounts.length)
                 for (let i = 0; i < message.accounts.length; ++i)
-                    $root.protoc.Account.encode(message.accounts[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    $root.protoc.Account.encode(
+                        message.accounts[i],
+                        writer.uint32(/* id 3, wireType 2 =*/ 26).fork(),
+                    ).ldelim();
             return writer;
         };
 
@@ -1184,26 +1131,25 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Coin.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Coin();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Coin();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.coinCode = reader.string();
-                    break;
-                case 2:
-                    message.active = reader.bool();
-                    break;
-                case 3:
-                    if (!(message.accounts && message.accounts.length))
-                        message.accounts = [];
-                    message.accounts.push($root.protoc.Account.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.coinCode = reader.string();
+                        break;
+                    case 2:
+                        message.active = reader.bool();
+                        break;
+                    case 3:
+                        if (!(message.accounts && message.accounts.length)) message.accounts = [];
+                        message.accounts.push($root.protoc.Account.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -1220,8 +1166,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Coin.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -1234,21 +1179,16 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Coin.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.coinCode != null && message.hasOwnProperty("coinCode"))
-                if (!$util.isString(message.coinCode))
-                    return "coinCode: string expected";
-            if (message.active != null && message.hasOwnProperty("active"))
-                if (typeof message.active !== "boolean")
-                    return "active: boolean expected";
-            if (message.accounts != null && message.hasOwnProperty("accounts")) {
-                if (!Array.isArray(message.accounts))
-                    return "accounts: array expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.coinCode != null && message.hasOwnProperty('coinCode'))
+                if (!$util.isString(message.coinCode)) return 'coinCode: string expected';
+            if (message.active != null && message.hasOwnProperty('active'))
+                if (typeof message.active !== 'boolean') return 'active: boolean expected';
+            if (message.accounts != null && message.hasOwnProperty('accounts')) {
+                if (!Array.isArray(message.accounts)) return 'accounts: array expected';
                 for (let i = 0; i < message.accounts.length; ++i) {
                     let error = $root.protoc.Account.verify(message.accounts[i]);
-                    if (error)
-                        return "accounts." + error;
+                    if (error) return 'accounts.' + error;
                 }
             }
             return null;
@@ -1263,20 +1203,16 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Coin} Coin
          */
         Coin.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Coin)
-                return object;
+            if (object instanceof $root.protoc.Coin) return object;
             let message = new $root.protoc.Coin();
-            if (object.coinCode != null)
-                message.coinCode = String(object.coinCode);
-            if (object.active != null)
-                message.active = Boolean(object.active);
+            if (object.coinCode != null) message.coinCode = String(object.coinCode);
+            if (object.active != null) message.active = Boolean(object.active);
             if (object.accounts) {
-                if (!Array.isArray(object.accounts))
-                    throw TypeError(".protoc.Coin.accounts: array expected");
+                if (!Array.isArray(object.accounts)) throw TypeError('.protoc.Coin.accounts: array expected');
                 message.accounts = [];
                 for (let i = 0; i < object.accounts.length; ++i) {
-                    if (typeof object.accounts[i] !== "object")
-                        throw TypeError(".protoc.Coin.accounts: object expected");
+                    if (typeof object.accounts[i] !== 'object')
+                        throw TypeError('.protoc.Coin.accounts: object expected');
                     message.accounts[i] = $root.protoc.Account.fromObject(object.accounts[i]);
                 }
             }
@@ -1293,19 +1229,15 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Coin.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
-            if (options.arrays || options.defaults)
-                object.accounts = [];
+            if (options.arrays || options.defaults) object.accounts = [];
             if (options.defaults) {
-                object.coinCode = "";
+                object.coinCode = '';
                 object.active = false;
             }
-            if (message.coinCode != null && message.hasOwnProperty("coinCode"))
-                object.coinCode = message.coinCode;
-            if (message.active != null && message.hasOwnProperty("active"))
-                object.active = message.active;
+            if (message.coinCode != null && message.hasOwnProperty('coinCode')) object.coinCode = message.coinCode;
+            if (message.active != null && message.hasOwnProperty('active')) object.active = message.active;
             if (message.accounts && message.accounts.length) {
                 object.accounts = [];
                 for (let j = 0; j < message.accounts.length; ++j)
@@ -1328,8 +1260,7 @@ export const protoc = $root.protoc = (() => {
         return Coin;
     })();
 
-    protoc.Sync = (function() {
-
+    protoc.Sync = (function () {
         /**
          * Properties of a Sync.
          * @memberof protoc
@@ -1349,8 +1280,7 @@ export const protoc = $root.protoc = (() => {
             this.coins = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -1383,11 +1313,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Sync.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
+            if (!writer) writer = $Writer.create();
             if (message.coins != null && message.coins.length)
                 for (let i = 0; i < message.coins.length; ++i)
-                    $root.protoc.Coin.encode(message.coins[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    $root.protoc.Coin.encode(
+                        message.coins[i],
+                        writer.uint32(/* id 1, wireType 2 =*/ 10).fork(),
+                    ).ldelim();
             return writer;
         };
 
@@ -1416,20 +1348,19 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Sync.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Sync();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Sync();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    if (!(message.coins && message.coins.length))
-                        message.coins = [];
-                    message.coins.push($root.protoc.Coin.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        if (!(message.coins && message.coins.length)) message.coins = [];
+                        message.coins.push($root.protoc.Coin.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -1446,8 +1377,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Sync.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -1460,15 +1390,12 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Sync.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.coins != null && message.hasOwnProperty("coins")) {
-                if (!Array.isArray(message.coins))
-                    return "coins: array expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.coins != null && message.hasOwnProperty('coins')) {
+                if (!Array.isArray(message.coins)) return 'coins: array expected';
                 for (let i = 0; i < message.coins.length; ++i) {
                     let error = $root.protoc.Coin.verify(message.coins[i]);
-                    if (error)
-                        return "coins." + error;
+                    if (error) return 'coins.' + error;
                 }
             }
             return null;
@@ -1483,16 +1410,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Sync} Sync
          */
         Sync.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Sync)
-                return object;
+            if (object instanceof $root.protoc.Sync) return object;
             let message = new $root.protoc.Sync();
             if (object.coins) {
-                if (!Array.isArray(object.coins))
-                    throw TypeError(".protoc.Sync.coins: array expected");
+                if (!Array.isArray(object.coins)) throw TypeError('.protoc.Sync.coins: array expected');
                 message.coins = [];
                 for (let i = 0; i < object.coins.length; ++i) {
-                    if (typeof object.coins[i] !== "object")
-                        throw TypeError(".protoc.Sync.coins: object expected");
+                    if (typeof object.coins[i] !== 'object') throw TypeError('.protoc.Sync.coins: object expected');
                     message.coins[i] = $root.protoc.Coin.fromObject(object.coins[i]);
                 }
             }
@@ -1509,11 +1433,9 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Sync.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
-            if (options.arrays || options.defaults)
-                object.coins = [];
+            if (options.arrays || options.defaults) object.coins = [];
             if (message.coins && message.coins.length) {
                 object.coins = [];
                 for (let j = 0; j < message.coins.length; ++j)
@@ -1536,8 +1458,7 @@ export const protoc = $root.protoc = (() => {
         return Sync;
     })();
 
-    protoc.SignTransaction = (function() {
-
+    protoc.SignTransaction = (function () {
         /**
          * Properties of a SignTransaction.
          * @memberof protoc
@@ -1576,8 +1497,7 @@ export const protoc = $root.protoc = (() => {
         function SignTransaction(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -1586,7 +1506,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignTransaction
          * @instance
          */
-        SignTransaction.prototype.coinCode = "";
+        SignTransaction.prototype.coinCode = '';
 
         /**
          * SignTransaction signId.
@@ -1594,7 +1514,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignTransaction
          * @instance
          */
-        SignTransaction.prototype.signId = "";
+        SignTransaction.prototype.signId = '';
 
         /**
          * SignTransaction hdPath.
@@ -1602,7 +1522,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignTransaction
          * @instance
          */
-        SignTransaction.prototype.hdPath = "";
+        SignTransaction.prototype.hdPath = '';
 
         /**
          * SignTransaction timestamp.
@@ -1610,7 +1530,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignTransaction
          * @instance
          */
-        SignTransaction.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SignTransaction.prototype.timestamp = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * SignTransaction decimal.
@@ -1757,9 +1677,28 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignTransaction
          * @instance
          */
-        Object.defineProperty(SignTransaction.prototype, "Transaction", {
-            get: $util.oneOfGetter($oneOfFields = ["btcTx", "ethTx", "tronTx", "etcTx", "bchTx", "dashTx", "ltcTx", "dcrTx", "xzcTx", "xrpTx", "iostTx", "omniTx", "eosTx", "dotTx", "ksmTx", "cfxTx"]),
-            set: $util.oneOfSetter($oneOfFields)
+        Object.defineProperty(SignTransaction.prototype, 'Transaction', {
+            get: $util.oneOfGetter(
+                ($oneOfFields = [
+                    'btcTx',
+                    'ethTx',
+                    'tronTx',
+                    'etcTx',
+                    'bchTx',
+                    'dashTx',
+                    'ltcTx',
+                    'dcrTx',
+                    'xzcTx',
+                    'xrpTx',
+                    'iostTx',
+                    'omniTx',
+                    'eosTx',
+                    'dotTx',
+                    'ksmTx',
+                    'cfxTx',
+                ]),
+            ),
+            set: $util.oneOfSetter($oneOfFields),
         });
 
         /**
@@ -1784,50 +1723,49 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         SignTransaction.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.coinCode != null && Object.hasOwnProperty.call(message, "coinCode"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.coinCode);
-            if (message.signId != null && Object.hasOwnProperty.call(message, "signId"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.signId);
-            if (message.hdPath != null && Object.hasOwnProperty.call(message, "hdPath"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.hdPath);
-            if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.timestamp);
-            if (message.decimal != null && Object.hasOwnProperty.call(message, "decimal"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.decimal);
-            if (message.btcTx != null && Object.hasOwnProperty.call(message, "btcTx"))
-                $root.protoc.BtcTx.encode(message.btcTx, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.ethTx != null && Object.hasOwnProperty.call(message, "ethTx"))
-                $root.protoc.EthTx.encode(message.ethTx, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-            if (message.tronTx != null && Object.hasOwnProperty.call(message, "tronTx"))
-                $root.protoc.TronTx.encode(message.tronTx, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-            if (message.etcTx != null && Object.hasOwnProperty.call(message, "etcTx"))
-                $root.protoc.EtcTx.encode(message.etcTx, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-            if (message.bchTx != null && Object.hasOwnProperty.call(message, "bchTx"))
-                $root.protoc.BchTx.encode(message.bchTx, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-            if (message.dashTx != null && Object.hasOwnProperty.call(message, "dashTx"))
-                $root.protoc.DashTx.encode(message.dashTx, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
-            if (message.ltcTx != null && Object.hasOwnProperty.call(message, "ltcTx"))
-                $root.protoc.LtcTx.encode(message.ltcTx, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
-            if (message.dcrTx != null && Object.hasOwnProperty.call(message, "dcrTx"))
-                $root.protoc.DcrTx.encode(message.dcrTx, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
-            if (message.xzcTx != null && Object.hasOwnProperty.call(message, "xzcTx"))
-                $root.protoc.XzcTx.encode(message.xzcTx, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
-            if (message.xrpTx != null && Object.hasOwnProperty.call(message, "xrpTx"))
-                $root.protoc.XrpTx.encode(message.xrpTx, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
-            if (message.iostTx != null && Object.hasOwnProperty.call(message, "iostTx"))
-                $root.protoc.IostTx.encode(message.iostTx, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
-            if (message.omniTx != null && Object.hasOwnProperty.call(message, "omniTx"))
-                $root.protoc.OmniTx.encode(message.omniTx, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
-            if (message.eosTx != null && Object.hasOwnProperty.call(message, "eosTx"))
-                $root.protoc.EosTx.encode(message.eosTx, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
-            if (message.dotTx != null && Object.hasOwnProperty.call(message, "dotTx"))
-                $root.protoc.DotTx.encode(message.dotTx, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
-            if (message.ksmTx != null && Object.hasOwnProperty.call(message, "ksmTx"))
-                $root.protoc.KsmTx.encode(message.ksmTx, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
-            if (message.cfxTx != null && Object.hasOwnProperty.call(message, "cfxTx"))
-                $root.protoc.CfxTx.encode(message.cfxTx, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+            if (!writer) writer = $Writer.create();
+            if (message.coinCode != null && Object.hasOwnProperty.call(message, 'coinCode'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.coinCode);
+            if (message.signId != null && Object.hasOwnProperty.call(message, 'signId'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.signId);
+            if (message.hdPath != null && Object.hasOwnProperty.call(message, 'hdPath'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.hdPath);
+            if (message.timestamp != null && Object.hasOwnProperty.call(message, 'timestamp'))
+                writer.uint32(/* id 4, wireType 0 =*/ 32).int64(message.timestamp);
+            if (message.decimal != null && Object.hasOwnProperty.call(message, 'decimal'))
+                writer.uint32(/* id 5, wireType 0 =*/ 40).int32(message.decimal);
+            if (message.btcTx != null && Object.hasOwnProperty.call(message, 'btcTx'))
+                $root.protoc.BtcTx.encode(message.btcTx, writer.uint32(/* id 6, wireType 2 =*/ 50).fork()).ldelim();
+            if (message.ethTx != null && Object.hasOwnProperty.call(message, 'ethTx'))
+                $root.protoc.EthTx.encode(message.ethTx, writer.uint32(/* id 7, wireType 2 =*/ 58).fork()).ldelim();
+            if (message.tronTx != null && Object.hasOwnProperty.call(message, 'tronTx'))
+                $root.protoc.TronTx.encode(message.tronTx, writer.uint32(/* id 8, wireType 2 =*/ 66).fork()).ldelim();
+            if (message.etcTx != null && Object.hasOwnProperty.call(message, 'etcTx'))
+                $root.protoc.EtcTx.encode(message.etcTx, writer.uint32(/* id 9, wireType 2 =*/ 74).fork()).ldelim();
+            if (message.bchTx != null && Object.hasOwnProperty.call(message, 'bchTx'))
+                $root.protoc.BchTx.encode(message.bchTx, writer.uint32(/* id 10, wireType 2 =*/ 82).fork()).ldelim();
+            if (message.dashTx != null && Object.hasOwnProperty.call(message, 'dashTx'))
+                $root.protoc.DashTx.encode(message.dashTx, writer.uint32(/* id 11, wireType 2 =*/ 90).fork()).ldelim();
+            if (message.ltcTx != null && Object.hasOwnProperty.call(message, 'ltcTx'))
+                $root.protoc.LtcTx.encode(message.ltcTx, writer.uint32(/* id 12, wireType 2 =*/ 98).fork()).ldelim();
+            if (message.dcrTx != null && Object.hasOwnProperty.call(message, 'dcrTx'))
+                $root.protoc.DcrTx.encode(message.dcrTx, writer.uint32(/* id 13, wireType 2 =*/ 106).fork()).ldelim();
+            if (message.xzcTx != null && Object.hasOwnProperty.call(message, 'xzcTx'))
+                $root.protoc.XzcTx.encode(message.xzcTx, writer.uint32(/* id 14, wireType 2 =*/ 114).fork()).ldelim();
+            if (message.xrpTx != null && Object.hasOwnProperty.call(message, 'xrpTx'))
+                $root.protoc.XrpTx.encode(message.xrpTx, writer.uint32(/* id 15, wireType 2 =*/ 122).fork()).ldelim();
+            if (message.iostTx != null && Object.hasOwnProperty.call(message, 'iostTx'))
+                $root.protoc.IostTx.encode(message.iostTx, writer.uint32(/* id 16, wireType 2 =*/ 130).fork()).ldelim();
+            if (message.omniTx != null && Object.hasOwnProperty.call(message, 'omniTx'))
+                $root.protoc.OmniTx.encode(message.omniTx, writer.uint32(/* id 17, wireType 2 =*/ 138).fork()).ldelim();
+            if (message.eosTx != null && Object.hasOwnProperty.call(message, 'eosTx'))
+                $root.protoc.EosTx.encode(message.eosTx, writer.uint32(/* id 18, wireType 2 =*/ 146).fork()).ldelim();
+            if (message.dotTx != null && Object.hasOwnProperty.call(message, 'dotTx'))
+                $root.protoc.DotTx.encode(message.dotTx, writer.uint32(/* id 19, wireType 2 =*/ 154).fork()).ldelim();
+            if (message.ksmTx != null && Object.hasOwnProperty.call(message, 'ksmTx'))
+                $root.protoc.KsmTx.encode(message.ksmTx, writer.uint32(/* id 20, wireType 2 =*/ 162).fork()).ldelim();
+            if (message.cfxTx != null && Object.hasOwnProperty.call(message, 'cfxTx'))
+                $root.protoc.CfxTx.encode(message.cfxTx, writer.uint32(/* id 21, wireType 2 =*/ 170).fork()).ldelim();
             return writer;
         };
 
@@ -1856,78 +1794,78 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SignTransaction.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.SignTransaction();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.SignTransaction();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.coinCode = reader.string();
-                    break;
-                case 2:
-                    message.signId = reader.string();
-                    break;
-                case 3:
-                    message.hdPath = reader.string();
-                    break;
-                case 4:
-                    message.timestamp = reader.int64();
-                    break;
-                case 5:
-                    message.decimal = reader.int32();
-                    break;
-                case 6:
-                    message.btcTx = $root.protoc.BtcTx.decode(reader, reader.uint32());
-                    break;
-                case 7:
-                    message.ethTx = $root.protoc.EthTx.decode(reader, reader.uint32());
-                    break;
-                case 8:
-                    message.tronTx = $root.protoc.TronTx.decode(reader, reader.uint32());
-                    break;
-                case 9:
-                    message.etcTx = $root.protoc.EtcTx.decode(reader, reader.uint32());
-                    break;
-                case 10:
-                    message.bchTx = $root.protoc.BchTx.decode(reader, reader.uint32());
-                    break;
-                case 11:
-                    message.dashTx = $root.protoc.DashTx.decode(reader, reader.uint32());
-                    break;
-                case 12:
-                    message.ltcTx = $root.protoc.LtcTx.decode(reader, reader.uint32());
-                    break;
-                case 13:
-                    message.dcrTx = $root.protoc.DcrTx.decode(reader, reader.uint32());
-                    break;
-                case 14:
-                    message.xzcTx = $root.protoc.XzcTx.decode(reader, reader.uint32());
-                    break;
-                case 15:
-                    message.xrpTx = $root.protoc.XrpTx.decode(reader, reader.uint32());
-                    break;
-                case 16:
-                    message.iostTx = $root.protoc.IostTx.decode(reader, reader.uint32());
-                    break;
-                case 17:
-                    message.omniTx = $root.protoc.OmniTx.decode(reader, reader.uint32());
-                    break;
-                case 18:
-                    message.eosTx = $root.protoc.EosTx.decode(reader, reader.uint32());
-                    break;
-                case 19:
-                    message.dotTx = $root.protoc.DotTx.decode(reader, reader.uint32());
-                    break;
-                case 20:
-                    message.ksmTx = $root.protoc.KsmTx.decode(reader, reader.uint32());
-                    break;
-                case 21:
-                    message.cfxTx = $root.protoc.CfxTx.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.coinCode = reader.string();
+                        break;
+                    case 2:
+                        message.signId = reader.string();
+                        break;
+                    case 3:
+                        message.hdPath = reader.string();
+                        break;
+                    case 4:
+                        message.timestamp = reader.int64();
+                        break;
+                    case 5:
+                        message.decimal = reader.int32();
+                        break;
+                    case 6:
+                        message.btcTx = $root.protoc.BtcTx.decode(reader, reader.uint32());
+                        break;
+                    case 7:
+                        message.ethTx = $root.protoc.EthTx.decode(reader, reader.uint32());
+                        break;
+                    case 8:
+                        message.tronTx = $root.protoc.TronTx.decode(reader, reader.uint32());
+                        break;
+                    case 9:
+                        message.etcTx = $root.protoc.EtcTx.decode(reader, reader.uint32());
+                        break;
+                    case 10:
+                        message.bchTx = $root.protoc.BchTx.decode(reader, reader.uint32());
+                        break;
+                    case 11:
+                        message.dashTx = $root.protoc.DashTx.decode(reader, reader.uint32());
+                        break;
+                    case 12:
+                        message.ltcTx = $root.protoc.LtcTx.decode(reader, reader.uint32());
+                        break;
+                    case 13:
+                        message.dcrTx = $root.protoc.DcrTx.decode(reader, reader.uint32());
+                        break;
+                    case 14:
+                        message.xzcTx = $root.protoc.XzcTx.decode(reader, reader.uint32());
+                        break;
+                    case 15:
+                        message.xrpTx = $root.protoc.XrpTx.decode(reader, reader.uint32());
+                        break;
+                    case 16:
+                        message.iostTx = $root.protoc.IostTx.decode(reader, reader.uint32());
+                        break;
+                    case 17:
+                        message.omniTx = $root.protoc.OmniTx.decode(reader, reader.uint32());
+                        break;
+                    case 18:
+                        message.eosTx = $root.protoc.EosTx.decode(reader, reader.uint32());
+                        break;
+                    case 19:
+                        message.dotTx = $root.protoc.DotTx.decode(reader, reader.uint32());
+                        break;
+                    case 20:
+                        message.ksmTx = $root.protoc.KsmTx.decode(reader, reader.uint32());
+                        break;
+                    case 21:
+                        message.cfxTx = $root.protoc.CfxTx.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -1944,8 +1882,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SignTransaction.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -1958,180 +1895,151 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         SignTransaction.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
             let properties = {};
-            if (message.coinCode != null && message.hasOwnProperty("coinCode"))
-                if (!$util.isString(message.coinCode))
-                    return "coinCode: string expected";
-            if (message.signId != null && message.hasOwnProperty("signId"))
-                if (!$util.isString(message.signId))
-                    return "signId: string expected";
-            if (message.hdPath != null && message.hasOwnProperty("hdPath"))
-                if (!$util.isString(message.hdPath))
-                    return "hdPath: string expected";
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
-                    return "timestamp: integer|Long expected";
-            if (message.decimal != null && message.hasOwnProperty("decimal"))
-                if (!$util.isInteger(message.decimal))
-                    return "decimal: integer expected";
-            if (message.btcTx != null && message.hasOwnProperty("btcTx")) {
+            if (message.coinCode != null && message.hasOwnProperty('coinCode'))
+                if (!$util.isString(message.coinCode)) return 'coinCode: string expected';
+            if (message.signId != null && message.hasOwnProperty('signId'))
+                if (!$util.isString(message.signId)) return 'signId: string expected';
+            if (message.hdPath != null && message.hasOwnProperty('hdPath'))
+                if (!$util.isString(message.hdPath)) return 'hdPath: string expected';
+            if (message.timestamp != null && message.hasOwnProperty('timestamp'))
+                if (
+                    !$util.isInteger(message.timestamp) &&
+                    !(
+                        message.timestamp &&
+                        $util.isInteger(message.timestamp.low) &&
+                        $util.isInteger(message.timestamp.high)
+                    )
+                )
+                    return 'timestamp: integer|Long expected';
+            if (message.decimal != null && message.hasOwnProperty('decimal'))
+                if (!$util.isInteger(message.decimal)) return 'decimal: integer expected';
+            if (message.btcTx != null && message.hasOwnProperty('btcTx')) {
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.BtcTx.verify(message.btcTx);
-                    if (error)
-                        return "btcTx." + error;
+                    if (error) return 'btcTx.' + error;
                 }
             }
-            if (message.ethTx != null && message.hasOwnProperty("ethTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.ethTx != null && message.hasOwnProperty('ethTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.EthTx.verify(message.ethTx);
-                    if (error)
-                        return "ethTx." + error;
+                    if (error) return 'ethTx.' + error;
                 }
             }
-            if (message.tronTx != null && message.hasOwnProperty("tronTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.tronTx != null && message.hasOwnProperty('tronTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.TronTx.verify(message.tronTx);
-                    if (error)
-                        return "tronTx." + error;
+                    if (error) return 'tronTx.' + error;
                 }
             }
-            if (message.etcTx != null && message.hasOwnProperty("etcTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.etcTx != null && message.hasOwnProperty('etcTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.EtcTx.verify(message.etcTx);
-                    if (error)
-                        return "etcTx." + error;
+                    if (error) return 'etcTx.' + error;
                 }
             }
-            if (message.bchTx != null && message.hasOwnProperty("bchTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.bchTx != null && message.hasOwnProperty('bchTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.BchTx.verify(message.bchTx);
-                    if (error)
-                        return "bchTx." + error;
+                    if (error) return 'bchTx.' + error;
                 }
             }
-            if (message.dashTx != null && message.hasOwnProperty("dashTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.dashTx != null && message.hasOwnProperty('dashTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.DashTx.verify(message.dashTx);
-                    if (error)
-                        return "dashTx." + error;
+                    if (error) return 'dashTx.' + error;
                 }
             }
-            if (message.ltcTx != null && message.hasOwnProperty("ltcTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.ltcTx != null && message.hasOwnProperty('ltcTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.LtcTx.verify(message.ltcTx);
-                    if (error)
-                        return "ltcTx." + error;
+                    if (error) return 'ltcTx.' + error;
                 }
             }
-            if (message.dcrTx != null && message.hasOwnProperty("dcrTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.dcrTx != null && message.hasOwnProperty('dcrTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.DcrTx.verify(message.dcrTx);
-                    if (error)
-                        return "dcrTx." + error;
+                    if (error) return 'dcrTx.' + error;
                 }
             }
-            if (message.xzcTx != null && message.hasOwnProperty("xzcTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.xzcTx != null && message.hasOwnProperty('xzcTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.XzcTx.verify(message.xzcTx);
-                    if (error)
-                        return "xzcTx." + error;
+                    if (error) return 'xzcTx.' + error;
                 }
             }
-            if (message.xrpTx != null && message.hasOwnProperty("xrpTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.xrpTx != null && message.hasOwnProperty('xrpTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.XrpTx.verify(message.xrpTx);
-                    if (error)
-                        return "xrpTx." + error;
+                    if (error) return 'xrpTx.' + error;
                 }
             }
-            if (message.iostTx != null && message.hasOwnProperty("iostTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.iostTx != null && message.hasOwnProperty('iostTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.IostTx.verify(message.iostTx);
-                    if (error)
-                        return "iostTx." + error;
+                    if (error) return 'iostTx.' + error;
                 }
             }
-            if (message.omniTx != null && message.hasOwnProperty("omniTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.omniTx != null && message.hasOwnProperty('omniTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.OmniTx.verify(message.omniTx);
-                    if (error)
-                        return "omniTx." + error;
+                    if (error) return 'omniTx.' + error;
                 }
             }
-            if (message.eosTx != null && message.hasOwnProperty("eosTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.eosTx != null && message.hasOwnProperty('eosTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.EosTx.verify(message.eosTx);
-                    if (error)
-                        return "eosTx." + error;
+                    if (error) return 'eosTx.' + error;
                 }
             }
-            if (message.dotTx != null && message.hasOwnProperty("dotTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.dotTx != null && message.hasOwnProperty('dotTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.DotTx.verify(message.dotTx);
-                    if (error)
-                        return "dotTx." + error;
+                    if (error) return 'dotTx.' + error;
                 }
             }
-            if (message.ksmTx != null && message.hasOwnProperty("ksmTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.ksmTx != null && message.hasOwnProperty('ksmTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.KsmTx.verify(message.ksmTx);
-                    if (error)
-                        return "ksmTx." + error;
+                    if (error) return 'ksmTx.' + error;
                 }
             }
-            if (message.cfxTx != null && message.hasOwnProperty("cfxTx")) {
-                if (properties.Transaction === 1)
-                    return "Transaction: multiple values";
+            if (message.cfxTx != null && message.hasOwnProperty('cfxTx')) {
+                if (properties.Transaction === 1) return 'Transaction: multiple values';
                 properties.Transaction = 1;
                 {
                     let error = $root.protoc.CfxTx.verify(message.cfxTx);
-                    if (error)
-                        return "cfxTx." + error;
+                    if (error) return 'cfxTx.' + error;
                 }
             }
             return null;
@@ -2146,104 +2054,87 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.SignTransaction} SignTransaction
          */
         SignTransaction.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.SignTransaction)
-                return object;
+            if (object instanceof $root.protoc.SignTransaction) return object;
             let message = new $root.protoc.SignTransaction();
-            if (object.coinCode != null)
-                message.coinCode = String(object.coinCode);
-            if (object.signId != null)
-                message.signId = String(object.signId);
-            if (object.hdPath != null)
-                message.hdPath = String(object.hdPath);
+            if (object.coinCode != null) message.coinCode = String(object.coinCode);
+            if (object.signId != null) message.signId = String(object.signId);
+            if (object.hdPath != null) message.hdPath = String(object.hdPath);
             if (object.timestamp != null)
-                if ($util.Long)
-                    (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
-                else if (typeof object.timestamp === "string")
-                    message.timestamp = parseInt(object.timestamp, 10);
-                else if (typeof object.timestamp === "number")
-                    message.timestamp = object.timestamp;
-                else if (typeof object.timestamp === "object")
-                    message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber();
-            if (object.decimal != null)
-                message.decimal = object.decimal | 0;
+                if ($util.Long) (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
+                else if (typeof object.timestamp === 'string') message.timestamp = parseInt(object.timestamp, 10);
+                else if (typeof object.timestamp === 'number') message.timestamp = object.timestamp;
+                else if (typeof object.timestamp === 'object')
+                    message.timestamp = new $util.LongBits(
+                        object.timestamp.low >>> 0,
+                        object.timestamp.high >>> 0,
+                    ).toNumber();
+            if (object.decimal != null) message.decimal = object.decimal | 0;
             if (object.btcTx != null) {
-                if (typeof object.btcTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.btcTx: object expected");
+                if (typeof object.btcTx !== 'object') throw TypeError('.protoc.SignTransaction.btcTx: object expected');
                 message.btcTx = $root.protoc.BtcTx.fromObject(object.btcTx);
             }
             if (object.ethTx != null) {
-                if (typeof object.ethTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.ethTx: object expected");
+                if (typeof object.ethTx !== 'object') throw TypeError('.protoc.SignTransaction.ethTx: object expected');
                 message.ethTx = $root.protoc.EthTx.fromObject(object.ethTx);
             }
             if (object.tronTx != null) {
-                if (typeof object.tronTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.tronTx: object expected");
+                if (typeof object.tronTx !== 'object')
+                    throw TypeError('.protoc.SignTransaction.tronTx: object expected');
                 message.tronTx = $root.protoc.TronTx.fromObject(object.tronTx);
             }
             if (object.etcTx != null) {
-                if (typeof object.etcTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.etcTx: object expected");
+                if (typeof object.etcTx !== 'object') throw TypeError('.protoc.SignTransaction.etcTx: object expected');
                 message.etcTx = $root.protoc.EtcTx.fromObject(object.etcTx);
             }
             if (object.bchTx != null) {
-                if (typeof object.bchTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.bchTx: object expected");
+                if (typeof object.bchTx !== 'object') throw TypeError('.protoc.SignTransaction.bchTx: object expected');
                 message.bchTx = $root.protoc.BchTx.fromObject(object.bchTx);
             }
             if (object.dashTx != null) {
-                if (typeof object.dashTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.dashTx: object expected");
+                if (typeof object.dashTx !== 'object')
+                    throw TypeError('.protoc.SignTransaction.dashTx: object expected');
                 message.dashTx = $root.protoc.DashTx.fromObject(object.dashTx);
             }
             if (object.ltcTx != null) {
-                if (typeof object.ltcTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.ltcTx: object expected");
+                if (typeof object.ltcTx !== 'object') throw TypeError('.protoc.SignTransaction.ltcTx: object expected');
                 message.ltcTx = $root.protoc.LtcTx.fromObject(object.ltcTx);
             }
             if (object.dcrTx != null) {
-                if (typeof object.dcrTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.dcrTx: object expected");
+                if (typeof object.dcrTx !== 'object') throw TypeError('.protoc.SignTransaction.dcrTx: object expected');
                 message.dcrTx = $root.protoc.DcrTx.fromObject(object.dcrTx);
             }
             if (object.xzcTx != null) {
-                if (typeof object.xzcTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.xzcTx: object expected");
+                if (typeof object.xzcTx !== 'object') throw TypeError('.protoc.SignTransaction.xzcTx: object expected');
                 message.xzcTx = $root.protoc.XzcTx.fromObject(object.xzcTx);
             }
             if (object.xrpTx != null) {
-                if (typeof object.xrpTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.xrpTx: object expected");
+                if (typeof object.xrpTx !== 'object') throw TypeError('.protoc.SignTransaction.xrpTx: object expected');
                 message.xrpTx = $root.protoc.XrpTx.fromObject(object.xrpTx);
             }
             if (object.iostTx != null) {
-                if (typeof object.iostTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.iostTx: object expected");
+                if (typeof object.iostTx !== 'object')
+                    throw TypeError('.protoc.SignTransaction.iostTx: object expected');
                 message.iostTx = $root.protoc.IostTx.fromObject(object.iostTx);
             }
             if (object.omniTx != null) {
-                if (typeof object.omniTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.omniTx: object expected");
+                if (typeof object.omniTx !== 'object')
+                    throw TypeError('.protoc.SignTransaction.omniTx: object expected');
                 message.omniTx = $root.protoc.OmniTx.fromObject(object.omniTx);
             }
             if (object.eosTx != null) {
-                if (typeof object.eosTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.eosTx: object expected");
+                if (typeof object.eosTx !== 'object') throw TypeError('.protoc.SignTransaction.eosTx: object expected');
                 message.eosTx = $root.protoc.EosTx.fromObject(object.eosTx);
             }
             if (object.dotTx != null) {
-                if (typeof object.dotTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.dotTx: object expected");
+                if (typeof object.dotTx !== 'object') throw TypeError('.protoc.SignTransaction.dotTx: object expected');
                 message.dotTx = $root.protoc.DotTx.fromObject(object.dotTx);
             }
             if (object.ksmTx != null) {
-                if (typeof object.ksmTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.ksmTx: object expected");
+                if (typeof object.ksmTx !== 'object') throw TypeError('.protoc.SignTransaction.ksmTx: object expected');
                 message.ksmTx = $root.protoc.KsmTx.fromObject(object.ksmTx);
             }
             if (object.cfxTx != null) {
-                if (typeof object.cfxTx !== "object")
-                    throw TypeError(".protoc.SignTransaction.cfxTx: object expected");
+                if (typeof object.cfxTx !== 'object') throw TypeError('.protoc.SignTransaction.cfxTx: object expected');
                 message.cfxTx = $root.protoc.CfxTx.fromObject(object.cfxTx);
             }
             return message;
@@ -2259,112 +2150,96 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         SignTransaction.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.coinCode = "";
-                object.signId = "";
-                object.hdPath = "";
+                object.coinCode = '';
+                object.signId = '';
+                object.hdPath = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.timestamp = options.longs === String ? "0" : 0;
+                    object.timestamp =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.timestamp = options.longs === String ? '0' : 0;
                 object.decimal = 0;
             }
-            if (message.coinCode != null && message.hasOwnProperty("coinCode"))
-                object.coinCode = message.coinCode;
-            if (message.signId != null && message.hasOwnProperty("signId"))
-                object.signId = message.signId;
-            if (message.hdPath != null && message.hasOwnProperty("hdPath"))
-                object.hdPath = message.hdPath;
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                if (typeof message.timestamp === "number")
+            if (message.coinCode != null && message.hasOwnProperty('coinCode')) object.coinCode = message.coinCode;
+            if (message.signId != null && message.hasOwnProperty('signId')) object.signId = message.signId;
+            if (message.hdPath != null && message.hasOwnProperty('hdPath')) object.hdPath = message.hdPath;
+            if (message.timestamp != null && message.hasOwnProperty('timestamp'))
+                if (typeof message.timestamp === 'number')
                     object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
                 else
-                    object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber() : message.timestamp;
-            if (message.decimal != null && message.hasOwnProperty("decimal"))
-                object.decimal = message.decimal;
-            if (message.btcTx != null && message.hasOwnProperty("btcTx")) {
+                    object.timestamp =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.timestamp)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber()
+                            : message.timestamp;
+            if (message.decimal != null && message.hasOwnProperty('decimal')) object.decimal = message.decimal;
+            if (message.btcTx != null && message.hasOwnProperty('btcTx')) {
                 object.btcTx = $root.protoc.BtcTx.toObject(message.btcTx, options);
-                if (options.oneofs)
-                    object.Transaction = "btcTx";
+                if (options.oneofs) object.Transaction = 'btcTx';
             }
-            if (message.ethTx != null && message.hasOwnProperty("ethTx")) {
+            if (message.ethTx != null && message.hasOwnProperty('ethTx')) {
                 object.ethTx = $root.protoc.EthTx.toObject(message.ethTx, options);
-                if (options.oneofs)
-                    object.Transaction = "ethTx";
+                if (options.oneofs) object.Transaction = 'ethTx';
             }
-            if (message.tronTx != null && message.hasOwnProperty("tronTx")) {
+            if (message.tronTx != null && message.hasOwnProperty('tronTx')) {
                 object.tronTx = $root.protoc.TronTx.toObject(message.tronTx, options);
-                if (options.oneofs)
-                    object.Transaction = "tronTx";
+                if (options.oneofs) object.Transaction = 'tronTx';
             }
-            if (message.etcTx != null && message.hasOwnProperty("etcTx")) {
+            if (message.etcTx != null && message.hasOwnProperty('etcTx')) {
                 object.etcTx = $root.protoc.EtcTx.toObject(message.etcTx, options);
-                if (options.oneofs)
-                    object.Transaction = "etcTx";
+                if (options.oneofs) object.Transaction = 'etcTx';
             }
-            if (message.bchTx != null && message.hasOwnProperty("bchTx")) {
+            if (message.bchTx != null && message.hasOwnProperty('bchTx')) {
                 object.bchTx = $root.protoc.BchTx.toObject(message.bchTx, options);
-                if (options.oneofs)
-                    object.Transaction = "bchTx";
+                if (options.oneofs) object.Transaction = 'bchTx';
             }
-            if (message.dashTx != null && message.hasOwnProperty("dashTx")) {
+            if (message.dashTx != null && message.hasOwnProperty('dashTx')) {
                 object.dashTx = $root.protoc.DashTx.toObject(message.dashTx, options);
-                if (options.oneofs)
-                    object.Transaction = "dashTx";
+                if (options.oneofs) object.Transaction = 'dashTx';
             }
-            if (message.ltcTx != null && message.hasOwnProperty("ltcTx")) {
+            if (message.ltcTx != null && message.hasOwnProperty('ltcTx')) {
                 object.ltcTx = $root.protoc.LtcTx.toObject(message.ltcTx, options);
-                if (options.oneofs)
-                    object.Transaction = "ltcTx";
+                if (options.oneofs) object.Transaction = 'ltcTx';
             }
-            if (message.dcrTx != null && message.hasOwnProperty("dcrTx")) {
+            if (message.dcrTx != null && message.hasOwnProperty('dcrTx')) {
                 object.dcrTx = $root.protoc.DcrTx.toObject(message.dcrTx, options);
-                if (options.oneofs)
-                    object.Transaction = "dcrTx";
+                if (options.oneofs) object.Transaction = 'dcrTx';
             }
-            if (message.xzcTx != null && message.hasOwnProperty("xzcTx")) {
+            if (message.xzcTx != null && message.hasOwnProperty('xzcTx')) {
                 object.xzcTx = $root.protoc.XzcTx.toObject(message.xzcTx, options);
-                if (options.oneofs)
-                    object.Transaction = "xzcTx";
+                if (options.oneofs) object.Transaction = 'xzcTx';
             }
-            if (message.xrpTx != null && message.hasOwnProperty("xrpTx")) {
+            if (message.xrpTx != null && message.hasOwnProperty('xrpTx')) {
                 object.xrpTx = $root.protoc.XrpTx.toObject(message.xrpTx, options);
-                if (options.oneofs)
-                    object.Transaction = "xrpTx";
+                if (options.oneofs) object.Transaction = 'xrpTx';
             }
-            if (message.iostTx != null && message.hasOwnProperty("iostTx")) {
+            if (message.iostTx != null && message.hasOwnProperty('iostTx')) {
                 object.iostTx = $root.protoc.IostTx.toObject(message.iostTx, options);
-                if (options.oneofs)
-                    object.Transaction = "iostTx";
+                if (options.oneofs) object.Transaction = 'iostTx';
             }
-            if (message.omniTx != null && message.hasOwnProperty("omniTx")) {
+            if (message.omniTx != null && message.hasOwnProperty('omniTx')) {
                 object.omniTx = $root.protoc.OmniTx.toObject(message.omniTx, options);
-                if (options.oneofs)
-                    object.Transaction = "omniTx";
+                if (options.oneofs) object.Transaction = 'omniTx';
             }
-            if (message.eosTx != null && message.hasOwnProperty("eosTx")) {
+            if (message.eosTx != null && message.hasOwnProperty('eosTx')) {
                 object.eosTx = $root.protoc.EosTx.toObject(message.eosTx, options);
-                if (options.oneofs)
-                    object.Transaction = "eosTx";
+                if (options.oneofs) object.Transaction = 'eosTx';
             }
-            if (message.dotTx != null && message.hasOwnProperty("dotTx")) {
+            if (message.dotTx != null && message.hasOwnProperty('dotTx')) {
                 object.dotTx = $root.protoc.DotTx.toObject(message.dotTx, options);
-                if (options.oneofs)
-                    object.Transaction = "dotTx";
+                if (options.oneofs) object.Transaction = 'dotTx';
             }
-            if (message.ksmTx != null && message.hasOwnProperty("ksmTx")) {
+            if (message.ksmTx != null && message.hasOwnProperty('ksmTx')) {
                 object.ksmTx = $root.protoc.KsmTx.toObject(message.ksmTx, options);
-                if (options.oneofs)
-                    object.Transaction = "ksmTx";
+                if (options.oneofs) object.Transaction = 'ksmTx';
             }
-            if (message.cfxTx != null && message.hasOwnProperty("cfxTx")) {
+            if (message.cfxTx != null && message.hasOwnProperty('cfxTx')) {
                 object.cfxTx = $root.protoc.CfxTx.toObject(message.cfxTx, options);
-                if (options.oneofs)
-                    object.Transaction = "cfxTx";
+                if (options.oneofs) object.Transaction = 'cfxTx';
             }
             return object;
         };
@@ -2383,8 +2258,7 @@ export const protoc = $root.protoc = (() => {
         return SignTransaction;
     })();
 
-    protoc.BtcTx = (function() {
-
+    protoc.BtcTx = (function () {
         /**
          * Properties of a BtcTx.
          * @memberof protoc
@@ -2410,8 +2284,7 @@ export const protoc = $root.protoc = (() => {
             this.outputs = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -2420,7 +2293,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.BtcTx
          * @instance
          */
-        BtcTx.prototype.fee = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BtcTx.prototype.fee = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * BtcTx dustThreshold.
@@ -2436,7 +2309,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.BtcTx
          * @instance
          */
-        BtcTx.prototype.memo = "";
+        BtcTx.prototype.memo = '';
 
         /**
          * BtcTx inputs.
@@ -2484,22 +2357,27 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         BtcTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.fee);
-            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, "dustThreshold"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dustThreshold);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.memo);
+            if (!writer) writer = $Writer.create();
+            if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.fee);
+            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, 'dustThreshold'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.dustThreshold);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.memo);
             if (message.inputs != null && message.inputs.length)
                 for (let i = 0; i < message.inputs.length; ++i)
-                    $root.protoc.Input.encode(message.inputs[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    $root.protoc.Input.encode(
+                        message.inputs[i],
+                        writer.uint32(/* id 4, wireType 2 =*/ 34).fork(),
+                    ).ldelim();
             if (message.outputs != null && message.outputs.length)
                 for (let i = 0; i < message.outputs.length; ++i)
-                    $root.protoc.Output.encode(message.outputs[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.omni != null && Object.hasOwnProperty.call(message, "omni"))
-                $root.protoc.Omni.encode(message.omni, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    $root.protoc.Output.encode(
+                        message.outputs[i],
+                        writer.uint32(/* id 5, wireType 2 =*/ 42).fork(),
+                    ).ldelim();
+            if (message.omni != null && Object.hasOwnProperty.call(message, 'omni'))
+                $root.protoc.Omni.encode(message.omni, writer.uint32(/* id 6, wireType 2 =*/ 50).fork()).ldelim();
             return writer;
         };
 
@@ -2528,37 +2406,35 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         BtcTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.BtcTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.BtcTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.fee = reader.int64();
-                    break;
-                case 2:
-                    message.dustThreshold = reader.int32();
-                    break;
-                case 3:
-                    message.memo = reader.string();
-                    break;
-                case 4:
-                    if (!(message.inputs && message.inputs.length))
-                        message.inputs = [];
-                    message.inputs.push($root.protoc.Input.decode(reader, reader.uint32()));
-                    break;
-                case 5:
-                    if (!(message.outputs && message.outputs.length))
-                        message.outputs = [];
-                    message.outputs.push($root.protoc.Output.decode(reader, reader.uint32()));
-                    break;
-                case 6:
-                    message.omni = $root.protoc.Omni.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.fee = reader.int64();
+                        break;
+                    case 2:
+                        message.dustThreshold = reader.int32();
+                        break;
+                    case 3:
+                        message.memo = reader.string();
+                        break;
+                    case 4:
+                        if (!(message.inputs && message.inputs.length)) message.inputs = [];
+                        message.inputs.push($root.protoc.Input.decode(reader, reader.uint32()));
+                        break;
+                    case 5:
+                        if (!(message.outputs && message.outputs.length)) message.outputs = [];
+                        message.outputs.push($root.protoc.Output.decode(reader, reader.uint32()));
+                        break;
+                    case 6:
+                        message.omni = $root.protoc.Omni.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -2575,8 +2451,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         BtcTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -2589,39 +2464,34 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         BtcTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (!$util.isInteger(message.fee) && !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high)))
-                    return "fee: integer|Long expected";
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
-                if (!$util.isInteger(message.dustThreshold))
-                    return "dustThreshold: integer expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.inputs != null && message.hasOwnProperty("inputs")) {
-                if (!Array.isArray(message.inputs))
-                    return "inputs: array expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (
+                    !$util.isInteger(message.fee) &&
+                    !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high))
+                )
+                    return 'fee: integer|Long expected';
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
+                if (!$util.isInteger(message.dustThreshold)) return 'dustThreshold: integer expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.inputs != null && message.hasOwnProperty('inputs')) {
+                if (!Array.isArray(message.inputs)) return 'inputs: array expected';
                 for (let i = 0; i < message.inputs.length; ++i) {
                     let error = $root.protoc.Input.verify(message.inputs[i]);
-                    if (error)
-                        return "inputs." + error;
+                    if (error) return 'inputs.' + error;
                 }
             }
-            if (message.outputs != null && message.hasOwnProperty("outputs")) {
-                if (!Array.isArray(message.outputs))
-                    return "outputs: array expected";
+            if (message.outputs != null && message.hasOwnProperty('outputs')) {
+                if (!Array.isArray(message.outputs)) return 'outputs: array expected';
                 for (let i = 0; i < message.outputs.length; ++i) {
                     let error = $root.protoc.Output.verify(message.outputs[i]);
-                    if (error)
-                        return "outputs." + error;
+                    if (error) return 'outputs.' + error;
                 }
             }
-            if (message.omni != null && message.hasOwnProperty("omni")) {
+            if (message.omni != null && message.hasOwnProperty('omni')) {
                 let error = $root.protoc.Omni.verify(message.omni);
-                if (error)
-                    return "omni." + error;
+                if (error) return 'omni.' + error;
             }
             return null;
         };
@@ -2635,45 +2505,35 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.BtcTx} BtcTx
          */
         BtcTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.BtcTx)
-                return object;
+            if (object instanceof $root.protoc.BtcTx) return object;
             let message = new $root.protoc.BtcTx();
             if (object.fee != null)
-                if ($util.Long)
-                    (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
-                else if (typeof object.fee === "string")
-                    message.fee = parseInt(object.fee, 10);
-                else if (typeof object.fee === "number")
-                    message.fee = object.fee;
-                else if (typeof object.fee === "object")
+                if ($util.Long) (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
+                else if (typeof object.fee === 'string') message.fee = parseInt(object.fee, 10);
+                else if (typeof object.fee === 'number') message.fee = object.fee;
+                else if (typeof object.fee === 'object')
                     message.fee = new $util.LongBits(object.fee.low >>> 0, object.fee.high >>> 0).toNumber();
-            if (object.dustThreshold != null)
-                message.dustThreshold = object.dustThreshold | 0;
-            if (object.memo != null)
-                message.memo = String(object.memo);
+            if (object.dustThreshold != null) message.dustThreshold = object.dustThreshold | 0;
+            if (object.memo != null) message.memo = String(object.memo);
             if (object.inputs) {
-                if (!Array.isArray(object.inputs))
-                    throw TypeError(".protoc.BtcTx.inputs: array expected");
+                if (!Array.isArray(object.inputs)) throw TypeError('.protoc.BtcTx.inputs: array expected');
                 message.inputs = [];
                 for (let i = 0; i < object.inputs.length; ++i) {
-                    if (typeof object.inputs[i] !== "object")
-                        throw TypeError(".protoc.BtcTx.inputs: object expected");
+                    if (typeof object.inputs[i] !== 'object') throw TypeError('.protoc.BtcTx.inputs: object expected');
                     message.inputs[i] = $root.protoc.Input.fromObject(object.inputs[i]);
                 }
             }
             if (object.outputs) {
-                if (!Array.isArray(object.outputs))
-                    throw TypeError(".protoc.BtcTx.outputs: array expected");
+                if (!Array.isArray(object.outputs)) throw TypeError('.protoc.BtcTx.outputs: array expected');
                 message.outputs = [];
                 for (let i = 0; i < object.outputs.length; ++i) {
-                    if (typeof object.outputs[i] !== "object")
-                        throw TypeError(".protoc.BtcTx.outputs: object expected");
+                    if (typeof object.outputs[i] !== 'object')
+                        throw TypeError('.protoc.BtcTx.outputs: object expected');
                     message.outputs[i] = $root.protoc.Output.fromObject(object.outputs[i]);
                 }
             }
             if (object.omni != null) {
-                if (typeof object.omni !== "object")
-                    throw TypeError(".protoc.BtcTx.omni: object expected");
+                if (typeof object.omni !== 'object') throw TypeError('.protoc.BtcTx.omni: object expected');
                 message.omni = $root.protoc.Omni.fromObject(object.omni);
             }
             return message;
@@ -2689,8 +2549,7 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         BtcTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.arrays || options.defaults) {
                 object.inputs = [];
@@ -2699,22 +2558,26 @@ export const protoc = $root.protoc = (() => {
             if (options.defaults) {
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.fee = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.fee = options.longs === String ? "0" : 0;
+                    object.fee =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.fee = options.longs === String ? '0' : 0;
                 object.dustThreshold = 0;
-                object.memo = "";
+                object.memo = '';
                 object.omni = null;
             }
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (typeof message.fee === "number")
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (typeof message.fee === 'number')
                     object.fee = options.longs === String ? String(message.fee) : message.fee;
                 else
-                    object.fee = options.longs === String ? $util.Long.prototype.toString.call(message.fee) : options.longs === Number ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber() : message.fee;
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
+                    object.fee =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.fee)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber()
+                            : message.fee;
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
                 object.dustThreshold = message.dustThreshold;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
             if (message.inputs && message.inputs.length) {
                 object.inputs = [];
                 for (let j = 0; j < message.inputs.length; ++j)
@@ -2725,7 +2588,7 @@ export const protoc = $root.protoc = (() => {
                 for (let j = 0; j < message.outputs.length; ++j)
                     object.outputs[j] = $root.protoc.Output.toObject(message.outputs[j], options);
             }
-            if (message.omni != null && message.hasOwnProperty("omni"))
+            if (message.omni != null && message.hasOwnProperty('omni'))
                 object.omni = $root.protoc.Omni.toObject(message.omni, options);
             return object;
         };
@@ -2744,8 +2607,7 @@ export const protoc = $root.protoc = (() => {
         return BtcTx;
     })();
 
-    protoc.Omni = (function() {
-
+    protoc.Omni = (function () {
         /**
          * Properties of an Omni.
          * @memberof protoc
@@ -2767,8 +2629,7 @@ export const protoc = $root.protoc = (() => {
         function Omni(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -2777,7 +2638,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Omni
          * @instance
          */
-        Omni.prototype.to = "";
+        Omni.prototype.to = '';
 
         /**
          * Omni changeAddress.
@@ -2785,7 +2646,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Omni
          * @instance
          */
-        Omni.prototype.changeAddress = "";
+        Omni.prototype.changeAddress = '';
 
         /**
          * Omni omniAmount.
@@ -2793,7 +2654,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Omni
          * @instance
          */
-        Omni.prototype.omniAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        Omni.prototype.omniAmount = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * Omni propertyId.
@@ -2825,16 +2686,15 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Omni.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.to);
-            if (message.changeAddress != null && Object.hasOwnProperty.call(message, "changeAddress"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.changeAddress);
-            if (message.omniAmount != null && Object.hasOwnProperty.call(message, "omniAmount"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.omniAmount);
-            if (message.propertyId != null && Object.hasOwnProperty.call(message, "propertyId"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.propertyId);
+            if (!writer) writer = $Writer.create();
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.to);
+            if (message.changeAddress != null && Object.hasOwnProperty.call(message, 'changeAddress'))
+                writer.uint32(/* id 6, wireType 2 =*/ 50).string(message.changeAddress);
+            if (message.omniAmount != null && Object.hasOwnProperty.call(message, 'omniAmount'))
+                writer.uint32(/* id 7, wireType 0 =*/ 56).int64(message.omniAmount);
+            if (message.propertyId != null && Object.hasOwnProperty.call(message, 'propertyId'))
+                writer.uint32(/* id 8, wireType 0 =*/ 64).int32(message.propertyId);
             return writer;
         };
 
@@ -2863,27 +2723,27 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Omni.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Omni();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Omni();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 5:
-                    message.to = reader.string();
-                    break;
-                case 6:
-                    message.changeAddress = reader.string();
-                    break;
-                case 7:
-                    message.omniAmount = reader.int64();
-                    break;
-                case 8:
-                    message.propertyId = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 5:
+                        message.to = reader.string();
+                        break;
+                    case 6:
+                        message.changeAddress = reader.string();
+                        break;
+                    case 7:
+                        message.omniAmount = reader.int64();
+                        break;
+                    case 8:
+                        message.propertyId = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -2900,8 +2760,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Omni.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -2914,20 +2773,23 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Omni.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
-                if (!$util.isString(message.changeAddress))
-                    return "changeAddress: string expected";
-            if (message.omniAmount != null && message.hasOwnProperty("omniAmount"))
-                if (!$util.isInteger(message.omniAmount) && !(message.omniAmount && $util.isInteger(message.omniAmount.low) && $util.isInteger(message.omniAmount.high)))
-                    return "omniAmount: integer|Long expected";
-            if (message.propertyId != null && message.hasOwnProperty("propertyId"))
-                if (!$util.isInteger(message.propertyId))
-                    return "propertyId: integer expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
+                if (!$util.isString(message.changeAddress)) return 'changeAddress: string expected';
+            if (message.omniAmount != null && message.hasOwnProperty('omniAmount'))
+                if (
+                    !$util.isInteger(message.omniAmount) &&
+                    !(
+                        message.omniAmount &&
+                        $util.isInteger(message.omniAmount.low) &&
+                        $util.isInteger(message.omniAmount.high)
+                    )
+                )
+                    return 'omniAmount: integer|Long expected';
+            if (message.propertyId != null && message.hasOwnProperty('propertyId'))
+                if (!$util.isInteger(message.propertyId)) return 'propertyId: integer expected';
             return null;
         };
 
@@ -2940,24 +2802,20 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Omni} Omni
          */
         Omni.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Omni)
-                return object;
+            if (object instanceof $root.protoc.Omni) return object;
             let message = new $root.protoc.Omni();
-            if (object.to != null)
-                message.to = String(object.to);
-            if (object.changeAddress != null)
-                message.changeAddress = String(object.changeAddress);
+            if (object.to != null) message.to = String(object.to);
+            if (object.changeAddress != null) message.changeAddress = String(object.changeAddress);
             if (object.omniAmount != null)
-                if ($util.Long)
-                    (message.omniAmount = $util.Long.fromValue(object.omniAmount)).unsigned = false;
-                else if (typeof object.omniAmount === "string")
-                    message.omniAmount = parseInt(object.omniAmount, 10);
-                else if (typeof object.omniAmount === "number")
-                    message.omniAmount = object.omniAmount;
-                else if (typeof object.omniAmount === "object")
-                    message.omniAmount = new $util.LongBits(object.omniAmount.low >>> 0, object.omniAmount.high >>> 0).toNumber();
-            if (object.propertyId != null)
-                message.propertyId = object.propertyId | 0;
+                if ($util.Long) (message.omniAmount = $util.Long.fromValue(object.omniAmount)).unsigned = false;
+                else if (typeof object.omniAmount === 'string') message.omniAmount = parseInt(object.omniAmount, 10);
+                else if (typeof object.omniAmount === 'number') message.omniAmount = object.omniAmount;
+                else if (typeof object.omniAmount === 'object')
+                    message.omniAmount = new $util.LongBits(
+                        object.omniAmount.low >>> 0,
+                        object.omniAmount.high >>> 0,
+                    ).toNumber();
+            if (object.propertyId != null) message.propertyId = object.propertyId | 0;
             return message;
         };
 
@@ -2971,29 +2829,32 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Omni.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.to = "";
-                object.changeAddress = "";
+                object.to = '';
+                object.changeAddress = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.omniAmount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.omniAmount = options.longs === String ? "0" : 0;
+                    object.omniAmount =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.omniAmount = options.longs === String ? '0' : 0;
                 object.propertyId = 0;
             }
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
                 object.changeAddress = message.changeAddress;
-            if (message.omniAmount != null && message.hasOwnProperty("omniAmount"))
-                if (typeof message.omniAmount === "number")
+            if (message.omniAmount != null && message.hasOwnProperty('omniAmount'))
+                if (typeof message.omniAmount === 'number')
                     object.omniAmount = options.longs === String ? String(message.omniAmount) : message.omniAmount;
                 else
-                    object.omniAmount = options.longs === String ? $util.Long.prototype.toString.call(message.omniAmount) : options.longs === Number ? new $util.LongBits(message.omniAmount.low >>> 0, message.omniAmount.high >>> 0).toNumber() : message.omniAmount;
-            if (message.propertyId != null && message.hasOwnProperty("propertyId"))
+                    object.omniAmount =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.omniAmount)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.omniAmount.low >>> 0, message.omniAmount.high >>> 0).toNumber()
+                            : message.omniAmount;
+            if (message.propertyId != null && message.hasOwnProperty('propertyId'))
                 object.propertyId = message.propertyId;
             return object;
         };
@@ -3012,8 +2873,7 @@ export const protoc = $root.protoc = (() => {
         return Omni;
     })();
 
-    protoc.Input = (function() {
-
+    protoc.Input = (function () {
         /**
          * Properties of an Input.
          * @memberof protoc
@@ -3035,8 +2895,7 @@ export const protoc = $root.protoc = (() => {
         function Input(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -3045,7 +2904,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Input
          * @instance
          */
-        Input.prototype.hash = "";
+        Input.prototype.hash = '';
 
         /**
          * Input index.
@@ -3069,7 +2928,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Input
          * @instance
          */
-        Input.prototype.ownerKeyPath = "";
+        Input.prototype.ownerKeyPath = '';
 
         /**
          * Creates a new Input instance using the specified properties.
@@ -3093,16 +2952,15 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Input.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.hash != null && Object.hasOwnProperty.call(message, "hash"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hash);
-            if (message.index != null && Object.hasOwnProperty.call(message, "index"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.index);
-            if (message.utxo != null && Object.hasOwnProperty.call(message, "utxo"))
-                $root.protoc.utxo.encode(message.utxo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.ownerKeyPath != null && Object.hasOwnProperty.call(message, "ownerKeyPath"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.ownerKeyPath);
+            if (!writer) writer = $Writer.create();
+            if (message.hash != null && Object.hasOwnProperty.call(message, 'hash'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.hash);
+            if (message.index != null && Object.hasOwnProperty.call(message, 'index'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.index);
+            if (message.utxo != null && Object.hasOwnProperty.call(message, 'utxo'))
+                $root.protoc.utxo.encode(message.utxo, writer.uint32(/* id 3, wireType 2 =*/ 26).fork()).ldelim();
+            if (message.ownerKeyPath != null && Object.hasOwnProperty.call(message, 'ownerKeyPath'))
+                writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.ownerKeyPath);
             return writer;
         };
 
@@ -3131,27 +2989,27 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Input.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Input();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Input();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.hash = reader.string();
-                    break;
-                case 2:
-                    message.index = reader.int32();
-                    break;
-                case 3:
-                    message.utxo = $root.protoc.utxo.decode(reader, reader.uint32());
-                    break;
-                case 4:
-                    message.ownerKeyPath = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.hash = reader.string();
+                        break;
+                    case 2:
+                        message.index = reader.int32();
+                        break;
+                    case 3:
+                        message.utxo = $root.protoc.utxo.decode(reader, reader.uint32());
+                        break;
+                    case 4:
+                        message.ownerKeyPath = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -3168,8 +3026,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Input.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -3182,22 +3039,17 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Input.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.hash != null && message.hasOwnProperty("hash"))
-                if (!$util.isString(message.hash))
-                    return "hash: string expected";
-            if (message.index != null && message.hasOwnProperty("index"))
-                if (!$util.isInteger(message.index))
-                    return "index: integer expected";
-            if (message.utxo != null && message.hasOwnProperty("utxo")) {
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.hash != null && message.hasOwnProperty('hash'))
+                if (!$util.isString(message.hash)) return 'hash: string expected';
+            if (message.index != null && message.hasOwnProperty('index'))
+                if (!$util.isInteger(message.index)) return 'index: integer expected';
+            if (message.utxo != null && message.hasOwnProperty('utxo')) {
                 let error = $root.protoc.utxo.verify(message.utxo);
-                if (error)
-                    return "utxo." + error;
+                if (error) return 'utxo.' + error;
             }
-            if (message.ownerKeyPath != null && message.hasOwnProperty("ownerKeyPath"))
-                if (!$util.isString(message.ownerKeyPath))
-                    return "ownerKeyPath: string expected";
+            if (message.ownerKeyPath != null && message.hasOwnProperty('ownerKeyPath'))
+                if (!$util.isString(message.ownerKeyPath)) return 'ownerKeyPath: string expected';
             return null;
         };
 
@@ -3210,20 +3062,15 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Input} Input
          */
         Input.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Input)
-                return object;
+            if (object instanceof $root.protoc.Input) return object;
             let message = new $root.protoc.Input();
-            if (object.hash != null)
-                message.hash = String(object.hash);
-            if (object.index != null)
-                message.index = object.index | 0;
+            if (object.hash != null) message.hash = String(object.hash);
+            if (object.index != null) message.index = object.index | 0;
             if (object.utxo != null) {
-                if (typeof object.utxo !== "object")
-                    throw TypeError(".protoc.Input.utxo: object expected");
+                if (typeof object.utxo !== 'object') throw TypeError('.protoc.Input.utxo: object expected');
                 message.utxo = $root.protoc.utxo.fromObject(object.utxo);
             }
-            if (object.ownerKeyPath != null)
-                message.ownerKeyPath = String(object.ownerKeyPath);
+            if (object.ownerKeyPath != null) message.ownerKeyPath = String(object.ownerKeyPath);
             return message;
         };
 
@@ -3237,22 +3084,19 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Input.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.hash = "";
+                object.hash = '';
                 object.index = 0;
                 object.utxo = null;
-                object.ownerKeyPath = "";
+                object.ownerKeyPath = '';
             }
-            if (message.hash != null && message.hasOwnProperty("hash"))
-                object.hash = message.hash;
-            if (message.index != null && message.hasOwnProperty("index"))
-                object.index = message.index;
-            if (message.utxo != null && message.hasOwnProperty("utxo"))
+            if (message.hash != null && message.hasOwnProperty('hash')) object.hash = message.hash;
+            if (message.index != null && message.hasOwnProperty('index')) object.index = message.index;
+            if (message.utxo != null && message.hasOwnProperty('utxo'))
                 object.utxo = $root.protoc.utxo.toObject(message.utxo, options);
-            if (message.ownerKeyPath != null && message.hasOwnProperty("ownerKeyPath"))
+            if (message.ownerKeyPath != null && message.hasOwnProperty('ownerKeyPath'))
                 object.ownerKeyPath = message.ownerKeyPath;
             return object;
         };
@@ -3271,8 +3115,7 @@ export const protoc = $root.protoc = (() => {
         return Input;
     })();
 
-    protoc.utxo = (function() {
-
+    protoc.utxo = (function () {
         /**
          * Properties of an utxo.
          * @memberof protoc
@@ -3293,8 +3136,7 @@ export const protoc = $root.protoc = (() => {
         function utxo(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -3303,7 +3145,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.utxo
          * @instance
          */
-        utxo.prototype.publicKey = "";
+        utxo.prototype.publicKey = '';
 
         /**
          * utxo script.
@@ -3311,7 +3153,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.utxo
          * @instance
          */
-        utxo.prototype.script = "";
+        utxo.prototype.script = '';
 
         /**
          * utxo value.
@@ -3319,7 +3161,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.utxo
          * @instance
          */
-        utxo.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        utxo.prototype.value = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * Creates a new utxo instance using the specified properties.
@@ -3343,14 +3185,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         utxo.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.publicKey != null && Object.hasOwnProperty.call(message, "publicKey"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.publicKey);
-            if (message.script != null && Object.hasOwnProperty.call(message, "script"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.script);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.value);
+            if (!writer) writer = $Writer.create();
+            if (message.publicKey != null && Object.hasOwnProperty.call(message, 'publicKey'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.publicKey);
+            if (message.script != null && Object.hasOwnProperty.call(message, 'script'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.script);
+            if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                writer.uint32(/* id 3, wireType 0 =*/ 24).int64(message.value);
             return writer;
         };
 
@@ -3379,24 +3220,24 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         utxo.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.utxo();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.utxo();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.publicKey = reader.string();
-                    break;
-                case 2:
-                    message.script = reader.string();
-                    break;
-                case 3:
-                    message.value = reader.int64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.publicKey = reader.string();
+                        break;
+                    case 2:
+                        message.script = reader.string();
+                        break;
+                    case 3:
+                        message.value = reader.int64();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -3413,8 +3254,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         utxo.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -3427,17 +3267,17 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         utxo.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
-                if (!$util.isString(message.publicKey))
-                    return "publicKey: string expected";
-            if (message.script != null && message.hasOwnProperty("script"))
-                if (!$util.isString(message.script))
-                    return "script: string expected";
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
-                    return "value: integer|Long expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.publicKey != null && message.hasOwnProperty('publicKey'))
+                if (!$util.isString(message.publicKey)) return 'publicKey: string expected';
+            if (message.script != null && message.hasOwnProperty('script'))
+                if (!$util.isString(message.script)) return 'script: string expected';
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (
+                    !$util.isInteger(message.value) &&
+                    !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high))
+                )
+                    return 'value: integer|Long expected';
             return null;
         };
 
@@ -3450,21 +3290,15 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.utxo} utxo
          */
         utxo.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.utxo)
-                return object;
+            if (object instanceof $root.protoc.utxo) return object;
             let message = new $root.protoc.utxo();
-            if (object.publicKey != null)
-                message.publicKey = String(object.publicKey);
-            if (object.script != null)
-                message.script = String(object.script);
+            if (object.publicKey != null) message.publicKey = String(object.publicKey);
+            if (object.script != null) message.script = String(object.script);
             if (object.value != null)
-                if ($util.Long)
-                    (message.value = $util.Long.fromValue(object.value)).unsigned = false;
-                else if (typeof object.value === "string")
-                    message.value = parseInt(object.value, 10);
-                else if (typeof object.value === "number")
-                    message.value = object.value;
-                else if (typeof object.value === "object")
+                if ($util.Long) (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                else if (typeof object.value === 'string') message.value = parseInt(object.value, 10);
+                else if (typeof object.value === 'number') message.value = object.value;
+                else if (typeof object.value === 'object')
                     message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
             return message;
         };
@@ -3479,27 +3313,29 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         utxo.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.publicKey = "";
-                object.script = "";
+                object.publicKey = '';
+                object.script = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.value = options.longs === String ? "0" : 0;
+                    object.value =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.value = options.longs === String ? '0' : 0;
             }
-            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
-                object.publicKey = message.publicKey;
-            if (message.script != null && message.hasOwnProperty("script"))
-                object.script = message.script;
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (typeof message.value === "number")
+            if (message.publicKey != null && message.hasOwnProperty('publicKey')) object.publicKey = message.publicKey;
+            if (message.script != null && message.hasOwnProperty('script')) object.script = message.script;
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (typeof message.value === 'number')
                     object.value = options.longs === String ? String(message.value) : message.value;
                 else
-                    object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+                    object.value =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.value)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber()
+                            : message.value;
             return object;
         };
 
@@ -3517,8 +3353,7 @@ export const protoc = $root.protoc = (() => {
         return utxo;
     })();
 
-    protoc.Output = (function() {
-
+    protoc.Output = (function () {
         /**
          * Properties of an Output.
          * @memberof protoc
@@ -3540,8 +3375,7 @@ export const protoc = $root.protoc = (() => {
         function Output(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -3550,7 +3384,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Output
          * @instance
          */
-        Output.prototype.address = "";
+        Output.prototype.address = '';
 
         /**
          * Output value.
@@ -3558,7 +3392,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Output
          * @instance
          */
-        Output.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        Output.prototype.value = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * Output isChange.
@@ -3574,7 +3408,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Output
          * @instance
          */
-        Output.prototype.changeAddressPath = "";
+        Output.prototype.changeAddressPath = '';
 
         /**
          * Creates a new Output instance using the specified properties.
@@ -3598,16 +3432,15 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Output.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.address != null && Object.hasOwnProperty.call(message, "address"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.value);
-            if (message.isChange != null && Object.hasOwnProperty.call(message, "isChange"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isChange);
-            if (message.changeAddressPath != null && Object.hasOwnProperty.call(message, "changeAddressPath"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.changeAddressPath);
+            if (!writer) writer = $Writer.create();
+            if (message.address != null && Object.hasOwnProperty.call(message, 'address'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.address);
+            if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int64(message.value);
+            if (message.isChange != null && Object.hasOwnProperty.call(message, 'isChange'))
+                writer.uint32(/* id 3, wireType 0 =*/ 24).bool(message.isChange);
+            if (message.changeAddressPath != null && Object.hasOwnProperty.call(message, 'changeAddressPath'))
+                writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.changeAddressPath);
             return writer;
         };
 
@@ -3636,27 +3469,27 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Output.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Output();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Output();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.address = reader.string();
-                    break;
-                case 2:
-                    message.value = reader.int64();
-                    break;
-                case 3:
-                    message.isChange = reader.bool();
-                    break;
-                case 4:
-                    message.changeAddressPath = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.address = reader.string();
+                        break;
+                    case 2:
+                        message.value = reader.int64();
+                        break;
+                    case 3:
+                        message.isChange = reader.bool();
+                        break;
+                    case 4:
+                        message.changeAddressPath = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -3673,8 +3506,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Output.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -3687,20 +3519,19 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Output.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.address != null && message.hasOwnProperty("address"))
-                if (!$util.isString(message.address))
-                    return "address: string expected";
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
-                    return "value: integer|Long expected";
-            if (message.isChange != null && message.hasOwnProperty("isChange"))
-                if (typeof message.isChange !== "boolean")
-                    return "isChange: boolean expected";
-            if (message.changeAddressPath != null && message.hasOwnProperty("changeAddressPath"))
-                if (!$util.isString(message.changeAddressPath))
-                    return "changeAddressPath: string expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.address != null && message.hasOwnProperty('address'))
+                if (!$util.isString(message.address)) return 'address: string expected';
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (
+                    !$util.isInteger(message.value) &&
+                    !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high))
+                )
+                    return 'value: integer|Long expected';
+            if (message.isChange != null && message.hasOwnProperty('isChange'))
+                if (typeof message.isChange !== 'boolean') return 'isChange: boolean expected';
+            if (message.changeAddressPath != null && message.hasOwnProperty('changeAddressPath'))
+                if (!$util.isString(message.changeAddressPath)) return 'changeAddressPath: string expected';
             return null;
         };
 
@@ -3713,24 +3544,17 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Output} Output
          */
         Output.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Output)
-                return object;
+            if (object instanceof $root.protoc.Output) return object;
             let message = new $root.protoc.Output();
-            if (object.address != null)
-                message.address = String(object.address);
+            if (object.address != null) message.address = String(object.address);
             if (object.value != null)
-                if ($util.Long)
-                    (message.value = $util.Long.fromValue(object.value)).unsigned = false;
-                else if (typeof object.value === "string")
-                    message.value = parseInt(object.value, 10);
-                else if (typeof object.value === "number")
-                    message.value = object.value;
-                else if (typeof object.value === "object")
+                if ($util.Long) (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                else if (typeof object.value === 'string') message.value = parseInt(object.value, 10);
+                else if (typeof object.value === 'number') message.value = object.value;
+                else if (typeof object.value === 'object')
                     message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
-            if (object.isChange != null)
-                message.isChange = Boolean(object.isChange);
-            if (object.changeAddressPath != null)
-                message.changeAddressPath = String(object.changeAddressPath);
+            if (object.isChange != null) message.isChange = Boolean(object.isChange);
+            if (object.changeAddressPath != null) message.changeAddressPath = String(object.changeAddressPath);
             return message;
         };
 
@@ -3744,29 +3568,31 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Output.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.address = "";
+                object.address = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.value = options.longs === String ? "0" : 0;
+                    object.value =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.value = options.longs === String ? '0' : 0;
                 object.isChange = false;
-                object.changeAddressPath = "";
+                object.changeAddressPath = '';
             }
-            if (message.address != null && message.hasOwnProperty("address"))
-                object.address = message.address;
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (typeof message.value === "number")
+            if (message.address != null && message.hasOwnProperty('address')) object.address = message.address;
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (typeof message.value === 'number')
                     object.value = options.longs === String ? String(message.value) : message.value;
                 else
-                    object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
-            if (message.isChange != null && message.hasOwnProperty("isChange"))
-                object.isChange = message.isChange;
-            if (message.changeAddressPath != null && message.hasOwnProperty("changeAddressPath"))
+                    object.value =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.value)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber()
+                            : message.value;
+            if (message.isChange != null && message.hasOwnProperty('isChange')) object.isChange = message.isChange;
+            if (message.changeAddressPath != null && message.hasOwnProperty('changeAddressPath'))
                 object.changeAddressPath = message.changeAddressPath;
             return object;
         };
@@ -3785,8 +3611,7 @@ export const protoc = $root.protoc = (() => {
         return Output;
     })();
 
-    protoc.EthTx = (function() {
-
+    protoc.EthTx = (function () {
         /**
          * Properties of an EthTx.
          * @memberof protoc
@@ -3811,8 +3636,7 @@ export const protoc = $root.protoc = (() => {
         function EthTx(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -3821,7 +3645,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EthTx
          * @instance
          */
-        EthTx.prototype.to = "";
+        EthTx.prototype.to = '';
 
         /**
          * EthTx value.
@@ -3829,7 +3653,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EthTx
          * @instance
          */
-        EthTx.prototype.value = "";
+        EthTx.prototype.value = '';
 
         /**
          * EthTx gasPrice.
@@ -3837,7 +3661,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EthTx
          * @instance
          */
-        EthTx.prototype.gasPrice = "";
+        EthTx.prototype.gasPrice = '';
 
         /**
          * EthTx gasLimit.
@@ -3845,7 +3669,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EthTx
          * @instance
          */
-        EthTx.prototype.gasLimit = "";
+        EthTx.prototype.gasLimit = '';
 
         /**
          * EthTx memo.
@@ -3853,7 +3677,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EthTx
          * @instance
          */
-        EthTx.prototype.memo = "";
+        EthTx.prototype.memo = '';
 
         /**
          * EthTx nonce.
@@ -3893,22 +3717,24 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         EthTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.to);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
-            if (message.gasPrice != null && Object.hasOwnProperty.call(message, "gasPrice"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.gasPrice);
-            if (message.gasLimit != null && Object.hasOwnProperty.call(message, "gasLimit"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.gasLimit);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.memo);
-            if (message.nonce != null && Object.hasOwnProperty.call(message, "nonce"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.nonce);
-            if (message.override != null && Object.hasOwnProperty.call(message, "override"))
-                $root.protoc.EthTx.Override.encode(message.override, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (!writer) writer = $Writer.create();
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.to);
+            if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.value);
+            if (message.gasPrice != null && Object.hasOwnProperty.call(message, 'gasPrice'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.gasPrice);
+            if (message.gasLimit != null && Object.hasOwnProperty.call(message, 'gasLimit'))
+                writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.gasLimit);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.memo);
+            if (message.nonce != null && Object.hasOwnProperty.call(message, 'nonce'))
+                writer.uint32(/* id 6, wireType 0 =*/ 48).int32(message.nonce);
+            if (message.override != null && Object.hasOwnProperty.call(message, 'override'))
+                $root.protoc.EthTx.Override.encode(
+                    message.override,
+                    writer.uint32(/* id 7, wireType 2 =*/ 58).fork(),
+                ).ldelim();
             return writer;
         };
 
@@ -3937,36 +3763,36 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         EthTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.EthTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.EthTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.to = reader.string();
-                    break;
-                case 2:
-                    message.value = reader.string();
-                    break;
-                case 3:
-                    message.gasPrice = reader.string();
-                    break;
-                case 4:
-                    message.gasLimit = reader.string();
-                    break;
-                case 5:
-                    message.memo = reader.string();
-                    break;
-                case 6:
-                    message.nonce = reader.int32();
-                    break;
-                case 7:
-                    message.override = $root.protoc.EthTx.Override.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.to = reader.string();
+                        break;
+                    case 2:
+                        message.value = reader.string();
+                        break;
+                    case 3:
+                        message.gasPrice = reader.string();
+                        break;
+                    case 4:
+                        message.gasLimit = reader.string();
+                        break;
+                    case 5:
+                        message.memo = reader.string();
+                        break;
+                    case 6:
+                        message.nonce = reader.int32();
+                        break;
+                    case 7:
+                        message.override = $root.protoc.EthTx.Override.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -3983,8 +3809,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         EthTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -3997,30 +3822,22 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         EthTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (!$util.isString(message.value))
-                    return "value: string expected";
-            if (message.gasPrice != null && message.hasOwnProperty("gasPrice"))
-                if (!$util.isString(message.gasPrice))
-                    return "gasPrice: string expected";
-            if (message.gasLimit != null && message.hasOwnProperty("gasLimit"))
-                if (!$util.isString(message.gasLimit))
-                    return "gasLimit: string expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                if (!$util.isInteger(message.nonce))
-                    return "nonce: integer expected";
-            if (message.override != null && message.hasOwnProperty("override")) {
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (!$util.isString(message.value)) return 'value: string expected';
+            if (message.gasPrice != null && message.hasOwnProperty('gasPrice'))
+                if (!$util.isString(message.gasPrice)) return 'gasPrice: string expected';
+            if (message.gasLimit != null && message.hasOwnProperty('gasLimit'))
+                if (!$util.isString(message.gasLimit)) return 'gasLimit: string expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.nonce != null && message.hasOwnProperty('nonce'))
+                if (!$util.isInteger(message.nonce)) return 'nonce: integer expected';
+            if (message.override != null && message.hasOwnProperty('override')) {
                 let error = $root.protoc.EthTx.Override.verify(message.override);
-                if (error)
-                    return "override." + error;
+                if (error) return 'override.' + error;
             }
             return null;
         };
@@ -4034,24 +3851,16 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.EthTx} EthTx
          */
         EthTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.EthTx)
-                return object;
+            if (object instanceof $root.protoc.EthTx) return object;
             let message = new $root.protoc.EthTx();
-            if (object.to != null)
-                message.to = String(object.to);
-            if (object.value != null)
-                message.value = String(object.value);
-            if (object.gasPrice != null)
-                message.gasPrice = String(object.gasPrice);
-            if (object.gasLimit != null)
-                message.gasLimit = String(object.gasLimit);
-            if (object.memo != null)
-                message.memo = String(object.memo);
-            if (object.nonce != null)
-                message.nonce = object.nonce | 0;
+            if (object.to != null) message.to = String(object.to);
+            if (object.value != null) message.value = String(object.value);
+            if (object.gasPrice != null) message.gasPrice = String(object.gasPrice);
+            if (object.gasLimit != null) message.gasLimit = String(object.gasLimit);
+            if (object.memo != null) message.memo = String(object.memo);
+            if (object.nonce != null) message.nonce = object.nonce | 0;
             if (object.override != null) {
-                if (typeof object.override !== "object")
-                    throw TypeError(".protoc.EthTx.override: object expected");
+                if (typeof object.override !== 'object') throw TypeError('.protoc.EthTx.override: object expected');
                 message.override = $root.protoc.EthTx.Override.fromObject(object.override);
             }
             return message;
@@ -4067,31 +3876,24 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         EthTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.to = "";
-                object.value = "";
-                object.gasPrice = "";
-                object.gasLimit = "";
-                object.memo = "";
+                object.to = '';
+                object.value = '';
+                object.gasPrice = '';
+                object.gasLimit = '';
+                object.memo = '';
                 object.nonce = 0;
                 object.override = null;
             }
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.value != null && message.hasOwnProperty("value"))
-                object.value = message.value;
-            if (message.gasPrice != null && message.hasOwnProperty("gasPrice"))
-                object.gasPrice = message.gasPrice;
-            if (message.gasLimit != null && message.hasOwnProperty("gasLimit"))
-                object.gasLimit = message.gasLimit;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                object.nonce = message.nonce;
-            if (message.override != null && message.hasOwnProperty("override"))
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.value != null && message.hasOwnProperty('value')) object.value = message.value;
+            if (message.gasPrice != null && message.hasOwnProperty('gasPrice')) object.gasPrice = message.gasPrice;
+            if (message.gasLimit != null && message.hasOwnProperty('gasLimit')) object.gasLimit = message.gasLimit;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
+            if (message.nonce != null && message.hasOwnProperty('nonce')) object.nonce = message.nonce;
+            if (message.override != null && message.hasOwnProperty('override'))
                 object.override = $root.protoc.EthTx.Override.toObject(message.override, options);
             return object;
         };
@@ -4107,8 +3909,7 @@ export const protoc = $root.protoc = (() => {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        EthTx.Override = (function() {
-
+        EthTx.Override = (function () {
             /**
              * Properties of an Override.
              * @memberof protoc.EthTx
@@ -4130,8 +3931,7 @@ export const protoc = $root.protoc = (() => {
             function Override(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -4148,7 +3948,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EthTx.Override
              * @instance
              */
-            Override.prototype.tokenShortName = "";
+            Override.prototype.tokenShortName = '';
 
             /**
              * Override tokenFullName.
@@ -4156,7 +3956,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EthTx.Override
              * @instance
              */
-            Override.prototype.tokenFullName = "";
+            Override.prototype.tokenFullName = '';
 
             /**
              * Override contractAddress.
@@ -4164,7 +3964,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EthTx.Override
              * @instance
              */
-            Override.prototype.contractAddress = "";
+            Override.prototype.contractAddress = '';
 
             /**
              * Creates a new Override instance using the specified properties.
@@ -4188,16 +3988,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Override.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.decimals != null && Object.hasOwnProperty.call(message, "decimals"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.decimals);
-                if (message.tokenShortName != null && Object.hasOwnProperty.call(message, "tokenShortName"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.tokenShortName);
-                if (message.tokenFullName != null && Object.hasOwnProperty.call(message, "tokenFullName"))
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.tokenFullName);
-                if (message.contractAddress != null && Object.hasOwnProperty.call(message, "contractAddress"))
-                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.contractAddress);
+                if (!writer) writer = $Writer.create();
+                if (message.decimals != null && Object.hasOwnProperty.call(message, 'decimals'))
+                    writer.uint32(/* id 1, wireType 0 =*/ 8).int32(message.decimals);
+                if (message.tokenShortName != null && Object.hasOwnProperty.call(message, 'tokenShortName'))
+                    writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.tokenShortName);
+                if (message.tokenFullName != null && Object.hasOwnProperty.call(message, 'tokenFullName'))
+                    writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.tokenFullName);
+                if (message.contractAddress != null && Object.hasOwnProperty.call(message, 'contractAddress'))
+                    writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.contractAddress);
                 return writer;
             };
 
@@ -4226,27 +4025,27 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Override.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.EthTx.Override();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.EthTx.Override();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.decimals = reader.int32();
-                        break;
-                    case 2:
-                        message.tokenShortName = reader.string();
-                        break;
-                    case 3:
-                        message.tokenFullName = reader.string();
-                        break;
-                    case 4:
-                        message.contractAddress = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.decimals = reader.int32();
+                            break;
+                        case 2:
+                            message.tokenShortName = reader.string();
+                            break;
+                        case 3:
+                            message.tokenFullName = reader.string();
+                            break;
+                        case 4:
+                            message.contractAddress = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -4263,8 +4062,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Override.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -4277,20 +4075,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Override.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.decimals != null && message.hasOwnProperty("decimals"))
-                    if (!$util.isInteger(message.decimals))
-                        return "decimals: integer expected";
-                if (message.tokenShortName != null && message.hasOwnProperty("tokenShortName"))
-                    if (!$util.isString(message.tokenShortName))
-                        return "tokenShortName: string expected";
-                if (message.tokenFullName != null && message.hasOwnProperty("tokenFullName"))
-                    if (!$util.isString(message.tokenFullName))
-                        return "tokenFullName: string expected";
-                if (message.contractAddress != null && message.hasOwnProperty("contractAddress"))
-                    if (!$util.isString(message.contractAddress))
-                        return "contractAddress: string expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.decimals != null && message.hasOwnProperty('decimals'))
+                    if (!$util.isInteger(message.decimals)) return 'decimals: integer expected';
+                if (message.tokenShortName != null && message.hasOwnProperty('tokenShortName'))
+                    if (!$util.isString(message.tokenShortName)) return 'tokenShortName: string expected';
+                if (message.tokenFullName != null && message.hasOwnProperty('tokenFullName'))
+                    if (!$util.isString(message.tokenFullName)) return 'tokenFullName: string expected';
+                if (message.contractAddress != null && message.hasOwnProperty('contractAddress'))
+                    if (!$util.isString(message.contractAddress)) return 'contractAddress: string expected';
                 return null;
             };
 
@@ -4303,17 +4096,12 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.EthTx.Override} Override
              */
             Override.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.EthTx.Override)
-                    return object;
+                if (object instanceof $root.protoc.EthTx.Override) return object;
                 let message = new $root.protoc.EthTx.Override();
-                if (object.decimals != null)
-                    message.decimals = object.decimals | 0;
-                if (object.tokenShortName != null)
-                    message.tokenShortName = String(object.tokenShortName);
-                if (object.tokenFullName != null)
-                    message.tokenFullName = String(object.tokenFullName);
-                if (object.contractAddress != null)
-                    message.contractAddress = String(object.contractAddress);
+                if (object.decimals != null) message.decimals = object.decimals | 0;
+                if (object.tokenShortName != null) message.tokenShortName = String(object.tokenShortName);
+                if (object.tokenFullName != null) message.tokenFullName = String(object.tokenFullName);
+                if (object.contractAddress != null) message.contractAddress = String(object.contractAddress);
                 return message;
             };
 
@@ -4327,22 +4115,20 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Override.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
                     object.decimals = 0;
-                    object.tokenShortName = "";
-                    object.tokenFullName = "";
-                    object.contractAddress = "";
+                    object.tokenShortName = '';
+                    object.tokenFullName = '';
+                    object.contractAddress = '';
                 }
-                if (message.decimals != null && message.hasOwnProperty("decimals"))
-                    object.decimals = message.decimals;
-                if (message.tokenShortName != null && message.hasOwnProperty("tokenShortName"))
+                if (message.decimals != null && message.hasOwnProperty('decimals')) object.decimals = message.decimals;
+                if (message.tokenShortName != null && message.hasOwnProperty('tokenShortName'))
                     object.tokenShortName = message.tokenShortName;
-                if (message.tokenFullName != null && message.hasOwnProperty("tokenFullName"))
+                if (message.tokenFullName != null && message.hasOwnProperty('tokenFullName'))
                     object.tokenFullName = message.tokenFullName;
-                if (message.contractAddress != null && message.hasOwnProperty("contractAddress"))
+                if (message.contractAddress != null && message.hasOwnProperty('contractAddress'))
                     object.contractAddress = message.contractAddress;
                 return object;
             };
@@ -4364,8 +4150,7 @@ export const protoc = $root.protoc = (() => {
         return EthTx;
     })();
 
-    protoc.EtcTx = (function() {
-
+    protoc.EtcTx = (function () {
         /**
          * Properties of an EtcTx.
          * @memberof protoc
@@ -4389,8 +4174,7 @@ export const protoc = $root.protoc = (() => {
         function EtcTx(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -4399,7 +4183,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EtcTx
          * @instance
          */
-        EtcTx.prototype.to = "";
+        EtcTx.prototype.to = '';
 
         /**
          * EtcTx value.
@@ -4407,7 +4191,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EtcTx
          * @instance
          */
-        EtcTx.prototype.value = "";
+        EtcTx.prototype.value = '';
 
         /**
          * EtcTx gasPrice.
@@ -4415,7 +4199,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EtcTx
          * @instance
          */
-        EtcTx.prototype.gasPrice = "";
+        EtcTx.prototype.gasPrice = '';
 
         /**
          * EtcTx gasLimit.
@@ -4423,7 +4207,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EtcTx
          * @instance
          */
-        EtcTx.prototype.gasLimit = "";
+        EtcTx.prototype.gasLimit = '';
 
         /**
          * EtcTx memo.
@@ -4431,7 +4215,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EtcTx
          * @instance
          */
-        EtcTx.prototype.memo = "";
+        EtcTx.prototype.memo = '';
 
         /**
          * EtcTx nonce.
@@ -4463,20 +4247,19 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         EtcTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.to);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
-            if (message.gasPrice != null && Object.hasOwnProperty.call(message, "gasPrice"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.gasPrice);
-            if (message.gasLimit != null && Object.hasOwnProperty.call(message, "gasLimit"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.gasLimit);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.memo);
-            if (message.nonce != null && Object.hasOwnProperty.call(message, "nonce"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.nonce);
+            if (!writer) writer = $Writer.create();
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.to);
+            if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.value);
+            if (message.gasPrice != null && Object.hasOwnProperty.call(message, 'gasPrice'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.gasPrice);
+            if (message.gasLimit != null && Object.hasOwnProperty.call(message, 'gasLimit'))
+                writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.gasLimit);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.memo);
+            if (message.nonce != null && Object.hasOwnProperty.call(message, 'nonce'))
+                writer.uint32(/* id 6, wireType 0 =*/ 48).int32(message.nonce);
             return writer;
         };
 
@@ -4505,33 +4288,33 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         EtcTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.EtcTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.EtcTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.to = reader.string();
-                    break;
-                case 2:
-                    message.value = reader.string();
-                    break;
-                case 3:
-                    message.gasPrice = reader.string();
-                    break;
-                case 4:
-                    message.gasLimit = reader.string();
-                    break;
-                case 5:
-                    message.memo = reader.string();
-                    break;
-                case 6:
-                    message.nonce = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.to = reader.string();
+                        break;
+                    case 2:
+                        message.value = reader.string();
+                        break;
+                    case 3:
+                        message.gasPrice = reader.string();
+                        break;
+                    case 4:
+                        message.gasLimit = reader.string();
+                        break;
+                    case 5:
+                        message.memo = reader.string();
+                        break;
+                    case 6:
+                        message.nonce = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -4548,8 +4331,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         EtcTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -4562,26 +4344,19 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         EtcTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (!$util.isString(message.value))
-                    return "value: string expected";
-            if (message.gasPrice != null && message.hasOwnProperty("gasPrice"))
-                if (!$util.isString(message.gasPrice))
-                    return "gasPrice: string expected";
-            if (message.gasLimit != null && message.hasOwnProperty("gasLimit"))
-                if (!$util.isString(message.gasLimit))
-                    return "gasLimit: string expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                if (!$util.isInteger(message.nonce))
-                    return "nonce: integer expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (!$util.isString(message.value)) return 'value: string expected';
+            if (message.gasPrice != null && message.hasOwnProperty('gasPrice'))
+                if (!$util.isString(message.gasPrice)) return 'gasPrice: string expected';
+            if (message.gasLimit != null && message.hasOwnProperty('gasLimit'))
+                if (!$util.isString(message.gasLimit)) return 'gasLimit: string expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.nonce != null && message.hasOwnProperty('nonce'))
+                if (!$util.isInteger(message.nonce)) return 'nonce: integer expected';
             return null;
         };
 
@@ -4594,21 +4369,14 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.EtcTx} EtcTx
          */
         EtcTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.EtcTx)
-                return object;
+            if (object instanceof $root.protoc.EtcTx) return object;
             let message = new $root.protoc.EtcTx();
-            if (object.to != null)
-                message.to = String(object.to);
-            if (object.value != null)
-                message.value = String(object.value);
-            if (object.gasPrice != null)
-                message.gasPrice = String(object.gasPrice);
-            if (object.gasLimit != null)
-                message.gasLimit = String(object.gasLimit);
-            if (object.memo != null)
-                message.memo = String(object.memo);
-            if (object.nonce != null)
-                message.nonce = object.nonce | 0;
+            if (object.to != null) message.to = String(object.to);
+            if (object.value != null) message.value = String(object.value);
+            if (object.gasPrice != null) message.gasPrice = String(object.gasPrice);
+            if (object.gasLimit != null) message.gasLimit = String(object.gasLimit);
+            if (object.memo != null) message.memo = String(object.memo);
+            if (object.nonce != null) message.nonce = object.nonce | 0;
             return message;
         };
 
@@ -4622,29 +4390,22 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         EtcTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.to = "";
-                object.value = "";
-                object.gasPrice = "";
-                object.gasLimit = "";
-                object.memo = "";
+                object.to = '';
+                object.value = '';
+                object.gasPrice = '';
+                object.gasLimit = '';
+                object.memo = '';
                 object.nonce = 0;
             }
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.value != null && message.hasOwnProperty("value"))
-                object.value = message.value;
-            if (message.gasPrice != null && message.hasOwnProperty("gasPrice"))
-                object.gasPrice = message.gasPrice;
-            if (message.gasLimit != null && message.hasOwnProperty("gasLimit"))
-                object.gasLimit = message.gasLimit;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                object.nonce = message.nonce;
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.value != null && message.hasOwnProperty('value')) object.value = message.value;
+            if (message.gasPrice != null && message.hasOwnProperty('gasPrice')) object.gasPrice = message.gasPrice;
+            if (message.gasLimit != null && message.hasOwnProperty('gasLimit')) object.gasLimit = message.gasLimit;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
+            if (message.nonce != null && message.hasOwnProperty('nonce')) object.nonce = message.nonce;
             return object;
         };
 
@@ -4662,8 +4423,7 @@ export const protoc = $root.protoc = (() => {
         return EtcTx;
     })();
 
-    protoc.LatestBlock = (function() {
-
+    protoc.LatestBlock = (function () {
         /**
          * Properties of a LatestBlock.
          * @memberof protoc
@@ -4684,8 +4444,7 @@ export const protoc = $root.protoc = (() => {
         function LatestBlock(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -4694,7 +4453,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.LatestBlock
          * @instance
          */
-        LatestBlock.prototype.hash = "";
+        LatestBlock.prototype.hash = '';
 
         /**
          * LatestBlock number.
@@ -4710,7 +4469,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.LatestBlock
          * @instance
          */
-        LatestBlock.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        LatestBlock.prototype.timestamp = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * Creates a new LatestBlock instance using the specified properties.
@@ -4734,14 +4493,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         LatestBlock.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.hash != null && Object.hasOwnProperty.call(message, "hash"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hash);
-            if (message.number != null && Object.hasOwnProperty.call(message, "number"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.number);
-            if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.timestamp);
+            if (!writer) writer = $Writer.create();
+            if (message.hash != null && Object.hasOwnProperty.call(message, 'hash'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.hash);
+            if (message.number != null && Object.hasOwnProperty.call(message, 'number'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.number);
+            if (message.timestamp != null && Object.hasOwnProperty.call(message, 'timestamp'))
+                writer.uint32(/* id 3, wireType 0 =*/ 24).int64(message.timestamp);
             return writer;
         };
 
@@ -4770,24 +4528,24 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         LatestBlock.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.LatestBlock();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.LatestBlock();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.hash = reader.string();
-                    break;
-                case 2:
-                    message.number = reader.int32();
-                    break;
-                case 3:
-                    message.timestamp = reader.int64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.hash = reader.string();
+                        break;
+                    case 2:
+                        message.number = reader.int32();
+                        break;
+                    case 3:
+                        message.timestamp = reader.int64();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -4804,8 +4562,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         LatestBlock.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -4818,17 +4575,21 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         LatestBlock.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.hash != null && message.hasOwnProperty("hash"))
-                if (!$util.isString(message.hash))
-                    return "hash: string expected";
-            if (message.number != null && message.hasOwnProperty("number"))
-                if (!$util.isInteger(message.number))
-                    return "number: integer expected";
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
-                    return "timestamp: integer|Long expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.hash != null && message.hasOwnProperty('hash'))
+                if (!$util.isString(message.hash)) return 'hash: string expected';
+            if (message.number != null && message.hasOwnProperty('number'))
+                if (!$util.isInteger(message.number)) return 'number: integer expected';
+            if (message.timestamp != null && message.hasOwnProperty('timestamp'))
+                if (
+                    !$util.isInteger(message.timestamp) &&
+                    !(
+                        message.timestamp &&
+                        $util.isInteger(message.timestamp.low) &&
+                        $util.isInteger(message.timestamp.high)
+                    )
+                )
+                    return 'timestamp: integer|Long expected';
             return null;
         };
 
@@ -4841,22 +4602,19 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.LatestBlock} LatestBlock
          */
         LatestBlock.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.LatestBlock)
-                return object;
+            if (object instanceof $root.protoc.LatestBlock) return object;
             let message = new $root.protoc.LatestBlock();
-            if (object.hash != null)
-                message.hash = String(object.hash);
-            if (object.number != null)
-                message.number = object.number | 0;
+            if (object.hash != null) message.hash = String(object.hash);
+            if (object.number != null) message.number = object.number | 0;
             if (object.timestamp != null)
-                if ($util.Long)
-                    (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
-                else if (typeof object.timestamp === "string")
-                    message.timestamp = parseInt(object.timestamp, 10);
-                else if (typeof object.timestamp === "number")
-                    message.timestamp = object.timestamp;
-                else if (typeof object.timestamp === "object")
-                    message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber();
+                if ($util.Long) (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
+                else if (typeof object.timestamp === 'string') message.timestamp = parseInt(object.timestamp, 10);
+                else if (typeof object.timestamp === 'number') message.timestamp = object.timestamp;
+                else if (typeof object.timestamp === 'object')
+                    message.timestamp = new $util.LongBits(
+                        object.timestamp.low >>> 0,
+                        object.timestamp.high >>> 0,
+                    ).toNumber();
             return message;
         };
 
@@ -4870,27 +4628,29 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         LatestBlock.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.hash = "";
+                object.hash = '';
                 object.number = 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.timestamp = options.longs === String ? "0" : 0;
+                    object.timestamp =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.timestamp = options.longs === String ? '0' : 0;
             }
-            if (message.hash != null && message.hasOwnProperty("hash"))
-                object.hash = message.hash;
-            if (message.number != null && message.hasOwnProperty("number"))
-                object.number = message.number;
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                if (typeof message.timestamp === "number")
+            if (message.hash != null && message.hasOwnProperty('hash')) object.hash = message.hash;
+            if (message.number != null && message.hasOwnProperty('number')) object.number = message.number;
+            if (message.timestamp != null && message.hasOwnProperty('timestamp'))
+                if (typeof message.timestamp === 'number')
                     object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
                 else
-                    object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber() : message.timestamp;
+                    object.timestamp =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.timestamp)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber()
+                            : message.timestamp;
             return object;
         };
 
@@ -4908,8 +4668,7 @@ export const protoc = $root.protoc = (() => {
         return LatestBlock;
     })();
 
-    protoc.Override = (function() {
-
+    protoc.Override = (function () {
         /**
          * Properties of an Override.
          * @memberof protoc
@@ -4930,8 +4689,7 @@ export const protoc = $root.protoc = (() => {
         function Override(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -4940,7 +4698,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Override
          * @instance
          */
-        Override.prototype.tokenShortName = "";
+        Override.prototype.tokenShortName = '';
 
         /**
          * Override tokenFullName.
@@ -4948,7 +4706,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Override
          * @instance
          */
-        Override.prototype.tokenFullName = "";
+        Override.prototype.tokenFullName = '';
 
         /**
          * Override decimals.
@@ -4980,14 +4738,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Override.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.tokenShortName != null && Object.hasOwnProperty.call(message, "tokenShortName"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.tokenShortName);
-            if (message.tokenFullName != null && Object.hasOwnProperty.call(message, "tokenFullName"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tokenFullName);
-            if (message.decimals != null && Object.hasOwnProperty.call(message, "decimals"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.decimals);
+            if (!writer) writer = $Writer.create();
+            if (message.tokenShortName != null && Object.hasOwnProperty.call(message, 'tokenShortName'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.tokenShortName);
+            if (message.tokenFullName != null && Object.hasOwnProperty.call(message, 'tokenFullName'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.tokenFullName);
+            if (message.decimals != null && Object.hasOwnProperty.call(message, 'decimals'))
+                writer.uint32(/* id 3, wireType 0 =*/ 24).int32(message.decimals);
             return writer;
         };
 
@@ -5016,24 +4773,24 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Override.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Override();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Override();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.tokenShortName = reader.string();
-                    break;
-                case 2:
-                    message.tokenFullName = reader.string();
-                    break;
-                case 3:
-                    message.decimals = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.tokenShortName = reader.string();
+                        break;
+                    case 2:
+                        message.tokenFullName = reader.string();
+                        break;
+                    case 3:
+                        message.decimals = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -5050,8 +4807,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Override.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -5064,17 +4820,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Override.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.tokenShortName != null && message.hasOwnProperty("tokenShortName"))
-                if (!$util.isString(message.tokenShortName))
-                    return "tokenShortName: string expected";
-            if (message.tokenFullName != null && message.hasOwnProperty("tokenFullName"))
-                if (!$util.isString(message.tokenFullName))
-                    return "tokenFullName: string expected";
-            if (message.decimals != null && message.hasOwnProperty("decimals"))
-                if (!$util.isInteger(message.decimals))
-                    return "decimals: integer expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.tokenShortName != null && message.hasOwnProperty('tokenShortName'))
+                if (!$util.isString(message.tokenShortName)) return 'tokenShortName: string expected';
+            if (message.tokenFullName != null && message.hasOwnProperty('tokenFullName'))
+                if (!$util.isString(message.tokenFullName)) return 'tokenFullName: string expected';
+            if (message.decimals != null && message.hasOwnProperty('decimals'))
+                if (!$util.isInteger(message.decimals)) return 'decimals: integer expected';
             return null;
         };
 
@@ -5087,15 +4839,11 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Override} Override
          */
         Override.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Override)
-                return object;
+            if (object instanceof $root.protoc.Override) return object;
             let message = new $root.protoc.Override();
-            if (object.tokenShortName != null)
-                message.tokenShortName = String(object.tokenShortName);
-            if (object.tokenFullName != null)
-                message.tokenFullName = String(object.tokenFullName);
-            if (object.decimals != null)
-                message.decimals = object.decimals | 0;
+            if (object.tokenShortName != null) message.tokenShortName = String(object.tokenShortName);
+            if (object.tokenFullName != null) message.tokenFullName = String(object.tokenFullName);
+            if (object.decimals != null) message.decimals = object.decimals | 0;
             return message;
         };
 
@@ -5109,20 +4857,18 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Override.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.tokenShortName = "";
-                object.tokenFullName = "";
+                object.tokenShortName = '';
+                object.tokenFullName = '';
                 object.decimals = 0;
             }
-            if (message.tokenShortName != null && message.hasOwnProperty("tokenShortName"))
+            if (message.tokenShortName != null && message.hasOwnProperty('tokenShortName'))
                 object.tokenShortName = message.tokenShortName;
-            if (message.tokenFullName != null && message.hasOwnProperty("tokenFullName"))
+            if (message.tokenFullName != null && message.hasOwnProperty('tokenFullName'))
                 object.tokenFullName = message.tokenFullName;
-            if (message.decimals != null && message.hasOwnProperty("decimals"))
-                object.decimals = message.decimals;
+            if (message.decimals != null && message.hasOwnProperty('decimals')) object.decimals = message.decimals;
             return object;
         };
 
@@ -5140,8 +4886,7 @@ export const protoc = $root.protoc = (() => {
         return Override;
     })();
 
-    protoc.TronTx = (function() {
-
+    protoc.TronTx = (function () {
         /**
          * Properties of a TronTx.
          * @memberof protoc
@@ -5168,8 +4913,7 @@ export const protoc = $root.protoc = (() => {
         function TronTx(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -5178,7 +4922,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.TronTx
          * @instance
          */
-        TronTx.prototype.token = "";
+        TronTx.prototype.token = '';
 
         /**
          * TronTx contractAddress.
@@ -5186,7 +4930,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.TronTx
          * @instance
          */
-        TronTx.prototype.contractAddress = "";
+        TronTx.prototype.contractAddress = '';
 
         /**
          * TronTx from.
@@ -5194,7 +4938,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.TronTx
          * @instance
          */
-        TronTx.prototype.from = "";
+        TronTx.prototype.from = '';
 
         /**
          * TronTx to.
@@ -5202,7 +4946,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.TronTx
          * @instance
          */
-        TronTx.prototype.to = "";
+        TronTx.prototype.to = '';
 
         /**
          * TronTx memo.
@@ -5210,7 +4954,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.TronTx
          * @instance
          */
-        TronTx.prototype.memo = "";
+        TronTx.prototype.memo = '';
 
         /**
          * TronTx value.
@@ -5218,7 +4962,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.TronTx
          * @instance
          */
-        TronTx.prototype.value = "";
+        TronTx.prototype.value = '';
 
         /**
          * TronTx latestBlock.
@@ -5266,26 +5010,31 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         TronTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.token);
-            if (message.contractAddress != null && Object.hasOwnProperty.call(message, "contractAddress"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.contractAddress);
-            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.from);
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.to);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.memo);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.value);
-            if (message.latestBlock != null && Object.hasOwnProperty.call(message, "latestBlock"))
-                $root.protoc.LatestBlock.encode(message.latestBlock, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-            if (message.override != null && Object.hasOwnProperty.call(message, "override"))
-                $root.protoc.Override.encode(message.override, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.fee);
+            if (!writer) writer = $Writer.create();
+            if (message.token != null && Object.hasOwnProperty.call(message, 'token'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.token);
+            if (message.contractAddress != null && Object.hasOwnProperty.call(message, 'contractAddress'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.contractAddress);
+            if (message.from != null && Object.hasOwnProperty.call(message, 'from'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.from);
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.to);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.memo);
+            if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                writer.uint32(/* id 6, wireType 2 =*/ 50).string(message.value);
+            if (message.latestBlock != null && Object.hasOwnProperty.call(message, 'latestBlock'))
+                $root.protoc.LatestBlock.encode(
+                    message.latestBlock,
+                    writer.uint32(/* id 7, wireType 2 =*/ 58).fork(),
+                ).ldelim();
+            if (message.override != null && Object.hasOwnProperty.call(message, 'override'))
+                $root.protoc.Override.encode(
+                    message.override,
+                    writer.uint32(/* id 8, wireType 2 =*/ 66).fork(),
+                ).ldelim();
+            if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                writer.uint32(/* id 9, wireType 0 =*/ 72).int32(message.fee);
             return writer;
         };
 
@@ -5314,42 +5063,42 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         TronTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.TronTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.TronTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.token = reader.string();
-                    break;
-                case 2:
-                    message.contractAddress = reader.string();
-                    break;
-                case 3:
-                    message.from = reader.string();
-                    break;
-                case 4:
-                    message.to = reader.string();
-                    break;
-                case 5:
-                    message.memo = reader.string();
-                    break;
-                case 6:
-                    message.value = reader.string();
-                    break;
-                case 7:
-                    message.latestBlock = $root.protoc.LatestBlock.decode(reader, reader.uint32());
-                    break;
-                case 8:
-                    message.override = $root.protoc.Override.decode(reader, reader.uint32());
-                    break;
-                case 9:
-                    message.fee = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.token = reader.string();
+                        break;
+                    case 2:
+                        message.contractAddress = reader.string();
+                        break;
+                    case 3:
+                        message.from = reader.string();
+                        break;
+                    case 4:
+                        message.to = reader.string();
+                        break;
+                    case 5:
+                        message.memo = reader.string();
+                        break;
+                    case 6:
+                        message.value = reader.string();
+                        break;
+                    case 7:
+                        message.latestBlock = $root.protoc.LatestBlock.decode(reader, reader.uint32());
+                        break;
+                    case 8:
+                        message.override = $root.protoc.Override.decode(reader, reader.uint32());
+                        break;
+                    case 9:
+                        message.fee = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -5366,8 +5115,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         TronTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -5380,39 +5128,29 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         TronTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.token != null && message.hasOwnProperty("token"))
-                if (!$util.isString(message.token))
-                    return "token: string expected";
-            if (message.contractAddress != null && message.hasOwnProperty("contractAddress"))
-                if (!$util.isString(message.contractAddress))
-                    return "contractAddress: string expected";
-            if (message.from != null && message.hasOwnProperty("from"))
-                if (!$util.isString(message.from))
-                    return "from: string expected";
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (!$util.isString(message.value))
-                    return "value: string expected";
-            if (message.latestBlock != null && message.hasOwnProperty("latestBlock")) {
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.token != null && message.hasOwnProperty('token'))
+                if (!$util.isString(message.token)) return 'token: string expected';
+            if (message.contractAddress != null && message.hasOwnProperty('contractAddress'))
+                if (!$util.isString(message.contractAddress)) return 'contractAddress: string expected';
+            if (message.from != null && message.hasOwnProperty('from'))
+                if (!$util.isString(message.from)) return 'from: string expected';
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (!$util.isString(message.value)) return 'value: string expected';
+            if (message.latestBlock != null && message.hasOwnProperty('latestBlock')) {
                 let error = $root.protoc.LatestBlock.verify(message.latestBlock);
-                if (error)
-                    return "latestBlock." + error;
+                if (error) return 'latestBlock.' + error;
             }
-            if (message.override != null && message.hasOwnProperty("override")) {
+            if (message.override != null && message.hasOwnProperty('override')) {
                 let error = $root.protoc.Override.verify(message.override);
-                if (error)
-                    return "override." + error;
+                if (error) return 'override.' + error;
             }
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (!$util.isInteger(message.fee))
-                    return "fee: integer expected";
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (!$util.isInteger(message.fee)) return 'fee: integer expected';
             return null;
         };
 
@@ -5425,33 +5163,24 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.TronTx} TronTx
          */
         TronTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.TronTx)
-                return object;
+            if (object instanceof $root.protoc.TronTx) return object;
             let message = new $root.protoc.TronTx();
-            if (object.token != null)
-                message.token = String(object.token);
-            if (object.contractAddress != null)
-                message.contractAddress = String(object.contractAddress);
-            if (object.from != null)
-                message.from = String(object.from);
-            if (object.to != null)
-                message.to = String(object.to);
-            if (object.memo != null)
-                message.memo = String(object.memo);
-            if (object.value != null)
-                message.value = String(object.value);
+            if (object.token != null) message.token = String(object.token);
+            if (object.contractAddress != null) message.contractAddress = String(object.contractAddress);
+            if (object.from != null) message.from = String(object.from);
+            if (object.to != null) message.to = String(object.to);
+            if (object.memo != null) message.memo = String(object.memo);
+            if (object.value != null) message.value = String(object.value);
             if (object.latestBlock != null) {
-                if (typeof object.latestBlock !== "object")
-                    throw TypeError(".protoc.TronTx.latestBlock: object expected");
+                if (typeof object.latestBlock !== 'object')
+                    throw TypeError('.protoc.TronTx.latestBlock: object expected');
                 message.latestBlock = $root.protoc.LatestBlock.fromObject(object.latestBlock);
             }
             if (object.override != null) {
-                if (typeof object.override !== "object")
-                    throw TypeError(".protoc.TronTx.override: object expected");
+                if (typeof object.override !== 'object') throw TypeError('.protoc.TronTx.override: object expected');
                 message.override = $root.protoc.Override.fromObject(object.override);
             }
-            if (object.fee != null)
-                message.fee = object.fee | 0;
+            if (object.fee != null) message.fee = object.fee | 0;
             return message;
         };
 
@@ -5465,38 +5194,31 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         TronTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.token = "";
-                object.contractAddress = "";
-                object.from = "";
-                object.to = "";
-                object.memo = "";
-                object.value = "";
+                object.token = '';
+                object.contractAddress = '';
+                object.from = '';
+                object.to = '';
+                object.memo = '';
+                object.value = '';
                 object.latestBlock = null;
                 object.override = null;
                 object.fee = 0;
             }
-            if (message.token != null && message.hasOwnProperty("token"))
-                object.token = message.token;
-            if (message.contractAddress != null && message.hasOwnProperty("contractAddress"))
+            if (message.token != null && message.hasOwnProperty('token')) object.token = message.token;
+            if (message.contractAddress != null && message.hasOwnProperty('contractAddress'))
                 object.contractAddress = message.contractAddress;
-            if (message.from != null && message.hasOwnProperty("from"))
-                object.from = message.from;
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
-            if (message.value != null && message.hasOwnProperty("value"))
-                object.value = message.value;
-            if (message.latestBlock != null && message.hasOwnProperty("latestBlock"))
+            if (message.from != null && message.hasOwnProperty('from')) object.from = message.from;
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
+            if (message.value != null && message.hasOwnProperty('value')) object.value = message.value;
+            if (message.latestBlock != null && message.hasOwnProperty('latestBlock'))
                 object.latestBlock = $root.protoc.LatestBlock.toObject(message.latestBlock, options);
-            if (message.override != null && message.hasOwnProperty("override"))
+            if (message.override != null && message.hasOwnProperty('override'))
                 object.override = $root.protoc.Override.toObject(message.override, options);
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                object.fee = message.fee;
+            if (message.fee != null && message.hasOwnProperty('fee')) object.fee = message.fee;
             return object;
         };
 
@@ -5514,8 +5236,7 @@ export const protoc = $root.protoc = (() => {
         return TronTx;
     })();
 
-    protoc.BchTx = (function() {
-
+    protoc.BchTx = (function () {
         /**
          * Properties of a BchTx.
          * @memberof protoc
@@ -5540,8 +5261,7 @@ export const protoc = $root.protoc = (() => {
             this.outputs = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -5550,7 +5270,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.BchTx
          * @instance
          */
-        BchTx.prototype.fee = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BchTx.prototype.fee = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * BchTx dustThreshold.
@@ -5566,7 +5286,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.BchTx
          * @instance
          */
-        BchTx.prototype.memo = "";
+        BchTx.prototype.memo = '';
 
         /**
          * BchTx inputs.
@@ -5606,20 +5326,25 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         BchTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.fee);
-            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, "dustThreshold"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dustThreshold);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.memo);
+            if (!writer) writer = $Writer.create();
+            if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.fee);
+            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, 'dustThreshold'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.dustThreshold);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.memo);
             if (message.inputs != null && message.inputs.length)
                 for (let i = 0; i < message.inputs.length; ++i)
-                    $root.protoc.BchTx.Input.encode(message.inputs[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    $root.protoc.BchTx.Input.encode(
+                        message.inputs[i],
+                        writer.uint32(/* id 4, wireType 2 =*/ 34).fork(),
+                    ).ldelim();
             if (message.outputs != null && message.outputs.length)
                 for (let i = 0; i < message.outputs.length; ++i)
-                    $root.protoc.Output.encode(message.outputs[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    $root.protoc.Output.encode(
+                        message.outputs[i],
+                        writer.uint32(/* id 5, wireType 2 =*/ 42).fork(),
+                    ).ldelim();
             return writer;
         };
 
@@ -5648,34 +5373,32 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         BchTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.BchTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.BchTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.fee = reader.int64();
-                    break;
-                case 2:
-                    message.dustThreshold = reader.int32();
-                    break;
-                case 3:
-                    message.memo = reader.string();
-                    break;
-                case 4:
-                    if (!(message.inputs && message.inputs.length))
-                        message.inputs = [];
-                    message.inputs.push($root.protoc.BchTx.Input.decode(reader, reader.uint32()));
-                    break;
-                case 5:
-                    if (!(message.outputs && message.outputs.length))
-                        message.outputs = [];
-                    message.outputs.push($root.protoc.Output.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.fee = reader.int64();
+                        break;
+                    case 2:
+                        message.dustThreshold = reader.int32();
+                        break;
+                    case 3:
+                        message.memo = reader.string();
+                        break;
+                    case 4:
+                        if (!(message.inputs && message.inputs.length)) message.inputs = [];
+                        message.inputs.push($root.protoc.BchTx.Input.decode(reader, reader.uint32()));
+                        break;
+                    case 5:
+                        if (!(message.outputs && message.outputs.length)) message.outputs = [];
+                        message.outputs.push($root.protoc.Output.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -5692,8 +5415,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         BchTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -5706,33 +5428,29 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         BchTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (!$util.isInteger(message.fee) && !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high)))
-                    return "fee: integer|Long expected";
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
-                if (!$util.isInteger(message.dustThreshold))
-                    return "dustThreshold: integer expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.inputs != null && message.hasOwnProperty("inputs")) {
-                if (!Array.isArray(message.inputs))
-                    return "inputs: array expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (
+                    !$util.isInteger(message.fee) &&
+                    !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high))
+                )
+                    return 'fee: integer|Long expected';
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
+                if (!$util.isInteger(message.dustThreshold)) return 'dustThreshold: integer expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.inputs != null && message.hasOwnProperty('inputs')) {
+                if (!Array.isArray(message.inputs)) return 'inputs: array expected';
                 for (let i = 0; i < message.inputs.length; ++i) {
                     let error = $root.protoc.BchTx.Input.verify(message.inputs[i]);
-                    if (error)
-                        return "inputs." + error;
+                    if (error) return 'inputs.' + error;
                 }
             }
-            if (message.outputs != null && message.hasOwnProperty("outputs")) {
-                if (!Array.isArray(message.outputs))
-                    return "outputs: array expected";
+            if (message.outputs != null && message.hasOwnProperty('outputs')) {
+                if (!Array.isArray(message.outputs)) return 'outputs: array expected';
                 for (let i = 0; i < message.outputs.length; ++i) {
                     let error = $root.protoc.Output.verify(message.outputs[i]);
-                    if (error)
-                        return "outputs." + error;
+                    if (error) return 'outputs.' + error;
                 }
             }
             return null;
@@ -5747,39 +5465,30 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.BchTx} BchTx
          */
         BchTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.BchTx)
-                return object;
+            if (object instanceof $root.protoc.BchTx) return object;
             let message = new $root.protoc.BchTx();
             if (object.fee != null)
-                if ($util.Long)
-                    (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
-                else if (typeof object.fee === "string")
-                    message.fee = parseInt(object.fee, 10);
-                else if (typeof object.fee === "number")
-                    message.fee = object.fee;
-                else if (typeof object.fee === "object")
+                if ($util.Long) (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
+                else if (typeof object.fee === 'string') message.fee = parseInt(object.fee, 10);
+                else if (typeof object.fee === 'number') message.fee = object.fee;
+                else if (typeof object.fee === 'object')
                     message.fee = new $util.LongBits(object.fee.low >>> 0, object.fee.high >>> 0).toNumber();
-            if (object.dustThreshold != null)
-                message.dustThreshold = object.dustThreshold | 0;
-            if (object.memo != null)
-                message.memo = String(object.memo);
+            if (object.dustThreshold != null) message.dustThreshold = object.dustThreshold | 0;
+            if (object.memo != null) message.memo = String(object.memo);
             if (object.inputs) {
-                if (!Array.isArray(object.inputs))
-                    throw TypeError(".protoc.BchTx.inputs: array expected");
+                if (!Array.isArray(object.inputs)) throw TypeError('.protoc.BchTx.inputs: array expected');
                 message.inputs = [];
                 for (let i = 0; i < object.inputs.length; ++i) {
-                    if (typeof object.inputs[i] !== "object")
-                        throw TypeError(".protoc.BchTx.inputs: object expected");
+                    if (typeof object.inputs[i] !== 'object') throw TypeError('.protoc.BchTx.inputs: object expected');
                     message.inputs[i] = $root.protoc.BchTx.Input.fromObject(object.inputs[i]);
                 }
             }
             if (object.outputs) {
-                if (!Array.isArray(object.outputs))
-                    throw TypeError(".protoc.BchTx.outputs: array expected");
+                if (!Array.isArray(object.outputs)) throw TypeError('.protoc.BchTx.outputs: array expected');
                 message.outputs = [];
                 for (let i = 0; i < object.outputs.length; ++i) {
-                    if (typeof object.outputs[i] !== "object")
-                        throw TypeError(".protoc.BchTx.outputs: object expected");
+                    if (typeof object.outputs[i] !== 'object')
+                        throw TypeError('.protoc.BchTx.outputs: object expected');
                     message.outputs[i] = $root.protoc.Output.fromObject(object.outputs[i]);
                 }
             }
@@ -5796,8 +5505,7 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         BchTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.arrays || options.defaults) {
                 object.inputs = [];
@@ -5806,21 +5514,25 @@ export const protoc = $root.protoc = (() => {
             if (options.defaults) {
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.fee = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.fee = options.longs === String ? "0" : 0;
+                    object.fee =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.fee = options.longs === String ? '0' : 0;
                 object.dustThreshold = 0;
-                object.memo = "";
+                object.memo = '';
             }
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (typeof message.fee === "number")
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (typeof message.fee === 'number')
                     object.fee = options.longs === String ? String(message.fee) : message.fee;
                 else
-                    object.fee = options.longs === String ? $util.Long.prototype.toString.call(message.fee) : options.longs === Number ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber() : message.fee;
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
+                    object.fee =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.fee)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber()
+                            : message.fee;
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
                 object.dustThreshold = message.dustThreshold;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
             if (message.inputs && message.inputs.length) {
                 object.inputs = [];
                 for (let j = 0; j < message.inputs.length; ++j)
@@ -5845,8 +5557,7 @@ export const protoc = $root.protoc = (() => {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        BchTx.Input = (function() {
-
+        BchTx.Input = (function () {
             /**
              * Properties of an Input.
              * @memberof protoc.BchTx
@@ -5869,8 +5580,7 @@ export const protoc = $root.protoc = (() => {
             function Input(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -5879,7 +5589,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.BchTx.Input
              * @instance
              */
-            Input.prototype.hash = "";
+            Input.prototype.hash = '';
 
             /**
              * Input index.
@@ -5895,7 +5605,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.BchTx.Input
              * @instance
              */
-            Input.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Input.prototype.value = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Input pubkey.
@@ -5903,7 +5613,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.BchTx.Input
              * @instance
              */
-            Input.prototype.pubkey = "";
+            Input.prototype.pubkey = '';
 
             /**
              * Input ownerKeyPath.
@@ -5911,7 +5621,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.BchTx.Input
              * @instance
              */
-            Input.prototype.ownerKeyPath = "";
+            Input.prototype.ownerKeyPath = '';
 
             /**
              * Creates a new Input instance using the specified properties.
@@ -5935,18 +5645,17 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Input.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.hash != null && Object.hasOwnProperty.call(message, "hash"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.hash);
-                if (message.index != null && Object.hasOwnProperty.call(message, "index"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.index);
-                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.value);
-                if (message.pubkey != null && Object.hasOwnProperty.call(message, "pubkey"))
-                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.pubkey);
-                if (message.ownerKeyPath != null && Object.hasOwnProperty.call(message, "ownerKeyPath"))
-                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.ownerKeyPath);
+                if (!writer) writer = $Writer.create();
+                if (message.hash != null && Object.hasOwnProperty.call(message, 'hash'))
+                    writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.hash);
+                if (message.index != null && Object.hasOwnProperty.call(message, 'index'))
+                    writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.index);
+                if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                    writer.uint32(/* id 3, wireType 0 =*/ 24).int64(message.value);
+                if (message.pubkey != null && Object.hasOwnProperty.call(message, 'pubkey'))
+                    writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.pubkey);
+                if (message.ownerKeyPath != null && Object.hasOwnProperty.call(message, 'ownerKeyPath'))
+                    writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.ownerKeyPath);
                 return writer;
             };
 
@@ -5975,30 +5684,30 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.BchTx.Input();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.BchTx.Input();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.hash = reader.string();
-                        break;
-                    case 2:
-                        message.index = reader.int32();
-                        break;
-                    case 3:
-                        message.value = reader.int64();
-                        break;
-                    case 4:
-                        message.pubkey = reader.string();
-                        break;
-                    case 5:
-                        message.ownerKeyPath = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.hash = reader.string();
+                            break;
+                        case 2:
+                            message.index = reader.int32();
+                            break;
+                        case 3:
+                            message.value = reader.int64();
+                            break;
+                        case 4:
+                            message.pubkey = reader.string();
+                            break;
+                        case 5:
+                            message.ownerKeyPath = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -6015,8 +5724,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -6029,23 +5737,21 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Input.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.hash != null && message.hasOwnProperty("hash"))
-                    if (!$util.isString(message.hash))
-                        return "hash: string expected";
-                if (message.index != null && message.hasOwnProperty("index"))
-                    if (!$util.isInteger(message.index))
-                        return "index: integer expected";
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
-                        return "value: integer|Long expected";
-                if (message.pubkey != null && message.hasOwnProperty("pubkey"))
-                    if (!$util.isString(message.pubkey))
-                        return "pubkey: string expected";
-                if (message.ownerKeyPath != null && message.hasOwnProperty("ownerKeyPath"))
-                    if (!$util.isString(message.ownerKeyPath))
-                        return "ownerKeyPath: string expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.hash != null && message.hasOwnProperty('hash'))
+                    if (!$util.isString(message.hash)) return 'hash: string expected';
+                if (message.index != null && message.hasOwnProperty('index'))
+                    if (!$util.isInteger(message.index)) return 'index: integer expected';
+                if (message.value != null && message.hasOwnProperty('value'))
+                    if (
+                        !$util.isInteger(message.value) &&
+                        !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high))
+                    )
+                        return 'value: integer|Long expected';
+                if (message.pubkey != null && message.hasOwnProperty('pubkey'))
+                    if (!$util.isString(message.pubkey)) return 'pubkey: string expected';
+                if (message.ownerKeyPath != null && message.hasOwnProperty('ownerKeyPath'))
+                    if (!$util.isString(message.ownerKeyPath)) return 'ownerKeyPath: string expected';
                 return null;
             };
 
@@ -6058,26 +5764,18 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.BchTx.Input} Input
              */
             Input.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.BchTx.Input)
-                    return object;
+                if (object instanceof $root.protoc.BchTx.Input) return object;
                 let message = new $root.protoc.BchTx.Input();
-                if (object.hash != null)
-                    message.hash = String(object.hash);
-                if (object.index != null)
-                    message.index = object.index | 0;
+                if (object.hash != null) message.hash = String(object.hash);
+                if (object.index != null) message.index = object.index | 0;
                 if (object.value != null)
-                    if ($util.Long)
-                        (message.value = $util.Long.fromValue(object.value)).unsigned = false;
-                    else if (typeof object.value === "string")
-                        message.value = parseInt(object.value, 10);
-                    else if (typeof object.value === "number")
-                        message.value = object.value;
-                    else if (typeof object.value === "object")
+                    if ($util.Long) (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                    else if (typeof object.value === 'string') message.value = parseInt(object.value, 10);
+                    else if (typeof object.value === 'number') message.value = object.value;
+                    else if (typeof object.value === 'object')
                         message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
-                if (object.pubkey != null)
-                    message.pubkey = String(object.pubkey);
-                if (object.ownerKeyPath != null)
-                    message.ownerKeyPath = String(object.ownerKeyPath);
+                if (object.pubkey != null) message.pubkey = String(object.pubkey);
+                if (object.ownerKeyPath != null) message.ownerKeyPath = String(object.ownerKeyPath);
                 return message;
             };
 
@@ -6091,32 +5789,37 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Input.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
-                    object.hash = "";
+                    object.hash = '';
                     object.index = 0;
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.value = options.longs === String ? "0" : 0;
-                    object.pubkey = "";
-                    object.ownerKeyPath = "";
+                        object.value =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.value = options.longs === String ? '0' : 0;
+                    object.pubkey = '';
+                    object.ownerKeyPath = '';
                 }
-                if (message.hash != null && message.hasOwnProperty("hash"))
-                    object.hash = message.hash;
-                if (message.index != null && message.hasOwnProperty("index"))
-                    object.index = message.index;
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (typeof message.value === "number")
+                if (message.hash != null && message.hasOwnProperty('hash')) object.hash = message.hash;
+                if (message.index != null && message.hasOwnProperty('index')) object.index = message.index;
+                if (message.value != null && message.hasOwnProperty('value'))
+                    if (typeof message.value === 'number')
                         object.value = options.longs === String ? String(message.value) : message.value;
                     else
-                        object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
-                if (message.pubkey != null && message.hasOwnProperty("pubkey"))
-                    object.pubkey = message.pubkey;
-                if (message.ownerKeyPath != null && message.hasOwnProperty("ownerKeyPath"))
+                        object.value =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.value)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber()
+                                : message.value;
+                if (message.pubkey != null && message.hasOwnProperty('pubkey')) object.pubkey = message.pubkey;
+                if (message.ownerKeyPath != null && message.hasOwnProperty('ownerKeyPath'))
                     object.ownerKeyPath = message.ownerKeyPath;
                 return object;
             };
@@ -6138,8 +5841,7 @@ export const protoc = $root.protoc = (() => {
         return BchTx;
     })();
 
-    protoc.DashTx = (function() {
-
+    protoc.DashTx = (function () {
         /**
          * Properties of a DashTx.
          * @memberof protoc
@@ -6164,8 +5866,7 @@ export const protoc = $root.protoc = (() => {
             this.outputs = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -6174,7 +5875,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DashTx
          * @instance
          */
-        DashTx.prototype.fee = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DashTx.prototype.fee = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DashTx dustThreshold.
@@ -6190,7 +5891,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DashTx
          * @instance
          */
-        DashTx.prototype.memo = "";
+        DashTx.prototype.memo = '';
 
         /**
          * DashTx inputs.
@@ -6230,20 +5931,25 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         DashTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.fee);
-            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, "dustThreshold"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dustThreshold);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.memo);
+            if (!writer) writer = $Writer.create();
+            if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.fee);
+            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, 'dustThreshold'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.dustThreshold);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.memo);
             if (message.inputs != null && message.inputs.length)
                 for (let i = 0; i < message.inputs.length; ++i)
-                    $root.protoc.DashTx.Input.encode(message.inputs[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    $root.protoc.DashTx.Input.encode(
+                        message.inputs[i],
+                        writer.uint32(/* id 4, wireType 2 =*/ 34).fork(),
+                    ).ldelim();
             if (message.outputs != null && message.outputs.length)
                 for (let i = 0; i < message.outputs.length; ++i)
-                    $root.protoc.Output.encode(message.outputs[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    $root.protoc.Output.encode(
+                        message.outputs[i],
+                        writer.uint32(/* id 5, wireType 2 =*/ 42).fork(),
+                    ).ldelim();
             return writer;
         };
 
@@ -6272,34 +5978,32 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DashTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.DashTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.DashTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.fee = reader.int64();
-                    break;
-                case 2:
-                    message.dustThreshold = reader.int32();
-                    break;
-                case 3:
-                    message.memo = reader.string();
-                    break;
-                case 4:
-                    if (!(message.inputs && message.inputs.length))
-                        message.inputs = [];
-                    message.inputs.push($root.protoc.DashTx.Input.decode(reader, reader.uint32()));
-                    break;
-                case 5:
-                    if (!(message.outputs && message.outputs.length))
-                        message.outputs = [];
-                    message.outputs.push($root.protoc.Output.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.fee = reader.int64();
+                        break;
+                    case 2:
+                        message.dustThreshold = reader.int32();
+                        break;
+                    case 3:
+                        message.memo = reader.string();
+                        break;
+                    case 4:
+                        if (!(message.inputs && message.inputs.length)) message.inputs = [];
+                        message.inputs.push($root.protoc.DashTx.Input.decode(reader, reader.uint32()));
+                        break;
+                    case 5:
+                        if (!(message.outputs && message.outputs.length)) message.outputs = [];
+                        message.outputs.push($root.protoc.Output.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -6316,8 +6020,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DashTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -6330,33 +6033,29 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         DashTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (!$util.isInteger(message.fee) && !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high)))
-                    return "fee: integer|Long expected";
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
-                if (!$util.isInteger(message.dustThreshold))
-                    return "dustThreshold: integer expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.inputs != null && message.hasOwnProperty("inputs")) {
-                if (!Array.isArray(message.inputs))
-                    return "inputs: array expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (
+                    !$util.isInteger(message.fee) &&
+                    !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high))
+                )
+                    return 'fee: integer|Long expected';
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
+                if (!$util.isInteger(message.dustThreshold)) return 'dustThreshold: integer expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.inputs != null && message.hasOwnProperty('inputs')) {
+                if (!Array.isArray(message.inputs)) return 'inputs: array expected';
                 for (let i = 0; i < message.inputs.length; ++i) {
                     let error = $root.protoc.DashTx.Input.verify(message.inputs[i]);
-                    if (error)
-                        return "inputs." + error;
+                    if (error) return 'inputs.' + error;
                 }
             }
-            if (message.outputs != null && message.hasOwnProperty("outputs")) {
-                if (!Array.isArray(message.outputs))
-                    return "outputs: array expected";
+            if (message.outputs != null && message.hasOwnProperty('outputs')) {
+                if (!Array.isArray(message.outputs)) return 'outputs: array expected';
                 for (let i = 0; i < message.outputs.length; ++i) {
                     let error = $root.protoc.Output.verify(message.outputs[i]);
-                    if (error)
-                        return "outputs." + error;
+                    if (error) return 'outputs.' + error;
                 }
             }
             return null;
@@ -6371,39 +6070,30 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.DashTx} DashTx
          */
         DashTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.DashTx)
-                return object;
+            if (object instanceof $root.protoc.DashTx) return object;
             let message = new $root.protoc.DashTx();
             if (object.fee != null)
-                if ($util.Long)
-                    (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
-                else if (typeof object.fee === "string")
-                    message.fee = parseInt(object.fee, 10);
-                else if (typeof object.fee === "number")
-                    message.fee = object.fee;
-                else if (typeof object.fee === "object")
+                if ($util.Long) (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
+                else if (typeof object.fee === 'string') message.fee = parseInt(object.fee, 10);
+                else if (typeof object.fee === 'number') message.fee = object.fee;
+                else if (typeof object.fee === 'object')
                     message.fee = new $util.LongBits(object.fee.low >>> 0, object.fee.high >>> 0).toNumber();
-            if (object.dustThreshold != null)
-                message.dustThreshold = object.dustThreshold | 0;
-            if (object.memo != null)
-                message.memo = String(object.memo);
+            if (object.dustThreshold != null) message.dustThreshold = object.dustThreshold | 0;
+            if (object.memo != null) message.memo = String(object.memo);
             if (object.inputs) {
-                if (!Array.isArray(object.inputs))
-                    throw TypeError(".protoc.DashTx.inputs: array expected");
+                if (!Array.isArray(object.inputs)) throw TypeError('.protoc.DashTx.inputs: array expected');
                 message.inputs = [];
                 for (let i = 0; i < object.inputs.length; ++i) {
-                    if (typeof object.inputs[i] !== "object")
-                        throw TypeError(".protoc.DashTx.inputs: object expected");
+                    if (typeof object.inputs[i] !== 'object') throw TypeError('.protoc.DashTx.inputs: object expected');
                     message.inputs[i] = $root.protoc.DashTx.Input.fromObject(object.inputs[i]);
                 }
             }
             if (object.outputs) {
-                if (!Array.isArray(object.outputs))
-                    throw TypeError(".protoc.DashTx.outputs: array expected");
+                if (!Array.isArray(object.outputs)) throw TypeError('.protoc.DashTx.outputs: array expected');
                 message.outputs = [];
                 for (let i = 0; i < object.outputs.length; ++i) {
-                    if (typeof object.outputs[i] !== "object")
-                        throw TypeError(".protoc.DashTx.outputs: object expected");
+                    if (typeof object.outputs[i] !== 'object')
+                        throw TypeError('.protoc.DashTx.outputs: object expected');
                     message.outputs[i] = $root.protoc.Output.fromObject(object.outputs[i]);
                 }
             }
@@ -6420,8 +6110,7 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         DashTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.arrays || options.defaults) {
                 object.inputs = [];
@@ -6430,21 +6119,25 @@ export const protoc = $root.protoc = (() => {
             if (options.defaults) {
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.fee = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.fee = options.longs === String ? "0" : 0;
+                    object.fee =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.fee = options.longs === String ? '0' : 0;
                 object.dustThreshold = 0;
-                object.memo = "";
+                object.memo = '';
             }
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (typeof message.fee === "number")
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (typeof message.fee === 'number')
                     object.fee = options.longs === String ? String(message.fee) : message.fee;
                 else
-                    object.fee = options.longs === String ? $util.Long.prototype.toString.call(message.fee) : options.longs === Number ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber() : message.fee;
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
+                    object.fee =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.fee)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber()
+                            : message.fee;
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
                 object.dustThreshold = message.dustThreshold;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
             if (message.inputs && message.inputs.length) {
                 object.inputs = [];
                 for (let j = 0; j < message.inputs.length; ++j)
@@ -6469,8 +6162,7 @@ export const protoc = $root.protoc = (() => {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        DashTx.Input = (function() {
-
+        DashTx.Input = (function () {
             /**
              * Properties of an Input.
              * @memberof protoc.DashTx
@@ -6493,8 +6185,7 @@ export const protoc = $root.protoc = (() => {
             function Input(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -6503,7 +6194,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.DashTx.Input
              * @instance
              */
-            Input.prototype.hash = "";
+            Input.prototype.hash = '';
 
             /**
              * Input index.
@@ -6519,7 +6210,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.DashTx.Input
              * @instance
              */
-            Input.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Input.prototype.value = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Input pubkey.
@@ -6527,7 +6218,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.DashTx.Input
              * @instance
              */
-            Input.prototype.pubkey = "";
+            Input.prototype.pubkey = '';
 
             /**
              * Input ownerKeyPath.
@@ -6535,7 +6226,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.DashTx.Input
              * @instance
              */
-            Input.prototype.ownerKeyPath = "";
+            Input.prototype.ownerKeyPath = '';
 
             /**
              * Creates a new Input instance using the specified properties.
@@ -6559,18 +6250,17 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Input.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.hash != null && Object.hasOwnProperty.call(message, "hash"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.hash);
-                if (message.index != null && Object.hasOwnProperty.call(message, "index"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.index);
-                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.value);
-                if (message.pubkey != null && Object.hasOwnProperty.call(message, "pubkey"))
-                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.pubkey);
-                if (message.ownerKeyPath != null && Object.hasOwnProperty.call(message, "ownerKeyPath"))
-                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.ownerKeyPath);
+                if (!writer) writer = $Writer.create();
+                if (message.hash != null && Object.hasOwnProperty.call(message, 'hash'))
+                    writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.hash);
+                if (message.index != null && Object.hasOwnProperty.call(message, 'index'))
+                    writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.index);
+                if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                    writer.uint32(/* id 3, wireType 0 =*/ 24).int64(message.value);
+                if (message.pubkey != null && Object.hasOwnProperty.call(message, 'pubkey'))
+                    writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.pubkey);
+                if (message.ownerKeyPath != null && Object.hasOwnProperty.call(message, 'ownerKeyPath'))
+                    writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.ownerKeyPath);
                 return writer;
             };
 
@@ -6599,30 +6289,30 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.DashTx.Input();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.DashTx.Input();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.hash = reader.string();
-                        break;
-                    case 2:
-                        message.index = reader.int32();
-                        break;
-                    case 3:
-                        message.value = reader.int64();
-                        break;
-                    case 4:
-                        message.pubkey = reader.string();
-                        break;
-                    case 5:
-                        message.ownerKeyPath = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.hash = reader.string();
+                            break;
+                        case 2:
+                            message.index = reader.int32();
+                            break;
+                        case 3:
+                            message.value = reader.int64();
+                            break;
+                        case 4:
+                            message.pubkey = reader.string();
+                            break;
+                        case 5:
+                            message.ownerKeyPath = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -6639,8 +6329,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -6653,23 +6342,21 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Input.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.hash != null && message.hasOwnProperty("hash"))
-                    if (!$util.isString(message.hash))
-                        return "hash: string expected";
-                if (message.index != null && message.hasOwnProperty("index"))
-                    if (!$util.isInteger(message.index))
-                        return "index: integer expected";
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
-                        return "value: integer|Long expected";
-                if (message.pubkey != null && message.hasOwnProperty("pubkey"))
-                    if (!$util.isString(message.pubkey))
-                        return "pubkey: string expected";
-                if (message.ownerKeyPath != null && message.hasOwnProperty("ownerKeyPath"))
-                    if (!$util.isString(message.ownerKeyPath))
-                        return "ownerKeyPath: string expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.hash != null && message.hasOwnProperty('hash'))
+                    if (!$util.isString(message.hash)) return 'hash: string expected';
+                if (message.index != null && message.hasOwnProperty('index'))
+                    if (!$util.isInteger(message.index)) return 'index: integer expected';
+                if (message.value != null && message.hasOwnProperty('value'))
+                    if (
+                        !$util.isInteger(message.value) &&
+                        !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high))
+                    )
+                        return 'value: integer|Long expected';
+                if (message.pubkey != null && message.hasOwnProperty('pubkey'))
+                    if (!$util.isString(message.pubkey)) return 'pubkey: string expected';
+                if (message.ownerKeyPath != null && message.hasOwnProperty('ownerKeyPath'))
+                    if (!$util.isString(message.ownerKeyPath)) return 'ownerKeyPath: string expected';
                 return null;
             };
 
@@ -6682,26 +6369,18 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.DashTx.Input} Input
              */
             Input.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.DashTx.Input)
-                    return object;
+                if (object instanceof $root.protoc.DashTx.Input) return object;
                 let message = new $root.protoc.DashTx.Input();
-                if (object.hash != null)
-                    message.hash = String(object.hash);
-                if (object.index != null)
-                    message.index = object.index | 0;
+                if (object.hash != null) message.hash = String(object.hash);
+                if (object.index != null) message.index = object.index | 0;
                 if (object.value != null)
-                    if ($util.Long)
-                        (message.value = $util.Long.fromValue(object.value)).unsigned = false;
-                    else if (typeof object.value === "string")
-                        message.value = parseInt(object.value, 10);
-                    else if (typeof object.value === "number")
-                        message.value = object.value;
-                    else if (typeof object.value === "object")
+                    if ($util.Long) (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                    else if (typeof object.value === 'string') message.value = parseInt(object.value, 10);
+                    else if (typeof object.value === 'number') message.value = object.value;
+                    else if (typeof object.value === 'object')
                         message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
-                if (object.pubkey != null)
-                    message.pubkey = String(object.pubkey);
-                if (object.ownerKeyPath != null)
-                    message.ownerKeyPath = String(object.ownerKeyPath);
+                if (object.pubkey != null) message.pubkey = String(object.pubkey);
+                if (object.ownerKeyPath != null) message.ownerKeyPath = String(object.ownerKeyPath);
                 return message;
             };
 
@@ -6715,32 +6394,37 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Input.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
-                    object.hash = "";
+                    object.hash = '';
                     object.index = 0;
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.value = options.longs === String ? "0" : 0;
-                    object.pubkey = "";
-                    object.ownerKeyPath = "";
+                        object.value =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.value = options.longs === String ? '0' : 0;
+                    object.pubkey = '';
+                    object.ownerKeyPath = '';
                 }
-                if (message.hash != null && message.hasOwnProperty("hash"))
-                    object.hash = message.hash;
-                if (message.index != null && message.hasOwnProperty("index"))
-                    object.index = message.index;
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (typeof message.value === "number")
+                if (message.hash != null && message.hasOwnProperty('hash')) object.hash = message.hash;
+                if (message.index != null && message.hasOwnProperty('index')) object.index = message.index;
+                if (message.value != null && message.hasOwnProperty('value'))
+                    if (typeof message.value === 'number')
                         object.value = options.longs === String ? String(message.value) : message.value;
                     else
-                        object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
-                if (message.pubkey != null && message.hasOwnProperty("pubkey"))
-                    object.pubkey = message.pubkey;
-                if (message.ownerKeyPath != null && message.hasOwnProperty("ownerKeyPath"))
+                        object.value =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.value)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber()
+                                : message.value;
+                if (message.pubkey != null && message.hasOwnProperty('pubkey')) object.pubkey = message.pubkey;
+                if (message.ownerKeyPath != null && message.hasOwnProperty('ownerKeyPath'))
                     object.ownerKeyPath = message.ownerKeyPath;
                 return object;
             };
@@ -6762,8 +6446,7 @@ export const protoc = $root.protoc = (() => {
         return DashTx;
     })();
 
-    protoc.LtcTx = (function() {
-
+    protoc.LtcTx = (function () {
         /**
          * Properties of a LtcTx.
          * @memberof protoc
@@ -6788,8 +6471,7 @@ export const protoc = $root.protoc = (() => {
             this.outputs = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -6798,7 +6480,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.LtcTx
          * @instance
          */
-        LtcTx.prototype.fee = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        LtcTx.prototype.fee = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * LtcTx dustThreshold.
@@ -6814,7 +6496,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.LtcTx
          * @instance
          */
-        LtcTx.prototype.memo = "";
+        LtcTx.prototype.memo = '';
 
         /**
          * LtcTx inputs.
@@ -6854,20 +6536,25 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         LtcTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.fee);
-            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, "dustThreshold"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dustThreshold);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.memo);
+            if (!writer) writer = $Writer.create();
+            if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.fee);
+            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, 'dustThreshold'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.dustThreshold);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.memo);
             if (message.inputs != null && message.inputs.length)
                 for (let i = 0; i < message.inputs.length; ++i)
-                    $root.protoc.Input.encode(message.inputs[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    $root.protoc.Input.encode(
+                        message.inputs[i],
+                        writer.uint32(/* id 4, wireType 2 =*/ 34).fork(),
+                    ).ldelim();
             if (message.outputs != null && message.outputs.length)
                 for (let i = 0; i < message.outputs.length; ++i)
-                    $root.protoc.Output.encode(message.outputs[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    $root.protoc.Output.encode(
+                        message.outputs[i],
+                        writer.uint32(/* id 5, wireType 2 =*/ 42).fork(),
+                    ).ldelim();
             return writer;
         };
 
@@ -6896,34 +6583,32 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         LtcTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.LtcTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.LtcTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.fee = reader.int64();
-                    break;
-                case 2:
-                    message.dustThreshold = reader.int32();
-                    break;
-                case 3:
-                    message.memo = reader.string();
-                    break;
-                case 4:
-                    if (!(message.inputs && message.inputs.length))
-                        message.inputs = [];
-                    message.inputs.push($root.protoc.Input.decode(reader, reader.uint32()));
-                    break;
-                case 5:
-                    if (!(message.outputs && message.outputs.length))
-                        message.outputs = [];
-                    message.outputs.push($root.protoc.Output.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.fee = reader.int64();
+                        break;
+                    case 2:
+                        message.dustThreshold = reader.int32();
+                        break;
+                    case 3:
+                        message.memo = reader.string();
+                        break;
+                    case 4:
+                        if (!(message.inputs && message.inputs.length)) message.inputs = [];
+                        message.inputs.push($root.protoc.Input.decode(reader, reader.uint32()));
+                        break;
+                    case 5:
+                        if (!(message.outputs && message.outputs.length)) message.outputs = [];
+                        message.outputs.push($root.protoc.Output.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -6940,8 +6625,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         LtcTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -6954,33 +6638,29 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         LtcTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (!$util.isInteger(message.fee) && !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high)))
-                    return "fee: integer|Long expected";
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
-                if (!$util.isInteger(message.dustThreshold))
-                    return "dustThreshold: integer expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.inputs != null && message.hasOwnProperty("inputs")) {
-                if (!Array.isArray(message.inputs))
-                    return "inputs: array expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (
+                    !$util.isInteger(message.fee) &&
+                    !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high))
+                )
+                    return 'fee: integer|Long expected';
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
+                if (!$util.isInteger(message.dustThreshold)) return 'dustThreshold: integer expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.inputs != null && message.hasOwnProperty('inputs')) {
+                if (!Array.isArray(message.inputs)) return 'inputs: array expected';
                 for (let i = 0; i < message.inputs.length; ++i) {
                     let error = $root.protoc.Input.verify(message.inputs[i]);
-                    if (error)
-                        return "inputs." + error;
+                    if (error) return 'inputs.' + error;
                 }
             }
-            if (message.outputs != null && message.hasOwnProperty("outputs")) {
-                if (!Array.isArray(message.outputs))
-                    return "outputs: array expected";
+            if (message.outputs != null && message.hasOwnProperty('outputs')) {
+                if (!Array.isArray(message.outputs)) return 'outputs: array expected';
                 for (let i = 0; i < message.outputs.length; ++i) {
                     let error = $root.protoc.Output.verify(message.outputs[i]);
-                    if (error)
-                        return "outputs." + error;
+                    if (error) return 'outputs.' + error;
                 }
             }
             return null;
@@ -6995,39 +6675,30 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.LtcTx} LtcTx
          */
         LtcTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.LtcTx)
-                return object;
+            if (object instanceof $root.protoc.LtcTx) return object;
             let message = new $root.protoc.LtcTx();
             if (object.fee != null)
-                if ($util.Long)
-                    (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
-                else if (typeof object.fee === "string")
-                    message.fee = parseInt(object.fee, 10);
-                else if (typeof object.fee === "number")
-                    message.fee = object.fee;
-                else if (typeof object.fee === "object")
+                if ($util.Long) (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
+                else if (typeof object.fee === 'string') message.fee = parseInt(object.fee, 10);
+                else if (typeof object.fee === 'number') message.fee = object.fee;
+                else if (typeof object.fee === 'object')
                     message.fee = new $util.LongBits(object.fee.low >>> 0, object.fee.high >>> 0).toNumber();
-            if (object.dustThreshold != null)
-                message.dustThreshold = object.dustThreshold | 0;
-            if (object.memo != null)
-                message.memo = String(object.memo);
+            if (object.dustThreshold != null) message.dustThreshold = object.dustThreshold | 0;
+            if (object.memo != null) message.memo = String(object.memo);
             if (object.inputs) {
-                if (!Array.isArray(object.inputs))
-                    throw TypeError(".protoc.LtcTx.inputs: array expected");
+                if (!Array.isArray(object.inputs)) throw TypeError('.protoc.LtcTx.inputs: array expected');
                 message.inputs = [];
                 for (let i = 0; i < object.inputs.length; ++i) {
-                    if (typeof object.inputs[i] !== "object")
-                        throw TypeError(".protoc.LtcTx.inputs: object expected");
+                    if (typeof object.inputs[i] !== 'object') throw TypeError('.protoc.LtcTx.inputs: object expected');
                     message.inputs[i] = $root.protoc.Input.fromObject(object.inputs[i]);
                 }
             }
             if (object.outputs) {
-                if (!Array.isArray(object.outputs))
-                    throw TypeError(".protoc.LtcTx.outputs: array expected");
+                if (!Array.isArray(object.outputs)) throw TypeError('.protoc.LtcTx.outputs: array expected');
                 message.outputs = [];
                 for (let i = 0; i < object.outputs.length; ++i) {
-                    if (typeof object.outputs[i] !== "object")
-                        throw TypeError(".protoc.LtcTx.outputs: object expected");
+                    if (typeof object.outputs[i] !== 'object')
+                        throw TypeError('.protoc.LtcTx.outputs: object expected');
                     message.outputs[i] = $root.protoc.Output.fromObject(object.outputs[i]);
                 }
             }
@@ -7044,8 +6715,7 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         LtcTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.arrays || options.defaults) {
                 object.inputs = [];
@@ -7054,21 +6724,25 @@ export const protoc = $root.protoc = (() => {
             if (options.defaults) {
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.fee = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.fee = options.longs === String ? "0" : 0;
+                    object.fee =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.fee = options.longs === String ? '0' : 0;
                 object.dustThreshold = 0;
-                object.memo = "";
+                object.memo = '';
             }
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (typeof message.fee === "number")
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (typeof message.fee === 'number')
                     object.fee = options.longs === String ? String(message.fee) : message.fee;
                 else
-                    object.fee = options.longs === String ? $util.Long.prototype.toString.call(message.fee) : options.longs === Number ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber() : message.fee;
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
+                    object.fee =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.fee)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber()
+                            : message.fee;
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
                 object.dustThreshold = message.dustThreshold;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
             if (message.inputs && message.inputs.length) {
                 object.inputs = [];
                 for (let j = 0; j < message.inputs.length; ++j)
@@ -7096,8 +6770,7 @@ export const protoc = $root.protoc = (() => {
         return LtcTx;
     })();
 
-    protoc.DcrTx = (function() {
-
+    protoc.DcrTx = (function () {
         /**
          * Properties of a DcrTx.
          * @memberof protoc
@@ -7122,8 +6795,7 @@ export const protoc = $root.protoc = (() => {
             this.inputs = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -7132,7 +6804,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DcrTx
          * @instance
          */
-        DcrTx.prototype.fee = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DcrTx.prototype.fee = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DcrTx to.
@@ -7140,7 +6812,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DcrTx
          * @instance
          */
-        DcrTx.prototype.to = "";
+        DcrTx.prototype.to = '';
 
         /**
          * DcrTx memo.
@@ -7148,7 +6820,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DcrTx
          * @instance
          */
-        DcrTx.prototype.memo = "";
+        DcrTx.prototype.memo = '';
 
         /**
          * DcrTx amount.
@@ -7156,7 +6828,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DcrTx
          * @instance
          */
-        DcrTx.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DcrTx.prototype.amount = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DcrTx inputs.
@@ -7172,7 +6844,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DcrTx
          * @instance
          */
-        DcrTx.prototype.changeAddress = "";
+        DcrTx.prototype.changeAddress = '';
 
         /**
          * Creates a new DcrTx instance using the specified properties.
@@ -7196,21 +6868,23 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         DcrTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.fee);
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.to);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.memo);
-            if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.amount);
+            if (!writer) writer = $Writer.create();
+            if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.fee);
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.to);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.memo);
+            if (message.amount != null && Object.hasOwnProperty.call(message, 'amount'))
+                writer.uint32(/* id 4, wireType 0 =*/ 32).int64(message.amount);
             if (message.inputs != null && message.inputs.length)
                 for (let i = 0; i < message.inputs.length; ++i)
-                    $root.protoc.DcrTx.Input.encode(message.inputs[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.changeAddress != null && Object.hasOwnProperty.call(message, "changeAddress"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.changeAddress);
+                    $root.protoc.DcrTx.Input.encode(
+                        message.inputs[i],
+                        writer.uint32(/* id 5, wireType 2 =*/ 42).fork(),
+                    ).ldelim();
+            if (message.changeAddress != null && Object.hasOwnProperty.call(message, 'changeAddress'))
+                writer.uint32(/* id 6, wireType 2 =*/ 50).string(message.changeAddress);
             return writer;
         };
 
@@ -7239,35 +6913,34 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DcrTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.DcrTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.DcrTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.fee = reader.int64();
-                    break;
-                case 2:
-                    message.to = reader.string();
-                    break;
-                case 3:
-                    message.memo = reader.string();
-                    break;
-                case 4:
-                    message.amount = reader.int64();
-                    break;
-                case 5:
-                    if (!(message.inputs && message.inputs.length))
-                        message.inputs = [];
-                    message.inputs.push($root.protoc.DcrTx.Input.decode(reader, reader.uint32()));
-                    break;
-                case 6:
-                    message.changeAddress = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.fee = reader.int64();
+                        break;
+                    case 2:
+                        message.to = reader.string();
+                        break;
+                    case 3:
+                        message.memo = reader.string();
+                        break;
+                    case 4:
+                        message.amount = reader.int64();
+                        break;
+                    case 5:
+                        if (!(message.inputs && message.inputs.length)) message.inputs = [];
+                        message.inputs.push($root.protoc.DcrTx.Input.decode(reader, reader.uint32()));
+                        break;
+                    case 6:
+                        message.changeAddress = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -7284,8 +6957,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DcrTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -7298,32 +6970,32 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         DcrTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (!$util.isInteger(message.fee) && !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high)))
-                    return "fee: integer|Long expected";
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                if (!$util.isInteger(message.amount) && !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high)))
-                    return "amount: integer|Long expected";
-            if (message.inputs != null && message.hasOwnProperty("inputs")) {
-                if (!Array.isArray(message.inputs))
-                    return "inputs: array expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (
+                    !$util.isInteger(message.fee) &&
+                    !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high))
+                )
+                    return 'fee: integer|Long expected';
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.amount != null && message.hasOwnProperty('amount'))
+                if (
+                    !$util.isInteger(message.amount) &&
+                    !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high))
+                )
+                    return 'amount: integer|Long expected';
+            if (message.inputs != null && message.hasOwnProperty('inputs')) {
+                if (!Array.isArray(message.inputs)) return 'inputs: array expected';
                 for (let i = 0; i < message.inputs.length; ++i) {
                     let error = $root.protoc.DcrTx.Input.verify(message.inputs[i]);
-                    if (error)
-                        return "inputs." + error;
+                    if (error) return 'inputs.' + error;
                 }
             }
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
-                if (!$util.isString(message.changeAddress))
-                    return "changeAddress: string expected";
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
+                if (!$util.isString(message.changeAddress)) return 'changeAddress: string expected';
             return null;
         };
 
@@ -7336,43 +7008,31 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.DcrTx} DcrTx
          */
         DcrTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.DcrTx)
-                return object;
+            if (object instanceof $root.protoc.DcrTx) return object;
             let message = new $root.protoc.DcrTx();
             if (object.fee != null)
-                if ($util.Long)
-                    (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
-                else if (typeof object.fee === "string")
-                    message.fee = parseInt(object.fee, 10);
-                else if (typeof object.fee === "number")
-                    message.fee = object.fee;
-                else if (typeof object.fee === "object")
+                if ($util.Long) (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
+                else if (typeof object.fee === 'string') message.fee = parseInt(object.fee, 10);
+                else if (typeof object.fee === 'number') message.fee = object.fee;
+                else if (typeof object.fee === 'object')
                     message.fee = new $util.LongBits(object.fee.low >>> 0, object.fee.high >>> 0).toNumber();
-            if (object.to != null)
-                message.to = String(object.to);
-            if (object.memo != null)
-                message.memo = String(object.memo);
+            if (object.to != null) message.to = String(object.to);
+            if (object.memo != null) message.memo = String(object.memo);
             if (object.amount != null)
-                if ($util.Long)
-                    (message.amount = $util.Long.fromValue(object.amount)).unsigned = false;
-                else if (typeof object.amount === "string")
-                    message.amount = parseInt(object.amount, 10);
-                else if (typeof object.amount === "number")
-                    message.amount = object.amount;
-                else if (typeof object.amount === "object")
+                if ($util.Long) (message.amount = $util.Long.fromValue(object.amount)).unsigned = false;
+                else if (typeof object.amount === 'string') message.amount = parseInt(object.amount, 10);
+                else if (typeof object.amount === 'number') message.amount = object.amount;
+                else if (typeof object.amount === 'object')
                     message.amount = new $util.LongBits(object.amount.low >>> 0, object.amount.high >>> 0).toNumber();
             if (object.inputs) {
-                if (!Array.isArray(object.inputs))
-                    throw TypeError(".protoc.DcrTx.inputs: array expected");
+                if (!Array.isArray(object.inputs)) throw TypeError('.protoc.DcrTx.inputs: array expected');
                 message.inputs = [];
                 for (let i = 0; i < object.inputs.length; ++i) {
-                    if (typeof object.inputs[i] !== "object")
-                        throw TypeError(".protoc.DcrTx.inputs: object expected");
+                    if (typeof object.inputs[i] !== 'object') throw TypeError('.protoc.DcrTx.inputs: object expected');
                     message.inputs[i] = $root.protoc.DcrTx.Input.fromObject(object.inputs[i]);
                 }
             }
-            if (object.changeAddress != null)
-                message.changeAddress = String(object.changeAddress);
+            if (object.changeAddress != null) message.changeAddress = String(object.changeAddress);
             return message;
         };
 
@@ -7386,46 +7046,52 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         DcrTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
-            if (options.arrays || options.defaults)
-                object.inputs = [];
+            if (options.arrays || options.defaults) object.inputs = [];
             if (options.defaults) {
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.fee = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.fee = options.longs === String ? "0" : 0;
-                object.to = "";
-                object.memo = "";
+                    object.fee =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.fee = options.longs === String ? '0' : 0;
+                object.to = '';
+                object.memo = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.amount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.amount = options.longs === String ? "0" : 0;
-                object.changeAddress = "";
+                    object.amount =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.amount = options.longs === String ? '0' : 0;
+                object.changeAddress = '';
             }
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (typeof message.fee === "number")
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (typeof message.fee === 'number')
                     object.fee = options.longs === String ? String(message.fee) : message.fee;
                 else
-                    object.fee = options.longs === String ? $util.Long.prototype.toString.call(message.fee) : options.longs === Number ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber() : message.fee;
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                if (typeof message.amount === "number")
+                    object.fee =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.fee)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber()
+                            : message.fee;
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
+            if (message.amount != null && message.hasOwnProperty('amount'))
+                if (typeof message.amount === 'number')
                     object.amount = options.longs === String ? String(message.amount) : message.amount;
                 else
-                    object.amount = options.longs === String ? $util.Long.prototype.toString.call(message.amount) : options.longs === Number ? new $util.LongBits(message.amount.low >>> 0, message.amount.high >>> 0).toNumber() : message.amount;
+                    object.amount =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.amount)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.amount.low >>> 0, message.amount.high >>> 0).toNumber()
+                            : message.amount;
             if (message.inputs && message.inputs.length) {
                 object.inputs = [];
                 for (let j = 0; j < message.inputs.length; ++j)
                     object.inputs[j] = $root.protoc.DcrTx.Input.toObject(message.inputs[j], options);
             }
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
                 object.changeAddress = message.changeAddress;
             return object;
         };
@@ -7441,8 +7107,7 @@ export const protoc = $root.protoc = (() => {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        DcrTx.Input = (function() {
-
+        DcrTx.Input = (function () {
             /**
              * Properties of an Input.
              * @memberof protoc.DcrTx
@@ -7464,8 +7129,7 @@ export const protoc = $root.protoc = (() => {
             function Input(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -7474,7 +7138,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.DcrTx.Input
              * @instance
              */
-            Input.prototype.address = "";
+            Input.prototype.address = '';
 
             /**
              * Input txId.
@@ -7482,7 +7146,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.DcrTx.Input
              * @instance
              */
-            Input.prototype.txId = "";
+            Input.prototype.txId = '';
 
             /**
              * Input outputIndex.
@@ -7498,7 +7162,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.DcrTx.Input
              * @instance
              */
-            Input.prototype.atoms = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Input.prototype.atoms = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Creates a new Input instance using the specified properties.
@@ -7522,16 +7186,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Input.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.address != null && Object.hasOwnProperty.call(message, "address"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
-                if (message.txId != null && Object.hasOwnProperty.call(message, "txId"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.txId);
-                if (message.outputIndex != null && Object.hasOwnProperty.call(message, "outputIndex"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.outputIndex);
-                if (message.atoms != null && Object.hasOwnProperty.call(message, "atoms"))
-                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.atoms);
+                if (!writer) writer = $Writer.create();
+                if (message.address != null && Object.hasOwnProperty.call(message, 'address'))
+                    writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.address);
+                if (message.txId != null && Object.hasOwnProperty.call(message, 'txId'))
+                    writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.txId);
+                if (message.outputIndex != null && Object.hasOwnProperty.call(message, 'outputIndex'))
+                    writer.uint32(/* id 3, wireType 0 =*/ 24).int32(message.outputIndex);
+                if (message.atoms != null && Object.hasOwnProperty.call(message, 'atoms'))
+                    writer.uint32(/* id 4, wireType 0 =*/ 32).int64(message.atoms);
                 return writer;
             };
 
@@ -7560,27 +7223,27 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.DcrTx.Input();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.DcrTx.Input();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.address = reader.string();
-                        break;
-                    case 2:
-                        message.txId = reader.string();
-                        break;
-                    case 3:
-                        message.outputIndex = reader.int32();
-                        break;
-                    case 4:
-                        message.atoms = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.address = reader.string();
+                            break;
+                        case 2:
+                            message.txId = reader.string();
+                            break;
+                        case 3:
+                            message.outputIndex = reader.int32();
+                            break;
+                        case 4:
+                            message.atoms = reader.int64();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -7597,8 +7260,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -7611,20 +7273,19 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Input.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.address != null && message.hasOwnProperty("address"))
-                    if (!$util.isString(message.address))
-                        return "address: string expected";
-                if (message.txId != null && message.hasOwnProperty("txId"))
-                    if (!$util.isString(message.txId))
-                        return "txId: string expected";
-                if (message.outputIndex != null && message.hasOwnProperty("outputIndex"))
-                    if (!$util.isInteger(message.outputIndex))
-                        return "outputIndex: integer expected";
-                if (message.atoms != null && message.hasOwnProperty("atoms"))
-                    if (!$util.isInteger(message.atoms) && !(message.atoms && $util.isInteger(message.atoms.low) && $util.isInteger(message.atoms.high)))
-                        return "atoms: integer|Long expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.address != null && message.hasOwnProperty('address'))
+                    if (!$util.isString(message.address)) return 'address: string expected';
+                if (message.txId != null && message.hasOwnProperty('txId'))
+                    if (!$util.isString(message.txId)) return 'txId: string expected';
+                if (message.outputIndex != null && message.hasOwnProperty('outputIndex'))
+                    if (!$util.isInteger(message.outputIndex)) return 'outputIndex: integer expected';
+                if (message.atoms != null && message.hasOwnProperty('atoms'))
+                    if (
+                        !$util.isInteger(message.atoms) &&
+                        !(message.atoms && $util.isInteger(message.atoms.low) && $util.isInteger(message.atoms.high))
+                    )
+                        return 'atoms: integer|Long expected';
                 return null;
             };
 
@@ -7637,23 +7298,16 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.DcrTx.Input} Input
              */
             Input.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.DcrTx.Input)
-                    return object;
+                if (object instanceof $root.protoc.DcrTx.Input) return object;
                 let message = new $root.protoc.DcrTx.Input();
-                if (object.address != null)
-                    message.address = String(object.address);
-                if (object.txId != null)
-                    message.txId = String(object.txId);
-                if (object.outputIndex != null)
-                    message.outputIndex = object.outputIndex | 0;
+                if (object.address != null) message.address = String(object.address);
+                if (object.txId != null) message.txId = String(object.txId);
+                if (object.outputIndex != null) message.outputIndex = object.outputIndex | 0;
                 if (object.atoms != null)
-                    if ($util.Long)
-                        (message.atoms = $util.Long.fromValue(object.atoms)).unsigned = false;
-                    else if (typeof object.atoms === "string")
-                        message.atoms = parseInt(object.atoms, 10);
-                    else if (typeof object.atoms === "number")
-                        message.atoms = object.atoms;
-                    else if (typeof object.atoms === "object")
+                    if ($util.Long) (message.atoms = $util.Long.fromValue(object.atoms)).unsigned = false;
+                    else if (typeof object.atoms === 'string') message.atoms = parseInt(object.atoms, 10);
+                    else if (typeof object.atoms === 'number') message.atoms = object.atoms;
+                    else if (typeof object.atoms === 'object')
                         message.atoms = new $util.LongBits(object.atoms.low >>> 0, object.atoms.high >>> 0).toNumber();
                 return message;
             };
@@ -7668,30 +7322,36 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Input.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
-                    object.address = "";
-                    object.txId = "";
+                    object.address = '';
+                    object.txId = '';
                     object.outputIndex = 0;
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.atoms = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.atoms = options.longs === String ? "0" : 0;
+                        object.atoms =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.atoms = options.longs === String ? '0' : 0;
                 }
-                if (message.address != null && message.hasOwnProperty("address"))
-                    object.address = message.address;
-                if (message.txId != null && message.hasOwnProperty("txId"))
-                    object.txId = message.txId;
-                if (message.outputIndex != null && message.hasOwnProperty("outputIndex"))
+                if (message.address != null && message.hasOwnProperty('address')) object.address = message.address;
+                if (message.txId != null && message.hasOwnProperty('txId')) object.txId = message.txId;
+                if (message.outputIndex != null && message.hasOwnProperty('outputIndex'))
                     object.outputIndex = message.outputIndex;
-                if (message.atoms != null && message.hasOwnProperty("atoms"))
-                    if (typeof message.atoms === "number")
+                if (message.atoms != null && message.hasOwnProperty('atoms'))
+                    if (typeof message.atoms === 'number')
                         object.atoms = options.longs === String ? String(message.atoms) : message.atoms;
                     else
-                        object.atoms = options.longs === String ? $util.Long.prototype.toString.call(message.atoms) : options.longs === Number ? new $util.LongBits(message.atoms.low >>> 0, message.atoms.high >>> 0).toNumber() : message.atoms;
+                        object.atoms =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.atoms)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.atoms.low >>> 0, message.atoms.high >>> 0).toNumber()
+                                : message.atoms;
                 return object;
             };
 
@@ -7712,8 +7372,7 @@ export const protoc = $root.protoc = (() => {
         return DcrTx;
     })();
 
-    protoc.XzcTx = (function() {
-
+    protoc.XzcTx = (function () {
         /**
          * Properties of a XzcTx.
          * @memberof protoc
@@ -7738,8 +7397,7 @@ export const protoc = $root.protoc = (() => {
             this.inputs = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -7748,7 +7406,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XzcTx
          * @instance
          */
-        XzcTx.prototype.fee = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        XzcTx.prototype.fee = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * XzcTx to.
@@ -7756,7 +7414,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XzcTx
          * @instance
          */
-        XzcTx.prototype.to = "";
+        XzcTx.prototype.to = '';
 
         /**
          * XzcTx memo.
@@ -7764,7 +7422,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XzcTx
          * @instance
          */
-        XzcTx.prototype.memo = "";
+        XzcTx.prototype.memo = '';
 
         /**
          * XzcTx amount.
@@ -7772,7 +7430,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XzcTx
          * @instance
          */
-        XzcTx.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        XzcTx.prototype.amount = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * XzcTx inputs.
@@ -7788,7 +7446,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XzcTx
          * @instance
          */
-        XzcTx.prototype.changeAddress = "";
+        XzcTx.prototype.changeAddress = '';
 
         /**
          * Creates a new XzcTx instance using the specified properties.
@@ -7812,21 +7470,23 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         XzcTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.fee);
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.to);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.memo);
-            if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.amount);
+            if (!writer) writer = $Writer.create();
+            if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.fee);
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.to);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.memo);
+            if (message.amount != null && Object.hasOwnProperty.call(message, 'amount'))
+                writer.uint32(/* id 4, wireType 0 =*/ 32).int64(message.amount);
             if (message.inputs != null && message.inputs.length)
                 for (let i = 0; i < message.inputs.length; ++i)
-                    $root.protoc.XzcTx.Input.encode(message.inputs[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.changeAddress != null && Object.hasOwnProperty.call(message, "changeAddress"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.changeAddress);
+                    $root.protoc.XzcTx.Input.encode(
+                        message.inputs[i],
+                        writer.uint32(/* id 5, wireType 2 =*/ 42).fork(),
+                    ).ldelim();
+            if (message.changeAddress != null && Object.hasOwnProperty.call(message, 'changeAddress'))
+                writer.uint32(/* id 6, wireType 2 =*/ 50).string(message.changeAddress);
             return writer;
         };
 
@@ -7855,35 +7515,34 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         XzcTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.XzcTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.XzcTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.fee = reader.int64();
-                    break;
-                case 2:
-                    message.to = reader.string();
-                    break;
-                case 3:
-                    message.memo = reader.string();
-                    break;
-                case 4:
-                    message.amount = reader.int64();
-                    break;
-                case 5:
-                    if (!(message.inputs && message.inputs.length))
-                        message.inputs = [];
-                    message.inputs.push($root.protoc.XzcTx.Input.decode(reader, reader.uint32()));
-                    break;
-                case 6:
-                    message.changeAddress = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.fee = reader.int64();
+                        break;
+                    case 2:
+                        message.to = reader.string();
+                        break;
+                    case 3:
+                        message.memo = reader.string();
+                        break;
+                    case 4:
+                        message.amount = reader.int64();
+                        break;
+                    case 5:
+                        if (!(message.inputs && message.inputs.length)) message.inputs = [];
+                        message.inputs.push($root.protoc.XzcTx.Input.decode(reader, reader.uint32()));
+                        break;
+                    case 6:
+                        message.changeAddress = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -7900,8 +7559,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         XzcTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -7914,32 +7572,32 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         XzcTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (!$util.isInteger(message.fee) && !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high)))
-                    return "fee: integer|Long expected";
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                if (!$util.isInteger(message.amount) && !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high)))
-                    return "amount: integer|Long expected";
-            if (message.inputs != null && message.hasOwnProperty("inputs")) {
-                if (!Array.isArray(message.inputs))
-                    return "inputs: array expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (
+                    !$util.isInteger(message.fee) &&
+                    !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high))
+                )
+                    return 'fee: integer|Long expected';
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.amount != null && message.hasOwnProperty('amount'))
+                if (
+                    !$util.isInteger(message.amount) &&
+                    !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high))
+                )
+                    return 'amount: integer|Long expected';
+            if (message.inputs != null && message.hasOwnProperty('inputs')) {
+                if (!Array.isArray(message.inputs)) return 'inputs: array expected';
                 for (let i = 0; i < message.inputs.length; ++i) {
                     let error = $root.protoc.XzcTx.Input.verify(message.inputs[i]);
-                    if (error)
-                        return "inputs." + error;
+                    if (error) return 'inputs.' + error;
                 }
             }
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
-                if (!$util.isString(message.changeAddress))
-                    return "changeAddress: string expected";
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
+                if (!$util.isString(message.changeAddress)) return 'changeAddress: string expected';
             return null;
         };
 
@@ -7952,43 +7610,31 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.XzcTx} XzcTx
          */
         XzcTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.XzcTx)
-                return object;
+            if (object instanceof $root.protoc.XzcTx) return object;
             let message = new $root.protoc.XzcTx();
             if (object.fee != null)
-                if ($util.Long)
-                    (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
-                else if (typeof object.fee === "string")
-                    message.fee = parseInt(object.fee, 10);
-                else if (typeof object.fee === "number")
-                    message.fee = object.fee;
-                else if (typeof object.fee === "object")
+                if ($util.Long) (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
+                else if (typeof object.fee === 'string') message.fee = parseInt(object.fee, 10);
+                else if (typeof object.fee === 'number') message.fee = object.fee;
+                else if (typeof object.fee === 'object')
                     message.fee = new $util.LongBits(object.fee.low >>> 0, object.fee.high >>> 0).toNumber();
-            if (object.to != null)
-                message.to = String(object.to);
-            if (object.memo != null)
-                message.memo = String(object.memo);
+            if (object.to != null) message.to = String(object.to);
+            if (object.memo != null) message.memo = String(object.memo);
             if (object.amount != null)
-                if ($util.Long)
-                    (message.amount = $util.Long.fromValue(object.amount)).unsigned = false;
-                else if (typeof object.amount === "string")
-                    message.amount = parseInt(object.amount, 10);
-                else if (typeof object.amount === "number")
-                    message.amount = object.amount;
-                else if (typeof object.amount === "object")
+                if ($util.Long) (message.amount = $util.Long.fromValue(object.amount)).unsigned = false;
+                else if (typeof object.amount === 'string') message.amount = parseInt(object.amount, 10);
+                else if (typeof object.amount === 'number') message.amount = object.amount;
+                else if (typeof object.amount === 'object')
                     message.amount = new $util.LongBits(object.amount.low >>> 0, object.amount.high >>> 0).toNumber();
             if (object.inputs) {
-                if (!Array.isArray(object.inputs))
-                    throw TypeError(".protoc.XzcTx.inputs: array expected");
+                if (!Array.isArray(object.inputs)) throw TypeError('.protoc.XzcTx.inputs: array expected');
                 message.inputs = [];
                 for (let i = 0; i < object.inputs.length; ++i) {
-                    if (typeof object.inputs[i] !== "object")
-                        throw TypeError(".protoc.XzcTx.inputs: object expected");
+                    if (typeof object.inputs[i] !== 'object') throw TypeError('.protoc.XzcTx.inputs: object expected');
                     message.inputs[i] = $root.protoc.XzcTx.Input.fromObject(object.inputs[i]);
                 }
             }
-            if (object.changeAddress != null)
-                message.changeAddress = String(object.changeAddress);
+            if (object.changeAddress != null) message.changeAddress = String(object.changeAddress);
             return message;
         };
 
@@ -8002,46 +7648,52 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         XzcTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
-            if (options.arrays || options.defaults)
-                object.inputs = [];
+            if (options.arrays || options.defaults) object.inputs = [];
             if (options.defaults) {
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.fee = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.fee = options.longs === String ? "0" : 0;
-                object.to = "";
-                object.memo = "";
+                    object.fee =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.fee = options.longs === String ? '0' : 0;
+                object.to = '';
+                object.memo = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.amount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.amount = options.longs === String ? "0" : 0;
-                object.changeAddress = "";
+                    object.amount =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.amount = options.longs === String ? '0' : 0;
+                object.changeAddress = '';
             }
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (typeof message.fee === "number")
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (typeof message.fee === 'number')
                     object.fee = options.longs === String ? String(message.fee) : message.fee;
                 else
-                    object.fee = options.longs === String ? $util.Long.prototype.toString.call(message.fee) : options.longs === Number ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber() : message.fee;
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                if (typeof message.amount === "number")
+                    object.fee =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.fee)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber()
+                            : message.fee;
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
+            if (message.amount != null && message.hasOwnProperty('amount'))
+                if (typeof message.amount === 'number')
                     object.amount = options.longs === String ? String(message.amount) : message.amount;
                 else
-                    object.amount = options.longs === String ? $util.Long.prototype.toString.call(message.amount) : options.longs === Number ? new $util.LongBits(message.amount.low >>> 0, message.amount.high >>> 0).toNumber() : message.amount;
+                    object.amount =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.amount)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.amount.low >>> 0, message.amount.high >>> 0).toNumber()
+                            : message.amount;
             if (message.inputs && message.inputs.length) {
                 object.inputs = [];
                 for (let j = 0; j < message.inputs.length; ++j)
                     object.inputs[j] = $root.protoc.XzcTx.Input.toObject(message.inputs[j], options);
             }
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
                 object.changeAddress = message.changeAddress;
             return object;
         };
@@ -8057,8 +7709,7 @@ export const protoc = $root.protoc = (() => {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        XzcTx.Input = (function() {
-
+        XzcTx.Input = (function () {
             /**
              * Properties of an Input.
              * @memberof protoc.XzcTx
@@ -8080,8 +7731,7 @@ export const protoc = $root.protoc = (() => {
             function Input(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -8090,7 +7740,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.XzcTx.Input
              * @instance
              */
-            Input.prototype.address = "";
+            Input.prototype.address = '';
 
             /**
              * Input txId.
@@ -8098,7 +7748,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.XzcTx.Input
              * @instance
              */
-            Input.prototype.txId = "";
+            Input.prototype.txId = '';
 
             /**
              * Input outputIndex.
@@ -8114,7 +7764,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.XzcTx.Input
              * @instance
              */
-            Input.prototype.satoshis = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Input.prototype.satoshis = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Creates a new Input instance using the specified properties.
@@ -8138,16 +7788,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Input.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.address != null && Object.hasOwnProperty.call(message, "address"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
-                if (message.txId != null && Object.hasOwnProperty.call(message, "txId"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.txId);
-                if (message.outputIndex != null && Object.hasOwnProperty.call(message, "outputIndex"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.outputIndex);
-                if (message.satoshis != null && Object.hasOwnProperty.call(message, "satoshis"))
-                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.satoshis);
+                if (!writer) writer = $Writer.create();
+                if (message.address != null && Object.hasOwnProperty.call(message, 'address'))
+                    writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.address);
+                if (message.txId != null && Object.hasOwnProperty.call(message, 'txId'))
+                    writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.txId);
+                if (message.outputIndex != null && Object.hasOwnProperty.call(message, 'outputIndex'))
+                    writer.uint32(/* id 3, wireType 0 =*/ 24).int32(message.outputIndex);
+                if (message.satoshis != null && Object.hasOwnProperty.call(message, 'satoshis'))
+                    writer.uint32(/* id 4, wireType 0 =*/ 32).int64(message.satoshis);
                 return writer;
             };
 
@@ -8176,27 +7825,27 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.XzcTx.Input();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.XzcTx.Input();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.address = reader.string();
-                        break;
-                    case 2:
-                        message.txId = reader.string();
-                        break;
-                    case 3:
-                        message.outputIndex = reader.int32();
-                        break;
-                    case 4:
-                        message.satoshis = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.address = reader.string();
+                            break;
+                        case 2:
+                            message.txId = reader.string();
+                            break;
+                        case 3:
+                            message.outputIndex = reader.int32();
+                            break;
+                        case 4:
+                            message.satoshis = reader.int64();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -8213,8 +7862,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -8227,20 +7875,23 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Input.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.address != null && message.hasOwnProperty("address"))
-                    if (!$util.isString(message.address))
-                        return "address: string expected";
-                if (message.txId != null && message.hasOwnProperty("txId"))
-                    if (!$util.isString(message.txId))
-                        return "txId: string expected";
-                if (message.outputIndex != null && message.hasOwnProperty("outputIndex"))
-                    if (!$util.isInteger(message.outputIndex))
-                        return "outputIndex: integer expected";
-                if (message.satoshis != null && message.hasOwnProperty("satoshis"))
-                    if (!$util.isInteger(message.satoshis) && !(message.satoshis && $util.isInteger(message.satoshis.low) && $util.isInteger(message.satoshis.high)))
-                        return "satoshis: integer|Long expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.address != null && message.hasOwnProperty('address'))
+                    if (!$util.isString(message.address)) return 'address: string expected';
+                if (message.txId != null && message.hasOwnProperty('txId'))
+                    if (!$util.isString(message.txId)) return 'txId: string expected';
+                if (message.outputIndex != null && message.hasOwnProperty('outputIndex'))
+                    if (!$util.isInteger(message.outputIndex)) return 'outputIndex: integer expected';
+                if (message.satoshis != null && message.hasOwnProperty('satoshis'))
+                    if (
+                        !$util.isInteger(message.satoshis) &&
+                        !(
+                            message.satoshis &&
+                            $util.isInteger(message.satoshis.low) &&
+                            $util.isInteger(message.satoshis.high)
+                        )
+                    )
+                        return 'satoshis: integer|Long expected';
                 return null;
             };
 
@@ -8253,24 +7904,20 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.XzcTx.Input} Input
              */
             Input.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.XzcTx.Input)
-                    return object;
+                if (object instanceof $root.protoc.XzcTx.Input) return object;
                 let message = new $root.protoc.XzcTx.Input();
-                if (object.address != null)
-                    message.address = String(object.address);
-                if (object.txId != null)
-                    message.txId = String(object.txId);
-                if (object.outputIndex != null)
-                    message.outputIndex = object.outputIndex | 0;
+                if (object.address != null) message.address = String(object.address);
+                if (object.txId != null) message.txId = String(object.txId);
+                if (object.outputIndex != null) message.outputIndex = object.outputIndex | 0;
                 if (object.satoshis != null)
-                    if ($util.Long)
-                        (message.satoshis = $util.Long.fromValue(object.satoshis)).unsigned = false;
-                    else if (typeof object.satoshis === "string")
-                        message.satoshis = parseInt(object.satoshis, 10);
-                    else if (typeof object.satoshis === "number")
-                        message.satoshis = object.satoshis;
-                    else if (typeof object.satoshis === "object")
-                        message.satoshis = new $util.LongBits(object.satoshis.low >>> 0, object.satoshis.high >>> 0).toNumber();
+                    if ($util.Long) (message.satoshis = $util.Long.fromValue(object.satoshis)).unsigned = false;
+                    else if (typeof object.satoshis === 'string') message.satoshis = parseInt(object.satoshis, 10);
+                    else if (typeof object.satoshis === 'number') message.satoshis = object.satoshis;
+                    else if (typeof object.satoshis === 'object')
+                        message.satoshis = new $util.LongBits(
+                            object.satoshis.low >>> 0,
+                            object.satoshis.high >>> 0,
+                        ).toNumber();
                 return message;
             };
 
@@ -8284,30 +7931,36 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Input.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
-                    object.address = "";
-                    object.txId = "";
+                    object.address = '';
+                    object.txId = '';
                     object.outputIndex = 0;
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.satoshis = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.satoshis = options.longs === String ? "0" : 0;
+                        object.satoshis =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.satoshis = options.longs === String ? '0' : 0;
                 }
-                if (message.address != null && message.hasOwnProperty("address"))
-                    object.address = message.address;
-                if (message.txId != null && message.hasOwnProperty("txId"))
-                    object.txId = message.txId;
-                if (message.outputIndex != null && message.hasOwnProperty("outputIndex"))
+                if (message.address != null && message.hasOwnProperty('address')) object.address = message.address;
+                if (message.txId != null && message.hasOwnProperty('txId')) object.txId = message.txId;
+                if (message.outputIndex != null && message.hasOwnProperty('outputIndex'))
                     object.outputIndex = message.outputIndex;
-                if (message.satoshis != null && message.hasOwnProperty("satoshis"))
-                    if (typeof message.satoshis === "number")
+                if (message.satoshis != null && message.hasOwnProperty('satoshis'))
+                    if (typeof message.satoshis === 'number')
                         object.satoshis = options.longs === String ? String(message.satoshis) : message.satoshis;
                     else
-                        object.satoshis = options.longs === String ? $util.Long.prototype.toString.call(message.satoshis) : options.longs === Number ? new $util.LongBits(message.satoshis.low >>> 0, message.satoshis.high >>> 0).toNumber() : message.satoshis;
+                        object.satoshis =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.satoshis)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.satoshis.low >>> 0, message.satoshis.high >>> 0).toNumber()
+                                : message.satoshis;
                 return object;
             };
 
@@ -8328,8 +7981,7 @@ export const protoc = $root.protoc = (() => {
         return XzcTx;
     })();
 
-    protoc.XrpTx = (function() {
-
+    protoc.XrpTx = (function () {
         /**
          * Properties of a XrpTx.
          * @memberof protoc
@@ -8354,8 +8006,7 @@ export const protoc = $root.protoc = (() => {
         function XrpTx(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -8364,7 +8015,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XrpTx
          * @instance
          */
-        XrpTx.prototype.to = "";
+        XrpTx.prototype.to = '';
 
         /**
          * XrpTx amount.
@@ -8372,7 +8023,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XrpTx
          * @instance
          */
-        XrpTx.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        XrpTx.prototype.amount = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * XrpTx changeAddress.
@@ -8380,7 +8031,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XrpTx
          * @instance
          */
-        XrpTx.prototype.changeAddress = "";
+        XrpTx.prototype.changeAddress = '';
 
         /**
          * XrpTx fee.
@@ -8388,7 +8039,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XrpTx
          * @instance
          */
-        XrpTx.prototype.fee = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        XrpTx.prototype.fee = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * XrpTx sequence.
@@ -8396,7 +8047,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XrpTx
          * @instance
          */
-        XrpTx.prototype.sequence = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        XrpTx.prototype.sequence = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * XrpTx tag.
@@ -8404,7 +8055,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XrpTx
          * @instance
          */
-        XrpTx.prototype.tag = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        XrpTx.prototype.tag = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * XrpTx memo.
@@ -8412,7 +8063,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.XrpTx
          * @instance
          */
-        XrpTx.prototype.memo = "";
+        XrpTx.prototype.memo = '';
 
         /**
          * Creates a new XrpTx instance using the specified properties.
@@ -8436,22 +8087,21 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         XrpTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.to);
-            if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.amount);
-            if (message.changeAddress != null && Object.hasOwnProperty.call(message, "changeAddress"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.changeAddress);
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.fee);
-            if (message.sequence != null && Object.hasOwnProperty.call(message, "sequence"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.sequence);
-            if (message.tag != null && Object.hasOwnProperty.call(message, "tag"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.tag);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 7, wireType 2 =*/58).string(message.memo);
+            if (!writer) writer = $Writer.create();
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.to);
+            if (message.amount != null && Object.hasOwnProperty.call(message, 'amount'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int64(message.amount);
+            if (message.changeAddress != null && Object.hasOwnProperty.call(message, 'changeAddress'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.changeAddress);
+            if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                writer.uint32(/* id 4, wireType 0 =*/ 32).int64(message.fee);
+            if (message.sequence != null && Object.hasOwnProperty.call(message, 'sequence'))
+                writer.uint32(/* id 5, wireType 0 =*/ 40).int64(message.sequence);
+            if (message.tag != null && Object.hasOwnProperty.call(message, 'tag'))
+                writer.uint32(/* id 6, wireType 0 =*/ 48).int64(message.tag);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 7, wireType 2 =*/ 58).string(message.memo);
             return writer;
         };
 
@@ -8480,36 +8130,36 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         XrpTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.XrpTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.XrpTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.to = reader.string();
-                    break;
-                case 2:
-                    message.amount = reader.int64();
-                    break;
-                case 3:
-                    message.changeAddress = reader.string();
-                    break;
-                case 4:
-                    message.fee = reader.int64();
-                    break;
-                case 5:
-                    message.sequence = reader.int64();
-                    break;
-                case 6:
-                    message.tag = reader.int64();
-                    break;
-                case 7:
-                    message.memo = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.to = reader.string();
+                        break;
+                    case 2:
+                        message.amount = reader.int64();
+                        break;
+                    case 3:
+                        message.changeAddress = reader.string();
+                        break;
+                    case 4:
+                        message.fee = reader.int64();
+                        break;
+                    case 5:
+                        message.sequence = reader.int64();
+                        break;
+                    case 6:
+                        message.tag = reader.int64();
+                        break;
+                    case 7:
+                        message.memo = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -8526,8 +8176,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         XrpTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -8540,29 +8189,41 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         XrpTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                if (!$util.isInteger(message.amount) && !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high)))
-                    return "amount: integer|Long expected";
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
-                if (!$util.isString(message.changeAddress))
-                    return "changeAddress: string expected";
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (!$util.isInteger(message.fee) && !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high)))
-                    return "fee: integer|Long expected";
-            if (message.sequence != null && message.hasOwnProperty("sequence"))
-                if (!$util.isInteger(message.sequence) && !(message.sequence && $util.isInteger(message.sequence.low) && $util.isInteger(message.sequence.high)))
-                    return "sequence: integer|Long expected";
-            if (message.tag != null && message.hasOwnProperty("tag"))
-                if (!$util.isInteger(message.tag) && !(message.tag && $util.isInteger(message.tag.low) && $util.isInteger(message.tag.high)))
-                    return "tag: integer|Long expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.amount != null && message.hasOwnProperty('amount'))
+                if (
+                    !$util.isInteger(message.amount) &&
+                    !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high))
+                )
+                    return 'amount: integer|Long expected';
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
+                if (!$util.isString(message.changeAddress)) return 'changeAddress: string expected';
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (
+                    !$util.isInteger(message.fee) &&
+                    !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high))
+                )
+                    return 'fee: integer|Long expected';
+            if (message.sequence != null && message.hasOwnProperty('sequence'))
+                if (
+                    !$util.isInteger(message.sequence) &&
+                    !(
+                        message.sequence &&
+                        $util.isInteger(message.sequence.low) &&
+                        $util.isInteger(message.sequence.high)
+                    )
+                )
+                    return 'sequence: integer|Long expected';
+            if (message.tag != null && message.hasOwnProperty('tag'))
+                if (
+                    !$util.isInteger(message.tag) &&
+                    !(message.tag && $util.isInteger(message.tag.low) && $util.isInteger(message.tag.high))
+                )
+                    return 'tag: integer|Long expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
             return null;
         };
 
@@ -8575,51 +8236,38 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.XrpTx} XrpTx
          */
         XrpTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.XrpTx)
-                return object;
+            if (object instanceof $root.protoc.XrpTx) return object;
             let message = new $root.protoc.XrpTx();
-            if (object.to != null)
-                message.to = String(object.to);
+            if (object.to != null) message.to = String(object.to);
             if (object.amount != null)
-                if ($util.Long)
-                    (message.amount = $util.Long.fromValue(object.amount)).unsigned = false;
-                else if (typeof object.amount === "string")
-                    message.amount = parseInt(object.amount, 10);
-                else if (typeof object.amount === "number")
-                    message.amount = object.amount;
-                else if (typeof object.amount === "object")
+                if ($util.Long) (message.amount = $util.Long.fromValue(object.amount)).unsigned = false;
+                else if (typeof object.amount === 'string') message.amount = parseInt(object.amount, 10);
+                else if (typeof object.amount === 'number') message.amount = object.amount;
+                else if (typeof object.amount === 'object')
                     message.amount = new $util.LongBits(object.amount.low >>> 0, object.amount.high >>> 0).toNumber();
-            if (object.changeAddress != null)
-                message.changeAddress = String(object.changeAddress);
+            if (object.changeAddress != null) message.changeAddress = String(object.changeAddress);
             if (object.fee != null)
-                if ($util.Long)
-                    (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
-                else if (typeof object.fee === "string")
-                    message.fee = parseInt(object.fee, 10);
-                else if (typeof object.fee === "number")
-                    message.fee = object.fee;
-                else if (typeof object.fee === "object")
+                if ($util.Long) (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
+                else if (typeof object.fee === 'string') message.fee = parseInt(object.fee, 10);
+                else if (typeof object.fee === 'number') message.fee = object.fee;
+                else if (typeof object.fee === 'object')
                     message.fee = new $util.LongBits(object.fee.low >>> 0, object.fee.high >>> 0).toNumber();
             if (object.sequence != null)
-                if ($util.Long)
-                    (message.sequence = $util.Long.fromValue(object.sequence)).unsigned = false;
-                else if (typeof object.sequence === "string")
-                    message.sequence = parseInt(object.sequence, 10);
-                else if (typeof object.sequence === "number")
-                    message.sequence = object.sequence;
-                else if (typeof object.sequence === "object")
-                    message.sequence = new $util.LongBits(object.sequence.low >>> 0, object.sequence.high >>> 0).toNumber();
+                if ($util.Long) (message.sequence = $util.Long.fromValue(object.sequence)).unsigned = false;
+                else if (typeof object.sequence === 'string') message.sequence = parseInt(object.sequence, 10);
+                else if (typeof object.sequence === 'number') message.sequence = object.sequence;
+                else if (typeof object.sequence === 'object')
+                    message.sequence = new $util.LongBits(
+                        object.sequence.low >>> 0,
+                        object.sequence.high >>> 0,
+                    ).toNumber();
             if (object.tag != null)
-                if ($util.Long)
-                    (message.tag = $util.Long.fromValue(object.tag)).unsigned = false;
-                else if (typeof object.tag === "string")
-                    message.tag = parseInt(object.tag, 10);
-                else if (typeof object.tag === "number")
-                    message.tag = object.tag;
-                else if (typeof object.tag === "object")
+                if ($util.Long) (message.tag = $util.Long.fromValue(object.tag)).unsigned = false;
+                else if (typeof object.tag === 'string') message.tag = parseInt(object.tag, 10);
+                else if (typeof object.tag === 'number') message.tag = object.tag;
+                else if (typeof object.tag === 'object')
                     message.tag = new $util.LongBits(object.tag.low >>> 0, object.tag.high >>> 0).toNumber();
-            if (object.memo != null)
-                message.memo = String(object.memo);
+            if (object.memo != null) message.memo = String(object.memo);
             return message;
         };
 
@@ -8633,60 +8281,77 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         XrpTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.to = "";
+                object.to = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.amount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.amount = options.longs === String ? "0" : 0;
-                object.changeAddress = "";
+                    object.amount =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.amount = options.longs === String ? '0' : 0;
+                object.changeAddress = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.fee = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.fee = options.longs === String ? "0" : 0;
+                    object.fee =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.fee = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.sequence = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.sequence = options.longs === String ? "0" : 0;
+                    object.sequence =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.sequence = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.tag = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.tag = options.longs === String ? "0" : 0;
-                object.memo = "";
+                    object.tag =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.tag = options.longs === String ? '0' : 0;
+                object.memo = '';
             }
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                if (typeof message.amount === "number")
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.amount != null && message.hasOwnProperty('amount'))
+                if (typeof message.amount === 'number')
                     object.amount = options.longs === String ? String(message.amount) : message.amount;
                 else
-                    object.amount = options.longs === String ? $util.Long.prototype.toString.call(message.amount) : options.longs === Number ? new $util.LongBits(message.amount.low >>> 0, message.amount.high >>> 0).toNumber() : message.amount;
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
+                    object.amount =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.amount)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.amount.low >>> 0, message.amount.high >>> 0).toNumber()
+                            : message.amount;
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
                 object.changeAddress = message.changeAddress;
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (typeof message.fee === "number")
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (typeof message.fee === 'number')
                     object.fee = options.longs === String ? String(message.fee) : message.fee;
                 else
-                    object.fee = options.longs === String ? $util.Long.prototype.toString.call(message.fee) : options.longs === Number ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber() : message.fee;
-            if (message.sequence != null && message.hasOwnProperty("sequence"))
-                if (typeof message.sequence === "number")
+                    object.fee =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.fee)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber()
+                            : message.fee;
+            if (message.sequence != null && message.hasOwnProperty('sequence'))
+                if (typeof message.sequence === 'number')
                     object.sequence = options.longs === String ? String(message.sequence) : message.sequence;
                 else
-                    object.sequence = options.longs === String ? $util.Long.prototype.toString.call(message.sequence) : options.longs === Number ? new $util.LongBits(message.sequence.low >>> 0, message.sequence.high >>> 0).toNumber() : message.sequence;
-            if (message.tag != null && message.hasOwnProperty("tag"))
-                if (typeof message.tag === "number")
+                    object.sequence =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.sequence)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.sequence.low >>> 0, message.sequence.high >>> 0).toNumber()
+                            : message.sequence;
+            if (message.tag != null && message.hasOwnProperty('tag'))
+                if (typeof message.tag === 'number')
                     object.tag = options.longs === String ? String(message.tag) : message.tag;
                 else
-                    object.tag = options.longs === String ? $util.Long.prototype.toString.call(message.tag) : options.longs === Number ? new $util.LongBits(message.tag.low >>> 0, message.tag.high >>> 0).toNumber() : message.tag;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
+                    object.tag =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.tag)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.tag.low >>> 0, message.tag.high >>> 0).toNumber()
+                            : message.tag;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
             return object;
         };
 
@@ -8704,8 +8369,7 @@ export const protoc = $root.protoc = (() => {
         return XrpTx;
     })();
 
-    protoc.IostTx = (function() {
-
+    protoc.IostTx = (function () {
         /**
          * Properties of an IostTx.
          * @memberof protoc
@@ -8731,8 +8395,7 @@ export const protoc = $root.protoc = (() => {
         function IostTx(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -8741,7 +8404,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.IostTx
          * @instance
          */
-        IostTx.prototype.tokenName = "";
+        IostTx.prototype.tokenName = '';
 
         /**
          * IostTx from.
@@ -8749,7 +8412,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.IostTx
          * @instance
          */
-        IostTx.prototype.from = "";
+        IostTx.prototype.from = '';
 
         /**
          * IostTx to.
@@ -8757,7 +8420,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.IostTx
          * @instance
          */
-        IostTx.prototype.to = "";
+        IostTx.prototype.to = '';
 
         /**
          * IostTx memo.
@@ -8765,7 +8428,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.IostTx
          * @instance
          */
-        IostTx.prototype.memo = "";
+        IostTx.prototype.memo = '';
 
         /**
          * IostTx amount.
@@ -8773,7 +8436,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.IostTx
          * @instance
          */
-        IostTx.prototype.amount = "";
+        IostTx.prototype.amount = '';
 
         /**
          * IostTx timestamp.
@@ -8781,7 +8444,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.IostTx
          * @instance
          */
-        IostTx.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        IostTx.prototype.timestamp = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * IostTx expiration.
@@ -8821,24 +8484,26 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         IostTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.tokenName != null && Object.hasOwnProperty.call(message, "tokenName"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.tokenName);
-            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.from);
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.to);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.memo);
-            if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.amount);
-            if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.timestamp);
-            if (message.expiration != null && Object.hasOwnProperty.call(message, "expiration"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.expiration);
-            if (message.config != null && Object.hasOwnProperty.call(message, "config"))
-                $root.protoc.IostTx.Config.encode(message.config, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (!writer) writer = $Writer.create();
+            if (message.tokenName != null && Object.hasOwnProperty.call(message, 'tokenName'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.tokenName);
+            if (message.from != null && Object.hasOwnProperty.call(message, 'from'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.from);
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.to);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.memo);
+            if (message.amount != null && Object.hasOwnProperty.call(message, 'amount'))
+                writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.amount);
+            if (message.timestamp != null && Object.hasOwnProperty.call(message, 'timestamp'))
+                writer.uint32(/* id 6, wireType 0 =*/ 48).int64(message.timestamp);
+            if (message.expiration != null && Object.hasOwnProperty.call(message, 'expiration'))
+                writer.uint32(/* id 7, wireType 0 =*/ 56).int32(message.expiration);
+            if (message.config != null && Object.hasOwnProperty.call(message, 'config'))
+                $root.protoc.IostTx.Config.encode(
+                    message.config,
+                    writer.uint32(/* id 8, wireType 2 =*/ 66).fork(),
+                ).ldelim();
             return writer;
         };
 
@@ -8867,39 +8532,39 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         IostTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.IostTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.IostTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.tokenName = reader.string();
-                    break;
-                case 2:
-                    message.from = reader.string();
-                    break;
-                case 3:
-                    message.to = reader.string();
-                    break;
-                case 4:
-                    message.memo = reader.string();
-                    break;
-                case 5:
-                    message.amount = reader.string();
-                    break;
-                case 6:
-                    message.timestamp = reader.int64();
-                    break;
-                case 7:
-                    message.expiration = reader.int32();
-                    break;
-                case 8:
-                    message.config = $root.protoc.IostTx.Config.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.tokenName = reader.string();
+                        break;
+                    case 2:
+                        message.from = reader.string();
+                        break;
+                    case 3:
+                        message.to = reader.string();
+                        break;
+                    case 4:
+                        message.memo = reader.string();
+                        break;
+                    case 5:
+                        message.amount = reader.string();
+                        break;
+                    case 6:
+                        message.timestamp = reader.int64();
+                        break;
+                    case 7:
+                        message.expiration = reader.int32();
+                        break;
+                    case 8:
+                        message.config = $root.protoc.IostTx.Config.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -8916,8 +8581,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         IostTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -8930,33 +8594,32 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         IostTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.tokenName != null && message.hasOwnProperty("tokenName"))
-                if (!$util.isString(message.tokenName))
-                    return "tokenName: string expected";
-            if (message.from != null && message.hasOwnProperty("from"))
-                if (!$util.isString(message.from))
-                    return "from: string expected";
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                if (!$util.isString(message.amount))
-                    return "amount: string expected";
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
-                    return "timestamp: integer|Long expected";
-            if (message.expiration != null && message.hasOwnProperty("expiration"))
-                if (!$util.isInteger(message.expiration))
-                    return "expiration: integer expected";
-            if (message.config != null && message.hasOwnProperty("config")) {
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.tokenName != null && message.hasOwnProperty('tokenName'))
+                if (!$util.isString(message.tokenName)) return 'tokenName: string expected';
+            if (message.from != null && message.hasOwnProperty('from'))
+                if (!$util.isString(message.from)) return 'from: string expected';
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.amount != null && message.hasOwnProperty('amount'))
+                if (!$util.isString(message.amount)) return 'amount: string expected';
+            if (message.timestamp != null && message.hasOwnProperty('timestamp'))
+                if (
+                    !$util.isInteger(message.timestamp) &&
+                    !(
+                        message.timestamp &&
+                        $util.isInteger(message.timestamp.low) &&
+                        $util.isInteger(message.timestamp.high)
+                    )
+                )
+                    return 'timestamp: integer|Long expected';
+            if (message.expiration != null && message.hasOwnProperty('expiration'))
+                if (!$util.isInteger(message.expiration)) return 'expiration: integer expected';
+            if (message.config != null && message.hasOwnProperty('config')) {
                 let error = $root.protoc.IostTx.Config.verify(message.config);
-                if (error)
-                    return "config." + error;
+                if (error) return 'config.' + error;
             }
             return null;
         };
@@ -8970,33 +8633,25 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.IostTx} IostTx
          */
         IostTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.IostTx)
-                return object;
+            if (object instanceof $root.protoc.IostTx) return object;
             let message = new $root.protoc.IostTx();
-            if (object.tokenName != null)
-                message.tokenName = String(object.tokenName);
-            if (object.from != null)
-                message.from = String(object.from);
-            if (object.to != null)
-                message.to = String(object.to);
-            if (object.memo != null)
-                message.memo = String(object.memo);
-            if (object.amount != null)
-                message.amount = String(object.amount);
+            if (object.tokenName != null) message.tokenName = String(object.tokenName);
+            if (object.from != null) message.from = String(object.from);
+            if (object.to != null) message.to = String(object.to);
+            if (object.memo != null) message.memo = String(object.memo);
+            if (object.amount != null) message.amount = String(object.amount);
             if (object.timestamp != null)
-                if ($util.Long)
-                    (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
-                else if (typeof object.timestamp === "string")
-                    message.timestamp = parseInt(object.timestamp, 10);
-                else if (typeof object.timestamp === "number")
-                    message.timestamp = object.timestamp;
-                else if (typeof object.timestamp === "object")
-                    message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber();
-            if (object.expiration != null)
-                message.expiration = object.expiration | 0;
+                if ($util.Long) (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
+                else if (typeof object.timestamp === 'string') message.timestamp = parseInt(object.timestamp, 10);
+                else if (typeof object.timestamp === 'number') message.timestamp = object.timestamp;
+                else if (typeof object.timestamp === 'object')
+                    message.timestamp = new $util.LongBits(
+                        object.timestamp.low >>> 0,
+                        object.timestamp.high >>> 0,
+                    ).toNumber();
+            if (object.expiration != null) message.expiration = object.expiration | 0;
             if (object.config != null) {
-                if (typeof object.config !== "object")
-                    throw TypeError(".protoc.IostTx.config: object expected");
+                if (typeof object.config !== 'object') throw TypeError('.protoc.IostTx.config: object expected');
                 message.config = $root.protoc.IostTx.Config.fromObject(object.config);
             }
             return message;
@@ -9012,41 +8667,40 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         IostTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.tokenName = "";
-                object.from = "";
-                object.to = "";
-                object.memo = "";
-                object.amount = "";
+                object.tokenName = '';
+                object.from = '';
+                object.to = '';
+                object.memo = '';
+                object.amount = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.timestamp = options.longs === String ? "0" : 0;
+                    object.timestamp =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.timestamp = options.longs === String ? '0' : 0;
                 object.expiration = 0;
                 object.config = null;
             }
-            if (message.tokenName != null && message.hasOwnProperty("tokenName"))
-                object.tokenName = message.tokenName;
-            if (message.from != null && message.hasOwnProperty("from"))
-                object.from = message.from;
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
-            if (message.amount != null && message.hasOwnProperty("amount"))
-                object.amount = message.amount;
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                if (typeof message.timestamp === "number")
+            if (message.tokenName != null && message.hasOwnProperty('tokenName')) object.tokenName = message.tokenName;
+            if (message.from != null && message.hasOwnProperty('from')) object.from = message.from;
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
+            if (message.amount != null && message.hasOwnProperty('amount')) object.amount = message.amount;
+            if (message.timestamp != null && message.hasOwnProperty('timestamp'))
+                if (typeof message.timestamp === 'number')
                     object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
                 else
-                    object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber() : message.timestamp;
-            if (message.expiration != null && message.hasOwnProperty("expiration"))
+                    object.timestamp =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.timestamp)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber()
+                            : message.timestamp;
+            if (message.expiration != null && message.hasOwnProperty('expiration'))
                 object.expiration = message.expiration;
-            if (message.config != null && message.hasOwnProperty("config"))
+            if (message.config != null && message.hasOwnProperty('config'))
                 object.config = $root.protoc.IostTx.Config.toObject(message.config, options);
             return object;
         };
@@ -9062,8 +8716,7 @@ export const protoc = $root.protoc = (() => {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        IostTx.Config = (function() {
-
+        IostTx.Config = (function () {
             /**
              * Properties of a Config.
              * @memberof protoc.IostTx
@@ -9085,8 +8738,7 @@ export const protoc = $root.protoc = (() => {
             function Config(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -9095,7 +8747,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.IostTx.Config
              * @instance
              */
-            Config.prototype.gasRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Config.prototype.gasRatio = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Config gasLimit.
@@ -9103,7 +8755,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.IostTx.Config
              * @instance
              */
-            Config.prototype.gasLimit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Config.prototype.gasLimit = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Config delay.
@@ -9119,7 +8771,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.IostTx.Config
              * @instance
              */
-            Config.prototype.defaultLimit = "";
+            Config.prototype.defaultLimit = '';
 
             /**
              * Creates a new Config instance using the specified properties.
@@ -9143,16 +8795,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Config.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.gasRatio != null && Object.hasOwnProperty.call(message, "gasRatio"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.gasRatio);
-                if (message.gasLimit != null && Object.hasOwnProperty.call(message, "gasLimit"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.gasLimit);
-                if (message.delay != null && Object.hasOwnProperty.call(message, "delay"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.delay);
-                if (message.defaultLimit != null && Object.hasOwnProperty.call(message, "defaultLimit"))
-                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.defaultLimit);
+                if (!writer) writer = $Writer.create();
+                if (message.gasRatio != null && Object.hasOwnProperty.call(message, 'gasRatio'))
+                    writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.gasRatio);
+                if (message.gasLimit != null && Object.hasOwnProperty.call(message, 'gasLimit'))
+                    writer.uint32(/* id 2, wireType 0 =*/ 16).int64(message.gasLimit);
+                if (message.delay != null && Object.hasOwnProperty.call(message, 'delay'))
+                    writer.uint32(/* id 3, wireType 0 =*/ 24).int32(message.delay);
+                if (message.defaultLimit != null && Object.hasOwnProperty.call(message, 'defaultLimit'))
+                    writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.defaultLimit);
                 return writer;
             };
 
@@ -9181,27 +8832,27 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Config.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.IostTx.Config();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.IostTx.Config();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.gasRatio = reader.int64();
-                        break;
-                    case 2:
-                        message.gasLimit = reader.int64();
-                        break;
-                    case 3:
-                        message.delay = reader.int32();
-                        break;
-                    case 4:
-                        message.defaultLimit = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.gasRatio = reader.int64();
+                            break;
+                        case 2:
+                            message.gasLimit = reader.int64();
+                            break;
+                        case 3:
+                            message.delay = reader.int32();
+                            break;
+                        case 4:
+                            message.defaultLimit = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -9218,8 +8869,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Config.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -9232,20 +8882,31 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Config.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.gasRatio != null && message.hasOwnProperty("gasRatio"))
-                    if (!$util.isInteger(message.gasRatio) && !(message.gasRatio && $util.isInteger(message.gasRatio.low) && $util.isInteger(message.gasRatio.high)))
-                        return "gasRatio: integer|Long expected";
-                if (message.gasLimit != null && message.hasOwnProperty("gasLimit"))
-                    if (!$util.isInteger(message.gasLimit) && !(message.gasLimit && $util.isInteger(message.gasLimit.low) && $util.isInteger(message.gasLimit.high)))
-                        return "gasLimit: integer|Long expected";
-                if (message.delay != null && message.hasOwnProperty("delay"))
-                    if (!$util.isInteger(message.delay))
-                        return "delay: integer expected";
-                if (message.defaultLimit != null && message.hasOwnProperty("defaultLimit"))
-                    if (!$util.isString(message.defaultLimit))
-                        return "defaultLimit: string expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.gasRatio != null && message.hasOwnProperty('gasRatio'))
+                    if (
+                        !$util.isInteger(message.gasRatio) &&
+                        !(
+                            message.gasRatio &&
+                            $util.isInteger(message.gasRatio.low) &&
+                            $util.isInteger(message.gasRatio.high)
+                        )
+                    )
+                        return 'gasRatio: integer|Long expected';
+                if (message.gasLimit != null && message.hasOwnProperty('gasLimit'))
+                    if (
+                        !$util.isInteger(message.gasLimit) &&
+                        !(
+                            message.gasLimit &&
+                            $util.isInteger(message.gasLimit.low) &&
+                            $util.isInteger(message.gasLimit.high)
+                        )
+                    )
+                        return 'gasLimit: integer|Long expected';
+                if (message.delay != null && message.hasOwnProperty('delay'))
+                    if (!$util.isInteger(message.delay)) return 'delay: integer expected';
+                if (message.defaultLimit != null && message.hasOwnProperty('defaultLimit'))
+                    if (!$util.isString(message.defaultLimit)) return 'defaultLimit: string expected';
                 return null;
             };
 
@@ -9258,31 +8919,28 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.IostTx.Config} Config
              */
             Config.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.IostTx.Config)
-                    return object;
+                if (object instanceof $root.protoc.IostTx.Config) return object;
                 let message = new $root.protoc.IostTx.Config();
                 if (object.gasRatio != null)
-                    if ($util.Long)
-                        (message.gasRatio = $util.Long.fromValue(object.gasRatio)).unsigned = false;
-                    else if (typeof object.gasRatio === "string")
-                        message.gasRatio = parseInt(object.gasRatio, 10);
-                    else if (typeof object.gasRatio === "number")
-                        message.gasRatio = object.gasRatio;
-                    else if (typeof object.gasRatio === "object")
-                        message.gasRatio = new $util.LongBits(object.gasRatio.low >>> 0, object.gasRatio.high >>> 0).toNumber();
+                    if ($util.Long) (message.gasRatio = $util.Long.fromValue(object.gasRatio)).unsigned = false;
+                    else if (typeof object.gasRatio === 'string') message.gasRatio = parseInt(object.gasRatio, 10);
+                    else if (typeof object.gasRatio === 'number') message.gasRatio = object.gasRatio;
+                    else if (typeof object.gasRatio === 'object')
+                        message.gasRatio = new $util.LongBits(
+                            object.gasRatio.low >>> 0,
+                            object.gasRatio.high >>> 0,
+                        ).toNumber();
                 if (object.gasLimit != null)
-                    if ($util.Long)
-                        (message.gasLimit = $util.Long.fromValue(object.gasLimit)).unsigned = false;
-                    else if (typeof object.gasLimit === "string")
-                        message.gasLimit = parseInt(object.gasLimit, 10);
-                    else if (typeof object.gasLimit === "number")
-                        message.gasLimit = object.gasLimit;
-                    else if (typeof object.gasLimit === "object")
-                        message.gasLimit = new $util.LongBits(object.gasLimit.low >>> 0, object.gasLimit.high >>> 0).toNumber();
-                if (object.delay != null)
-                    message.delay = object.delay | 0;
-                if (object.defaultLimit != null)
-                    message.defaultLimit = String(object.defaultLimit);
+                    if ($util.Long) (message.gasLimit = $util.Long.fromValue(object.gasLimit)).unsigned = false;
+                    else if (typeof object.gasLimit === 'string') message.gasLimit = parseInt(object.gasLimit, 10);
+                    else if (typeof object.gasLimit === 'number') message.gasLimit = object.gasLimit;
+                    else if (typeof object.gasLimit === 'object')
+                        message.gasLimit = new $util.LongBits(
+                            object.gasLimit.low >>> 0,
+                            object.gasLimit.high >>> 0,
+                        ).toNumber();
+                if (object.delay != null) message.delay = object.delay | 0;
+                if (object.defaultLimit != null) message.defaultLimit = String(object.defaultLimit);
                 return message;
             };
 
@@ -9296,36 +8954,52 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Config.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.gasRatio = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.gasRatio = options.longs === String ? "0" : 0;
+                        object.gasRatio =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.gasRatio = options.longs === String ? '0' : 0;
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.gasLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.gasLimit = options.longs === String ? "0" : 0;
+                        object.gasLimit =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.gasLimit = options.longs === String ? '0' : 0;
                     object.delay = 0;
-                    object.defaultLimit = "";
+                    object.defaultLimit = '';
                 }
-                if (message.gasRatio != null && message.hasOwnProperty("gasRatio"))
-                    if (typeof message.gasRatio === "number")
+                if (message.gasRatio != null && message.hasOwnProperty('gasRatio'))
+                    if (typeof message.gasRatio === 'number')
                         object.gasRatio = options.longs === String ? String(message.gasRatio) : message.gasRatio;
                     else
-                        object.gasRatio = options.longs === String ? $util.Long.prototype.toString.call(message.gasRatio) : options.longs === Number ? new $util.LongBits(message.gasRatio.low >>> 0, message.gasRatio.high >>> 0).toNumber() : message.gasRatio;
-                if (message.gasLimit != null && message.hasOwnProperty("gasLimit"))
-                    if (typeof message.gasLimit === "number")
+                        object.gasRatio =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.gasRatio)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.gasRatio.low >>> 0, message.gasRatio.high >>> 0).toNumber()
+                                : message.gasRatio;
+                if (message.gasLimit != null && message.hasOwnProperty('gasLimit'))
+                    if (typeof message.gasLimit === 'number')
                         object.gasLimit = options.longs === String ? String(message.gasLimit) : message.gasLimit;
                     else
-                        object.gasLimit = options.longs === String ? $util.Long.prototype.toString.call(message.gasLimit) : options.longs === Number ? new $util.LongBits(message.gasLimit.low >>> 0, message.gasLimit.high >>> 0).toNumber() : message.gasLimit;
-                if (message.delay != null && message.hasOwnProperty("delay"))
-                    object.delay = message.delay;
-                if (message.defaultLimit != null && message.hasOwnProperty("defaultLimit"))
+                        object.gasLimit =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.gasLimit)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.gasLimit.low >>> 0, message.gasLimit.high >>> 0).toNumber()
+                                : message.gasLimit;
+                if (message.delay != null && message.hasOwnProperty('delay')) object.delay = message.delay;
+                if (message.defaultLimit != null && message.hasOwnProperty('defaultLimit'))
                     object.defaultLimit = message.defaultLimit;
                 return object;
             };
@@ -9347,8 +9021,7 @@ export const protoc = $root.protoc = (() => {
         return IostTx;
     })();
 
-    protoc.OmniTx = (function() {
-
+    protoc.OmniTx = (function () {
         /**
          * Properties of an OmniTx.
          * @memberof protoc
@@ -9375,8 +9048,7 @@ export const protoc = $root.protoc = (() => {
             this.inputs = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -9385,7 +9057,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.OmniTx
          * @instance
          */
-        OmniTx.prototype.fee = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        OmniTx.prototype.fee = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * OmniTx dustThreshold.
@@ -9401,7 +9073,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.OmniTx
          * @instance
          */
-        OmniTx.prototype.memo = "";
+        OmniTx.prototype.memo = '';
 
         /**
          * OmniTx inputs.
@@ -9417,7 +9089,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.OmniTx
          * @instance
          */
-        OmniTx.prototype.to = "";
+        OmniTx.prototype.to = '';
 
         /**
          * OmniTx changeAddress.
@@ -9425,7 +9097,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.OmniTx
          * @instance
          */
-        OmniTx.prototype.changeAddress = "";
+        OmniTx.prototype.changeAddress = '';
 
         /**
          * OmniTx omniAmount.
@@ -9433,7 +9105,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.OmniTx
          * @instance
          */
-        OmniTx.prototype.omniAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        OmniTx.prototype.omniAmount = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * OmniTx propertyId.
@@ -9465,25 +9137,27 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         OmniTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.fee);
-            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, "dustThreshold"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dustThreshold);
-            if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.memo);
+            if (!writer) writer = $Writer.create();
+            if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.fee);
+            if (message.dustThreshold != null && Object.hasOwnProperty.call(message, 'dustThreshold'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.dustThreshold);
+            if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.memo);
             if (message.inputs != null && message.inputs.length)
                 for (let i = 0; i < message.inputs.length; ++i)
-                    $root.protoc.OmniTx.Input.encode(message.inputs[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.to);
-            if (message.changeAddress != null && Object.hasOwnProperty.call(message, "changeAddress"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.changeAddress);
-            if (message.omniAmount != null && Object.hasOwnProperty.call(message, "omniAmount"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.omniAmount);
-            if (message.propertyId != null && Object.hasOwnProperty.call(message, "propertyId"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.propertyId);
+                    $root.protoc.OmniTx.Input.encode(
+                        message.inputs[i],
+                        writer.uint32(/* id 4, wireType 2 =*/ 34).fork(),
+                    ).ldelim();
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.to);
+            if (message.changeAddress != null && Object.hasOwnProperty.call(message, 'changeAddress'))
+                writer.uint32(/* id 6, wireType 2 =*/ 50).string(message.changeAddress);
+            if (message.omniAmount != null && Object.hasOwnProperty.call(message, 'omniAmount'))
+                writer.uint32(/* id 7, wireType 0 =*/ 56).int64(message.omniAmount);
+            if (message.propertyId != null && Object.hasOwnProperty.call(message, 'propertyId'))
+                writer.uint32(/* id 8, wireType 0 =*/ 64).int32(message.propertyId);
             return writer;
         };
 
@@ -9512,41 +9186,40 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         OmniTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.OmniTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.OmniTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.fee = reader.int64();
-                    break;
-                case 2:
-                    message.dustThreshold = reader.int32();
-                    break;
-                case 3:
-                    message.memo = reader.string();
-                    break;
-                case 4:
-                    if (!(message.inputs && message.inputs.length))
-                        message.inputs = [];
-                    message.inputs.push($root.protoc.OmniTx.Input.decode(reader, reader.uint32()));
-                    break;
-                case 5:
-                    message.to = reader.string();
-                    break;
-                case 6:
-                    message.changeAddress = reader.string();
-                    break;
-                case 7:
-                    message.omniAmount = reader.int64();
-                    break;
-                case 8:
-                    message.propertyId = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.fee = reader.int64();
+                        break;
+                    case 2:
+                        message.dustThreshold = reader.int32();
+                        break;
+                    case 3:
+                        message.memo = reader.string();
+                        break;
+                    case 4:
+                        if (!(message.inputs && message.inputs.length)) message.inputs = [];
+                        message.inputs.push($root.protoc.OmniTx.Input.decode(reader, reader.uint32()));
+                        break;
+                    case 5:
+                        message.to = reader.string();
+                        break;
+                    case 6:
+                        message.changeAddress = reader.string();
+                        break;
+                    case 7:
+                        message.omniAmount = reader.int64();
+                        break;
+                    case 8:
+                        message.propertyId = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -9563,8 +9236,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         OmniTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -9577,38 +9249,40 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         OmniTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (!$util.isInteger(message.fee) && !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high)))
-                    return "fee: integer|Long expected";
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
-                if (!$util.isInteger(message.dustThreshold))
-                    return "dustThreshold: integer expected";
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                if (!$util.isString(message.memo))
-                    return "memo: string expected";
-            if (message.inputs != null && message.hasOwnProperty("inputs")) {
-                if (!Array.isArray(message.inputs))
-                    return "inputs: array expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (
+                    !$util.isInteger(message.fee) &&
+                    !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high))
+                )
+                    return 'fee: integer|Long expected';
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
+                if (!$util.isInteger(message.dustThreshold)) return 'dustThreshold: integer expected';
+            if (message.memo != null && message.hasOwnProperty('memo'))
+                if (!$util.isString(message.memo)) return 'memo: string expected';
+            if (message.inputs != null && message.hasOwnProperty('inputs')) {
+                if (!Array.isArray(message.inputs)) return 'inputs: array expected';
                 for (let i = 0; i < message.inputs.length; ++i) {
                     let error = $root.protoc.OmniTx.Input.verify(message.inputs[i]);
-                    if (error)
-                        return "inputs." + error;
+                    if (error) return 'inputs.' + error;
                 }
             }
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
-                if (!$util.isString(message.changeAddress))
-                    return "changeAddress: string expected";
-            if (message.omniAmount != null && message.hasOwnProperty("omniAmount"))
-                if (!$util.isInteger(message.omniAmount) && !(message.omniAmount && $util.isInteger(message.omniAmount.low) && $util.isInteger(message.omniAmount.high)))
-                    return "omniAmount: integer|Long expected";
-            if (message.propertyId != null && message.hasOwnProperty("propertyId"))
-                if (!$util.isInteger(message.propertyId))
-                    return "propertyId: integer expected";
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
+                if (!$util.isString(message.changeAddress)) return 'changeAddress: string expected';
+            if (message.omniAmount != null && message.hasOwnProperty('omniAmount'))
+                if (
+                    !$util.isInteger(message.omniAmount) &&
+                    !(
+                        message.omniAmount &&
+                        $util.isInteger(message.omniAmount.low) &&
+                        $util.isInteger(message.omniAmount.high)
+                    )
+                )
+                    return 'omniAmount: integer|Long expected';
+            if (message.propertyId != null && message.hasOwnProperty('propertyId'))
+                if (!$util.isInteger(message.propertyId)) return 'propertyId: integer expected';
             return null;
         };
 
@@ -9621,47 +9295,36 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.OmniTx} OmniTx
          */
         OmniTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.OmniTx)
-                return object;
+            if (object instanceof $root.protoc.OmniTx) return object;
             let message = new $root.protoc.OmniTx();
             if (object.fee != null)
-                if ($util.Long)
-                    (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
-                else if (typeof object.fee === "string")
-                    message.fee = parseInt(object.fee, 10);
-                else if (typeof object.fee === "number")
-                    message.fee = object.fee;
-                else if (typeof object.fee === "object")
+                if ($util.Long) (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
+                else if (typeof object.fee === 'string') message.fee = parseInt(object.fee, 10);
+                else if (typeof object.fee === 'number') message.fee = object.fee;
+                else if (typeof object.fee === 'object')
                     message.fee = new $util.LongBits(object.fee.low >>> 0, object.fee.high >>> 0).toNumber();
-            if (object.dustThreshold != null)
-                message.dustThreshold = object.dustThreshold | 0;
-            if (object.memo != null)
-                message.memo = String(object.memo);
+            if (object.dustThreshold != null) message.dustThreshold = object.dustThreshold | 0;
+            if (object.memo != null) message.memo = String(object.memo);
             if (object.inputs) {
-                if (!Array.isArray(object.inputs))
-                    throw TypeError(".protoc.OmniTx.inputs: array expected");
+                if (!Array.isArray(object.inputs)) throw TypeError('.protoc.OmniTx.inputs: array expected');
                 message.inputs = [];
                 for (let i = 0; i < object.inputs.length; ++i) {
-                    if (typeof object.inputs[i] !== "object")
-                        throw TypeError(".protoc.OmniTx.inputs: object expected");
+                    if (typeof object.inputs[i] !== 'object') throw TypeError('.protoc.OmniTx.inputs: object expected');
                     message.inputs[i] = $root.protoc.OmniTx.Input.fromObject(object.inputs[i]);
                 }
             }
-            if (object.to != null)
-                message.to = String(object.to);
-            if (object.changeAddress != null)
-                message.changeAddress = String(object.changeAddress);
+            if (object.to != null) message.to = String(object.to);
+            if (object.changeAddress != null) message.changeAddress = String(object.changeAddress);
             if (object.omniAmount != null)
-                if ($util.Long)
-                    (message.omniAmount = $util.Long.fromValue(object.omniAmount)).unsigned = false;
-                else if (typeof object.omniAmount === "string")
-                    message.omniAmount = parseInt(object.omniAmount, 10);
-                else if (typeof object.omniAmount === "number")
-                    message.omniAmount = object.omniAmount;
-                else if (typeof object.omniAmount === "object")
-                    message.omniAmount = new $util.LongBits(object.omniAmount.low >>> 0, object.omniAmount.high >>> 0).toNumber();
-            if (object.propertyId != null)
-                message.propertyId = object.propertyId | 0;
+                if ($util.Long) (message.omniAmount = $util.Long.fromValue(object.omniAmount)).unsigned = false;
+                else if (typeof object.omniAmount === 'string') message.omniAmount = parseInt(object.omniAmount, 10);
+                else if (typeof object.omniAmount === 'number') message.omniAmount = object.omniAmount;
+                else if (typeof object.omniAmount === 'object')
+                    message.omniAmount = new $util.LongBits(
+                        object.omniAmount.low >>> 0,
+                        object.omniAmount.high >>> 0,
+                    ).toNumber();
+            if (object.propertyId != null) message.propertyId = object.propertyId | 0;
             return message;
         };
 
@@ -9675,52 +9338,58 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         OmniTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
-            if (options.arrays || options.defaults)
-                object.inputs = [];
+            if (options.arrays || options.defaults) object.inputs = [];
             if (options.defaults) {
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.fee = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.fee = options.longs === String ? "0" : 0;
+                    object.fee =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.fee = options.longs === String ? '0' : 0;
                 object.dustThreshold = 0;
-                object.memo = "";
-                object.to = "";
-                object.changeAddress = "";
+                object.memo = '';
+                object.to = '';
+                object.changeAddress = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.omniAmount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.omniAmount = options.longs === String ? "0" : 0;
+                    object.omniAmount =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.omniAmount = options.longs === String ? '0' : 0;
                 object.propertyId = 0;
             }
-            if (message.fee != null && message.hasOwnProperty("fee"))
-                if (typeof message.fee === "number")
+            if (message.fee != null && message.hasOwnProperty('fee'))
+                if (typeof message.fee === 'number')
                     object.fee = options.longs === String ? String(message.fee) : message.fee;
                 else
-                    object.fee = options.longs === String ? $util.Long.prototype.toString.call(message.fee) : options.longs === Number ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber() : message.fee;
-            if (message.dustThreshold != null && message.hasOwnProperty("dustThreshold"))
+                    object.fee =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.fee)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber()
+                            : message.fee;
+            if (message.dustThreshold != null && message.hasOwnProperty('dustThreshold'))
                 object.dustThreshold = message.dustThreshold;
-            if (message.memo != null && message.hasOwnProperty("memo"))
-                object.memo = message.memo;
+            if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
             if (message.inputs && message.inputs.length) {
                 object.inputs = [];
                 for (let j = 0; j < message.inputs.length; ++j)
                     object.inputs[j] = $root.protoc.OmniTx.Input.toObject(message.inputs[j], options);
             }
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.changeAddress != null && message.hasOwnProperty("changeAddress"))
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.changeAddress != null && message.hasOwnProperty('changeAddress'))
                 object.changeAddress = message.changeAddress;
-            if (message.omniAmount != null && message.hasOwnProperty("omniAmount"))
-                if (typeof message.omniAmount === "number")
+            if (message.omniAmount != null && message.hasOwnProperty('omniAmount'))
+                if (typeof message.omniAmount === 'number')
                     object.omniAmount = options.longs === String ? String(message.omniAmount) : message.omniAmount;
                 else
-                    object.omniAmount = options.longs === String ? $util.Long.prototype.toString.call(message.omniAmount) : options.longs === Number ? new $util.LongBits(message.omniAmount.low >>> 0, message.omniAmount.high >>> 0).toNumber() : message.omniAmount;
-            if (message.propertyId != null && message.hasOwnProperty("propertyId"))
+                    object.omniAmount =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.omniAmount)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.omniAmount.low >>> 0, message.omniAmount.high >>> 0).toNumber()
+                            : message.omniAmount;
+            if (message.propertyId != null && message.hasOwnProperty('propertyId'))
                 object.propertyId = message.propertyId;
             return object;
         };
@@ -9736,8 +9405,7 @@ export const protoc = $root.protoc = (() => {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        OmniTx.Input = (function() {
-
+        OmniTx.Input = (function () {
             /**
              * Properties of an Input.
              * @memberof protoc.OmniTx
@@ -9759,8 +9427,7 @@ export const protoc = $root.protoc = (() => {
             function Input(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -9769,7 +9436,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.OmniTx.Input
              * @instance
              */
-            Input.prototype.hash = "";
+            Input.prototype.hash = '';
 
             /**
              * Input index.
@@ -9793,7 +9460,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.OmniTx.Input
              * @instance
              */
-            Input.prototype.ownerKeyPath = "";
+            Input.prototype.ownerKeyPath = '';
 
             /**
              * Creates a new Input instance using the specified properties.
@@ -9817,16 +9484,17 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Input.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.hash != null && Object.hasOwnProperty.call(message, "hash"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.hash);
-                if (message.index != null && Object.hasOwnProperty.call(message, "index"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.index);
-                if (message.utxo != null && Object.hasOwnProperty.call(message, "utxo"))
-                    $root.protoc.OmniTx.utxo.encode(message.utxo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                if (message.ownerKeyPath != null && Object.hasOwnProperty.call(message, "ownerKeyPath"))
-                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.ownerKeyPath);
+                if (!writer) writer = $Writer.create();
+                if (message.hash != null && Object.hasOwnProperty.call(message, 'hash'))
+                    writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.hash);
+                if (message.index != null && Object.hasOwnProperty.call(message, 'index'))
+                    writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.index);
+                if (message.utxo != null && Object.hasOwnProperty.call(message, 'utxo'))
+                    $root.protoc.OmniTx.utxo
+                        .encode(message.utxo, writer.uint32(/* id 3, wireType 2 =*/ 26).fork())
+                        .ldelim();
+                if (message.ownerKeyPath != null && Object.hasOwnProperty.call(message, 'ownerKeyPath'))
+                    writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.ownerKeyPath);
                 return writer;
             };
 
@@ -9855,27 +9523,27 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.OmniTx.Input();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.OmniTx.Input();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.hash = reader.string();
-                        break;
-                    case 2:
-                        message.index = reader.int32();
-                        break;
-                    case 3:
-                        message.utxo = $root.protoc.OmniTx.utxo.decode(reader, reader.uint32());
-                        break;
-                    case 4:
-                        message.ownerKeyPath = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.hash = reader.string();
+                            break;
+                        case 2:
+                            message.index = reader.int32();
+                            break;
+                        case 3:
+                            message.utxo = $root.protoc.OmniTx.utxo.decode(reader, reader.uint32());
+                            break;
+                        case 4:
+                            message.ownerKeyPath = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -9892,8 +9560,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Input.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -9906,22 +9573,17 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Input.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.hash != null && message.hasOwnProperty("hash"))
-                    if (!$util.isString(message.hash))
-                        return "hash: string expected";
-                if (message.index != null && message.hasOwnProperty("index"))
-                    if (!$util.isInteger(message.index))
-                        return "index: integer expected";
-                if (message.utxo != null && message.hasOwnProperty("utxo")) {
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.hash != null && message.hasOwnProperty('hash'))
+                    if (!$util.isString(message.hash)) return 'hash: string expected';
+                if (message.index != null && message.hasOwnProperty('index'))
+                    if (!$util.isInteger(message.index)) return 'index: integer expected';
+                if (message.utxo != null && message.hasOwnProperty('utxo')) {
                     let error = $root.protoc.OmniTx.utxo.verify(message.utxo);
-                    if (error)
-                        return "utxo." + error;
+                    if (error) return 'utxo.' + error;
                 }
-                if (message.ownerKeyPath != null && message.hasOwnProperty("ownerKeyPath"))
-                    if (!$util.isString(message.ownerKeyPath))
-                        return "ownerKeyPath: string expected";
+                if (message.ownerKeyPath != null && message.hasOwnProperty('ownerKeyPath'))
+                    if (!$util.isString(message.ownerKeyPath)) return 'ownerKeyPath: string expected';
                 return null;
             };
 
@@ -9934,20 +9596,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.OmniTx.Input} Input
              */
             Input.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.OmniTx.Input)
-                    return object;
+                if (object instanceof $root.protoc.OmniTx.Input) return object;
                 let message = new $root.protoc.OmniTx.Input();
-                if (object.hash != null)
-                    message.hash = String(object.hash);
-                if (object.index != null)
-                    message.index = object.index | 0;
+                if (object.hash != null) message.hash = String(object.hash);
+                if (object.index != null) message.index = object.index | 0;
                 if (object.utxo != null) {
-                    if (typeof object.utxo !== "object")
-                        throw TypeError(".protoc.OmniTx.Input.utxo: object expected");
+                    if (typeof object.utxo !== 'object') throw TypeError('.protoc.OmniTx.Input.utxo: object expected');
                     message.utxo = $root.protoc.OmniTx.utxo.fromObject(object.utxo);
                 }
-                if (object.ownerKeyPath != null)
-                    message.ownerKeyPath = String(object.ownerKeyPath);
+                if (object.ownerKeyPath != null) message.ownerKeyPath = String(object.ownerKeyPath);
                 return message;
             };
 
@@ -9961,22 +9618,19 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Input.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
-                    object.hash = "";
+                    object.hash = '';
                     object.index = 0;
                     object.utxo = null;
-                    object.ownerKeyPath = "";
+                    object.ownerKeyPath = '';
                 }
-                if (message.hash != null && message.hasOwnProperty("hash"))
-                    object.hash = message.hash;
-                if (message.index != null && message.hasOwnProperty("index"))
-                    object.index = message.index;
-                if (message.utxo != null && message.hasOwnProperty("utxo"))
+                if (message.hash != null && message.hasOwnProperty('hash')) object.hash = message.hash;
+                if (message.index != null && message.hasOwnProperty('index')) object.index = message.index;
+                if (message.utxo != null && message.hasOwnProperty('utxo'))
                     object.utxo = $root.protoc.OmniTx.utxo.toObject(message.utxo, options);
-                if (message.ownerKeyPath != null && message.hasOwnProperty("ownerKeyPath"))
+                if (message.ownerKeyPath != null && message.hasOwnProperty('ownerKeyPath'))
                     object.ownerKeyPath = message.ownerKeyPath;
                 return object;
             };
@@ -9995,8 +9649,7 @@ export const protoc = $root.protoc = (() => {
             return Input;
         })();
 
-        OmniTx.utxo = (function() {
-
+        OmniTx.utxo = (function () {
             /**
              * Properties of an utxo.
              * @memberof protoc.OmniTx
@@ -10017,8 +9670,7 @@ export const protoc = $root.protoc = (() => {
             function utxo(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -10027,7 +9679,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.OmniTx.utxo
              * @instance
              */
-            utxo.prototype.publicKey = "";
+            utxo.prototype.publicKey = '';
 
             /**
              * utxo script.
@@ -10035,7 +9687,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.OmniTx.utxo
              * @instance
              */
-            utxo.prototype.script = "";
+            utxo.prototype.script = '';
 
             /**
              * utxo value.
@@ -10043,7 +9695,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.OmniTx.utxo
              * @instance
              */
-            utxo.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            utxo.prototype.value = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Creates a new utxo instance using the specified properties.
@@ -10067,14 +9719,13 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             utxo.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.publicKey != null && Object.hasOwnProperty.call(message, "publicKey"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.publicKey);
-                if (message.script != null && Object.hasOwnProperty.call(message, "script"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.script);
-                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.value);
+                if (!writer) writer = $Writer.create();
+                if (message.publicKey != null && Object.hasOwnProperty.call(message, 'publicKey'))
+                    writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.publicKey);
+                if (message.script != null && Object.hasOwnProperty.call(message, 'script'))
+                    writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.script);
+                if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                    writer.uint32(/* id 3, wireType 0 =*/ 24).int64(message.value);
                 return writer;
             };
 
@@ -10103,24 +9754,24 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             utxo.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.OmniTx.utxo();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.OmniTx.utxo();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.publicKey = reader.string();
-                        break;
-                    case 2:
-                        message.script = reader.string();
-                        break;
-                    case 3:
-                        message.value = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.publicKey = reader.string();
+                            break;
+                        case 2:
+                            message.script = reader.string();
+                            break;
+                        case 3:
+                            message.value = reader.int64();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -10137,8 +9788,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             utxo.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -10151,17 +9801,17 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             utxo.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.publicKey != null && message.hasOwnProperty("publicKey"))
-                    if (!$util.isString(message.publicKey))
-                        return "publicKey: string expected";
-                if (message.script != null && message.hasOwnProperty("script"))
-                    if (!$util.isString(message.script))
-                        return "script: string expected";
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
-                        return "value: integer|Long expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.publicKey != null && message.hasOwnProperty('publicKey'))
+                    if (!$util.isString(message.publicKey)) return 'publicKey: string expected';
+                if (message.script != null && message.hasOwnProperty('script'))
+                    if (!$util.isString(message.script)) return 'script: string expected';
+                if (message.value != null && message.hasOwnProperty('value'))
+                    if (
+                        !$util.isInteger(message.value) &&
+                        !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high))
+                    )
+                        return 'value: integer|Long expected';
                 return null;
             };
 
@@ -10174,21 +9824,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.OmniTx.utxo} utxo
              */
             utxo.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.OmniTx.utxo)
-                    return object;
+                if (object instanceof $root.protoc.OmniTx.utxo) return object;
                 let message = new $root.protoc.OmniTx.utxo();
-                if (object.publicKey != null)
-                    message.publicKey = String(object.publicKey);
-                if (object.script != null)
-                    message.script = String(object.script);
+                if (object.publicKey != null) message.publicKey = String(object.publicKey);
+                if (object.script != null) message.script = String(object.script);
                 if (object.value != null)
-                    if ($util.Long)
-                        (message.value = $util.Long.fromValue(object.value)).unsigned = false;
-                    else if (typeof object.value === "string")
-                        message.value = parseInt(object.value, 10);
-                    else if (typeof object.value === "number")
-                        message.value = object.value;
-                    else if (typeof object.value === "object")
+                    if ($util.Long) (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                    else if (typeof object.value === 'string') message.value = parseInt(object.value, 10);
+                    else if (typeof object.value === 'number') message.value = object.value;
+                    else if (typeof object.value === 'object')
                         message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
                 return message;
             };
@@ -10203,27 +9847,34 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             utxo.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
-                    object.publicKey = "";
-                    object.script = "";
+                    object.publicKey = '';
+                    object.script = '';
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.value = options.longs === String ? "0" : 0;
+                        object.value =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.value = options.longs === String ? '0' : 0;
                 }
-                if (message.publicKey != null && message.hasOwnProperty("publicKey"))
+                if (message.publicKey != null && message.hasOwnProperty('publicKey'))
                     object.publicKey = message.publicKey;
-                if (message.script != null && message.hasOwnProperty("script"))
-                    object.script = message.script;
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (typeof message.value === "number")
+                if (message.script != null && message.hasOwnProperty('script')) object.script = message.script;
+                if (message.value != null && message.hasOwnProperty('value'))
+                    if (typeof message.value === 'number')
                         object.value = options.longs === String ? String(message.value) : message.value;
                     else
-                        object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+                        object.value =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.value)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber()
+                                : message.value;
                 return object;
             };
 
@@ -10244,8 +9895,7 @@ export const protoc = $root.protoc = (() => {
         return OmniTx;
     })();
 
-    protoc.EosTx = (function() {
-
+    protoc.EosTx = (function () {
         /**
          * Properties of an EosTx.
          * @memberof protoc
@@ -10267,8 +9917,7 @@ export const protoc = $root.protoc = (() => {
         function EosTx(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -10277,7 +9926,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EosTx
          * @instance
          */
-        EosTx.prototype.type = "";
+        EosTx.prototype.type = '';
 
         /**
          * EosTx tokenAccount.
@@ -10285,7 +9934,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.EosTx
          * @instance
          */
-        EosTx.prototype.tokenAccount = "";
+        EosTx.prototype.tokenAccount = '';
 
         /**
          * EosTx data.
@@ -10325,16 +9974,18 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         EosTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-            if (message.tokenAccount != null && Object.hasOwnProperty.call(message, "tokenAccount"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tokenAccount);
-            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
-                $root.protoc.EosTx.Data.encode(message.data, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.header != null && Object.hasOwnProperty.call(message, "header"))
-                $root.protoc.EosTx.Header.encode(message.header, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (!writer) writer = $Writer.create();
+            if (message.type != null && Object.hasOwnProperty.call(message, 'type'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.type);
+            if (message.tokenAccount != null && Object.hasOwnProperty.call(message, 'tokenAccount'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.tokenAccount);
+            if (message.data != null && Object.hasOwnProperty.call(message, 'data'))
+                $root.protoc.EosTx.Data.encode(message.data, writer.uint32(/* id 3, wireType 2 =*/ 26).fork()).ldelim();
+            if (message.header != null && Object.hasOwnProperty.call(message, 'header'))
+                $root.protoc.EosTx.Header.encode(
+                    message.header,
+                    writer.uint32(/* id 4, wireType 2 =*/ 34).fork(),
+                ).ldelim();
             return writer;
         };
 
@@ -10363,27 +10014,27 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         EosTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.EosTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.EosTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.type = reader.string();
-                    break;
-                case 2:
-                    message.tokenAccount = reader.string();
-                    break;
-                case 3:
-                    message.data = $root.protoc.EosTx.Data.decode(reader, reader.uint32());
-                    break;
-                case 4:
-                    message.header = $root.protoc.EosTx.Header.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.type = reader.string();
+                        break;
+                    case 2:
+                        message.tokenAccount = reader.string();
+                        break;
+                    case 3:
+                        message.data = $root.protoc.EosTx.Data.decode(reader, reader.uint32());
+                        break;
+                    case 4:
+                        message.header = $root.protoc.EosTx.Header.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -10400,8 +10051,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         EosTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -10414,23 +10064,18 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         EosTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.type != null && message.hasOwnProperty("type"))
-                if (!$util.isString(message.type))
-                    return "type: string expected";
-            if (message.tokenAccount != null && message.hasOwnProperty("tokenAccount"))
-                if (!$util.isString(message.tokenAccount))
-                    return "tokenAccount: string expected";
-            if (message.data != null && message.hasOwnProperty("data")) {
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.type != null && message.hasOwnProperty('type'))
+                if (!$util.isString(message.type)) return 'type: string expected';
+            if (message.tokenAccount != null && message.hasOwnProperty('tokenAccount'))
+                if (!$util.isString(message.tokenAccount)) return 'tokenAccount: string expected';
+            if (message.data != null && message.hasOwnProperty('data')) {
                 let error = $root.protoc.EosTx.Data.verify(message.data);
-                if (error)
-                    return "data." + error;
+                if (error) return 'data.' + error;
             }
-            if (message.header != null && message.hasOwnProperty("header")) {
+            if (message.header != null && message.hasOwnProperty('header')) {
                 let error = $root.protoc.EosTx.Header.verify(message.header);
-                if (error)
-                    return "header." + error;
+                if (error) return 'header.' + error;
             }
             return null;
         };
@@ -10444,21 +10089,16 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.EosTx} EosTx
          */
         EosTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.EosTx)
-                return object;
+            if (object instanceof $root.protoc.EosTx) return object;
             let message = new $root.protoc.EosTx();
-            if (object.type != null)
-                message.type = String(object.type);
-            if (object.tokenAccount != null)
-                message.tokenAccount = String(object.tokenAccount);
+            if (object.type != null) message.type = String(object.type);
+            if (object.tokenAccount != null) message.tokenAccount = String(object.tokenAccount);
             if (object.data != null) {
-                if (typeof object.data !== "object")
-                    throw TypeError(".protoc.EosTx.data: object expected");
+                if (typeof object.data !== 'object') throw TypeError('.protoc.EosTx.data: object expected');
                 message.data = $root.protoc.EosTx.Data.fromObject(object.data);
             }
             if (object.header != null) {
-                if (typeof object.header !== "object")
-                    throw TypeError(".protoc.EosTx.header: object expected");
+                if (typeof object.header !== 'object') throw TypeError('.protoc.EosTx.header: object expected');
                 message.header = $root.protoc.EosTx.Header.fromObject(object.header);
             }
             return message;
@@ -10474,22 +10114,20 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         EosTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.type = "";
-                object.tokenAccount = "";
+                object.type = '';
+                object.tokenAccount = '';
                 object.data = null;
                 object.header = null;
             }
-            if (message.type != null && message.hasOwnProperty("type"))
-                object.type = message.type;
-            if (message.tokenAccount != null && message.hasOwnProperty("tokenAccount"))
+            if (message.type != null && message.hasOwnProperty('type')) object.type = message.type;
+            if (message.tokenAccount != null && message.hasOwnProperty('tokenAccount'))
                 object.tokenAccount = message.tokenAccount;
-            if (message.data != null && message.hasOwnProperty("data"))
+            if (message.data != null && message.hasOwnProperty('data'))
                 object.data = $root.protoc.EosTx.Data.toObject(message.data, options);
-            if (message.header != null && message.hasOwnProperty("header"))
+            if (message.header != null && message.hasOwnProperty('header'))
                 object.header = $root.protoc.EosTx.Header.toObject(message.header, options);
             return object;
         };
@@ -10505,8 +10143,7 @@ export const protoc = $root.protoc = (() => {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        EosTx.Data = (function() {
-
+        EosTx.Data = (function () {
             /**
              * Properties of a Data.
              * @memberof protoc.EosTx
@@ -10531,8 +10168,7 @@ export const protoc = $root.protoc = (() => {
             function Data(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -10541,7 +10177,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EosTx.Data
              * @instance
              */
-            Data.prototype.from = "";
+            Data.prototype.from = '';
 
             /**
              * Data to.
@@ -10549,7 +10185,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EosTx.Data
              * @instance
              */
-            Data.prototype.to = "";
+            Data.prototype.to = '';
 
             /**
              * Data amount.
@@ -10557,7 +10193,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EosTx.Data
              * @instance
              */
-            Data.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Data.prototype.amount = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Data symbol.
@@ -10565,7 +10201,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EosTx.Data
              * @instance
              */
-            Data.prototype.symbol = "";
+            Data.prototype.symbol = '';
 
             /**
              * Data memo.
@@ -10573,7 +10209,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EosTx.Data
              * @instance
              */
-            Data.prototype.memo = "";
+            Data.prototype.memo = '';
 
             /**
              * Data fee.
@@ -10581,7 +10217,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EosTx.Data
              * @instance
              */
-            Data.prototype.fee = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Data.prototype.fee = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Data decimal.
@@ -10613,22 +10249,21 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Data.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.from != null && Object.hasOwnProperty.call(message, "from"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.from);
-                if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.to);
-                if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.amount);
-                if (message.symbol != null && Object.hasOwnProperty.call(message, "symbol"))
-                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.symbol);
-                if (message.memo != null && Object.hasOwnProperty.call(message, "memo"))
-                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.memo);
-                if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                    writer.uint32(/* id 6, wireType 0 =*/48).int64(message.fee);
-                if (message.decimal != null && Object.hasOwnProperty.call(message, "decimal"))
-                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.decimal);
+                if (!writer) writer = $Writer.create();
+                if (message.from != null && Object.hasOwnProperty.call(message, 'from'))
+                    writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.from);
+                if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                    writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.to);
+                if (message.amount != null && Object.hasOwnProperty.call(message, 'amount'))
+                    writer.uint32(/* id 3, wireType 0 =*/ 24).int64(message.amount);
+                if (message.symbol != null && Object.hasOwnProperty.call(message, 'symbol'))
+                    writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.symbol);
+                if (message.memo != null && Object.hasOwnProperty.call(message, 'memo'))
+                    writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.memo);
+                if (message.fee != null && Object.hasOwnProperty.call(message, 'fee'))
+                    writer.uint32(/* id 6, wireType 0 =*/ 48).int64(message.fee);
+                if (message.decimal != null && Object.hasOwnProperty.call(message, 'decimal'))
+                    writer.uint32(/* id 7, wireType 0 =*/ 56).int32(message.decimal);
                 return writer;
             };
 
@@ -10657,36 +10292,36 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Data.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.EosTx.Data();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.EosTx.Data();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.from = reader.string();
-                        break;
-                    case 2:
-                        message.to = reader.string();
-                        break;
-                    case 3:
-                        message.amount = reader.int64();
-                        break;
-                    case 4:
-                        message.symbol = reader.string();
-                        break;
-                    case 5:
-                        message.memo = reader.string();
-                        break;
-                    case 6:
-                        message.fee = reader.int64();
-                        break;
-                    case 7:
-                        message.decimal = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.from = reader.string();
+                            break;
+                        case 2:
+                            message.to = reader.string();
+                            break;
+                        case 3:
+                            message.amount = reader.int64();
+                            break;
+                        case 4:
+                            message.symbol = reader.string();
+                            break;
+                        case 5:
+                            message.memo = reader.string();
+                            break;
+                        case 6:
+                            message.fee = reader.int64();
+                            break;
+                        case 7:
+                            message.decimal = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -10703,8 +10338,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Data.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -10717,29 +10351,29 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Data.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.from != null && message.hasOwnProperty("from"))
-                    if (!$util.isString(message.from))
-                        return "from: string expected";
-                if (message.to != null && message.hasOwnProperty("to"))
-                    if (!$util.isString(message.to))
-                        return "to: string expected";
-                if (message.amount != null && message.hasOwnProperty("amount"))
-                    if (!$util.isInteger(message.amount) && !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high)))
-                        return "amount: integer|Long expected";
-                if (message.symbol != null && message.hasOwnProperty("symbol"))
-                    if (!$util.isString(message.symbol))
-                        return "symbol: string expected";
-                if (message.memo != null && message.hasOwnProperty("memo"))
-                    if (!$util.isString(message.memo))
-                        return "memo: string expected";
-                if (message.fee != null && message.hasOwnProperty("fee"))
-                    if (!$util.isInteger(message.fee) && !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high)))
-                        return "fee: integer|Long expected";
-                if (message.decimal != null && message.hasOwnProperty("decimal"))
-                    if (!$util.isInteger(message.decimal))
-                        return "decimal: integer expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.from != null && message.hasOwnProperty('from'))
+                    if (!$util.isString(message.from)) return 'from: string expected';
+                if (message.to != null && message.hasOwnProperty('to'))
+                    if (!$util.isString(message.to)) return 'to: string expected';
+                if (message.amount != null && message.hasOwnProperty('amount'))
+                    if (
+                        !$util.isInteger(message.amount) &&
+                        !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high))
+                    )
+                        return 'amount: integer|Long expected';
+                if (message.symbol != null && message.hasOwnProperty('symbol'))
+                    if (!$util.isString(message.symbol)) return 'symbol: string expected';
+                if (message.memo != null && message.hasOwnProperty('memo'))
+                    if (!$util.isString(message.memo)) return 'memo: string expected';
+                if (message.fee != null && message.hasOwnProperty('fee'))
+                    if (
+                        !$util.isInteger(message.fee) &&
+                        !(message.fee && $util.isInteger(message.fee.low) && $util.isInteger(message.fee.high))
+                    )
+                        return 'fee: integer|Long expected';
+                if (message.decimal != null && message.hasOwnProperty('decimal'))
+                    if (!$util.isInteger(message.decimal)) return 'decimal: integer expected';
                 return null;
             };
 
@@ -10752,37 +10386,28 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.EosTx.Data} Data
              */
             Data.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.EosTx.Data)
-                    return object;
+                if (object instanceof $root.protoc.EosTx.Data) return object;
                 let message = new $root.protoc.EosTx.Data();
-                if (object.from != null)
-                    message.from = String(object.from);
-                if (object.to != null)
-                    message.to = String(object.to);
+                if (object.from != null) message.from = String(object.from);
+                if (object.to != null) message.to = String(object.to);
                 if (object.amount != null)
-                    if ($util.Long)
-                        (message.amount = $util.Long.fromValue(object.amount)).unsigned = false;
-                    else if (typeof object.amount === "string")
-                        message.amount = parseInt(object.amount, 10);
-                    else if (typeof object.amount === "number")
-                        message.amount = object.amount;
-                    else if (typeof object.amount === "object")
-                        message.amount = new $util.LongBits(object.amount.low >>> 0, object.amount.high >>> 0).toNumber();
-                if (object.symbol != null)
-                    message.symbol = String(object.symbol);
-                if (object.memo != null)
-                    message.memo = String(object.memo);
+                    if ($util.Long) (message.amount = $util.Long.fromValue(object.amount)).unsigned = false;
+                    else if (typeof object.amount === 'string') message.amount = parseInt(object.amount, 10);
+                    else if (typeof object.amount === 'number') message.amount = object.amount;
+                    else if (typeof object.amount === 'object')
+                        message.amount = new $util.LongBits(
+                            object.amount.low >>> 0,
+                            object.amount.high >>> 0,
+                        ).toNumber();
+                if (object.symbol != null) message.symbol = String(object.symbol);
+                if (object.memo != null) message.memo = String(object.memo);
                 if (object.fee != null)
-                    if ($util.Long)
-                        (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
-                    else if (typeof object.fee === "string")
-                        message.fee = parseInt(object.fee, 10);
-                    else if (typeof object.fee === "number")
-                        message.fee = object.fee;
-                    else if (typeof object.fee === "object")
+                    if ($util.Long) (message.fee = $util.Long.fromValue(object.fee)).unsigned = false;
+                    else if (typeof object.fee === 'string') message.fee = parseInt(object.fee, 10);
+                    else if (typeof object.fee === 'number') message.fee = object.fee;
+                    else if (typeof object.fee === 'object')
                         message.fee = new $util.LongBits(object.fee.low >>> 0, object.fee.high >>> 0).toNumber();
-                if (object.decimal != null)
-                    message.decimal = object.decimal | 0;
+                if (object.decimal != null) message.decimal = object.decimal | 0;
                 return message;
             };
 
@@ -10796,46 +10421,58 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Data.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
-                    object.from = "";
-                    object.to = "";
+                    object.from = '';
+                    object.to = '';
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.amount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.amount = options.longs === String ? "0" : 0;
-                    object.symbol = "";
-                    object.memo = "";
+                        object.amount =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.amount = options.longs === String ? '0' : 0;
+                    object.symbol = '';
+                    object.memo = '';
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.fee = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.fee = options.longs === String ? "0" : 0;
+                        object.fee =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.fee = options.longs === String ? '0' : 0;
                     object.decimal = 0;
                 }
-                if (message.from != null && message.hasOwnProperty("from"))
-                    object.from = message.from;
-                if (message.to != null && message.hasOwnProperty("to"))
-                    object.to = message.to;
-                if (message.amount != null && message.hasOwnProperty("amount"))
-                    if (typeof message.amount === "number")
+                if (message.from != null && message.hasOwnProperty('from')) object.from = message.from;
+                if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+                if (message.amount != null && message.hasOwnProperty('amount'))
+                    if (typeof message.amount === 'number')
                         object.amount = options.longs === String ? String(message.amount) : message.amount;
                     else
-                        object.amount = options.longs === String ? $util.Long.prototype.toString.call(message.amount) : options.longs === Number ? new $util.LongBits(message.amount.low >>> 0, message.amount.high >>> 0).toNumber() : message.amount;
-                if (message.symbol != null && message.hasOwnProperty("symbol"))
-                    object.symbol = message.symbol;
-                if (message.memo != null && message.hasOwnProperty("memo"))
-                    object.memo = message.memo;
-                if (message.fee != null && message.hasOwnProperty("fee"))
-                    if (typeof message.fee === "number")
+                        object.amount =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.amount)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.amount.low >>> 0, message.amount.high >>> 0).toNumber()
+                                : message.amount;
+                if (message.symbol != null && message.hasOwnProperty('symbol')) object.symbol = message.symbol;
+                if (message.memo != null && message.hasOwnProperty('memo')) object.memo = message.memo;
+                if (message.fee != null && message.hasOwnProperty('fee'))
+                    if (typeof message.fee === 'number')
                         object.fee = options.longs === String ? String(message.fee) : message.fee;
                     else
-                        object.fee = options.longs === String ? $util.Long.prototype.toString.call(message.fee) : options.longs === Number ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber() : message.fee;
-                if (message.decimal != null && message.hasOwnProperty("decimal"))
-                    object.decimal = message.decimal;
+                        object.fee =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.fee)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.fee.low >>> 0, message.fee.high >>> 0).toNumber()
+                                : message.fee;
+                if (message.decimal != null && message.hasOwnProperty('decimal')) object.decimal = message.decimal;
                 return object;
             };
 
@@ -10853,8 +10490,7 @@ export const protoc = $root.protoc = (() => {
             return Data;
         })();
 
-        EosTx.Header = (function() {
-
+        EosTx.Header = (function () {
             /**
              * Properties of a Header.
              * @memberof protoc.EosTx
@@ -10876,8 +10512,7 @@ export const protoc = $root.protoc = (() => {
             function Header(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -10886,7 +10521,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EosTx.Header
              * @instance
              */
-            Header.prototype.time = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Header.prototype.time = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Header expireInSeconds.
@@ -10902,7 +10537,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EosTx.Header
              * @instance
              */
-            Header.prototype.refBlockNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Header.prototype.refBlockNum = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Header refBlockPrefix.
@@ -10910,7 +10545,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.EosTx.Header
              * @instance
              */
-            Header.prototype.refBlockPrefix = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+            Header.prototype.refBlockPrefix = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
             /**
              * Creates a new Header instance using the specified properties.
@@ -10934,16 +10569,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Header.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.time != null && Object.hasOwnProperty.call(message, "time"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.time);
-                if (message.expireInSeconds != null && Object.hasOwnProperty.call(message, "expireInSeconds"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.expireInSeconds);
-                if (message.refBlockNum != null && Object.hasOwnProperty.call(message, "refBlockNum"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.refBlockNum);
-                if (message.refBlockPrefix != null && Object.hasOwnProperty.call(message, "refBlockPrefix"))
-                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.refBlockPrefix);
+                if (!writer) writer = $Writer.create();
+                if (message.time != null && Object.hasOwnProperty.call(message, 'time'))
+                    writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.time);
+                if (message.expireInSeconds != null && Object.hasOwnProperty.call(message, 'expireInSeconds'))
+                    writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.expireInSeconds);
+                if (message.refBlockNum != null && Object.hasOwnProperty.call(message, 'refBlockNum'))
+                    writer.uint32(/* id 3, wireType 0 =*/ 24).int64(message.refBlockNum);
+                if (message.refBlockPrefix != null && Object.hasOwnProperty.call(message, 'refBlockPrefix'))
+                    writer.uint32(/* id 4, wireType 0 =*/ 32).int64(message.refBlockPrefix);
                 return writer;
             };
 
@@ -10972,27 +10606,27 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Header.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.EosTx.Header();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.EosTx.Header();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.time = reader.int64();
-                        break;
-                    case 2:
-                        message.expireInSeconds = reader.int32();
-                        break;
-                    case 3:
-                        message.refBlockNum = reader.int64();
-                        break;
-                    case 4:
-                        message.refBlockPrefix = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.time = reader.int64();
+                            break;
+                        case 2:
+                            message.expireInSeconds = reader.int32();
+                            break;
+                        case 3:
+                            message.refBlockNum = reader.int64();
+                            break;
+                        case 4:
+                            message.refBlockPrefix = reader.int64();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -11009,8 +10643,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Header.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -11023,20 +10656,35 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Header.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.time != null && message.hasOwnProperty("time"))
-                    if (!$util.isInteger(message.time) && !(message.time && $util.isInteger(message.time.low) && $util.isInteger(message.time.high)))
-                        return "time: integer|Long expected";
-                if (message.expireInSeconds != null && message.hasOwnProperty("expireInSeconds"))
-                    if (!$util.isInteger(message.expireInSeconds))
-                        return "expireInSeconds: integer expected";
-                if (message.refBlockNum != null && message.hasOwnProperty("refBlockNum"))
-                    if (!$util.isInteger(message.refBlockNum) && !(message.refBlockNum && $util.isInteger(message.refBlockNum.low) && $util.isInteger(message.refBlockNum.high)))
-                        return "refBlockNum: integer|Long expected";
-                if (message.refBlockPrefix != null && message.hasOwnProperty("refBlockPrefix"))
-                    if (!$util.isInteger(message.refBlockPrefix) && !(message.refBlockPrefix && $util.isInteger(message.refBlockPrefix.low) && $util.isInteger(message.refBlockPrefix.high)))
-                        return "refBlockPrefix: integer|Long expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.time != null && message.hasOwnProperty('time'))
+                    if (
+                        !$util.isInteger(message.time) &&
+                        !(message.time && $util.isInteger(message.time.low) && $util.isInteger(message.time.high))
+                    )
+                        return 'time: integer|Long expected';
+                if (message.expireInSeconds != null && message.hasOwnProperty('expireInSeconds'))
+                    if (!$util.isInteger(message.expireInSeconds)) return 'expireInSeconds: integer expected';
+                if (message.refBlockNum != null && message.hasOwnProperty('refBlockNum'))
+                    if (
+                        !$util.isInteger(message.refBlockNum) &&
+                        !(
+                            message.refBlockNum &&
+                            $util.isInteger(message.refBlockNum.low) &&
+                            $util.isInteger(message.refBlockNum.high)
+                        )
+                    )
+                        return 'refBlockNum: integer|Long expected';
+                if (message.refBlockPrefix != null && message.hasOwnProperty('refBlockPrefix'))
+                    if (
+                        !$util.isInteger(message.refBlockPrefix) &&
+                        !(
+                            message.refBlockPrefix &&
+                            $util.isInteger(message.refBlockPrefix.low) &&
+                            $util.isInteger(message.refBlockPrefix.high)
+                        )
+                    )
+                        return 'refBlockPrefix: integer|Long expected';
                 return null;
             };
 
@@ -11049,38 +10697,36 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.EosTx.Header} Header
              */
             Header.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.EosTx.Header)
-                    return object;
+                if (object instanceof $root.protoc.EosTx.Header) return object;
                 let message = new $root.protoc.EosTx.Header();
                 if (object.time != null)
-                    if ($util.Long)
-                        (message.time = $util.Long.fromValue(object.time)).unsigned = false;
-                    else if (typeof object.time === "string")
-                        message.time = parseInt(object.time, 10);
-                    else if (typeof object.time === "number")
-                        message.time = object.time;
-                    else if (typeof object.time === "object")
+                    if ($util.Long) (message.time = $util.Long.fromValue(object.time)).unsigned = false;
+                    else if (typeof object.time === 'string') message.time = parseInt(object.time, 10);
+                    else if (typeof object.time === 'number') message.time = object.time;
+                    else if (typeof object.time === 'object')
                         message.time = new $util.LongBits(object.time.low >>> 0, object.time.high >>> 0).toNumber();
-                if (object.expireInSeconds != null)
-                    message.expireInSeconds = object.expireInSeconds | 0;
+                if (object.expireInSeconds != null) message.expireInSeconds = object.expireInSeconds | 0;
                 if (object.refBlockNum != null)
-                    if ($util.Long)
-                        (message.refBlockNum = $util.Long.fromValue(object.refBlockNum)).unsigned = false;
-                    else if (typeof object.refBlockNum === "string")
+                    if ($util.Long) (message.refBlockNum = $util.Long.fromValue(object.refBlockNum)).unsigned = false;
+                    else if (typeof object.refBlockNum === 'string')
                         message.refBlockNum = parseInt(object.refBlockNum, 10);
-                    else if (typeof object.refBlockNum === "number")
-                        message.refBlockNum = object.refBlockNum;
-                    else if (typeof object.refBlockNum === "object")
-                        message.refBlockNum = new $util.LongBits(object.refBlockNum.low >>> 0, object.refBlockNum.high >>> 0).toNumber();
+                    else if (typeof object.refBlockNum === 'number') message.refBlockNum = object.refBlockNum;
+                    else if (typeof object.refBlockNum === 'object')
+                        message.refBlockNum = new $util.LongBits(
+                            object.refBlockNum.low >>> 0,
+                            object.refBlockNum.high >>> 0,
+                        ).toNumber();
                 if (object.refBlockPrefix != null)
                     if ($util.Long)
                         (message.refBlockPrefix = $util.Long.fromValue(object.refBlockPrefix)).unsigned = false;
-                    else if (typeof object.refBlockPrefix === "string")
+                    else if (typeof object.refBlockPrefix === 'string')
                         message.refBlockPrefix = parseInt(object.refBlockPrefix, 10);
-                    else if (typeof object.refBlockPrefix === "number")
-                        message.refBlockPrefix = object.refBlockPrefix;
-                    else if (typeof object.refBlockPrefix === "object")
-                        message.refBlockPrefix = new $util.LongBits(object.refBlockPrefix.low >>> 0, object.refBlockPrefix.high >>> 0).toNumber();
+                    else if (typeof object.refBlockPrefix === 'number') message.refBlockPrefix = object.refBlockPrefix;
+                    else if (typeof object.refBlockPrefix === 'object')
+                        message.refBlockPrefix = new $util.LongBits(
+                            object.refBlockPrefix.low >>> 0,
+                            object.refBlockPrefix.high >>> 0,
+                        ).toNumber();
                 return message;
             };
 
@@ -11094,44 +10740,78 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Header.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.time = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.time = options.longs === String ? "0" : 0;
+                        object.time =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.time = options.longs === String ? '0' : 0;
                     object.expireInSeconds = 0;
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.refBlockNum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.refBlockNum = options.longs === String ? "0" : 0;
+                        object.refBlockNum =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.refBlockNum = options.longs === String ? '0' : 0;
                     if ($util.Long) {
                         let long = new $util.Long(0, 0, false);
-                        object.refBlockPrefix = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.refBlockPrefix = options.longs === String ? "0" : 0;
+                        object.refBlockPrefix =
+                            options.longs === String
+                                ? long.toString()
+                                : options.longs === Number
+                                ? long.toNumber()
+                                : long;
+                    } else object.refBlockPrefix = options.longs === String ? '0' : 0;
                 }
-                if (message.time != null && message.hasOwnProperty("time"))
-                    if (typeof message.time === "number")
+                if (message.time != null && message.hasOwnProperty('time'))
+                    if (typeof message.time === 'number')
                         object.time = options.longs === String ? String(message.time) : message.time;
                     else
-                        object.time = options.longs === String ? $util.Long.prototype.toString.call(message.time) : options.longs === Number ? new $util.LongBits(message.time.low >>> 0, message.time.high >>> 0).toNumber() : message.time;
-                if (message.expireInSeconds != null && message.hasOwnProperty("expireInSeconds"))
+                        object.time =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.time)
+                                : options.longs === Number
+                                ? new $util.LongBits(message.time.low >>> 0, message.time.high >>> 0).toNumber()
+                                : message.time;
+                if (message.expireInSeconds != null && message.hasOwnProperty('expireInSeconds'))
                     object.expireInSeconds = message.expireInSeconds;
-                if (message.refBlockNum != null && message.hasOwnProperty("refBlockNum"))
-                    if (typeof message.refBlockNum === "number")
-                        object.refBlockNum = options.longs === String ? String(message.refBlockNum) : message.refBlockNum;
+                if (message.refBlockNum != null && message.hasOwnProperty('refBlockNum'))
+                    if (typeof message.refBlockNum === 'number')
+                        object.refBlockNum =
+                            options.longs === String ? String(message.refBlockNum) : message.refBlockNum;
                     else
-                        object.refBlockNum = options.longs === String ? $util.Long.prototype.toString.call(message.refBlockNum) : options.longs === Number ? new $util.LongBits(message.refBlockNum.low >>> 0, message.refBlockNum.high >>> 0).toNumber() : message.refBlockNum;
-                if (message.refBlockPrefix != null && message.hasOwnProperty("refBlockPrefix"))
-                    if (typeof message.refBlockPrefix === "number")
-                        object.refBlockPrefix = options.longs === String ? String(message.refBlockPrefix) : message.refBlockPrefix;
+                        object.refBlockNum =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.refBlockNum)
+                                : options.longs === Number
+                                ? new $util.LongBits(
+                                      message.refBlockNum.low >>> 0,
+                                      message.refBlockNum.high >>> 0,
+                                  ).toNumber()
+                                : message.refBlockNum;
+                if (message.refBlockPrefix != null && message.hasOwnProperty('refBlockPrefix'))
+                    if (typeof message.refBlockPrefix === 'number')
+                        object.refBlockPrefix =
+                            options.longs === String ? String(message.refBlockPrefix) : message.refBlockPrefix;
                     else
-                        object.refBlockPrefix = options.longs === String ? $util.Long.prototype.toString.call(message.refBlockPrefix) : options.longs === Number ? new $util.LongBits(message.refBlockPrefix.low >>> 0, message.refBlockPrefix.high >>> 0).toNumber() : message.refBlockPrefix;
+                        object.refBlockPrefix =
+                            options.longs === String
+                                ? $util.Long.prototype.toString.call(message.refBlockPrefix)
+                                : options.longs === Number
+                                ? new $util.LongBits(
+                                      message.refBlockPrefix.low >>> 0,
+                                      message.refBlockPrefix.high >>> 0,
+                                  ).toNumber()
+                                : message.refBlockPrefix;
                 return object;
             };
 
@@ -11152,8 +10832,7 @@ export const protoc = $root.protoc = (() => {
         return EosTx;
     })();
 
-    protoc.DotTx = (function() {
-
+    protoc.DotTx = (function () {
         /**
          * Properties of a DotTx.
          * @memberof protoc
@@ -11182,8 +10861,7 @@ export const protoc = $root.protoc = (() => {
         function DotTx(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -11192,7 +10870,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DotTx.prototype.value = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DotTx dest.
@@ -11200,7 +10878,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.dest = "";
+        DotTx.prototype.dest = '';
 
         /**
          * DotTx blockHash.
@@ -11208,7 +10886,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.blockHash = "";
+        DotTx.prototype.blockHash = '';
 
         /**
          * DotTx nonce.
@@ -11216,7 +10894,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.nonce = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DotTx.prototype.nonce = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DotTx tip.
@@ -11224,7 +10902,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.tip = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DotTx.prototype.tip = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DotTx transactionVersion.
@@ -11232,7 +10910,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.transactionVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DotTx.prototype.transactionVersion = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DotTx specVersion.
@@ -11240,7 +10918,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.specVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DotTx.prototype.specVersion = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DotTx validityPeriod.
@@ -11248,7 +10926,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.validityPeriod = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DotTx.prototype.validityPeriod = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DotTx implVersion.
@@ -11256,7 +10934,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.implVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DotTx.prototype.implVersion = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DotTx authoringVersion.
@@ -11264,7 +10942,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DotTx
          * @instance
          */
-        DotTx.prototype.authoringVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        DotTx.prototype.authoringVersion = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * DotTx blockNumber.
@@ -11296,30 +10974,29 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         DotTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.value);
-            if (message.dest != null && Object.hasOwnProperty.call(message, "dest"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.dest);
-            if (message.blockHash != null && Object.hasOwnProperty.call(message, "blockHash"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.blockHash);
-            if (message.nonce != null && Object.hasOwnProperty.call(message, "nonce"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.nonce);
-            if (message.tip != null && Object.hasOwnProperty.call(message, "tip"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.tip);
-            if (message.transactionVersion != null && Object.hasOwnProperty.call(message, "transactionVersion"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.transactionVersion);
-            if (message.specVersion != null && Object.hasOwnProperty.call(message, "specVersion"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.specVersion);
-            if (message.validityPeriod != null && Object.hasOwnProperty.call(message, "validityPeriod"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.validityPeriod);
-            if (message.implVersion != null && Object.hasOwnProperty.call(message, "implVersion"))
-                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.implVersion);
-            if (message.authoringVersion != null && Object.hasOwnProperty.call(message, "authoringVersion"))
-                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.authoringVersion);
-            if (message.blockNumber != null && Object.hasOwnProperty.call(message, "blockNumber"))
-                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.blockNumber);
+            if (!writer) writer = $Writer.create();
+            if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.value);
+            if (message.dest != null && Object.hasOwnProperty.call(message, 'dest'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.dest);
+            if (message.blockHash != null && Object.hasOwnProperty.call(message, 'blockHash'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.blockHash);
+            if (message.nonce != null && Object.hasOwnProperty.call(message, 'nonce'))
+                writer.uint32(/* id 4, wireType 0 =*/ 32).int64(message.nonce);
+            if (message.tip != null && Object.hasOwnProperty.call(message, 'tip'))
+                writer.uint32(/* id 5, wireType 0 =*/ 40).int64(message.tip);
+            if (message.transactionVersion != null && Object.hasOwnProperty.call(message, 'transactionVersion'))
+                writer.uint32(/* id 6, wireType 0 =*/ 48).int64(message.transactionVersion);
+            if (message.specVersion != null && Object.hasOwnProperty.call(message, 'specVersion'))
+                writer.uint32(/* id 7, wireType 0 =*/ 56).int64(message.specVersion);
+            if (message.validityPeriod != null && Object.hasOwnProperty.call(message, 'validityPeriod'))
+                writer.uint32(/* id 8, wireType 0 =*/ 64).int64(message.validityPeriod);
+            if (message.implVersion != null && Object.hasOwnProperty.call(message, 'implVersion'))
+                writer.uint32(/* id 9, wireType 0 =*/ 72).int64(message.implVersion);
+            if (message.authoringVersion != null && Object.hasOwnProperty.call(message, 'authoringVersion'))
+                writer.uint32(/* id 10, wireType 0 =*/ 80).int64(message.authoringVersion);
+            if (message.blockNumber != null && Object.hasOwnProperty.call(message, 'blockNumber'))
+                writer.uint32(/* id 11, wireType 0 =*/ 88).int32(message.blockNumber);
             return writer;
         };
 
@@ -11348,48 +11025,48 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DotTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.DotTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.DotTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.value = reader.int64();
-                    break;
-                case 2:
-                    message.dest = reader.string();
-                    break;
-                case 3:
-                    message.blockHash = reader.string();
-                    break;
-                case 4:
-                    message.nonce = reader.int64();
-                    break;
-                case 5:
-                    message.tip = reader.int64();
-                    break;
-                case 6:
-                    message.transactionVersion = reader.int64();
-                    break;
-                case 7:
-                    message.specVersion = reader.int64();
-                    break;
-                case 8:
-                    message.validityPeriod = reader.int64();
-                    break;
-                case 9:
-                    message.implVersion = reader.int64();
-                    break;
-                case 10:
-                    message.authoringVersion = reader.int64();
-                    break;
-                case 11:
-                    message.blockNumber = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.value = reader.int64();
+                        break;
+                    case 2:
+                        message.dest = reader.string();
+                        break;
+                    case 3:
+                        message.blockHash = reader.string();
+                        break;
+                    case 4:
+                        message.nonce = reader.int64();
+                        break;
+                    case 5:
+                        message.tip = reader.int64();
+                        break;
+                    case 6:
+                        message.transactionVersion = reader.int64();
+                        break;
+                    case 7:
+                        message.specVersion = reader.int64();
+                        break;
+                    case 8:
+                        message.validityPeriod = reader.int64();
+                        break;
+                    case 9:
+                        message.implVersion = reader.int64();
+                        break;
+                    case 10:
+                        message.authoringVersion = reader.int64();
+                        break;
+                    case 11:
+                        message.blockNumber = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -11406,8 +11083,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DotTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -11420,41 +11096,81 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         DotTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
-                    return "value: integer|Long expected";
-            if (message.dest != null && message.hasOwnProperty("dest"))
-                if (!$util.isString(message.dest))
-                    return "dest: string expected";
-            if (message.blockHash != null && message.hasOwnProperty("blockHash"))
-                if (!$util.isString(message.blockHash))
-                    return "blockHash: string expected";
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                if (!$util.isInteger(message.nonce) && !(message.nonce && $util.isInteger(message.nonce.low) && $util.isInteger(message.nonce.high)))
-                    return "nonce: integer|Long expected";
-            if (message.tip != null && message.hasOwnProperty("tip"))
-                if (!$util.isInteger(message.tip) && !(message.tip && $util.isInteger(message.tip.low) && $util.isInteger(message.tip.high)))
-                    return "tip: integer|Long expected";
-            if (message.transactionVersion != null && message.hasOwnProperty("transactionVersion"))
-                if (!$util.isInteger(message.transactionVersion) && !(message.transactionVersion && $util.isInteger(message.transactionVersion.low) && $util.isInteger(message.transactionVersion.high)))
-                    return "transactionVersion: integer|Long expected";
-            if (message.specVersion != null && message.hasOwnProperty("specVersion"))
-                if (!$util.isInteger(message.specVersion) && !(message.specVersion && $util.isInteger(message.specVersion.low) && $util.isInteger(message.specVersion.high)))
-                    return "specVersion: integer|Long expected";
-            if (message.validityPeriod != null && message.hasOwnProperty("validityPeriod"))
-                if (!$util.isInteger(message.validityPeriod) && !(message.validityPeriod && $util.isInteger(message.validityPeriod.low) && $util.isInteger(message.validityPeriod.high)))
-                    return "validityPeriod: integer|Long expected";
-            if (message.implVersion != null && message.hasOwnProperty("implVersion"))
-                if (!$util.isInteger(message.implVersion) && !(message.implVersion && $util.isInteger(message.implVersion.low) && $util.isInteger(message.implVersion.high)))
-                    return "implVersion: integer|Long expected";
-            if (message.authoringVersion != null && message.hasOwnProperty("authoringVersion"))
-                if (!$util.isInteger(message.authoringVersion) && !(message.authoringVersion && $util.isInteger(message.authoringVersion.low) && $util.isInteger(message.authoringVersion.high)))
-                    return "authoringVersion: integer|Long expected";
-            if (message.blockNumber != null && message.hasOwnProperty("blockNumber"))
-                if (!$util.isInteger(message.blockNumber))
-                    return "blockNumber: integer expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (
+                    !$util.isInteger(message.value) &&
+                    !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high))
+                )
+                    return 'value: integer|Long expected';
+            if (message.dest != null && message.hasOwnProperty('dest'))
+                if (!$util.isString(message.dest)) return 'dest: string expected';
+            if (message.blockHash != null && message.hasOwnProperty('blockHash'))
+                if (!$util.isString(message.blockHash)) return 'blockHash: string expected';
+            if (message.nonce != null && message.hasOwnProperty('nonce'))
+                if (
+                    !$util.isInteger(message.nonce) &&
+                    !(message.nonce && $util.isInteger(message.nonce.low) && $util.isInteger(message.nonce.high))
+                )
+                    return 'nonce: integer|Long expected';
+            if (message.tip != null && message.hasOwnProperty('tip'))
+                if (
+                    !$util.isInteger(message.tip) &&
+                    !(message.tip && $util.isInteger(message.tip.low) && $util.isInteger(message.tip.high))
+                )
+                    return 'tip: integer|Long expected';
+            if (message.transactionVersion != null && message.hasOwnProperty('transactionVersion'))
+                if (
+                    !$util.isInteger(message.transactionVersion) &&
+                    !(
+                        message.transactionVersion &&
+                        $util.isInteger(message.transactionVersion.low) &&
+                        $util.isInteger(message.transactionVersion.high)
+                    )
+                )
+                    return 'transactionVersion: integer|Long expected';
+            if (message.specVersion != null && message.hasOwnProperty('specVersion'))
+                if (
+                    !$util.isInteger(message.specVersion) &&
+                    !(
+                        message.specVersion &&
+                        $util.isInteger(message.specVersion.low) &&
+                        $util.isInteger(message.specVersion.high)
+                    )
+                )
+                    return 'specVersion: integer|Long expected';
+            if (message.validityPeriod != null && message.hasOwnProperty('validityPeriod'))
+                if (
+                    !$util.isInteger(message.validityPeriod) &&
+                    !(
+                        message.validityPeriod &&
+                        $util.isInteger(message.validityPeriod.low) &&
+                        $util.isInteger(message.validityPeriod.high)
+                    )
+                )
+                    return 'validityPeriod: integer|Long expected';
+            if (message.implVersion != null && message.hasOwnProperty('implVersion'))
+                if (
+                    !$util.isInteger(message.implVersion) &&
+                    !(
+                        message.implVersion &&
+                        $util.isInteger(message.implVersion.low) &&
+                        $util.isInteger(message.implVersion.high)
+                    )
+                )
+                    return 'implVersion: integer|Long expected';
+            if (message.authoringVersion != null && message.hasOwnProperty('authoringVersion'))
+                if (
+                    !$util.isInteger(message.authoringVersion) &&
+                    !(
+                        message.authoringVersion &&
+                        $util.isInteger(message.authoringVersion.low) &&
+                        $util.isInteger(message.authoringVersion.high)
+                    )
+                )
+                    return 'authoringVersion: integer|Long expected';
+            if (message.blockNumber != null && message.hasOwnProperty('blockNumber'))
+                if (!$util.isInteger(message.blockNumber)) return 'blockNumber: integer expected';
             return null;
         };
 
@@ -11467,87 +11183,81 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.DotTx} DotTx
          */
         DotTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.DotTx)
-                return object;
+            if (object instanceof $root.protoc.DotTx) return object;
             let message = new $root.protoc.DotTx();
             if (object.value != null)
-                if ($util.Long)
-                    (message.value = $util.Long.fromValue(object.value)).unsigned = false;
-                else if (typeof object.value === "string")
-                    message.value = parseInt(object.value, 10);
-                else if (typeof object.value === "number")
-                    message.value = object.value;
-                else if (typeof object.value === "object")
+                if ($util.Long) (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                else if (typeof object.value === 'string') message.value = parseInt(object.value, 10);
+                else if (typeof object.value === 'number') message.value = object.value;
+                else if (typeof object.value === 'object')
                     message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
-            if (object.dest != null)
-                message.dest = String(object.dest);
-            if (object.blockHash != null)
-                message.blockHash = String(object.blockHash);
+            if (object.dest != null) message.dest = String(object.dest);
+            if (object.blockHash != null) message.blockHash = String(object.blockHash);
             if (object.nonce != null)
-                if ($util.Long)
-                    (message.nonce = $util.Long.fromValue(object.nonce)).unsigned = false;
-                else if (typeof object.nonce === "string")
-                    message.nonce = parseInt(object.nonce, 10);
-                else if (typeof object.nonce === "number")
-                    message.nonce = object.nonce;
-                else if (typeof object.nonce === "object")
+                if ($util.Long) (message.nonce = $util.Long.fromValue(object.nonce)).unsigned = false;
+                else if (typeof object.nonce === 'string') message.nonce = parseInt(object.nonce, 10);
+                else if (typeof object.nonce === 'number') message.nonce = object.nonce;
+                else if (typeof object.nonce === 'object')
                     message.nonce = new $util.LongBits(object.nonce.low >>> 0, object.nonce.high >>> 0).toNumber();
             if (object.tip != null)
-                if ($util.Long)
-                    (message.tip = $util.Long.fromValue(object.tip)).unsigned = false;
-                else if (typeof object.tip === "string")
-                    message.tip = parseInt(object.tip, 10);
-                else if (typeof object.tip === "number")
-                    message.tip = object.tip;
-                else if (typeof object.tip === "object")
+                if ($util.Long) (message.tip = $util.Long.fromValue(object.tip)).unsigned = false;
+                else if (typeof object.tip === 'string') message.tip = parseInt(object.tip, 10);
+                else if (typeof object.tip === 'number') message.tip = object.tip;
+                else if (typeof object.tip === 'object')
                     message.tip = new $util.LongBits(object.tip.low >>> 0, object.tip.high >>> 0).toNumber();
             if (object.transactionVersion != null)
                 if ($util.Long)
                     (message.transactionVersion = $util.Long.fromValue(object.transactionVersion)).unsigned = false;
-                else if (typeof object.transactionVersion === "string")
+                else if (typeof object.transactionVersion === 'string')
                     message.transactionVersion = parseInt(object.transactionVersion, 10);
-                else if (typeof object.transactionVersion === "number")
+                else if (typeof object.transactionVersion === 'number')
                     message.transactionVersion = object.transactionVersion;
-                else if (typeof object.transactionVersion === "object")
-                    message.transactionVersion = new $util.LongBits(object.transactionVersion.low >>> 0, object.transactionVersion.high >>> 0).toNumber();
+                else if (typeof object.transactionVersion === 'object')
+                    message.transactionVersion = new $util.LongBits(
+                        object.transactionVersion.low >>> 0,
+                        object.transactionVersion.high >>> 0,
+                    ).toNumber();
             if (object.specVersion != null)
-                if ($util.Long)
-                    (message.specVersion = $util.Long.fromValue(object.specVersion)).unsigned = false;
-                else if (typeof object.specVersion === "string")
-                    message.specVersion = parseInt(object.specVersion, 10);
-                else if (typeof object.specVersion === "number")
-                    message.specVersion = object.specVersion;
-                else if (typeof object.specVersion === "object")
-                    message.specVersion = new $util.LongBits(object.specVersion.low >>> 0, object.specVersion.high >>> 0).toNumber();
+                if ($util.Long) (message.specVersion = $util.Long.fromValue(object.specVersion)).unsigned = false;
+                else if (typeof object.specVersion === 'string') message.specVersion = parseInt(object.specVersion, 10);
+                else if (typeof object.specVersion === 'number') message.specVersion = object.specVersion;
+                else if (typeof object.specVersion === 'object')
+                    message.specVersion = new $util.LongBits(
+                        object.specVersion.low >>> 0,
+                        object.specVersion.high >>> 0,
+                    ).toNumber();
             if (object.validityPeriod != null)
-                if ($util.Long)
-                    (message.validityPeriod = $util.Long.fromValue(object.validityPeriod)).unsigned = false;
-                else if (typeof object.validityPeriod === "string")
+                if ($util.Long) (message.validityPeriod = $util.Long.fromValue(object.validityPeriod)).unsigned = false;
+                else if (typeof object.validityPeriod === 'string')
                     message.validityPeriod = parseInt(object.validityPeriod, 10);
-                else if (typeof object.validityPeriod === "number")
-                    message.validityPeriod = object.validityPeriod;
-                else if (typeof object.validityPeriod === "object")
-                    message.validityPeriod = new $util.LongBits(object.validityPeriod.low >>> 0, object.validityPeriod.high >>> 0).toNumber();
+                else if (typeof object.validityPeriod === 'number') message.validityPeriod = object.validityPeriod;
+                else if (typeof object.validityPeriod === 'object')
+                    message.validityPeriod = new $util.LongBits(
+                        object.validityPeriod.low >>> 0,
+                        object.validityPeriod.high >>> 0,
+                    ).toNumber();
             if (object.implVersion != null)
-                if ($util.Long)
-                    (message.implVersion = $util.Long.fromValue(object.implVersion)).unsigned = false;
-                else if (typeof object.implVersion === "string")
-                    message.implVersion = parseInt(object.implVersion, 10);
-                else if (typeof object.implVersion === "number")
-                    message.implVersion = object.implVersion;
-                else if (typeof object.implVersion === "object")
-                    message.implVersion = new $util.LongBits(object.implVersion.low >>> 0, object.implVersion.high >>> 0).toNumber();
+                if ($util.Long) (message.implVersion = $util.Long.fromValue(object.implVersion)).unsigned = false;
+                else if (typeof object.implVersion === 'string') message.implVersion = parseInt(object.implVersion, 10);
+                else if (typeof object.implVersion === 'number') message.implVersion = object.implVersion;
+                else if (typeof object.implVersion === 'object')
+                    message.implVersion = new $util.LongBits(
+                        object.implVersion.low >>> 0,
+                        object.implVersion.high >>> 0,
+                    ).toNumber();
             if (object.authoringVersion != null)
                 if ($util.Long)
                     (message.authoringVersion = $util.Long.fromValue(object.authoringVersion)).unsigned = false;
-                else if (typeof object.authoringVersion === "string")
+                else if (typeof object.authoringVersion === 'string')
                     message.authoringVersion = parseInt(object.authoringVersion, 10);
-                else if (typeof object.authoringVersion === "number")
+                else if (typeof object.authoringVersion === 'number')
                     message.authoringVersion = object.authoringVersion;
-                else if (typeof object.authoringVersion === "object")
-                    message.authoringVersion = new $util.LongBits(object.authoringVersion.low >>> 0, object.authoringVersion.high >>> 0).toNumber();
-            if (object.blockNumber != null)
-                message.blockNumber = object.blockNumber | 0;
+                else if (typeof object.authoringVersion === 'object')
+                    message.authoringVersion = new $util.LongBits(
+                        object.authoringVersion.low >>> 0,
+                        object.authoringVersion.high >>> 0,
+                    ).toNumber();
+            if (object.blockNumber != null) message.blockNumber = object.blockNumber | 0;
             return message;
         };
 
@@ -11561,99 +11271,154 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         DotTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.value = options.longs === String ? "0" : 0;
-                object.dest = "";
-                object.blockHash = "";
+                    object.value =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.value = options.longs === String ? '0' : 0;
+                object.dest = '';
+                object.blockHash = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.nonce = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.nonce = options.longs === String ? "0" : 0;
+                    object.nonce =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.nonce = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.tip = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.tip = options.longs === String ? "0" : 0;
+                    object.tip =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.tip = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.transactionVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.transactionVersion = options.longs === String ? "0" : 0;
+                    object.transactionVersion =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.transactionVersion = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.specVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.specVersion = options.longs === String ? "0" : 0;
+                    object.specVersion =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.specVersion = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.validityPeriod = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.validityPeriod = options.longs === String ? "0" : 0;
+                    object.validityPeriod =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.validityPeriod = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.implVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.implVersion = options.longs === String ? "0" : 0;
+                    object.implVersion =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.implVersion = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.authoringVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.authoringVersion = options.longs === String ? "0" : 0;
+                    object.authoringVersion =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.authoringVersion = options.longs === String ? '0' : 0;
                 object.blockNumber = 0;
             }
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (typeof message.value === "number")
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (typeof message.value === 'number')
                     object.value = options.longs === String ? String(message.value) : message.value;
                 else
-                    object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
-            if (message.dest != null && message.hasOwnProperty("dest"))
-                object.dest = message.dest;
-            if (message.blockHash != null && message.hasOwnProperty("blockHash"))
-                object.blockHash = message.blockHash;
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                if (typeof message.nonce === "number")
+                    object.value =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.value)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber()
+                            : message.value;
+            if (message.dest != null && message.hasOwnProperty('dest')) object.dest = message.dest;
+            if (message.blockHash != null && message.hasOwnProperty('blockHash')) object.blockHash = message.blockHash;
+            if (message.nonce != null && message.hasOwnProperty('nonce'))
+                if (typeof message.nonce === 'number')
                     object.nonce = options.longs === String ? String(message.nonce) : message.nonce;
                 else
-                    object.nonce = options.longs === String ? $util.Long.prototype.toString.call(message.nonce) : options.longs === Number ? new $util.LongBits(message.nonce.low >>> 0, message.nonce.high >>> 0).toNumber() : message.nonce;
-            if (message.tip != null && message.hasOwnProperty("tip"))
-                if (typeof message.tip === "number")
+                    object.nonce =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.nonce)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.nonce.low >>> 0, message.nonce.high >>> 0).toNumber()
+                            : message.nonce;
+            if (message.tip != null && message.hasOwnProperty('tip'))
+                if (typeof message.tip === 'number')
                     object.tip = options.longs === String ? String(message.tip) : message.tip;
                 else
-                    object.tip = options.longs === String ? $util.Long.prototype.toString.call(message.tip) : options.longs === Number ? new $util.LongBits(message.tip.low >>> 0, message.tip.high >>> 0).toNumber() : message.tip;
-            if (message.transactionVersion != null && message.hasOwnProperty("transactionVersion"))
-                if (typeof message.transactionVersion === "number")
-                    object.transactionVersion = options.longs === String ? String(message.transactionVersion) : message.transactionVersion;
+                    object.tip =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.tip)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.tip.low >>> 0, message.tip.high >>> 0).toNumber()
+                            : message.tip;
+            if (message.transactionVersion != null && message.hasOwnProperty('transactionVersion'))
+                if (typeof message.transactionVersion === 'number')
+                    object.transactionVersion =
+                        options.longs === String ? String(message.transactionVersion) : message.transactionVersion;
                 else
-                    object.transactionVersion = options.longs === String ? $util.Long.prototype.toString.call(message.transactionVersion) : options.longs === Number ? new $util.LongBits(message.transactionVersion.low >>> 0, message.transactionVersion.high >>> 0).toNumber() : message.transactionVersion;
-            if (message.specVersion != null && message.hasOwnProperty("specVersion"))
-                if (typeof message.specVersion === "number")
+                    object.transactionVersion =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.transactionVersion)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.transactionVersion.low >>> 0,
+                                  message.transactionVersion.high >>> 0,
+                              ).toNumber()
+                            : message.transactionVersion;
+            if (message.specVersion != null && message.hasOwnProperty('specVersion'))
+                if (typeof message.specVersion === 'number')
                     object.specVersion = options.longs === String ? String(message.specVersion) : message.specVersion;
                 else
-                    object.specVersion = options.longs === String ? $util.Long.prototype.toString.call(message.specVersion) : options.longs === Number ? new $util.LongBits(message.specVersion.low >>> 0, message.specVersion.high >>> 0).toNumber() : message.specVersion;
-            if (message.validityPeriod != null && message.hasOwnProperty("validityPeriod"))
-                if (typeof message.validityPeriod === "number")
-                    object.validityPeriod = options.longs === String ? String(message.validityPeriod) : message.validityPeriod;
+                    object.specVersion =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.specVersion)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.specVersion.low >>> 0,
+                                  message.specVersion.high >>> 0,
+                              ).toNumber()
+                            : message.specVersion;
+            if (message.validityPeriod != null && message.hasOwnProperty('validityPeriod'))
+                if (typeof message.validityPeriod === 'number')
+                    object.validityPeriod =
+                        options.longs === String ? String(message.validityPeriod) : message.validityPeriod;
                 else
-                    object.validityPeriod = options.longs === String ? $util.Long.prototype.toString.call(message.validityPeriod) : options.longs === Number ? new $util.LongBits(message.validityPeriod.low >>> 0, message.validityPeriod.high >>> 0).toNumber() : message.validityPeriod;
-            if (message.implVersion != null && message.hasOwnProperty("implVersion"))
-                if (typeof message.implVersion === "number")
+                    object.validityPeriod =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.validityPeriod)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.validityPeriod.low >>> 0,
+                                  message.validityPeriod.high >>> 0,
+                              ).toNumber()
+                            : message.validityPeriod;
+            if (message.implVersion != null && message.hasOwnProperty('implVersion'))
+                if (typeof message.implVersion === 'number')
                     object.implVersion = options.longs === String ? String(message.implVersion) : message.implVersion;
                 else
-                    object.implVersion = options.longs === String ? $util.Long.prototype.toString.call(message.implVersion) : options.longs === Number ? new $util.LongBits(message.implVersion.low >>> 0, message.implVersion.high >>> 0).toNumber() : message.implVersion;
-            if (message.authoringVersion != null && message.hasOwnProperty("authoringVersion"))
-                if (typeof message.authoringVersion === "number")
-                    object.authoringVersion = options.longs === String ? String(message.authoringVersion) : message.authoringVersion;
+                    object.implVersion =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.implVersion)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.implVersion.low >>> 0,
+                                  message.implVersion.high >>> 0,
+                              ).toNumber()
+                            : message.implVersion;
+            if (message.authoringVersion != null && message.hasOwnProperty('authoringVersion'))
+                if (typeof message.authoringVersion === 'number')
+                    object.authoringVersion =
+                        options.longs === String ? String(message.authoringVersion) : message.authoringVersion;
                 else
-                    object.authoringVersion = options.longs === String ? $util.Long.prototype.toString.call(message.authoringVersion) : options.longs === Number ? new $util.LongBits(message.authoringVersion.low >>> 0, message.authoringVersion.high >>> 0).toNumber() : message.authoringVersion;
-            if (message.blockNumber != null && message.hasOwnProperty("blockNumber"))
+                    object.authoringVersion =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.authoringVersion)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.authoringVersion.low >>> 0,
+                                  message.authoringVersion.high >>> 0,
+                              ).toNumber()
+                            : message.authoringVersion;
+            if (message.blockNumber != null && message.hasOwnProperty('blockNumber'))
                 object.blockNumber = message.blockNumber;
             return object;
         };
@@ -11672,8 +11437,7 @@ export const protoc = $root.protoc = (() => {
         return DotTx;
     })();
 
-    protoc.KsmTx = (function() {
-
+    protoc.KsmTx = (function () {
         /**
          * Properties of a KsmTx.
          * @memberof protoc
@@ -11702,8 +11466,7 @@ export const protoc = $root.protoc = (() => {
         function KsmTx(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -11712,7 +11475,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        KsmTx.prototype.value = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * KsmTx dest.
@@ -11720,7 +11483,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.dest = "";
+        KsmTx.prototype.dest = '';
 
         /**
          * KsmTx blockHash.
@@ -11728,7 +11491,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.blockHash = "";
+        KsmTx.prototype.blockHash = '';
 
         /**
          * KsmTx nonce.
@@ -11736,7 +11499,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.nonce = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        KsmTx.prototype.nonce = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * KsmTx tip.
@@ -11744,7 +11507,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.tip = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        KsmTx.prototype.tip = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * KsmTx transactionVersion.
@@ -11752,7 +11515,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.transactionVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        KsmTx.prototype.transactionVersion = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * KsmTx specVersion.
@@ -11760,7 +11523,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.specVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        KsmTx.prototype.specVersion = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * KsmTx validityPeriod.
@@ -11768,7 +11531,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.validityPeriod = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        KsmTx.prototype.validityPeriod = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * KsmTx implVersion.
@@ -11776,7 +11539,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.implVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        KsmTx.prototype.implVersion = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * KsmTx authoringVersion.
@@ -11784,7 +11547,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.KsmTx
          * @instance
          */
-        KsmTx.prototype.authoringVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        KsmTx.prototype.authoringVersion = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * KsmTx blockNumber.
@@ -11816,30 +11579,29 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         KsmTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.value);
-            if (message.dest != null && Object.hasOwnProperty.call(message, "dest"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.dest);
-            if (message.blockHash != null && Object.hasOwnProperty.call(message, "blockHash"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.blockHash);
-            if (message.nonce != null && Object.hasOwnProperty.call(message, "nonce"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.nonce);
-            if (message.tip != null && Object.hasOwnProperty.call(message, "tip"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.tip);
-            if (message.transactionVersion != null && Object.hasOwnProperty.call(message, "transactionVersion"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.transactionVersion);
-            if (message.specVersion != null && Object.hasOwnProperty.call(message, "specVersion"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.specVersion);
-            if (message.validityPeriod != null && Object.hasOwnProperty.call(message, "validityPeriod"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.validityPeriod);
-            if (message.implVersion != null && Object.hasOwnProperty.call(message, "implVersion"))
-                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.implVersion);
-            if (message.authoringVersion != null && Object.hasOwnProperty.call(message, "authoringVersion"))
-                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.authoringVersion);
-            if (message.blockNumber != null && Object.hasOwnProperty.call(message, "blockNumber"))
-                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.blockNumber);
+            if (!writer) writer = $Writer.create();
+            if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int64(message.value);
+            if (message.dest != null && Object.hasOwnProperty.call(message, 'dest'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.dest);
+            if (message.blockHash != null && Object.hasOwnProperty.call(message, 'blockHash'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.blockHash);
+            if (message.nonce != null && Object.hasOwnProperty.call(message, 'nonce'))
+                writer.uint32(/* id 4, wireType 0 =*/ 32).int64(message.nonce);
+            if (message.tip != null && Object.hasOwnProperty.call(message, 'tip'))
+                writer.uint32(/* id 5, wireType 0 =*/ 40).int64(message.tip);
+            if (message.transactionVersion != null && Object.hasOwnProperty.call(message, 'transactionVersion'))
+                writer.uint32(/* id 6, wireType 0 =*/ 48).int64(message.transactionVersion);
+            if (message.specVersion != null && Object.hasOwnProperty.call(message, 'specVersion'))
+                writer.uint32(/* id 7, wireType 0 =*/ 56).int64(message.specVersion);
+            if (message.validityPeriod != null && Object.hasOwnProperty.call(message, 'validityPeriod'))
+                writer.uint32(/* id 8, wireType 0 =*/ 64).int64(message.validityPeriod);
+            if (message.implVersion != null && Object.hasOwnProperty.call(message, 'implVersion'))
+                writer.uint32(/* id 9, wireType 0 =*/ 72).int64(message.implVersion);
+            if (message.authoringVersion != null && Object.hasOwnProperty.call(message, 'authoringVersion'))
+                writer.uint32(/* id 10, wireType 0 =*/ 80).int64(message.authoringVersion);
+            if (message.blockNumber != null && Object.hasOwnProperty.call(message, 'blockNumber'))
+                writer.uint32(/* id 11, wireType 0 =*/ 88).int32(message.blockNumber);
             return writer;
         };
 
@@ -11868,48 +11630,48 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         KsmTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.KsmTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.KsmTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.value = reader.int64();
-                    break;
-                case 2:
-                    message.dest = reader.string();
-                    break;
-                case 3:
-                    message.blockHash = reader.string();
-                    break;
-                case 4:
-                    message.nonce = reader.int64();
-                    break;
-                case 5:
-                    message.tip = reader.int64();
-                    break;
-                case 6:
-                    message.transactionVersion = reader.int64();
-                    break;
-                case 7:
-                    message.specVersion = reader.int64();
-                    break;
-                case 8:
-                    message.validityPeriod = reader.int64();
-                    break;
-                case 9:
-                    message.implVersion = reader.int64();
-                    break;
-                case 10:
-                    message.authoringVersion = reader.int64();
-                    break;
-                case 11:
-                    message.blockNumber = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.value = reader.int64();
+                        break;
+                    case 2:
+                        message.dest = reader.string();
+                        break;
+                    case 3:
+                        message.blockHash = reader.string();
+                        break;
+                    case 4:
+                        message.nonce = reader.int64();
+                        break;
+                    case 5:
+                        message.tip = reader.int64();
+                        break;
+                    case 6:
+                        message.transactionVersion = reader.int64();
+                        break;
+                    case 7:
+                        message.specVersion = reader.int64();
+                        break;
+                    case 8:
+                        message.validityPeriod = reader.int64();
+                        break;
+                    case 9:
+                        message.implVersion = reader.int64();
+                        break;
+                    case 10:
+                        message.authoringVersion = reader.int64();
+                        break;
+                    case 11:
+                        message.blockNumber = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -11926,8 +11688,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         KsmTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -11940,41 +11701,81 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         KsmTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
-                    return "value: integer|Long expected";
-            if (message.dest != null && message.hasOwnProperty("dest"))
-                if (!$util.isString(message.dest))
-                    return "dest: string expected";
-            if (message.blockHash != null && message.hasOwnProperty("blockHash"))
-                if (!$util.isString(message.blockHash))
-                    return "blockHash: string expected";
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                if (!$util.isInteger(message.nonce) && !(message.nonce && $util.isInteger(message.nonce.low) && $util.isInteger(message.nonce.high)))
-                    return "nonce: integer|Long expected";
-            if (message.tip != null && message.hasOwnProperty("tip"))
-                if (!$util.isInteger(message.tip) && !(message.tip && $util.isInteger(message.tip.low) && $util.isInteger(message.tip.high)))
-                    return "tip: integer|Long expected";
-            if (message.transactionVersion != null && message.hasOwnProperty("transactionVersion"))
-                if (!$util.isInteger(message.transactionVersion) && !(message.transactionVersion && $util.isInteger(message.transactionVersion.low) && $util.isInteger(message.transactionVersion.high)))
-                    return "transactionVersion: integer|Long expected";
-            if (message.specVersion != null && message.hasOwnProperty("specVersion"))
-                if (!$util.isInteger(message.specVersion) && !(message.specVersion && $util.isInteger(message.specVersion.low) && $util.isInteger(message.specVersion.high)))
-                    return "specVersion: integer|Long expected";
-            if (message.validityPeriod != null && message.hasOwnProperty("validityPeriod"))
-                if (!$util.isInteger(message.validityPeriod) && !(message.validityPeriod && $util.isInteger(message.validityPeriod.low) && $util.isInteger(message.validityPeriod.high)))
-                    return "validityPeriod: integer|Long expected";
-            if (message.implVersion != null && message.hasOwnProperty("implVersion"))
-                if (!$util.isInteger(message.implVersion) && !(message.implVersion && $util.isInteger(message.implVersion.low) && $util.isInteger(message.implVersion.high)))
-                    return "implVersion: integer|Long expected";
-            if (message.authoringVersion != null && message.hasOwnProperty("authoringVersion"))
-                if (!$util.isInteger(message.authoringVersion) && !(message.authoringVersion && $util.isInteger(message.authoringVersion.low) && $util.isInteger(message.authoringVersion.high)))
-                    return "authoringVersion: integer|Long expected";
-            if (message.blockNumber != null && message.hasOwnProperty("blockNumber"))
-                if (!$util.isInteger(message.blockNumber))
-                    return "blockNumber: integer expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (
+                    !$util.isInteger(message.value) &&
+                    !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high))
+                )
+                    return 'value: integer|Long expected';
+            if (message.dest != null && message.hasOwnProperty('dest'))
+                if (!$util.isString(message.dest)) return 'dest: string expected';
+            if (message.blockHash != null && message.hasOwnProperty('blockHash'))
+                if (!$util.isString(message.blockHash)) return 'blockHash: string expected';
+            if (message.nonce != null && message.hasOwnProperty('nonce'))
+                if (
+                    !$util.isInteger(message.nonce) &&
+                    !(message.nonce && $util.isInteger(message.nonce.low) && $util.isInteger(message.nonce.high))
+                )
+                    return 'nonce: integer|Long expected';
+            if (message.tip != null && message.hasOwnProperty('tip'))
+                if (
+                    !$util.isInteger(message.tip) &&
+                    !(message.tip && $util.isInteger(message.tip.low) && $util.isInteger(message.tip.high))
+                )
+                    return 'tip: integer|Long expected';
+            if (message.transactionVersion != null && message.hasOwnProperty('transactionVersion'))
+                if (
+                    !$util.isInteger(message.transactionVersion) &&
+                    !(
+                        message.transactionVersion &&
+                        $util.isInteger(message.transactionVersion.low) &&
+                        $util.isInteger(message.transactionVersion.high)
+                    )
+                )
+                    return 'transactionVersion: integer|Long expected';
+            if (message.specVersion != null && message.hasOwnProperty('specVersion'))
+                if (
+                    !$util.isInteger(message.specVersion) &&
+                    !(
+                        message.specVersion &&
+                        $util.isInteger(message.specVersion.low) &&
+                        $util.isInteger(message.specVersion.high)
+                    )
+                )
+                    return 'specVersion: integer|Long expected';
+            if (message.validityPeriod != null && message.hasOwnProperty('validityPeriod'))
+                if (
+                    !$util.isInteger(message.validityPeriod) &&
+                    !(
+                        message.validityPeriod &&
+                        $util.isInteger(message.validityPeriod.low) &&
+                        $util.isInteger(message.validityPeriod.high)
+                    )
+                )
+                    return 'validityPeriod: integer|Long expected';
+            if (message.implVersion != null && message.hasOwnProperty('implVersion'))
+                if (
+                    !$util.isInteger(message.implVersion) &&
+                    !(
+                        message.implVersion &&
+                        $util.isInteger(message.implVersion.low) &&
+                        $util.isInteger(message.implVersion.high)
+                    )
+                )
+                    return 'implVersion: integer|Long expected';
+            if (message.authoringVersion != null && message.hasOwnProperty('authoringVersion'))
+                if (
+                    !$util.isInteger(message.authoringVersion) &&
+                    !(
+                        message.authoringVersion &&
+                        $util.isInteger(message.authoringVersion.low) &&
+                        $util.isInteger(message.authoringVersion.high)
+                    )
+                )
+                    return 'authoringVersion: integer|Long expected';
+            if (message.blockNumber != null && message.hasOwnProperty('blockNumber'))
+                if (!$util.isInteger(message.blockNumber)) return 'blockNumber: integer expected';
             return null;
         };
 
@@ -11987,87 +11788,81 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.KsmTx} KsmTx
          */
         KsmTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.KsmTx)
-                return object;
+            if (object instanceof $root.protoc.KsmTx) return object;
             let message = new $root.protoc.KsmTx();
             if (object.value != null)
-                if ($util.Long)
-                    (message.value = $util.Long.fromValue(object.value)).unsigned = false;
-                else if (typeof object.value === "string")
-                    message.value = parseInt(object.value, 10);
-                else if (typeof object.value === "number")
-                    message.value = object.value;
-                else if (typeof object.value === "object")
+                if ($util.Long) (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                else if (typeof object.value === 'string') message.value = parseInt(object.value, 10);
+                else if (typeof object.value === 'number') message.value = object.value;
+                else if (typeof object.value === 'object')
                     message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
-            if (object.dest != null)
-                message.dest = String(object.dest);
-            if (object.blockHash != null)
-                message.blockHash = String(object.blockHash);
+            if (object.dest != null) message.dest = String(object.dest);
+            if (object.blockHash != null) message.blockHash = String(object.blockHash);
             if (object.nonce != null)
-                if ($util.Long)
-                    (message.nonce = $util.Long.fromValue(object.nonce)).unsigned = false;
-                else if (typeof object.nonce === "string")
-                    message.nonce = parseInt(object.nonce, 10);
-                else if (typeof object.nonce === "number")
-                    message.nonce = object.nonce;
-                else if (typeof object.nonce === "object")
+                if ($util.Long) (message.nonce = $util.Long.fromValue(object.nonce)).unsigned = false;
+                else if (typeof object.nonce === 'string') message.nonce = parseInt(object.nonce, 10);
+                else if (typeof object.nonce === 'number') message.nonce = object.nonce;
+                else if (typeof object.nonce === 'object')
                     message.nonce = new $util.LongBits(object.nonce.low >>> 0, object.nonce.high >>> 0).toNumber();
             if (object.tip != null)
-                if ($util.Long)
-                    (message.tip = $util.Long.fromValue(object.tip)).unsigned = false;
-                else if (typeof object.tip === "string")
-                    message.tip = parseInt(object.tip, 10);
-                else if (typeof object.tip === "number")
-                    message.tip = object.tip;
-                else if (typeof object.tip === "object")
+                if ($util.Long) (message.tip = $util.Long.fromValue(object.tip)).unsigned = false;
+                else if (typeof object.tip === 'string') message.tip = parseInt(object.tip, 10);
+                else if (typeof object.tip === 'number') message.tip = object.tip;
+                else if (typeof object.tip === 'object')
                     message.tip = new $util.LongBits(object.tip.low >>> 0, object.tip.high >>> 0).toNumber();
             if (object.transactionVersion != null)
                 if ($util.Long)
                     (message.transactionVersion = $util.Long.fromValue(object.transactionVersion)).unsigned = false;
-                else if (typeof object.transactionVersion === "string")
+                else if (typeof object.transactionVersion === 'string')
                     message.transactionVersion = parseInt(object.transactionVersion, 10);
-                else if (typeof object.transactionVersion === "number")
+                else if (typeof object.transactionVersion === 'number')
                     message.transactionVersion = object.transactionVersion;
-                else if (typeof object.transactionVersion === "object")
-                    message.transactionVersion = new $util.LongBits(object.transactionVersion.low >>> 0, object.transactionVersion.high >>> 0).toNumber();
+                else if (typeof object.transactionVersion === 'object')
+                    message.transactionVersion = new $util.LongBits(
+                        object.transactionVersion.low >>> 0,
+                        object.transactionVersion.high >>> 0,
+                    ).toNumber();
             if (object.specVersion != null)
-                if ($util.Long)
-                    (message.specVersion = $util.Long.fromValue(object.specVersion)).unsigned = false;
-                else if (typeof object.specVersion === "string")
-                    message.specVersion = parseInt(object.specVersion, 10);
-                else if (typeof object.specVersion === "number")
-                    message.specVersion = object.specVersion;
-                else if (typeof object.specVersion === "object")
-                    message.specVersion = new $util.LongBits(object.specVersion.low >>> 0, object.specVersion.high >>> 0).toNumber();
+                if ($util.Long) (message.specVersion = $util.Long.fromValue(object.specVersion)).unsigned = false;
+                else if (typeof object.specVersion === 'string') message.specVersion = parseInt(object.specVersion, 10);
+                else if (typeof object.specVersion === 'number') message.specVersion = object.specVersion;
+                else if (typeof object.specVersion === 'object')
+                    message.specVersion = new $util.LongBits(
+                        object.specVersion.low >>> 0,
+                        object.specVersion.high >>> 0,
+                    ).toNumber();
             if (object.validityPeriod != null)
-                if ($util.Long)
-                    (message.validityPeriod = $util.Long.fromValue(object.validityPeriod)).unsigned = false;
-                else if (typeof object.validityPeriod === "string")
+                if ($util.Long) (message.validityPeriod = $util.Long.fromValue(object.validityPeriod)).unsigned = false;
+                else if (typeof object.validityPeriod === 'string')
                     message.validityPeriod = parseInt(object.validityPeriod, 10);
-                else if (typeof object.validityPeriod === "number")
-                    message.validityPeriod = object.validityPeriod;
-                else if (typeof object.validityPeriod === "object")
-                    message.validityPeriod = new $util.LongBits(object.validityPeriod.low >>> 0, object.validityPeriod.high >>> 0).toNumber();
+                else if (typeof object.validityPeriod === 'number') message.validityPeriod = object.validityPeriod;
+                else if (typeof object.validityPeriod === 'object')
+                    message.validityPeriod = new $util.LongBits(
+                        object.validityPeriod.low >>> 0,
+                        object.validityPeriod.high >>> 0,
+                    ).toNumber();
             if (object.implVersion != null)
-                if ($util.Long)
-                    (message.implVersion = $util.Long.fromValue(object.implVersion)).unsigned = false;
-                else if (typeof object.implVersion === "string")
-                    message.implVersion = parseInt(object.implVersion, 10);
-                else if (typeof object.implVersion === "number")
-                    message.implVersion = object.implVersion;
-                else if (typeof object.implVersion === "object")
-                    message.implVersion = new $util.LongBits(object.implVersion.low >>> 0, object.implVersion.high >>> 0).toNumber();
+                if ($util.Long) (message.implVersion = $util.Long.fromValue(object.implVersion)).unsigned = false;
+                else if (typeof object.implVersion === 'string') message.implVersion = parseInt(object.implVersion, 10);
+                else if (typeof object.implVersion === 'number') message.implVersion = object.implVersion;
+                else if (typeof object.implVersion === 'object')
+                    message.implVersion = new $util.LongBits(
+                        object.implVersion.low >>> 0,
+                        object.implVersion.high >>> 0,
+                    ).toNumber();
             if (object.authoringVersion != null)
                 if ($util.Long)
                     (message.authoringVersion = $util.Long.fromValue(object.authoringVersion)).unsigned = false;
-                else if (typeof object.authoringVersion === "string")
+                else if (typeof object.authoringVersion === 'string')
                     message.authoringVersion = parseInt(object.authoringVersion, 10);
-                else if (typeof object.authoringVersion === "number")
+                else if (typeof object.authoringVersion === 'number')
                     message.authoringVersion = object.authoringVersion;
-                else if (typeof object.authoringVersion === "object")
-                    message.authoringVersion = new $util.LongBits(object.authoringVersion.low >>> 0, object.authoringVersion.high >>> 0).toNumber();
-            if (object.blockNumber != null)
-                message.blockNumber = object.blockNumber | 0;
+                else if (typeof object.authoringVersion === 'object')
+                    message.authoringVersion = new $util.LongBits(
+                        object.authoringVersion.low >>> 0,
+                        object.authoringVersion.high >>> 0,
+                    ).toNumber();
+            if (object.blockNumber != null) message.blockNumber = object.blockNumber | 0;
             return message;
         };
 
@@ -12081,99 +11876,154 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         KsmTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.value = options.longs === String ? "0" : 0;
-                object.dest = "";
-                object.blockHash = "";
+                    object.value =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.value = options.longs === String ? '0' : 0;
+                object.dest = '';
+                object.blockHash = '';
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.nonce = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.nonce = options.longs === String ? "0" : 0;
+                    object.nonce =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.nonce = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.tip = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.tip = options.longs === String ? "0" : 0;
+                    object.tip =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.tip = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.transactionVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.transactionVersion = options.longs === String ? "0" : 0;
+                    object.transactionVersion =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.transactionVersion = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.specVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.specVersion = options.longs === String ? "0" : 0;
+                    object.specVersion =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.specVersion = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.validityPeriod = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.validityPeriod = options.longs === String ? "0" : 0;
+                    object.validityPeriod =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.validityPeriod = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.implVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.implVersion = options.longs === String ? "0" : 0;
+                    object.implVersion =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.implVersion = options.longs === String ? '0' : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.authoringVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.authoringVersion = options.longs === String ? "0" : 0;
+                    object.authoringVersion =
+                        options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else object.authoringVersion = options.longs === String ? '0' : 0;
                 object.blockNumber = 0;
             }
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (typeof message.value === "number")
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (typeof message.value === 'number')
                     object.value = options.longs === String ? String(message.value) : message.value;
                 else
-                    object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
-            if (message.dest != null && message.hasOwnProperty("dest"))
-                object.dest = message.dest;
-            if (message.blockHash != null && message.hasOwnProperty("blockHash"))
-                object.blockHash = message.blockHash;
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                if (typeof message.nonce === "number")
+                    object.value =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.value)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber()
+                            : message.value;
+            if (message.dest != null && message.hasOwnProperty('dest')) object.dest = message.dest;
+            if (message.blockHash != null && message.hasOwnProperty('blockHash')) object.blockHash = message.blockHash;
+            if (message.nonce != null && message.hasOwnProperty('nonce'))
+                if (typeof message.nonce === 'number')
                     object.nonce = options.longs === String ? String(message.nonce) : message.nonce;
                 else
-                    object.nonce = options.longs === String ? $util.Long.prototype.toString.call(message.nonce) : options.longs === Number ? new $util.LongBits(message.nonce.low >>> 0, message.nonce.high >>> 0).toNumber() : message.nonce;
-            if (message.tip != null && message.hasOwnProperty("tip"))
-                if (typeof message.tip === "number")
+                    object.nonce =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.nonce)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.nonce.low >>> 0, message.nonce.high >>> 0).toNumber()
+                            : message.nonce;
+            if (message.tip != null && message.hasOwnProperty('tip'))
+                if (typeof message.tip === 'number')
                     object.tip = options.longs === String ? String(message.tip) : message.tip;
                 else
-                    object.tip = options.longs === String ? $util.Long.prototype.toString.call(message.tip) : options.longs === Number ? new $util.LongBits(message.tip.low >>> 0, message.tip.high >>> 0).toNumber() : message.tip;
-            if (message.transactionVersion != null && message.hasOwnProperty("transactionVersion"))
-                if (typeof message.transactionVersion === "number")
-                    object.transactionVersion = options.longs === String ? String(message.transactionVersion) : message.transactionVersion;
+                    object.tip =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.tip)
+                            : options.longs === Number
+                            ? new $util.LongBits(message.tip.low >>> 0, message.tip.high >>> 0).toNumber()
+                            : message.tip;
+            if (message.transactionVersion != null && message.hasOwnProperty('transactionVersion'))
+                if (typeof message.transactionVersion === 'number')
+                    object.transactionVersion =
+                        options.longs === String ? String(message.transactionVersion) : message.transactionVersion;
                 else
-                    object.transactionVersion = options.longs === String ? $util.Long.prototype.toString.call(message.transactionVersion) : options.longs === Number ? new $util.LongBits(message.transactionVersion.low >>> 0, message.transactionVersion.high >>> 0).toNumber() : message.transactionVersion;
-            if (message.specVersion != null && message.hasOwnProperty("specVersion"))
-                if (typeof message.specVersion === "number")
+                    object.transactionVersion =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.transactionVersion)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.transactionVersion.low >>> 0,
+                                  message.transactionVersion.high >>> 0,
+                              ).toNumber()
+                            : message.transactionVersion;
+            if (message.specVersion != null && message.hasOwnProperty('specVersion'))
+                if (typeof message.specVersion === 'number')
                     object.specVersion = options.longs === String ? String(message.specVersion) : message.specVersion;
                 else
-                    object.specVersion = options.longs === String ? $util.Long.prototype.toString.call(message.specVersion) : options.longs === Number ? new $util.LongBits(message.specVersion.low >>> 0, message.specVersion.high >>> 0).toNumber() : message.specVersion;
-            if (message.validityPeriod != null && message.hasOwnProperty("validityPeriod"))
-                if (typeof message.validityPeriod === "number")
-                    object.validityPeriod = options.longs === String ? String(message.validityPeriod) : message.validityPeriod;
+                    object.specVersion =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.specVersion)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.specVersion.low >>> 0,
+                                  message.specVersion.high >>> 0,
+                              ).toNumber()
+                            : message.specVersion;
+            if (message.validityPeriod != null && message.hasOwnProperty('validityPeriod'))
+                if (typeof message.validityPeriod === 'number')
+                    object.validityPeriod =
+                        options.longs === String ? String(message.validityPeriod) : message.validityPeriod;
                 else
-                    object.validityPeriod = options.longs === String ? $util.Long.prototype.toString.call(message.validityPeriod) : options.longs === Number ? new $util.LongBits(message.validityPeriod.low >>> 0, message.validityPeriod.high >>> 0).toNumber() : message.validityPeriod;
-            if (message.implVersion != null && message.hasOwnProperty("implVersion"))
-                if (typeof message.implVersion === "number")
+                    object.validityPeriod =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.validityPeriod)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.validityPeriod.low >>> 0,
+                                  message.validityPeriod.high >>> 0,
+                              ).toNumber()
+                            : message.validityPeriod;
+            if (message.implVersion != null && message.hasOwnProperty('implVersion'))
+                if (typeof message.implVersion === 'number')
                     object.implVersion = options.longs === String ? String(message.implVersion) : message.implVersion;
                 else
-                    object.implVersion = options.longs === String ? $util.Long.prototype.toString.call(message.implVersion) : options.longs === Number ? new $util.LongBits(message.implVersion.low >>> 0, message.implVersion.high >>> 0).toNumber() : message.implVersion;
-            if (message.authoringVersion != null && message.hasOwnProperty("authoringVersion"))
-                if (typeof message.authoringVersion === "number")
-                    object.authoringVersion = options.longs === String ? String(message.authoringVersion) : message.authoringVersion;
+                    object.implVersion =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.implVersion)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.implVersion.low >>> 0,
+                                  message.implVersion.high >>> 0,
+                              ).toNumber()
+                            : message.implVersion;
+            if (message.authoringVersion != null && message.hasOwnProperty('authoringVersion'))
+                if (typeof message.authoringVersion === 'number')
+                    object.authoringVersion =
+                        options.longs === String ? String(message.authoringVersion) : message.authoringVersion;
                 else
-                    object.authoringVersion = options.longs === String ? $util.Long.prototype.toString.call(message.authoringVersion) : options.longs === Number ? new $util.LongBits(message.authoringVersion.low >>> 0, message.authoringVersion.high >>> 0).toNumber() : message.authoringVersion;
-            if (message.blockNumber != null && message.hasOwnProperty("blockNumber"))
+                    object.authoringVersion =
+                        options.longs === String
+                            ? $util.Long.prototype.toString.call(message.authoringVersion)
+                            : options.longs === Number
+                            ? new $util.LongBits(
+                                  message.authoringVersion.low >>> 0,
+                                  message.authoringVersion.high >>> 0,
+                              ).toNumber()
+                            : message.authoringVersion;
+            if (message.blockNumber != null && message.hasOwnProperty('blockNumber'))
                 object.blockNumber = message.blockNumber;
             return object;
         };
@@ -12192,8 +12042,7 @@ export const protoc = $root.protoc = (() => {
         return KsmTx;
     })();
 
-    protoc.CfxTx = (function() {
-
+    protoc.CfxTx = (function () {
         /**
          * Properties of a CfxTx.
          * @memberof protoc
@@ -12221,8 +12070,7 @@ export const protoc = $root.protoc = (() => {
         function CfxTx(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -12231,7 +12079,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.CfxTx
          * @instance
          */
-        CfxTx.prototype.to = "";
+        CfxTx.prototype.to = '';
 
         /**
          * CfxTx value.
@@ -12239,7 +12087,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.CfxTx
          * @instance
          */
-        CfxTx.prototype.value = "";
+        CfxTx.prototype.value = '';
 
         /**
          * CfxTx gasPrice.
@@ -12247,7 +12095,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.CfxTx
          * @instance
          */
-        CfxTx.prototype.gasPrice = "";
+        CfxTx.prototype.gasPrice = '';
 
         /**
          * CfxTx gas.
@@ -12255,7 +12103,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.CfxTx
          * @instance
          */
-        CfxTx.prototype.gas = "";
+        CfxTx.prototype.gas = '';
 
         /**
          * CfxTx nonce.
@@ -12271,7 +12119,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.CfxTx
          * @instance
          */
-        CfxTx.prototype.storageLimit = "";
+        CfxTx.prototype.storageLimit = '';
 
         /**
          * CfxTx epochHeight.
@@ -12279,7 +12127,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.CfxTx
          * @instance
          */
-        CfxTx.prototype.epochHeight = "";
+        CfxTx.prototype.epochHeight = '';
 
         /**
          * CfxTx chainId.
@@ -12287,7 +12135,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.CfxTx
          * @instance
          */
-        CfxTx.prototype.chainId = "";
+        CfxTx.prototype.chainId = '';
 
         /**
          * CfxTx contractAddress.
@@ -12295,7 +12143,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.CfxTx
          * @instance
          */
-        CfxTx.prototype.contractAddress = "";
+        CfxTx.prototype.contractAddress = '';
 
         /**
          * CfxTx override.
@@ -12327,28 +12175,30 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         CfxTx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.to);
-            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
-            if (message.gasPrice != null && Object.hasOwnProperty.call(message, "gasPrice"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.gasPrice);
-            if (message.gas != null && Object.hasOwnProperty.call(message, "gas"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.gas);
-            if (message.nonce != null && Object.hasOwnProperty.call(message, "nonce"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.nonce);
-            if (message.storageLimit != null && Object.hasOwnProperty.call(message, "storageLimit"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.storageLimit);
-            if (message.epochHeight != null && Object.hasOwnProperty.call(message, "epochHeight"))
-                writer.uint32(/* id 7, wireType 2 =*/58).string(message.epochHeight);
-            if (message.chainId != null && Object.hasOwnProperty.call(message, "chainId"))
-                writer.uint32(/* id 8, wireType 2 =*/66).string(message.chainId);
-            if (message.contractAddress != null && Object.hasOwnProperty.call(message, "contractAddress"))
-                writer.uint32(/* id 9, wireType 2 =*/74).string(message.contractAddress);
-            if (message.override != null && Object.hasOwnProperty.call(message, "override"))
-                $root.protoc.CfxTx.Override.encode(message.override, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+            if (!writer) writer = $Writer.create();
+            if (message.to != null && Object.hasOwnProperty.call(message, 'to'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.to);
+            if (message.value != null && Object.hasOwnProperty.call(message, 'value'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.value);
+            if (message.gasPrice != null && Object.hasOwnProperty.call(message, 'gasPrice'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.gasPrice);
+            if (message.gas != null && Object.hasOwnProperty.call(message, 'gas'))
+                writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.gas);
+            if (message.nonce != null && Object.hasOwnProperty.call(message, 'nonce'))
+                writer.uint32(/* id 5, wireType 0 =*/ 40).int32(message.nonce);
+            if (message.storageLimit != null && Object.hasOwnProperty.call(message, 'storageLimit'))
+                writer.uint32(/* id 6, wireType 2 =*/ 50).string(message.storageLimit);
+            if (message.epochHeight != null && Object.hasOwnProperty.call(message, 'epochHeight'))
+                writer.uint32(/* id 7, wireType 2 =*/ 58).string(message.epochHeight);
+            if (message.chainId != null && Object.hasOwnProperty.call(message, 'chainId'))
+                writer.uint32(/* id 8, wireType 2 =*/ 66).string(message.chainId);
+            if (message.contractAddress != null && Object.hasOwnProperty.call(message, 'contractAddress'))
+                writer.uint32(/* id 9, wireType 2 =*/ 74).string(message.contractAddress);
+            if (message.override != null && Object.hasOwnProperty.call(message, 'override'))
+                $root.protoc.CfxTx.Override.encode(
+                    message.override,
+                    writer.uint32(/* id 10, wireType 2 =*/ 82).fork(),
+                ).ldelim();
             return writer;
         };
 
@@ -12377,45 +12227,45 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         CfxTx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.CfxTx();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.CfxTx();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.to = reader.string();
-                    break;
-                case 2:
-                    message.value = reader.string();
-                    break;
-                case 3:
-                    message.gasPrice = reader.string();
-                    break;
-                case 4:
-                    message.gas = reader.string();
-                    break;
-                case 5:
-                    message.nonce = reader.int32();
-                    break;
-                case 6:
-                    message.storageLimit = reader.string();
-                    break;
-                case 7:
-                    message.epochHeight = reader.string();
-                    break;
-                case 8:
-                    message.chainId = reader.string();
-                    break;
-                case 9:
-                    message.contractAddress = reader.string();
-                    break;
-                case 10:
-                    message.override = $root.protoc.CfxTx.Override.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.to = reader.string();
+                        break;
+                    case 2:
+                        message.value = reader.string();
+                        break;
+                    case 3:
+                        message.gasPrice = reader.string();
+                        break;
+                    case 4:
+                        message.gas = reader.string();
+                        break;
+                    case 5:
+                        message.nonce = reader.int32();
+                        break;
+                    case 6:
+                        message.storageLimit = reader.string();
+                        break;
+                    case 7:
+                        message.epochHeight = reader.string();
+                        break;
+                    case 8:
+                        message.chainId = reader.string();
+                        break;
+                    case 9:
+                        message.contractAddress = reader.string();
+                        break;
+                    case 10:
+                        message.override = $root.protoc.CfxTx.Override.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -12432,8 +12282,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         CfxTx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -12446,39 +12295,28 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         CfxTx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.to != null && message.hasOwnProperty("to"))
-                if (!$util.isString(message.to))
-                    return "to: string expected";
-            if (message.value != null && message.hasOwnProperty("value"))
-                if (!$util.isString(message.value))
-                    return "value: string expected";
-            if (message.gasPrice != null && message.hasOwnProperty("gasPrice"))
-                if (!$util.isString(message.gasPrice))
-                    return "gasPrice: string expected";
-            if (message.gas != null && message.hasOwnProperty("gas"))
-                if (!$util.isString(message.gas))
-                    return "gas: string expected";
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                if (!$util.isInteger(message.nonce))
-                    return "nonce: integer expected";
-            if (message.storageLimit != null && message.hasOwnProperty("storageLimit"))
-                if (!$util.isString(message.storageLimit))
-                    return "storageLimit: string expected";
-            if (message.epochHeight != null && message.hasOwnProperty("epochHeight"))
-                if (!$util.isString(message.epochHeight))
-                    return "epochHeight: string expected";
-            if (message.chainId != null && message.hasOwnProperty("chainId"))
-                if (!$util.isString(message.chainId))
-                    return "chainId: string expected";
-            if (message.contractAddress != null && message.hasOwnProperty("contractAddress"))
-                if (!$util.isString(message.contractAddress))
-                    return "contractAddress: string expected";
-            if (message.override != null && message.hasOwnProperty("override")) {
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.to != null && message.hasOwnProperty('to'))
+                if (!$util.isString(message.to)) return 'to: string expected';
+            if (message.value != null && message.hasOwnProperty('value'))
+                if (!$util.isString(message.value)) return 'value: string expected';
+            if (message.gasPrice != null && message.hasOwnProperty('gasPrice'))
+                if (!$util.isString(message.gasPrice)) return 'gasPrice: string expected';
+            if (message.gas != null && message.hasOwnProperty('gas'))
+                if (!$util.isString(message.gas)) return 'gas: string expected';
+            if (message.nonce != null && message.hasOwnProperty('nonce'))
+                if (!$util.isInteger(message.nonce)) return 'nonce: integer expected';
+            if (message.storageLimit != null && message.hasOwnProperty('storageLimit'))
+                if (!$util.isString(message.storageLimit)) return 'storageLimit: string expected';
+            if (message.epochHeight != null && message.hasOwnProperty('epochHeight'))
+                if (!$util.isString(message.epochHeight)) return 'epochHeight: string expected';
+            if (message.chainId != null && message.hasOwnProperty('chainId'))
+                if (!$util.isString(message.chainId)) return 'chainId: string expected';
+            if (message.contractAddress != null && message.hasOwnProperty('contractAddress'))
+                if (!$util.isString(message.contractAddress)) return 'contractAddress: string expected';
+            if (message.override != null && message.hasOwnProperty('override')) {
                 let error = $root.protoc.CfxTx.Override.verify(message.override);
-                if (error)
-                    return "override." + error;
+                if (error) return 'override.' + error;
             }
             return null;
         };
@@ -12492,30 +12330,19 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.CfxTx} CfxTx
          */
         CfxTx.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.CfxTx)
-                return object;
+            if (object instanceof $root.protoc.CfxTx) return object;
             let message = new $root.protoc.CfxTx();
-            if (object.to != null)
-                message.to = String(object.to);
-            if (object.value != null)
-                message.value = String(object.value);
-            if (object.gasPrice != null)
-                message.gasPrice = String(object.gasPrice);
-            if (object.gas != null)
-                message.gas = String(object.gas);
-            if (object.nonce != null)
-                message.nonce = object.nonce | 0;
-            if (object.storageLimit != null)
-                message.storageLimit = String(object.storageLimit);
-            if (object.epochHeight != null)
-                message.epochHeight = String(object.epochHeight);
-            if (object.chainId != null)
-                message.chainId = String(object.chainId);
-            if (object.contractAddress != null)
-                message.contractAddress = String(object.contractAddress);
+            if (object.to != null) message.to = String(object.to);
+            if (object.value != null) message.value = String(object.value);
+            if (object.gasPrice != null) message.gasPrice = String(object.gasPrice);
+            if (object.gas != null) message.gas = String(object.gas);
+            if (object.nonce != null) message.nonce = object.nonce | 0;
+            if (object.storageLimit != null) message.storageLimit = String(object.storageLimit);
+            if (object.epochHeight != null) message.epochHeight = String(object.epochHeight);
+            if (object.chainId != null) message.chainId = String(object.chainId);
+            if (object.contractAddress != null) message.contractAddress = String(object.contractAddress);
             if (object.override != null) {
-                if (typeof object.override !== "object")
-                    throw TypeError(".protoc.CfxTx.override: object expected");
+                if (typeof object.override !== 'object') throw TypeError('.protoc.CfxTx.override: object expected');
                 message.override = $root.protoc.CfxTx.Override.fromObject(object.override);
             }
             return message;
@@ -12531,40 +12358,33 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         CfxTx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.to = "";
-                object.value = "";
-                object.gasPrice = "";
-                object.gas = "";
+                object.to = '';
+                object.value = '';
+                object.gasPrice = '';
+                object.gas = '';
                 object.nonce = 0;
-                object.storageLimit = "";
-                object.epochHeight = "";
-                object.chainId = "";
-                object.contractAddress = "";
+                object.storageLimit = '';
+                object.epochHeight = '';
+                object.chainId = '';
+                object.contractAddress = '';
                 object.override = null;
             }
-            if (message.to != null && message.hasOwnProperty("to"))
-                object.to = message.to;
-            if (message.value != null && message.hasOwnProperty("value"))
-                object.value = message.value;
-            if (message.gasPrice != null && message.hasOwnProperty("gasPrice"))
-                object.gasPrice = message.gasPrice;
-            if (message.gas != null && message.hasOwnProperty("gas"))
-                object.gas = message.gas;
-            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                object.nonce = message.nonce;
-            if (message.storageLimit != null && message.hasOwnProperty("storageLimit"))
+            if (message.to != null && message.hasOwnProperty('to')) object.to = message.to;
+            if (message.value != null && message.hasOwnProperty('value')) object.value = message.value;
+            if (message.gasPrice != null && message.hasOwnProperty('gasPrice')) object.gasPrice = message.gasPrice;
+            if (message.gas != null && message.hasOwnProperty('gas')) object.gas = message.gas;
+            if (message.nonce != null && message.hasOwnProperty('nonce')) object.nonce = message.nonce;
+            if (message.storageLimit != null && message.hasOwnProperty('storageLimit'))
                 object.storageLimit = message.storageLimit;
-            if (message.epochHeight != null && message.hasOwnProperty("epochHeight"))
+            if (message.epochHeight != null && message.hasOwnProperty('epochHeight'))
                 object.epochHeight = message.epochHeight;
-            if (message.chainId != null && message.hasOwnProperty("chainId"))
-                object.chainId = message.chainId;
-            if (message.contractAddress != null && message.hasOwnProperty("contractAddress"))
+            if (message.chainId != null && message.hasOwnProperty('chainId')) object.chainId = message.chainId;
+            if (message.contractAddress != null && message.hasOwnProperty('contractAddress'))
                 object.contractAddress = message.contractAddress;
-            if (message.override != null && message.hasOwnProperty("override"))
+            if (message.override != null && message.hasOwnProperty('override'))
                 object.override = $root.protoc.CfxTx.Override.toObject(message.override, options);
             return object;
         };
@@ -12580,8 +12400,7 @@ export const protoc = $root.protoc = (() => {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        CfxTx.Override = (function() {
-
+        CfxTx.Override = (function () {
             /**
              * Properties of an Override.
              * @memberof protoc.CfxTx
@@ -12603,8 +12422,7 @@ export const protoc = $root.protoc = (() => {
             function Override(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                        if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
             }
 
             /**
@@ -12621,7 +12439,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.CfxTx.Override
              * @instance
              */
-            Override.prototype.tokenShortName = "";
+            Override.prototype.tokenShortName = '';
 
             /**
              * Override tokenFullName.
@@ -12629,7 +12447,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.CfxTx.Override
              * @instance
              */
-            Override.prototype.tokenFullName = "";
+            Override.prototype.tokenFullName = '';
 
             /**
              * Override contractAddress.
@@ -12637,7 +12455,7 @@ export const protoc = $root.protoc = (() => {
              * @memberof protoc.CfxTx.Override
              * @instance
              */
-            Override.prototype.contractAddress = "";
+            Override.prototype.contractAddress = '';
 
             /**
              * Creates a new Override instance using the specified properties.
@@ -12661,16 +12479,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {$protobuf.Writer} Writer
              */
             Override.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.decimals != null && Object.hasOwnProperty.call(message, "decimals"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.decimals);
-                if (message.tokenShortName != null && Object.hasOwnProperty.call(message, "tokenShortName"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.tokenShortName);
-                if (message.tokenFullName != null && Object.hasOwnProperty.call(message, "tokenFullName"))
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.tokenFullName);
-                if (message.contractAddress != null && Object.hasOwnProperty.call(message, "contractAddress"))
-                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.contractAddress);
+                if (!writer) writer = $Writer.create();
+                if (message.decimals != null && Object.hasOwnProperty.call(message, 'decimals'))
+                    writer.uint32(/* id 1, wireType 0 =*/ 8).int32(message.decimals);
+                if (message.tokenShortName != null && Object.hasOwnProperty.call(message, 'tokenShortName'))
+                    writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.tokenShortName);
+                if (message.tokenFullName != null && Object.hasOwnProperty.call(message, 'tokenFullName'))
+                    writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.tokenFullName);
+                if (message.contractAddress != null && Object.hasOwnProperty.call(message, 'contractAddress'))
+                    writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.contractAddress);
                 return writer;
             };
 
@@ -12699,27 +12516,27 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Override.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.CfxTx.Override();
+                if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length,
+                    message = new $root.protoc.CfxTx.Override();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.decimals = reader.int32();
-                        break;
-                    case 2:
-                        message.tokenShortName = reader.string();
-                        break;
-                    case 3:
-                        message.tokenFullName = reader.string();
-                        break;
-                    case 4:
-                        message.contractAddress = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                        case 1:
+                            message.decimals = reader.int32();
+                            break;
+                        case 2:
+                            message.tokenShortName = reader.string();
+                            break;
+                        case 3:
+                            message.tokenFullName = reader.string();
+                            break;
+                        case 4:
+                            message.contractAddress = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
                     }
                 }
                 return message;
@@ -12736,8 +12553,7 @@ export const protoc = $root.protoc = (() => {
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             Override.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
+                if (!(reader instanceof $Reader)) reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
@@ -12750,20 +12566,15 @@ export const protoc = $root.protoc = (() => {
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
             Override.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.decimals != null && message.hasOwnProperty("decimals"))
-                    if (!$util.isInteger(message.decimals))
-                        return "decimals: integer expected";
-                if (message.tokenShortName != null && message.hasOwnProperty("tokenShortName"))
-                    if (!$util.isString(message.tokenShortName))
-                        return "tokenShortName: string expected";
-                if (message.tokenFullName != null && message.hasOwnProperty("tokenFullName"))
-                    if (!$util.isString(message.tokenFullName))
-                        return "tokenFullName: string expected";
-                if (message.contractAddress != null && message.hasOwnProperty("contractAddress"))
-                    if (!$util.isString(message.contractAddress))
-                        return "contractAddress: string expected";
+                if (typeof message !== 'object' || message === null) return 'object expected';
+                if (message.decimals != null && message.hasOwnProperty('decimals'))
+                    if (!$util.isInteger(message.decimals)) return 'decimals: integer expected';
+                if (message.tokenShortName != null && message.hasOwnProperty('tokenShortName'))
+                    if (!$util.isString(message.tokenShortName)) return 'tokenShortName: string expected';
+                if (message.tokenFullName != null && message.hasOwnProperty('tokenFullName'))
+                    if (!$util.isString(message.tokenFullName)) return 'tokenFullName: string expected';
+                if (message.contractAddress != null && message.hasOwnProperty('contractAddress'))
+                    if (!$util.isString(message.contractAddress)) return 'contractAddress: string expected';
                 return null;
             };
 
@@ -12776,17 +12587,12 @@ export const protoc = $root.protoc = (() => {
              * @returns {protoc.CfxTx.Override} Override
              */
             Override.fromObject = function fromObject(object) {
-                if (object instanceof $root.protoc.CfxTx.Override)
-                    return object;
+                if (object instanceof $root.protoc.CfxTx.Override) return object;
                 let message = new $root.protoc.CfxTx.Override();
-                if (object.decimals != null)
-                    message.decimals = object.decimals | 0;
-                if (object.tokenShortName != null)
-                    message.tokenShortName = String(object.tokenShortName);
-                if (object.tokenFullName != null)
-                    message.tokenFullName = String(object.tokenFullName);
-                if (object.contractAddress != null)
-                    message.contractAddress = String(object.contractAddress);
+                if (object.decimals != null) message.decimals = object.decimals | 0;
+                if (object.tokenShortName != null) message.tokenShortName = String(object.tokenShortName);
+                if (object.tokenFullName != null) message.tokenFullName = String(object.tokenFullName);
+                if (object.contractAddress != null) message.contractAddress = String(object.contractAddress);
                 return message;
             };
 
@@ -12800,22 +12606,20 @@ export const protoc = $root.protoc = (() => {
              * @returns {Object.<string,*>} Plain object
              */
             Override.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
+                if (!options) options = {};
                 let object = {};
                 if (options.defaults) {
                     object.decimals = 0;
-                    object.tokenShortName = "";
-                    object.tokenFullName = "";
-                    object.contractAddress = "";
+                    object.tokenShortName = '';
+                    object.tokenFullName = '';
+                    object.contractAddress = '';
                 }
-                if (message.decimals != null && message.hasOwnProperty("decimals"))
-                    object.decimals = message.decimals;
-                if (message.tokenShortName != null && message.hasOwnProperty("tokenShortName"))
+                if (message.decimals != null && message.hasOwnProperty('decimals')) object.decimals = message.decimals;
+                if (message.tokenShortName != null && message.hasOwnProperty('tokenShortName'))
                     object.tokenShortName = message.tokenShortName;
-                if (message.tokenFullName != null && message.hasOwnProperty("tokenFullName"))
+                if (message.tokenFullName != null && message.hasOwnProperty('tokenFullName'))
                     object.tokenFullName = message.tokenFullName;
-                if (message.contractAddress != null && message.hasOwnProperty("contractAddress"))
+                if (message.contractAddress != null && message.hasOwnProperty('contractAddress'))
                     object.contractAddress = message.contractAddress;
                 return object;
             };
@@ -12837,8 +12641,7 @@ export const protoc = $root.protoc = (() => {
         return CfxTx;
     })();
 
-    protoc.SignMessage = (function() {
-
+    protoc.SignMessage = (function () {
         /**
          * Properties of a SignMessage.
          * @memberof protoc
@@ -12859,8 +12662,7 @@ export const protoc = $root.protoc = (() => {
         function SignMessage(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -12869,7 +12671,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignMessage
          * @instance
          */
-        SignMessage.prototype.coinCode = "";
+        SignMessage.prototype.coinCode = '';
 
         /**
          * SignMessage hdPath.
@@ -12877,7 +12679,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignMessage
          * @instance
          */
-        SignMessage.prototype.hdPath = "";
+        SignMessage.prototype.hdPath = '';
 
         /**
          * SignMessage message.
@@ -12885,7 +12687,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignMessage
          * @instance
          */
-        SignMessage.prototype.message = "";
+        SignMessage.prototype.message = '';
 
         /**
          * Creates a new SignMessage instance using the specified properties.
@@ -12909,14 +12711,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         SignMessage.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.coinCode != null && Object.hasOwnProperty.call(message, "coinCode"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.coinCode);
-            if (message.hdPath != null && Object.hasOwnProperty.call(message, "hdPath"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.hdPath);
-            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+            if (!writer) writer = $Writer.create();
+            if (message.coinCode != null && Object.hasOwnProperty.call(message, 'coinCode'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.coinCode);
+            if (message.hdPath != null && Object.hasOwnProperty.call(message, 'hdPath'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.hdPath);
+            if (message.message != null && Object.hasOwnProperty.call(message, 'message'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.message);
             return writer;
         };
 
@@ -12945,24 +12746,24 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SignMessage.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.SignMessage();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.SignMessage();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.coinCode = reader.string();
-                    break;
-                case 2:
-                    message.hdPath = reader.string();
-                    break;
-                case 3:
-                    message.message = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.coinCode = reader.string();
+                        break;
+                    case 2:
+                        message.hdPath = reader.string();
+                        break;
+                    case 3:
+                        message.message = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -12979,8 +12780,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SignMessage.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -12993,17 +12793,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         SignMessage.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.coinCode != null && message.hasOwnProperty("coinCode"))
-                if (!$util.isString(message.coinCode))
-                    return "coinCode: string expected";
-            if (message.hdPath != null && message.hasOwnProperty("hdPath"))
-                if (!$util.isString(message.hdPath))
-                    return "hdPath: string expected";
-            if (message.message != null && message.hasOwnProperty("message"))
-                if (!$util.isString(message.message))
-                    return "message: string expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.coinCode != null && message.hasOwnProperty('coinCode'))
+                if (!$util.isString(message.coinCode)) return 'coinCode: string expected';
+            if (message.hdPath != null && message.hasOwnProperty('hdPath'))
+                if (!$util.isString(message.hdPath)) return 'hdPath: string expected';
+            if (message.message != null && message.hasOwnProperty('message'))
+                if (!$util.isString(message.message)) return 'message: string expected';
             return null;
         };
 
@@ -13016,15 +12812,11 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.SignMessage} SignMessage
          */
         SignMessage.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.SignMessage)
-                return object;
+            if (object instanceof $root.protoc.SignMessage) return object;
             let message = new $root.protoc.SignMessage();
-            if (object.coinCode != null)
-                message.coinCode = String(object.coinCode);
-            if (object.hdPath != null)
-                message.hdPath = String(object.hdPath);
-            if (object.message != null)
-                message.message = String(object.message);
+            if (object.coinCode != null) message.coinCode = String(object.coinCode);
+            if (object.hdPath != null) message.hdPath = String(object.hdPath);
+            if (object.message != null) message.message = String(object.message);
             return message;
         };
 
@@ -13038,20 +12830,16 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         SignMessage.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.coinCode = "";
-                object.hdPath = "";
-                object.message = "";
+                object.coinCode = '';
+                object.hdPath = '';
+                object.message = '';
             }
-            if (message.coinCode != null && message.hasOwnProperty("coinCode"))
-                object.coinCode = message.coinCode;
-            if (message.hdPath != null && message.hasOwnProperty("hdPath"))
-                object.hdPath = message.hdPath;
-            if (message.message != null && message.hasOwnProperty("message"))
-                object.message = message.message;
+            if (message.coinCode != null && message.hasOwnProperty('coinCode')) object.coinCode = message.coinCode;
+            if (message.hdPath != null && message.hasOwnProperty('hdPath')) object.hdPath = message.hdPath;
+            if (message.message != null && message.hasOwnProperty('message')) object.message = message.message;
             return object;
         };
 
@@ -13069,8 +12857,7 @@ export const protoc = $root.protoc = (() => {
         return SignMessage;
     })();
 
-    protoc.VerifyAddress = (function() {
-
+    protoc.VerifyAddress = (function () {
         /**
          * Properties of a VerifyAddress.
          * @memberof protoc
@@ -13091,8 +12878,7 @@ export const protoc = $root.protoc = (() => {
         function VerifyAddress(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -13117,7 +12903,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.VerifyAddress
          * @instance
          */
-        VerifyAddress.prototype.address = "";
+        VerifyAddress.prototype.address = '';
 
         /**
          * Creates a new VerifyAddress instance using the specified properties.
@@ -13141,14 +12927,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         VerifyAddress.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.coinType != null && Object.hasOwnProperty.call(message, "coinType"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.coinType);
-            if (message.addressIndex != null && Object.hasOwnProperty.call(message, "addressIndex"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.addressIndex);
-            if (message.address != null && Object.hasOwnProperty.call(message, "address"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.address);
+            if (!writer) writer = $Writer.create();
+            if (message.coinType != null && Object.hasOwnProperty.call(message, 'coinType'))
+                writer.uint32(/* id 1, wireType 0 =*/ 8).int32(message.coinType);
+            if (message.addressIndex != null && Object.hasOwnProperty.call(message, 'addressIndex'))
+                writer.uint32(/* id 2, wireType 0 =*/ 16).int32(message.addressIndex);
+            if (message.address != null && Object.hasOwnProperty.call(message, 'address'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.address);
             return writer;
         };
 
@@ -13177,24 +12962,24 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         VerifyAddress.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.VerifyAddress();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.VerifyAddress();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.coinType = reader.int32();
-                    break;
-                case 2:
-                    message.addressIndex = reader.int32();
-                    break;
-                case 3:
-                    message.address = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.coinType = reader.int32();
+                        break;
+                    case 2:
+                        message.addressIndex = reader.int32();
+                        break;
+                    case 3:
+                        message.address = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -13211,8 +12996,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         VerifyAddress.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -13225,17 +13009,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         VerifyAddress.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.coinType != null && message.hasOwnProperty("coinType"))
-                if (!$util.isInteger(message.coinType))
-                    return "coinType: integer expected";
-            if (message.addressIndex != null && message.hasOwnProperty("addressIndex"))
-                if (!$util.isInteger(message.addressIndex))
-                    return "addressIndex: integer expected";
-            if (message.address != null && message.hasOwnProperty("address"))
-                if (!$util.isString(message.address))
-                    return "address: string expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.coinType != null && message.hasOwnProperty('coinType'))
+                if (!$util.isInteger(message.coinType)) return 'coinType: integer expected';
+            if (message.addressIndex != null && message.hasOwnProperty('addressIndex'))
+                if (!$util.isInteger(message.addressIndex)) return 'addressIndex: integer expected';
+            if (message.address != null && message.hasOwnProperty('address'))
+                if (!$util.isString(message.address)) return 'address: string expected';
             return null;
         };
 
@@ -13248,15 +13028,11 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.VerifyAddress} VerifyAddress
          */
         VerifyAddress.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.VerifyAddress)
-                return object;
+            if (object instanceof $root.protoc.VerifyAddress) return object;
             let message = new $root.protoc.VerifyAddress();
-            if (object.coinType != null)
-                message.coinType = object.coinType | 0;
-            if (object.addressIndex != null)
-                message.addressIndex = object.addressIndex | 0;
-            if (object.address != null)
-                message.address = String(object.address);
+            if (object.coinType != null) message.coinType = object.coinType | 0;
+            if (object.addressIndex != null) message.addressIndex = object.addressIndex | 0;
+            if (object.address != null) message.address = String(object.address);
             return message;
         };
 
@@ -13270,20 +13046,17 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         VerifyAddress.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
                 object.coinType = 0;
                 object.addressIndex = 0;
-                object.address = "";
+                object.address = '';
             }
-            if (message.coinType != null && message.hasOwnProperty("coinType"))
-                object.coinType = message.coinType;
-            if (message.addressIndex != null && message.hasOwnProperty("addressIndex"))
+            if (message.coinType != null && message.hasOwnProperty('coinType')) object.coinType = message.coinType;
+            if (message.addressIndex != null && message.hasOwnProperty('addressIndex'))
                 object.addressIndex = message.addressIndex;
-            if (message.address != null && message.hasOwnProperty("address"))
-                object.address = message.address;
+            if (message.address != null && message.hasOwnProperty('address')) object.address = message.address;
             return object;
         };
 
@@ -13301,8 +13074,7 @@ export const protoc = $root.protoc = (() => {
         return VerifyAddress;
     })();
 
-    protoc.SignTransactionResult = (function() {
-
+    protoc.SignTransactionResult = (function () {
         /**
          * Properties of a SignTransactionResult.
          * @memberof protoc
@@ -13323,8 +13095,7 @@ export const protoc = $root.protoc = (() => {
         function SignTransactionResult(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -13333,7 +13104,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignTransactionResult
          * @instance
          */
-        SignTransactionResult.prototype.signId = "";
+        SignTransactionResult.prototype.signId = '';
 
         /**
          * SignTransactionResult txId.
@@ -13341,7 +13112,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignTransactionResult
          * @instance
          */
-        SignTransactionResult.prototype.txId = "";
+        SignTransactionResult.prototype.txId = '';
 
         /**
          * SignTransactionResult rawTx.
@@ -13349,7 +13120,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.SignTransactionResult
          * @instance
          */
-        SignTransactionResult.prototype.rawTx = "";
+        SignTransactionResult.prototype.rawTx = '';
 
         /**
          * Creates a new SignTransactionResult instance using the specified properties.
@@ -13373,14 +13144,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         SignTransactionResult.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.signId != null && Object.hasOwnProperty.call(message, "signId"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.signId);
-            if (message.txId != null && Object.hasOwnProperty.call(message, "txId"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.txId);
-            if (message.rawTx != null && Object.hasOwnProperty.call(message, "rawTx"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.rawTx);
+            if (!writer) writer = $Writer.create();
+            if (message.signId != null && Object.hasOwnProperty.call(message, 'signId'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.signId);
+            if (message.txId != null && Object.hasOwnProperty.call(message, 'txId'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.txId);
+            if (message.rawTx != null && Object.hasOwnProperty.call(message, 'rawTx'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.rawTx);
             return writer;
         };
 
@@ -13409,24 +13179,24 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SignTransactionResult.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.SignTransactionResult();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.SignTransactionResult();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.signId = reader.string();
-                    break;
-                case 2:
-                    message.txId = reader.string();
-                    break;
-                case 3:
-                    message.rawTx = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.signId = reader.string();
+                        break;
+                    case 2:
+                        message.txId = reader.string();
+                        break;
+                    case 3:
+                        message.rawTx = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -13443,8 +13213,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SignTransactionResult.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -13457,17 +13226,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         SignTransactionResult.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.signId != null && message.hasOwnProperty("signId"))
-                if (!$util.isString(message.signId))
-                    return "signId: string expected";
-            if (message.txId != null && message.hasOwnProperty("txId"))
-                if (!$util.isString(message.txId))
-                    return "txId: string expected";
-            if (message.rawTx != null && message.hasOwnProperty("rawTx"))
-                if (!$util.isString(message.rawTx))
-                    return "rawTx: string expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.signId != null && message.hasOwnProperty('signId'))
+                if (!$util.isString(message.signId)) return 'signId: string expected';
+            if (message.txId != null && message.hasOwnProperty('txId'))
+                if (!$util.isString(message.txId)) return 'txId: string expected';
+            if (message.rawTx != null && message.hasOwnProperty('rawTx'))
+                if (!$util.isString(message.rawTx)) return 'rawTx: string expected';
             return null;
         };
 
@@ -13480,15 +13245,11 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.SignTransactionResult} SignTransactionResult
          */
         SignTransactionResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.SignTransactionResult)
-                return object;
+            if (object instanceof $root.protoc.SignTransactionResult) return object;
             let message = new $root.protoc.SignTransactionResult();
-            if (object.signId != null)
-                message.signId = String(object.signId);
-            if (object.txId != null)
-                message.txId = String(object.txId);
-            if (object.rawTx != null)
-                message.rawTx = String(object.rawTx);
+            if (object.signId != null) message.signId = String(object.signId);
+            if (object.txId != null) message.txId = String(object.txId);
+            if (object.rawTx != null) message.rawTx = String(object.rawTx);
             return message;
         };
 
@@ -13502,20 +13263,16 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         SignTransactionResult.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.signId = "";
-                object.txId = "";
-                object.rawTx = "";
+                object.signId = '';
+                object.txId = '';
+                object.rawTx = '';
             }
-            if (message.signId != null && message.hasOwnProperty("signId"))
-                object.signId = message.signId;
-            if (message.txId != null && message.hasOwnProperty("txId"))
-                object.txId = message.txId;
-            if (message.rawTx != null && message.hasOwnProperty("rawTx"))
-                object.rawTx = message.rawTx;
+            if (message.signId != null && message.hasOwnProperty('signId')) object.signId = message.signId;
+            if (message.txId != null && message.hasOwnProperty('txId')) object.txId = message.txId;
+            if (message.rawTx != null && message.hasOwnProperty('rawTx')) object.rawTx = message.rawTx;
             return object;
         };
 
@@ -13533,8 +13290,7 @@ export const protoc = $root.protoc = (() => {
         return SignTransactionResult;
     })();
 
-    protoc.DashStaking = (function() {
-
+    protoc.DashStaking = (function () {
         /**
          * Properties of a DashStaking.
          * @memberof protoc
@@ -13557,8 +13313,7 @@ export const protoc = $root.protoc = (() => {
         function DashStaking(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -13567,7 +13322,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DashStaking
          * @instance
          */
-        DashStaking.prototype.coinCode = "";
+        DashStaking.prototype.coinCode = '';
 
         /**
          * DashStaking hdPath.
@@ -13575,7 +13330,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DashStaking
          * @instance
          */
-        DashStaking.prototype.hdPath = "";
+        DashStaking.prototype.hdPath = '';
 
         /**
          * DashStaking mnid.
@@ -13583,7 +13338,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DashStaking
          * @instance
          */
-        DashStaking.prototype.mnid = "";
+        DashStaking.prototype.mnid = '';
 
         /**
          * DashStaking address.
@@ -13591,7 +13346,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DashStaking
          * @instance
          */
-        DashStaking.prototype.address = "";
+        DashStaking.prototype.address = '';
 
         /**
          * DashStaking message.
@@ -13599,7 +13354,7 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.DashStaking
          * @instance
          */
-        DashStaking.prototype.message = "";
+        DashStaking.prototype.message = '';
 
         /**
          * Creates a new DashStaking instance using the specified properties.
@@ -13623,18 +13378,17 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         DashStaking.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.coinCode != null && Object.hasOwnProperty.call(message, "coinCode"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.coinCode);
-            if (message.hdPath != null && Object.hasOwnProperty.call(message, "hdPath"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.hdPath);
-            if (message.mnid != null && Object.hasOwnProperty.call(message, "mnid"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.mnid);
-            if (message.address != null && Object.hasOwnProperty.call(message, "address"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.address);
-            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.message);
+            if (!writer) writer = $Writer.create();
+            if (message.coinCode != null && Object.hasOwnProperty.call(message, 'coinCode'))
+                writer.uint32(/* id 1, wireType 2 =*/ 10).string(message.coinCode);
+            if (message.hdPath != null && Object.hasOwnProperty.call(message, 'hdPath'))
+                writer.uint32(/* id 2, wireType 2 =*/ 18).string(message.hdPath);
+            if (message.mnid != null && Object.hasOwnProperty.call(message, 'mnid'))
+                writer.uint32(/* id 3, wireType 2 =*/ 26).string(message.mnid);
+            if (message.address != null && Object.hasOwnProperty.call(message, 'address'))
+                writer.uint32(/* id 4, wireType 2 =*/ 34).string(message.address);
+            if (message.message != null && Object.hasOwnProperty.call(message, 'message'))
+                writer.uint32(/* id 5, wireType 2 =*/ 42).string(message.message);
             return writer;
         };
 
@@ -13663,30 +13417,30 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DashStaking.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.DashStaking();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.DashStaking();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.coinCode = reader.string();
-                    break;
-                case 2:
-                    message.hdPath = reader.string();
-                    break;
-                case 3:
-                    message.mnid = reader.string();
-                    break;
-                case 4:
-                    message.address = reader.string();
-                    break;
-                case 5:
-                    message.message = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.coinCode = reader.string();
+                        break;
+                    case 2:
+                        message.hdPath = reader.string();
+                        break;
+                    case 3:
+                        message.mnid = reader.string();
+                        break;
+                    case 4:
+                        message.address = reader.string();
+                        break;
+                    case 5:
+                        message.message = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -13703,8 +13457,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DashStaking.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -13717,23 +13470,17 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         DashStaking.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.coinCode != null && message.hasOwnProperty("coinCode"))
-                if (!$util.isString(message.coinCode))
-                    return "coinCode: string expected";
-            if (message.hdPath != null && message.hasOwnProperty("hdPath"))
-                if (!$util.isString(message.hdPath))
-                    return "hdPath: string expected";
-            if (message.mnid != null && message.hasOwnProperty("mnid"))
-                if (!$util.isString(message.mnid))
-                    return "mnid: string expected";
-            if (message.address != null && message.hasOwnProperty("address"))
-                if (!$util.isString(message.address))
-                    return "address: string expected";
-            if (message.message != null && message.hasOwnProperty("message"))
-                if (!$util.isString(message.message))
-                    return "message: string expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
+            if (message.coinCode != null && message.hasOwnProperty('coinCode'))
+                if (!$util.isString(message.coinCode)) return 'coinCode: string expected';
+            if (message.hdPath != null && message.hasOwnProperty('hdPath'))
+                if (!$util.isString(message.hdPath)) return 'hdPath: string expected';
+            if (message.mnid != null && message.hasOwnProperty('mnid'))
+                if (!$util.isString(message.mnid)) return 'mnid: string expected';
+            if (message.address != null && message.hasOwnProperty('address'))
+                if (!$util.isString(message.address)) return 'address: string expected';
+            if (message.message != null && message.hasOwnProperty('message'))
+                if (!$util.isString(message.message)) return 'message: string expected';
             return null;
         };
 
@@ -13746,19 +13493,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.DashStaking} DashStaking
          */
         DashStaking.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.DashStaking)
-                return object;
+            if (object instanceof $root.protoc.DashStaking) return object;
             let message = new $root.protoc.DashStaking();
-            if (object.coinCode != null)
-                message.coinCode = String(object.coinCode);
-            if (object.hdPath != null)
-                message.hdPath = String(object.hdPath);
-            if (object.mnid != null)
-                message.mnid = String(object.mnid);
-            if (object.address != null)
-                message.address = String(object.address);
-            if (object.message != null)
-                message.message = String(object.message);
+            if (object.coinCode != null) message.coinCode = String(object.coinCode);
+            if (object.hdPath != null) message.hdPath = String(object.hdPath);
+            if (object.mnid != null) message.mnid = String(object.mnid);
+            if (object.address != null) message.address = String(object.address);
+            if (object.message != null) message.message = String(object.message);
             return message;
         };
 
@@ -13772,26 +13513,20 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         DashStaking.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
             if (options.defaults) {
-                object.coinCode = "";
-                object.hdPath = "";
-                object.mnid = "";
-                object.address = "";
-                object.message = "";
+                object.coinCode = '';
+                object.hdPath = '';
+                object.mnid = '';
+                object.address = '';
+                object.message = '';
             }
-            if (message.coinCode != null && message.hasOwnProperty("coinCode"))
-                object.coinCode = message.coinCode;
-            if (message.hdPath != null && message.hasOwnProperty("hdPath"))
-                object.hdPath = message.hdPath;
-            if (message.mnid != null && message.hasOwnProperty("mnid"))
-                object.mnid = message.mnid;
-            if (message.address != null && message.hasOwnProperty("address"))
-                object.address = message.address;
-            if (message.message != null && message.hasOwnProperty("message"))
-                object.message = message.message;
+            if (message.coinCode != null && message.hasOwnProperty('coinCode')) object.coinCode = message.coinCode;
+            if (message.hdPath != null && message.hasOwnProperty('hdPath')) object.hdPath = message.hdPath;
+            if (message.mnid != null && message.hasOwnProperty('mnid')) object.mnid = message.mnid;
+            if (message.address != null && message.hasOwnProperty('address')) object.address = message.address;
+            if (message.message != null && message.hasOwnProperty('message')) object.message = message.message;
             return object;
         };
 
@@ -13809,8 +13544,7 @@ export const protoc = $root.protoc = (() => {
         return DashStaking;
     })();
 
-    protoc.Staking = (function() {
-
+    protoc.Staking = (function () {
         /**
          * Properties of a Staking.
          * @memberof protoc
@@ -13829,8 +13563,7 @@ export const protoc = $root.protoc = (() => {
         function Staking(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+                    if (properties[keys[i]] != null) this[keys[i]] = properties[keys[i]];
         }
 
         /**
@@ -13850,9 +13583,9 @@ export const protoc = $root.protoc = (() => {
          * @memberof protoc.Staking
          * @instance
          */
-        Object.defineProperty(Staking.prototype, "data", {
-            get: $util.oneOfGetter($oneOfFields = ["dash"]),
-            set: $util.oneOfSetter($oneOfFields)
+        Object.defineProperty(Staking.prototype, 'data', {
+            get: $util.oneOfGetter(($oneOfFields = ['dash'])),
+            set: $util.oneOfSetter($oneOfFields),
         });
 
         /**
@@ -13877,10 +13610,12 @@ export const protoc = $root.protoc = (() => {
          * @returns {$protobuf.Writer} Writer
          */
         Staking.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.dash != null && Object.hasOwnProperty.call(message, "dash"))
-                $root.protoc.DashStaking.encode(message.dash, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (!writer) writer = $Writer.create();
+            if (message.dash != null && Object.hasOwnProperty.call(message, 'dash'))
+                $root.protoc.DashStaking.encode(
+                    message.dash,
+                    writer.uint32(/* id 1, wireType 2 =*/ 10).fork(),
+                ).ldelim();
             return writer;
         };
 
@@ -13909,18 +13644,18 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Staking.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.protoc.Staking();
+            if (!(reader instanceof $Reader)) reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length,
+                message = new $root.protoc.Staking();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.dash = $root.protoc.DashStaking.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    case 1:
+                        message.dash = $root.protoc.DashStaking.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -13937,8 +13672,7 @@ export const protoc = $root.protoc = (() => {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Staking.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
+            if (!(reader instanceof $Reader)) reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
@@ -13951,15 +13685,13 @@ export const protoc = $root.protoc = (() => {
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
         Staking.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
+            if (typeof message !== 'object' || message === null) return 'object expected';
             let properties = {};
-            if (message.dash != null && message.hasOwnProperty("dash")) {
+            if (message.dash != null && message.hasOwnProperty('dash')) {
                 properties.data = 1;
                 {
                     let error = $root.protoc.DashStaking.verify(message.dash);
-                    if (error)
-                        return "dash." + error;
+                    if (error) return 'dash.' + error;
                 }
             }
             return null;
@@ -13974,12 +13706,10 @@ export const protoc = $root.protoc = (() => {
          * @returns {protoc.Staking} Staking
          */
         Staking.fromObject = function fromObject(object) {
-            if (object instanceof $root.protoc.Staking)
-                return object;
+            if (object instanceof $root.protoc.Staking) return object;
             let message = new $root.protoc.Staking();
             if (object.dash != null) {
-                if (typeof object.dash !== "object")
-                    throw TypeError(".protoc.Staking.dash: object expected");
+                if (typeof object.dash !== 'object') throw TypeError('.protoc.Staking.dash: object expected');
                 message.dash = $root.protoc.DashStaking.fromObject(object.dash);
             }
             return message;
@@ -13995,13 +13725,11 @@ export const protoc = $root.protoc = (() => {
          * @returns {Object.<string,*>} Plain object
          */
         Staking.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
+            if (!options) options = {};
             let object = {};
-            if (message.dash != null && message.hasOwnProperty("dash")) {
+            if (message.dash != null && message.hasOwnProperty('dash')) {
                 object.dash = $root.protoc.DashStaking.toObject(message.dash, options);
-                if (options.oneofs)
-                    object.data = "dash";
+                if (options.oneofs) object.data = 'dash';
             }
             return object;
         };
@@ -14021,6 +13749,6 @@ export const protoc = $root.protoc = (() => {
     })();
 
     return protoc;
-})();
+})());
 
 export { $root as default };
