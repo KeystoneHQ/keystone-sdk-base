@@ -88,23 +88,22 @@ describe('Keystone Subprovider', () => {
     it('shoudld generate the eip1559 txhex', async () => {
         const eip1559TxData = {
             from: '0x9858EfFD232B4033E47d90003D41EC34EcaEda94',
-            nonce:353,
-            value:61901619,
-            gasLimit:32593,
-            maxPriorityFeePerGas:38850,
-            maxFeePerGas:136295,
-            to:"0x000000000000000000000000000000000000aaaa",
-        }
+            nonce: 353,
+            value: 61901619,
+            gasLimit: 32593,
+            maxPriorityFeePerGas: 38850,
+            maxFeePerGas: 136295,
+            to: '0x000000000000000000000000000000000000aaaa',
+        };
 
         const provider = new KeystoneSubprovider({
             networkId: 1,
         });
 
-        const txHex = provider.signEIP1559TransactionAsync(eip1559TxData)
+        const txHex = provider.signEIP1559TransactionAsync(eip1559TxData);
 
         console.log(txHex);
-        
-    })
+    });
 
     it('should throw error if the chainId is missmatched', async () => {
         const txParams = {
