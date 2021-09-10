@@ -2,14 +2,24 @@ import { UR } from '@ngraveio/bc-ur';
 
 type DecodedSuccess = {
     result: UR;
-    status: 'success';
+    status: ReadStatus.success;
 };
 
 type DecodedCanceled = {
-    status: 'canceled';
+    status: ReadStatus.canceled;
 };
 
 export type DecodedResult = DecodedSuccess | DecodedCanceled;
+
+export enum ReadStatus {
+    canceled = 'canceled',
+    success = 'success',
+}
+
+export enum PlayStatus {
+    canceled = 'canceled',
+    success = 'success',
+}
 
 export type Play = (
     data: UR,
@@ -19,14 +29,19 @@ export type Play = (
         title?: string;
         description?: string;
     },
-) => Promise<void>;
+) => Promise<PlayStatus>;
 
 export type Read = (
     expect: SupportedResult[],
-    options?: { title?: string; description?: string, renderInitial?: {
-        walletMode: string,
-        link: string
-    }, URTypeErrorMessage?: string },
+    options?: {
+        title?: string;
+        description?: string;
+        renderInitial?: {
+            walletMode: string;
+            link: string;
+        };
+        URTypeErrorMessage?: string;
+    },
 ) => Promise<DecodedResult>;
 
 export enum SupportedResult {

@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/qr-protocol",
-  "version": "0.6.5",
+  "version": "0.7.0",
   "description": "QRCode Protocol",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -10,9 +10,10 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "npm run clean && npx tsc -p tsconfig.json -outDir ./dist && cp -R src/QRProtocolBuf dist/QRProtocolBuf",
+    "copy": "mkdir dist/QRProtocolBuf && cp -R src/QRProtocolBuf dist/QRProtocolBuf",
+    "build": "tsdx build && npm run copy",
     "test": "jest",
-    "protobuf": "npx pbjs -t static-module -w commonjs -o src/QRProtocolBuf/proto.js crypto-coin-message-protocol/*.proto; npx pbts -o src/QRProtocolBuf/proto.d.ts src/QRProtocolBuf/proto.js",
+    "protobuf": "npx pbjs -t static-module -w es6 -o src/QRProtocolBuf/proto.js crypto-coin-message-protocol/*.proto; npx pbts -o src/QRProtocolBuf/proto.d.ts src/QRProtocolBuf/proto.js",
     "update-proto-buffer": "git submodule update --remote && npm run protobuf"
   },
   "files": [
@@ -20,8 +21,10 @@
     "dist"
   ],
   "dependencies": {
+    "@babel/preset-typescript": "^7.15.0",
     "@ngraveio/bc-ur": "^1.0.0",
-    "protobufjs": "^6.10.1"
+    "protobufjs": "^6.10.1",
+    "tsdx": "^0.14.1"
   },
   "repository": {
     "type": "git",
@@ -40,5 +43,8 @@
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0"
   }
 }

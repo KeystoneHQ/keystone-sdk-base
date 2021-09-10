@@ -1,37 +1,40 @@
 {
-	"name": "keystone-airgaped-base",
-	"private": true,
-	"scripts": {
-		"clean": "lerna clean",
-		"bootstrap": "lerna bootstrap",
-		"build": "lerna run build",
-		"start": "lerna run start",
-		"prepare": "npm run clean && npm run bootstrap && npm run build",
-		"lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
-		"test": "lerna run test"
-	},
-	"jest": {
-		"modulePathIgnorePatterns": [
-			"__data__"
-		],
-		"testEnvironment": "node"
-	},
-	"devDependencies": {
-		"@babel/preset-env": "^7.9.6",
-		"@babel/preset-typescript": "^7.9.0",
-		"@types/jest": "^25.2.3",
-		"@typescript-eslint/eslint-plugin": "^4.6.1",
-		"@typescript-eslint/parser": "^4.6.1",
-		"eslint": "^7.12.1",
-		"eslint-config-prettier": "^6.15.0",
-		"eslint-plugin-prettier": "^3.1.4",
-		"jest": "^26.6.3",
-		"lerna": "^3.21.0",
-		"prettier": "^2.1.2",
-		"typescript": "^4.3.5"
-	},
-	"dependencies": {
-		"tsdx": "^0.14.1",
-		"uuid": "^8.3.2"
-	}
+    "name": "keystone-airgaped-base",
+    "private": true,
+    "scripts": {
+        "clean": "lerna clean",
+        "bootstrap": "lerna bootstrap",
+        "build": "lerna run build",
+        "start": "lerna run start",
+        "prepare": "npm run clean && npm run bootstrap && npm run build",
+        "lint": "eslint '*/**/*.ts' --quiet --fix",
+        "prettier:check": "yarn prettier --check",
+        "prettier:fix": "yarn prettier --write",
+        "prettier": "prettier '*/**/*.{js,jsx,ts,tsx}'",
+        "test": "lerna run test"
+    },
+    "jest": {
+        "modulePathIgnorePatterns": [
+            "__data__"
+        ],
+        "testEnvironment": "node"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.9.6",
+        "@babel/preset-typescript": "^7.9.0",
+        "@types/jest": "^25.2.3",
+        "@typescript-eslint/eslint-plugin": "^4.6.1",
+        "@typescript-eslint/parser": "^4.6.1",
+        "eslint": "^7.12.1",
+        "eslint-config-prettier": "^6.15.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "jest": "^26.6.3",
+        "lerna": "^3.21.0",
+        "prettier": "^2.1.2",
+        "tsdx": "^0.14.1",
+        "typescript": "^4.3.5"
+    },
+    "dependencies": {
+        "uuid": "^8.3.2"
+    }
 }

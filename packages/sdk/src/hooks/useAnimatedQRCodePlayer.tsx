@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { interval } from 'rxjs';
 import { BaseQRCode } from '../components/BaseQRCode';
-import { Play } from '../types';
+import { Play, PlayStatus } from '../types';
 import { EventEmitter } from 'events';
 import { Button } from '../components/Button';
 import { ButtonGroup } from '../components/ButtonGroup';
@@ -58,9 +58,9 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
                 alignItems: 'center',
             }}
         >
-            {title && <p style={{fontSize: '1.25rem', fontWeight: 'bold'}}>{title}</p>}
+            {title && <p style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>{title}</p>}
             <BaseQRCode size={288} data={qr} />
-            {description && <p style={{fontSize: '1rem', textAlign:'center'}}>{description}</p>}
+            {description && <p style={{ fontSize: '1rem', textAlign: 'center' }}>{description}</p>}
             <ButtonGroup>
                 <Button onClick={finish}>{hasNext ? 'Scan Keystone' : 'Finish'}</Button>
             </ButtonGroup>
@@ -83,7 +83,7 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
                     }
                     ee.once('finish', () => {
                         reset();
-                        resolve();
+                        resolve(PlayStatus.success);
                     });
                 });
             },

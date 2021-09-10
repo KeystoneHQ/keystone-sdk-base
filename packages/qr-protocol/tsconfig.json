@@ -1,12 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": ["src"],
-  "compilerOptions": {
-    "rootDir": "./",
-    "baseUrl": "./",
-    "paths": {
-      "*": ["src/*", "node_modules/*"]
+    "extends": "../../tsconfig.json",
+    "include": ["src"],
+    "compilerOptions": {
+        "allowJs": true,
+        "rootDir": "./",
+        "baseUrl": "./",
+        "outDir": "./dist",
+        "paths": {
+            "*": ["src/*", "node_modules/*"]
+        }
     },
-  },
-  "exclude": ["__tests__"]
+    "exclude": ["__tests__", "src/QRProtocolBuf"]
 }

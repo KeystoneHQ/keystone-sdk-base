@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-eth",
-  "version": "0.6.5",
+  "version": "0.6.9",
   "description": "bc-ur-registry extension for ETH",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,12 +24,15 @@
   "author": "soralit <soralitria@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-typescript": "^7.15.0",
     "@keystonehq/bc-ur-registry": "^0.4.4",
     "ethereumjs-util": "^7.0.8",
     "hdkey": "^2.0.1",
+    "tsdx": "^0.14.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/uuid": "^8.3.1"
+    "@types/uuid": "^8.3.1",
+    "tsdx": "^0.14.1"
   }
 }

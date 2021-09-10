@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Modal from 'react-modal';
+import { EventEmitter } from 'events';
 import { useAnimatedQRCodePlayer } from './useAnimatedQRCodePlayer';
 import { useAnimatedQRCodeReader } from './useAnimatedQRCodeReader';
-import { Play, Read } from '../types';
+import { Play, PlayStatus, Read } from '../types';
 import { InitialPage } from '../components/InitialPage';
 
 const customStyles = {
     overlay: {
-        zIndex: 999
+        zIndex: 999,
     },
     content: {
         top: '50%',
@@ -18,7 +19,7 @@ const customStyles = {
         width: '37rem',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        postion: 'relative'
+        postion: 'relative',
     },
 };
 
@@ -30,12 +31,18 @@ export const useController = (): [
         cameraReady: boolean;
     },
 ] => {
+    const ee = useMemo(() => new EventEmitter(), []);
     const [visible, setVisible] = useState(false);
-    const [walletMode, setWalltMode] = useState("");
-    const [link, setLink] = useState("");
+    const [walletMode, setWalltMode] = useState('');
+    const [link, setLink] = useState('');
     const [mode, setMode] = useState<'read' | 'play' | 'initial' | null>(null);
     const [AnimatedQRCodePlayer, { play }] = useAnimatedQRCodePlayer();
     const [AnimatedQRCodeReader, { read, cameraReady }] = useAnimatedQRCodeReader();
+    const close = () => {
+        ee.emit('close');
+        reset();
+    };
+
     const reset = () => {
         setMode(null);
         setLink('');
@@ -44,25 +51,28 @@ export const useController = (): [
     };
 
     const goToRead = () => {
-        setMode('read')
-    }
+        setMode('read');
+    };
 
     const renderPannel = (pageMode: string) => {
-        if(pageMode==="initial") {
-            return <InitialPage  walletMode={walletMode} link={link} onButtonClick={goToRead}/>
+        if (pageMode === 'initial') {
+            return <InitialPage walletMode={walletMode} link={link} onButtonClick={goToRead} />;
         } else if (pageMode === 'read') {
-            return AnimatedQRCodeReader
+            return AnimatedQRCodeReader;
         } else if (pageMode === 'play') {
-            return AnimatedQRCodePlayer
+            return AnimatedQRCodePlayer;
         } else {
-            return null
+            return null;
         }
-    }
+    };
 
     const element = (
         <Modal isOpen={visible} style={customStyles}>
-            <div onClick={reset}>
-                <img style={{ position: "absolute", top: '1rem', right: '1rem' }} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAADKADAAQAAAABAAAADAAAAAATDPpdAAAAmklEQVQoFZWRwQ3DIAwAa4brJPBP80hnaD/lD5N0iYxEfRVBxBGRwsvgO2PZklJaReTrvX/eTk7O+VVKuTtgDRYVPyOeHAysAFV40jCGEB69aHN/YSRZGK4JVuKu5/DrToDoqnI9tOh4vXJ2Qlc96kSY2lTfWs0m9DCT0r3MSkUrXR9r3eBCNbuDrY/td23z7Vg3wQhGIgcD+wPGY2fPvHuWagAAAABJRU5ErkJggg=="/>
+            <div onClick={close}>
+                <img
+                    style={{ position: 'absolute', top: '1rem', right: '1rem' }}
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAADKADAAQAAAABAAAADAAAAAATDPpdAAAAmklEQVQoFZWRwQ3DIAwAa4brJPBP80hnaD/lD5N0iYxEfRVBxBGRwsvgO2PZklJaReTrvX/eTk7O+VVKuTtgDRYVPyOeHAysAFV40jCGEB69aHN/YSRZGK4JVuKu5/DrToDoqnI9tOh4vXJ2Qlc96kSY2lTfWs0m9DCT0r3MSkUrXR9r3eBCNbuDrY/td23z7Vg3wQhGIgcD+wPGY2fPvHuWagAAAABJRU5ErkJggg=="
+                />
             </div>
             <div
                 style={{
@@ -72,7 +82,7 @@ export const useController = (): [
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#002237'
+                    color: '#002237',
                 }}
             >
                 {renderPannel(mode)}
@@ -82,28 +92,33 @@ export const useController = (): [
     return [
         element,
         {
-            play: async (data, options) => {
-                setVisible(true);
-                setMode('play');
-                await play(data, options);
-                reset();
-                return;
+            play: (data, options) => {
+                return new Promise<PlayStatus>(async (resolve) => {
+                    ee.once('close', () => {
+                        resolve(PlayStatus.canceled);
+                    });
+                    setVisible(true);
+                    setMode('play');
+                    await play(data, options);
+                    reset();
+                    resolve(PlayStatus.success);
+                });
             },
             read: async (expect, options) => {
-                if(options.renderInitial) {
+                if (options.renderInitial) {
                     setWalltMode(options.renderInitial.walletMode);
                     setLink(options.renderInitial.link);
                     setMode('initial');
                     setVisible(true);
                     const result = await read(expect, options);
                     reset();
-                    return result;    
+                    return result;
                 } else {
                     setMode('read');
                     setVisible(true);
                     const result = await read(expect, options);
                     reset();
-                    return result;    
+                    return result;
                 }
             },
             cameraReady,

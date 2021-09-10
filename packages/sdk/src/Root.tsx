@@ -1,4 +1,4 @@
-import {setupSdk} from './service';
+import { setupSdk } from './service';
 import { useController } from './hooks/useController';
 
 export default () => {
