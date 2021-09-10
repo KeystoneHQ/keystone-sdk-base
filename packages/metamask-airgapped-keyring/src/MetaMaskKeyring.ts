@@ -1,7 +1,7 @@
 import HDKey from 'hdkey';
 import { BaseKeyring, StoredKeyring } from '@keystonehq/base-eth-keyring';
 import { MetamaskInteractionProvider } from './MetaMaskInteractionProvider';
-import { TransactionFactory } from '@ethereumjs/tx';
+import { TransactionFactory, Transaction, FeeMarketEIP1559Transaction } from '@ethereumjs/tx';
 import { DataType, EthSignRequest } from '@keystonehq/bc-ur-registry-eth';
 import * as uuid from 'uuid';
 import rlp from 'rlp';
@@ -54,11 +54,17 @@ export class MetaMaskKeyring extends BaseKeyring {
 
     async signTransaction(address: string, tx: any): Promise<any> {
         const dataType = tx.type === 0 ? DataType.transaction : DataType.typedTransaction;
+        let messageToSign;
+        if (tx.type === 0) {
+            messageToSign = rlp.encode((tx as Transaction).getMessageToSign(false));
+        } else {
+            messageToSign = (tx as FeeMarketEIP1559Transaction).getMessageToSign(false);
+        }
         const hdPath = this._pathFromAddress(address);
         const chainId = tx.common.chainId();
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
-            rlp.encode(tx.getMessageToSign(false)),
+            messageToSign,
             dataType,
             hdPath,
             this.xfp,
