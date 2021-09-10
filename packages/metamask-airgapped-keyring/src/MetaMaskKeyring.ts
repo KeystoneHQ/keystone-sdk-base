@@ -1,6 +1,6 @@
 import HDKey from 'hdkey';
 import { BaseKeyring, StoredKeyring } from '@keystonehq/base-eth-keyring';
-import { MetamaskInteractionProvider } from './MetamaskInteractionProvider';
+import { MetamaskInteractionProvider } from './MetaMaskInteractionProvider';
 import { TransactionFactory } from '@ethereumjs/tx';
 import { DataType, EthSignRequest } from '@keystonehq/bc-ur-registry-eth';
 import * as uuid from 'uuid';

@@ -18,6 +18,7 @@
     "author": "soralit <soralitria@gmail.com>",
     "license": "ISC",
     "dependencies": {
+        "@babel/preset-typescript": "^7.15.0",
         "@ethereumjs/tx": "3.0.0",
         "@keystonehq/base-eth-keyring": "^0.0.5",
         "@keystonehq/bc-ur-registry-eth": "^0.6.9",
@@ -26,6 +27,7 @@
         "bs58check": "^2.1.2",
         "ethereumjs-util": "^7.0.8",
         "hdkey": "^2.0.1",
+        "tsdx": "^0.14.1",
         "uuid": "^8.3.2"
     },
     "devDependencies": {

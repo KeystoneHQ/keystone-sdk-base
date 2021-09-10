@@ -21,6 +21,7 @@
     "dist"
   ],
   "dependencies": {
+    "@babel/preset-typescript": "^7.15.0",
     "@ngraveio/bc-ur": "^1.0.0",
     "protobufjs": "^6.10.1",
     "tsdx": "^0.14.1"
@@ -42,5 +43,8 @@
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0"
   }
 }
