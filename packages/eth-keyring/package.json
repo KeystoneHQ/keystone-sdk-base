@@ -1,6 +1,6 @@
 {
     "name": "@keystonehq/eth-keyring",
-    "version": "0.8.0",
+    "version": "0.8.1",
     "description": "eth-keyring interact with keystone",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -20,9 +20,9 @@
     "dependencies": {
         "@babel/preset-typescript": "^7.15.0",
         "@ethereumjs/tx": "3.0.0",
-        "@keystonehq/base-eth-keyring": "^0.0.5",
-        "@keystonehq/bc-ur-registry-eth": "^0.6.9",
-        "@keystonehq/sdk": "^0.7.9",
+        "@keystonehq/base-eth-keyring": "^0.0.6",
+        "@keystonehq/bc-ur-registry-eth": "^0.6.10",
+        "@keystonehq/sdk": "^0.7.10",
         "@metamask/obs-store": "^7.0.0",
         "bs58check": "^2.1.2",
         "ethereumjs-util": "^7.0.8",
