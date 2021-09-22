@@ -26,15 +26,17 @@
     "build": "tsdx build"
   },
   "dependencies": {
-    "@babel/preset-typescript": "^7.15.0",
     "@ethereumjs/tx": "^3.3.0",
     "@keystonehq/base-eth-keyring": "^0.0.5",
     "@keystonehq/bc-ur-registry-eth": "^0.6.9",
     "@metamask/obs-store": "^7.0.0",
     "hdkey": "^2.0.1",
     "rlp": "^2.2.6",
-    "tsdx": "^0.14.1",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "tsdx": "^0.14.1"
   },
   "bugs": {
     "url": "https://github.com/KeystoneHQ/keystone-airgaped-base/issues"

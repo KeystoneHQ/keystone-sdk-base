@@ -21,10 +21,8 @@
     "dist"
   ],
   "dependencies": {
-    "@babel/preset-typescript": "^7.15.0",
     "@ngraveio/bc-ur": "^1.0.0",
-    "protobufjs": "^6.10.1",
-    "tsdx": "^0.14.1"
+    "protobufjs": "^6.10.1"
   },
   "repository": {
     "type": "git",
@@ -45,6 +43,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.15.0"
+    "@babel/preset-typescript": "^7.15.0",
+    "tsdx": "^0.14.1"
   }
 }

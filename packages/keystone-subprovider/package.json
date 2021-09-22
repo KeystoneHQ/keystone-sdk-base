@@ -35,16 +35,15 @@
   },
   "dependencies": {
     "@0x/subproviders": "^6.5.4",
-    "@babel/preset-typescript": "^7.15.0",
     "@ethereumjs/common": "2.4.0",
     "@ethereumjs/tx": "3.3.0",
     "@keystonehq/bc-ur-registry-eth": "^0.6.9",
     "@keystonehq/sdk": "^0.7.9",
     "ethereumjs-util": "^7.0.8",
-    "tsdx": "^0.14.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
     "tsdx": "^0.14.1"
   }
 }
