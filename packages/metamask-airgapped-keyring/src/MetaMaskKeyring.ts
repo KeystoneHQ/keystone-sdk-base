@@ -1,4 +1,3 @@
-import HDKey from 'hdkey';
 import { BaseKeyring, StoredKeyring } from '@keystonehq/base-eth-keyring';
 import { MetamaskInteractionProvider } from './MetaMaskInteractionProvider';
 import { TransactionFactory, Transaction, FeeMarketEIP1559Transaction } from '@ethereumjs/tx';
@@ -102,7 +101,7 @@ export class MetaMaskKeyring extends BaseKeyring {
         this.currentAccount = 0;
         this.paths = {};
         this.latestAccount = 0;
-        this.hdk = new HDKey();
+        this.hdk = undefined;
         this.unlockedAccount = 0;
         this.indexedAccounts = {};
     };
