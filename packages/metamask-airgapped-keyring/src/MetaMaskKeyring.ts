@@ -9,7 +9,6 @@ export class MetaMaskKeyring extends BaseKeyring {
     static type = BaseKeyring.type;
     static instance: MetaMaskKeyring;
     private unlockedAccount: number;
-    private indexedAccounts: { [k: string]: string } = {};
     constructor(opts?: StoredKeyring) {
         super(opts);
         if (MetaMaskKeyring.instance) {
@@ -36,13 +35,15 @@ export class MetaMaskKeyring extends BaseKeyring {
             try {
                 const from = this.unlockedAccount;
                 const to = from + n;
+                const newAccounts = [];
+
                 for (let i = from; i < to; i++) {
                     const address = this._addressFromIndex('m', i);
+                    newAccounts.push(address);
                     this.page = 0;
                     this.latestAccount++;
-                    this.indexedAccounts[i] = address;
                 }
-                this.accounts = Object.values(this.indexedAccounts);
+                this.accounts = this.accounts.concat(newAccounts);
                 resolve(this.accounts);
             } catch (e) {
                 reject(e);
@@ -103,7 +104,6 @@ export class MetaMaskKeyring extends BaseKeyring {
         this.latestAccount = 0;
         this.hdk = undefined;
         this.unlockedAccount = 0;
-        this.indexedAccounts = {};
     };
 
     submitCryptoHDKey = this.getInteraction().submitCryptoHDKey;
