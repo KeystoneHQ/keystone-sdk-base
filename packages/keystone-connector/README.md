@@ -4,11 +4,17 @@
 A web3 connector which can make Dapps to work with [Keystone Hardware wallet](https://keyst.one) inspired by [web3-react](https://github.com/NoahZinsmeister/web3-react)
 
 
-## install
+## Install
+
+```bash
+yarn add @keystonehq/keystone-connector
 ```
-npm install @keystonehq/keystone-connector
+
+```base
+npm install --save @keystonehq/keystone-connector
 ```
-## usage
+
+## Usage
 
 ```
 import KeystoneConnetor from '@keystonehq/keystone-connector'
