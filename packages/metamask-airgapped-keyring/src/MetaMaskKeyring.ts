@@ -1,22 +1,57 @@
 import { BaseKeyring, StoredKeyring } from '@keystonehq/base-eth-keyring';
 import { MetamaskInteractionProvider } from './MetaMaskInteractionProvider';
-import { TransactionFactory, Transaction, FeeMarketEIP1559Transaction } from '@ethereumjs/tx';
+import { FeeMarketEIP1559Transaction, Transaction, TransactionFactory } from '@ethereumjs/tx';
 import { DataType, EthSignRequest } from '@keystonehq/bc-ur-registry-eth';
 import * as uuid from 'uuid';
 import rlp from 'rlp';
+
+type MetaMaskStoredKeyring = StoredKeyring & {
+    indexedAccounts: { [k: string]: string };
+};
 
 export class MetaMaskKeyring extends BaseKeyring {
     static type = BaseKeyring.type;
     static instance: MetaMaskKeyring;
     private unlockedAccount: number;
-    private indexedAccounts: { [k: string]: string } = {};
-    constructor(opts?: StoredKeyring) {
+    private indexedAccounts: { [k: string]: string };
+
+    constructor(opts?: MetaMaskStoredKeyring) {
         super(opts);
+        this.indexedAccounts = {};
+        this.deserialize(opts);
         if (MetaMaskKeyring.instance) {
             MetaMaskKeyring.instance.deserialize(opts);
             return MetaMaskKeyring.instance;
         }
         MetaMaskKeyring.instance = this;
+    }
+
+    serialize(): Promise<MetaMaskStoredKeyring> {
+        return Promise.resolve({
+            xfp: this.xfp,
+            xpub: this.xpub,
+            hdPath: this.hdPath,
+            accounts: this.accounts,
+            currentAccount: this.currentAccount,
+            page: this.page,
+            perPage: this.perPage,
+            paths: this.paths,
+            indexedAccounts: this.indexedAccounts,
+        });
+    }
+
+    deserialize(opts?: MetaMaskStoredKeyring): void {
+        if (opts) {
+            this.xfp = opts.xfp;
+            this.xpub = opts.xpub;
+            this.hdPath = opts.hdPath;
+            this.accounts = opts.accounts;
+            this.currentAccount = opts.currentAccount;
+            this.page = opts.page;
+            this.perPage = opts.perPage;
+            this.paths = opts.paths;
+            this.indexedAccounts = opts.indexedAccounts;
+        }
     }
 
     getInteraction = (): MetamaskInteractionProvider => {
@@ -80,8 +115,7 @@ export class MetaMaskKeyring extends BaseKeyring {
         txJson.s = s;
         txJson.r = r;
         txJson.type = tx.type;
-        const transaction = TransactionFactory.fromTxData(txJson, { common: tx.common });
-        return transaction;
+        return TransactionFactory.fromTxData(txJson, { common: tx.common });
     }
 
     removeAccount = (address) => {
