@@ -6,6 +6,16 @@ the main purpose is to encode and decode data for QR Code usage.
 
 currently we use UR to encode data. check this for detail info about [UR](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md)
 
+## Install
+
+```bash
+yarn add @keystonehq/sdk
+```
+
+```base
+npm install --save @keystonehq/sdk
+```
+
 ## Usage
 
 ```

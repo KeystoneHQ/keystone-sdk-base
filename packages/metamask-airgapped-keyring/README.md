@@ -1,11 +1,15 @@
 # `metamask-airgapped-keyring`
 
-> TODO: description
+## This package is still Working in Progress.
 
-## Usage
+This package is the Keystone implementation of `MetaMaskKeyring` which used in MetaMask Extension.
 
+## Install
+
+```bash
+yarn add @keystonehq/metamask-airgapped-keyring
 ```
-const metamaskAirgappedKeyring = require('metamask-airgapped-keyring');
 
-// TODO: DEMONSTRATE API
+```base
+npm install --save @keystonehq/metamask-airgapped-keyring
 ```
