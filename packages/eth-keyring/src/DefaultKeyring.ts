@@ -1,5 +1,5 @@
 import { DefaultInteractionProvider } from './DefaultInteractionProvider';
-import { BaseKeyring } from '@keystonehq/base-eth-keyring';
+import { BaseKeyring, StoredKeyring } from '@keystonehq/base-eth-keyring';
 
 export class DefaultKeyring extends BaseKeyring {
     static type = BaseKeyring.type;
@@ -15,6 +15,11 @@ export class DefaultKeyring extends BaseKeyring {
             paths: {},
         });
     }
+
+    constructor(opts?: StoredKeyring) {
+        super(opts);
+    }
+
     getInteraction = () => {
         return new DefaultInteractionProvider();
     };
