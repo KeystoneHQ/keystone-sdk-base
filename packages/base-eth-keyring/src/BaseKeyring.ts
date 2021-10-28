@@ -18,6 +18,7 @@ export type StoredKeyring = {
     page: number;
     perPage: number;
     paths: Record<string, number>;
+    name: string;
 };
 
 export type PagedAccount = { address: string; balance: any; index: number };
@@ -40,6 +41,7 @@ export class BaseKeyring {
     protected paths: Record<string, number>;
     protected hdk: HDKey;
     protected latestAccount: number;
+    protected name: string;
 
     constructor(opts?: StoredKeyring) {
         this.xfp = '';
@@ -51,13 +53,15 @@ export class BaseKeyring {
         this.currentAccount = 0;
         this.paths = {};
         this.latestAccount = 0;
+        this.name = 'QR Hardware';
         this.deserialize(opts);
     }
 
-    private readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hdPath: string }> => {
+    private readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hdPath: string; name: string }> => {
         const cryptoHDKey = await this.getInteraction().readCryptoHDKey();
         const hdPath = `m/${cryptoHDKey.getOrigin().getPath()}`;
         const xfp = cryptoHDKey.getOrigin().getSourceFingerprint()?.toString('hex');
+        const name = cryptoHDKey.getName();
         if (!xfp) {
             throw new Error('invalid crypto-hd-key, cannot get source fingerprint');
         }
@@ -66,6 +70,7 @@ export class BaseKeyring {
             xfp,
             xpub,
             hdPath,
+            name,
         };
     };
 
@@ -99,11 +104,18 @@ export class BaseKeyring {
     };
 
     async readKeyring(): Promise<void> {
-        const { xpub, xfp, hdPath } = await this.readKeyringCryptoHDKey();
+        const { xpub, xfp, hdPath, name } = await this.readKeyringCryptoHDKey();
         this.xfp = xfp;
         this.xpub = xpub;
         this.hdPath = hdPath;
+        if (name !== undefined && name !== '') {
+            this.name = name;
+        }
     }
+
+    public getName = (): string => {
+        return this.name;
+    };
 
     protected checkKeyring() {
         if (!this.xfp || !this.xpub || !this.hdPath) {
@@ -121,6 +133,7 @@ export class BaseKeyring {
             page: this.page,
             perPage: this.perPage,
             paths: this.paths,
+            name: this.name,
         });
     }
 
@@ -134,6 +147,7 @@ export class BaseKeyring {
             this.page = opts.page;
             this.perPage = opts.perPage;
             this.paths = opts.paths;
+            this.name = opts.name;
         }
     }
 

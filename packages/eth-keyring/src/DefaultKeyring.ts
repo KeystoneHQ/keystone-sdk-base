@@ -3,6 +3,7 @@ import { BaseKeyring, StoredKeyring } from '@keystonehq/base-eth-keyring';
 
 export class DefaultKeyring extends BaseKeyring {
     static type = BaseKeyring.type;
+
     static getEmptyKeyring(): DefaultKeyring {
         return new DefaultKeyring({
             xfp: '',
@@ -13,6 +14,7 @@ export class DefaultKeyring extends BaseKeyring {
             accounts: [],
             currentAccount: 0,
             paths: {},
+            name: 'Keystone',
         });
     }
 
