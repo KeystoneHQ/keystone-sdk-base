@@ -8,7 +8,6 @@ import rlp from 'rlp';
 export class MetaMaskKeyring extends BaseKeyring {
     static type = BaseKeyring.type;
     static instance: MetaMaskKeyring;
-    private unlockedAccount: number;
     constructor(opts?: StoredKeyring) {
         super(opts);
         if (MetaMaskKeyring.instance) {
@@ -26,31 +25,6 @@ export class MetaMaskKeyring extends BaseKeyring {
         return this.getInteraction().memStore;
     };
 
-    setAccountToUnlock = (index) => {
-        this.unlockedAccount = parseInt(index, 10);
-    };
-
-    addAccounts(n = 1): Promise<string[]> {
-        return new Promise((resolve, reject) => {
-            try {
-                const from = this.unlockedAccount;
-                const to = from + n;
-                const newAccounts = [];
-
-                for (let i = from; i < to; i++) {
-                    const address = this._addressFromIndex('m', i);
-                    newAccounts.push(address);
-                    this.page = 0;
-                    this.latestAccount++;
-                }
-                this.accounts = this.accounts.concat(newAccounts);
-                resolve(this.accounts);
-            } catch (e) {
-                reject(e);
-            }
-        });
-    }
-
     async signTransaction(address: string, tx: any): Promise<any> {
         const dataType = tx.type === 0 ? DataType.transaction : DataType.typedTransaction;
         let messageToSign;
@@ -59,7 +33,7 @@ export class MetaMaskKeyring extends BaseKeyring {
         } else {
             messageToSign = (tx as FeeMarketEIP1559Transaction).getMessageToSign(false);
         }
-        const hdPath = this._pathFromAddress(address);
+        const hdPath = await this._pathFromAddress(address);
         const chainId = tx.common.chainId();
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
@@ -100,15 +74,14 @@ export class MetaMaskKeyring extends BaseKeyring {
         this.perPage = 5;
         this.accounts = [];
         this.currentAccount = 0;
-        this.paths = {};
-        this.latestAccount = 0;
+        this.indexes = {};
         this.hdk = undefined;
-        this.unlockedAccount = 0;
     };
 
     submitCryptoHDKey = this.getInteraction().submitCryptoHDKey;
+    submitCryptoAccount = this.getInteraction().submitCryptoAccount;
     submitSignature = this.getInteraction().submitSignature;
 
-    cancelReadCryptoHDKey = this.getInteraction().cancelReadCryptoHDKey;
+    cancelSync = this.getInteraction().cancelSync;
     cancelSignRequest = this.getInteraction().cancelRequestSignature;
 }

@@ -5,17 +5,7 @@ export class DefaultKeyring extends BaseKeyring {
     static type = BaseKeyring.type;
 
     static getEmptyKeyring(): DefaultKeyring {
-        return new DefaultKeyring({
-            xfp: '',
-            xpub: '',
-            hdPath: '',
-            perPage: 5,
-            page: 0,
-            accounts: [],
-            currentAccount: 0,
-            paths: {},
-            name: 'Keystone',
-        });
+        return new DefaultKeyring();
     }
 
     constructor(opts?: StoredKeyring) {

@@ -1,6 +1,6 @@
-import { EthSignRequest, CryptoHDKey, ETHSignature } from '@keystonehq/bc-ur-registry-eth';
-import { InteractionProvider } from '@keystonehq/base-eth-keyring';
-import sdk, { SupportedResult, ReadStatus, PlayStatus } from '@keystonehq/sdk';
+import { CryptoAccount, CryptoHDKey, ETHSignature, EthSignRequest } from "@keystonehq/bc-ur-registry-eth";
+import { InteractionProvider } from "@keystonehq/base-eth-keyring";
+import sdk, { PlayStatus, ReadStatus, SupportedResult } from "@keystonehq/sdk";
 
 export class DefaultInteractionProvider implements InteractionProvider {
     private static instance;
@@ -15,24 +15,34 @@ export class DefaultInteractionProvider implements InteractionProvider {
         DefaultInteractionProvider.instance = this;
     }
 
-    public readCryptoHDKey = async () => {
-        const decodedResult = await this.keystoneSDK.read([SupportedResult.UR_CRYPTO_HDKEY], {
-            title: 'Sync Keystone',
-            description: 'Please scan the QR code displayed on your Keystone',
-            renderInitial: {
-                walletMode: 'Web3',
-                link: 'https://keyst.one/defi',
+    public readCryptoHDKeyOrCryptoAccount = async () => {
+        const decodedResult = await this.keystoneSDK.read(
+            [SupportedResult.UR_CRYPTO_HDKEY, SupportedResult.UR_CRYPTO_ACCOUNT],
+            {
+                title: 'Sync Keystone',
+                description: 'Please scan the QR code displayed on your Keystone',
+                renderInitial: {
+                    walletMode: 'Web3',
+                    link: 'https://keyst.one/defi',
+                },
+                URTypeErrorMessage:
+                    'The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again ( Keystone firmware V1.3.0 or newer required).',
             },
-            URTypeErrorMessage:
-                'The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again ( Keystone firmware V1.3.0 or newer required).',
-        });
+        );
         if (decodedResult.status === ReadStatus.success) {
             const { result } = decodedResult;
-            const cryptoHDKey = CryptoHDKey.fromCBOR(result.cbor);
-            return cryptoHDKey;
+            if (result.type === 'crypto-hdkey') {
+                return CryptoHDKey.fromCBOR(result.cbor);
+            }else {
+                return CryptoAccount.fromCBOR(result.cbor);
+            }
         } else {
             throw new Error('Reading canceled');
         }
+    };
+
+    public readCryptoAccount = async () => {
+        throw new Error('');
     };
 
     public requestSignature = async (

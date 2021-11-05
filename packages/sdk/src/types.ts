@@ -47,6 +47,7 @@ export type Read = (
 export enum SupportedResult {
     UR_BYTES = 'bytes',
     UR_CRYPTO_HDKEY = 'crypto-hdkey',
+    UR_CRYPTO_ACCOUNT = 'crypto-account',
     UR_ETH_SIGN_REQUEST = 'eth-sign-request',
     UR_ETH_SIGNATURE = 'eth-signature',
 }
