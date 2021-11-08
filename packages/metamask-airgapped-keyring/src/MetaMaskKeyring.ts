@@ -67,15 +67,22 @@ export class MetaMaskKeyring extends BaseKeyring {
     };
 
     forgetDevice = () => {
-        this.xfp = '';
-        this.xpub = '';
-        this.hdPath = '';
+        //common props
         this.page = 0;
         this.perPage = 5;
         this.accounts = [];
         this.currentAccount = 0;
+        this.name = 'QR Hardware';
+        this.initialized = false;
+
+        //hd props;
+        this.xfp = '';
+        this.xpub = '';
+        this.hdPath = '';
         this.indexes = {};
-        this.hdk = undefined;
+
+        //pubkey props;
+        this.paths = {};
     };
 
     submitCryptoHDKey = this.getInteraction().submitCryptoHDKey;
