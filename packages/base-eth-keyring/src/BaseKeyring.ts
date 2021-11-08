@@ -1,7 +1,7 @@
 import HDKey from 'hdkey';
 import { toChecksumAddress, publicToAddress, BN, stripHexPrefix } from 'ethereumjs-util';
 import { Transaction } from '@ethereumjs/tx';
-import { DataType, EthSignRequest } from '@keystonehq/bc-ur-registry-eth';
+import { CryptoHDKey, DataType, EthSignRequest, extend, CryptoAccount } from '@keystonehq/bc-ur-registry-eth';
 import * as uuid from 'uuid';
 import { InteractionProvider } from './InteractionProvider';
 
@@ -10,20 +10,46 @@ const pathBase = 'm';
 const MAX_INDEX = 1000;
 
 export type StoredKeyring = {
-    xfp: string;
-    xpub: string;
-    hdPath: string;
+    //common props;
+    version: number;
+    initialized: boolean;
     accounts: string[];
     currentAccount: number;
     page: number;
     perPage: number;
-    paths: Record<string, number>;
     name: string;
+    keyringMode?: string;
+    keyringAccount?: string;
+    xfp: string;
+
+    //hd props;
+    xpub: string;
+    hdPath: string;
+    indexes: Record<string, number>;
+    childrenPath: string;
+
+    //pubkey props;
+    paths: Record<string, string>;
 };
 
 export type PagedAccount = { address: string; balance: any; index: number };
 
+const DEFAULT_CHILDREN_PATH = '0/*';
+
+enum KEYRING_MODE {
+    hd = 'hd',
+    pubkey = 'pubkey',
+}
+
+enum KEYRING_ACCOUNT {
+    standard = 'account.standard',
+    ledger_live = 'account.ledger_live',
+    ledger_legacy = 'account.ledger_legacy',
+}
+
 export class BaseKeyring {
+    // @ts-ignore
+    private version = 1;
     getInteraction = (): InteractionProvider => {
         throw new Error(
             '#ktek_error, method getInteraction not implemented, please extend BaseKeyring by overwriting this method.',
@@ -32,47 +58,47 @@ export class BaseKeyring {
     static type = keyringType;
     protected xfp: string;
     protected type = keyringType;
+    protected keyringMode: KEYRING_MODE;
+    protected initialized: boolean;
     protected xpub: string;
     protected hdPath: string;
+    protected childrenPath: string;
     protected accounts: string[];
     protected currentAccount: number;
     protected page: number;
     protected perPage: number;
-    protected paths: Record<string, number>;
+    protected indexes: Record<string, number>;
     protected hdk: HDKey;
-    protected latestAccount: number;
     protected name: string;
+    protected paths: Record<string, string>;
+    protected keyringAccount: KEYRING_ACCOUNT;
+
+    private unlockedAccount: number;
 
     constructor(opts?: StoredKeyring) {
-        this.xfp = '';
-        this.xpub = '';
-        this.hdPath = '';
+        //common props
         this.page = 0;
         this.perPage = 5;
         this.accounts = [];
         this.currentAccount = 0;
-        this.paths = {};
-        this.latestAccount = 0;
+        this.unlockedAccount = 0;
         this.name = 'QR Hardware';
+        this.keyringMode = KEYRING_MODE.hd;
+        this.keyringAccount = KEYRING_ACCOUNT.standard;
+        this.initialized = false;
+
+        //hd props;
+        this.xfp = '';
+        this.xpub = '';
+        this.hdPath = '';
+        this.childrenPath = DEFAULT_CHILDREN_PATH;
+        this.indexes = {};
+
+        //pubkey props;
+        this.paths = {};
+
         this.deserialize(opts);
     }
-
-    private readKeyringCryptoHDKey = async (): Promise<{ xfp: string; xpub: string; hdPath: string; name: string }> => {
-        const cryptoHDKey = await this.getInteraction().readCryptoHDKey();
-        const hdPath = `m/${cryptoHDKey.getOrigin().getPath()}`;
-        const xfp = cryptoHDKey.getOrigin().getSourceFingerprint()?.toString('hex');
-        const name = cryptoHDKey.getName();
-        if (!xfp) {
-            throw new Error('invalid crypto-hd-key, cannot get source fingerprint');
-        }
-        const xpub = cryptoHDKey.getBip32Key();
-        return {
-            xfp,
-            xpub,
-            hdPath,
-            name,
-        };
-    };
 
     protected requestSignature = async (
         _requestId: string,
@@ -103,15 +129,84 @@ export class BaseKeyring {
         };
     };
 
-    async readKeyring(): Promise<void> {
-        const { xpub, xfp, hdPath, name } = await this.readKeyringCryptoHDKey();
+    private __readCryptoHDKey = (cryptoHDKey: CryptoHDKey) => {
+        const hdPath = `m/${cryptoHDKey.getOrigin().getPath()}`;
+        const xfp = cryptoHDKey.getOrigin().getSourceFingerprint()?.toString('hex');
+        const childrenPath = cryptoHDKey.getChildren()?.getPath() || DEFAULT_CHILDREN_PATH;
+        const name = cryptoHDKey.getName();
+        if (cryptoHDKey.getNote() === KEYRING_ACCOUNT.standard) {
+            this.keyringAccount = KEYRING_ACCOUNT.standard;
+        } else if (cryptoHDKey.getNote() === KEYRING_ACCOUNT.ledger_legacy) {
+            this.keyringAccount = KEYRING_ACCOUNT.ledger_legacy;
+        }
+        if (!xfp) {
+            throw new Error('invalid crypto-hdkey, cannot get source fingerprint');
+        }
+        const xpub = cryptoHDKey.getBip32Key();
         this.xfp = xfp;
         this.xpub = xpub;
         this.hdPath = hdPath;
+        this.childrenPath = childrenPath;
         if (name !== undefined && name !== '') {
             this.name = name;
         }
+        this.initialized = true;
+    };
+
+    private __readCryptoAccount = (cryptoAccount: CryptoAccount): boolean => {
+        const xfp = cryptoAccount.getMasterFingerprint()?.toString('hex');
+        if (!xfp) {
+            throw new Error('invalid crypto-account, cannot get master fingerprint');
+        }
+        this.xfp = xfp;
+        this.initialized = true;
+        let changed = false;
+        cryptoAccount.getOutputDescriptors()?.forEach((od) => {
+            try {
+                const cryptoHDKey = od.getHDKey();
+                if (cryptoHDKey) {
+                    const key = cryptoHDKey.getKey();
+                    const path = `M/${cryptoHDKey.getOrigin().getPath()}`;
+                    const address = '0x' + publicToAddress(key, true).toString('hex');
+                    this.name = cryptoHDKey.getName();
+                    if (cryptoHDKey.getNote() === KEYRING_ACCOUNT.ledger_live) {
+                        this.keyringAccount = KEYRING_ACCOUNT.ledger_live;
+                    }
+                    if (this.paths[toChecksumAddress(address)] === undefined) {
+                        changed = true;
+                    }
+                    this.paths[toChecksumAddress(address)] = path;
+                }
+            } catch (e) {
+                throw new Error(`KeystoneError#invalid_data, ${e}`);
+            }
+        });
+        return changed;
+    };
+
+    //initial read
+    async readKeyring(): Promise<void> {
+        const result = await this.getInteraction().readCryptoHDKeyOrCryptoAccount();
+        if (result.getRegistryType() === extend.RegistryTypes.CRYPTO_HDKEY) {
+            this.keyringMode = KEYRING_MODE.hd;
+            this.__readCryptoHDKey(result as CryptoHDKey);
+        } else {
+            this.keyringMode = KEYRING_MODE.pubkey;
+            this.__readCryptoAccount(result as CryptoAccount);
+        }
     }
+
+    // private __readLedgerLiveAccounts = async () => {
+    //     const result = await this.getInteraction().readCryptoHDKeyOrCryptoAccount();
+    //     if (result.getRegistryType() === extend.RegistryTypes.CRYPTO_ACCOUNT) {
+    //         const changed = this.__readCryptoAccount(result as CryptoAccount);
+    //         if (!changed) {
+    //             throw new Error(`#KeystoneError#ledger_live.no_new_account`);
+    //         }
+    //     } else {
+    //         throw new Error(`KeystoneError#ledger_live.unexpected_urtype`);
+    //     }
+    // };
 
     public getName = (): string => {
         return this.name;
@@ -125,29 +220,50 @@ export class BaseKeyring {
 
     serialize(): Promise<StoredKeyring> {
         return Promise.resolve({
-            xfp: this.xfp,
-            xpub: this.xpub,
-            hdPath: this.hdPath,
+            //common
+            initialized: this.initialized,
             accounts: this.accounts,
             currentAccount: this.currentAccount,
             page: this.page,
             perPage: this.perPage,
-            paths: this.paths,
+            keyringAccount: this.keyringAccount,
+            keyringMode: this.keyringMode,
             name: this.name,
+            version: this.version,
+            xfp: this.xfp,
+
+            //hd
+            xpub: this.xpub,
+            hdPath: this.hdPath,
+            childrenPath: this.childrenPath,
+            indexes: this.indexes,
+
+            //pubkey
+            paths: this.paths,
         });
     }
 
     deserialize(opts?: StoredKeyring): void {
         if (opts) {
-            this.xfp = opts.xfp;
-            this.xpub = opts.xpub;
-            this.hdPath = opts.hdPath;
+            //common props;
             this.accounts = opts.accounts;
             this.currentAccount = opts.currentAccount;
             this.page = opts.page;
             this.perPage = opts.perPage;
-            this.paths = opts.paths;
             this.name = opts.name;
+            this.initialized = opts.initialized;
+            this.keyringMode = (opts.keyringMode as KEYRING_MODE) || KEYRING_MODE.hd;
+            this.keyringAccount = (opts.keyringAccount as KEYRING_ACCOUNT) || KEYRING_ACCOUNT.standard;
+            this.xfp = opts.xfp;
+
+            //hd props;
+            this.xpub = opts.xpub;
+            this.hdPath = opts.hdPath;
+            this.indexes = opts.indexes;
+
+            this.paths = opts.paths;
+
+            this.childrenPath = opts.childrenPath || DEFAULT_CHILDREN_PATH;
         }
     }
 
@@ -163,18 +279,22 @@ export class BaseKeyring {
         return this.accounts[this.currentAccount];
     }
 
+    setAccountToUnlock = (index) => {
+        this.unlockedAccount = parseInt(index, 10);
+    };
+
     addAccounts(n = 1): Promise<string[]> {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             try {
-                const from = this.latestAccount;
+                const from = this.unlockedAccount;
                 const to = from + n;
                 const newAccounts = [];
 
                 for (let i = from; i < to; i++) {
-                    const address = this._addressFromIndex(pathBase, i);
+                    const address = await this.__addressFromIndex(pathBase, i);
                     newAccounts.push(address);
                     this.page = 0;
-                    this.latestAccount++;
+                    this.unlockedAccount++;
                 }
                 this.accounts = this.accounts.concat(newAccounts);
                 resolve(this.accounts);
@@ -197,18 +317,12 @@ export class BaseKeyring {
         return this.__getPage(-1);
     }
 
-    async __getPage(increment: number): Promise<PagedAccount[]> {
+    private __getNormalPage = (increment: number): Promise<PagedAccount[]> => {
         this.page += increment;
-
         if (this.page <= 0) {
             this.page = 1;
         }
-
-        if (!!!this.xfp) {
-            await this.readKeyring();
-        }
-
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             try {
                 const from = (this.page - 1) * this.perPage;
                 const to = from + this.perPage;
@@ -216,19 +330,66 @@ export class BaseKeyring {
                 const accounts = [];
 
                 for (let i = from; i < to; i++) {
-                    const address = this._addressFromIndex(pathBase, i);
+                    const address = await this.__addressFromIndex(pathBase, i);
                     accounts.push({
                         address,
                         balance: null,
                         index: i,
                     });
-                    this.paths[toChecksumAddress(address)] = i;
+                    this.indexes[toChecksumAddress(address)] = i;
                 }
                 resolve(accounts);
             } catch (e) {
                 reject(e);
             }
         });
+    };
+
+    private __getLedgerLivePage = (increment: number): Promise<PagedAccount[]> => {
+        const nextPage = this.page + increment;
+        return new Promise(async (resolve, reject) => {
+            const from = (nextPage - 1) * this.perPage;
+            const to = from + this.perPage;
+
+            const accounts = [];
+
+            for (let i = from; i < to; i++) {
+                try {
+                    const address = await this.__addressFromIndex(pathBase, i);
+                    accounts.push({
+                        address,
+                        balance: null,
+                        index: i,
+                    });
+                } catch (e) {
+                    // if (e.message === `KeystoneError#ledger_live.no_expected_account`) {
+                    //     await this.__readLedgerLiveAccounts();
+                    //     const address = await this.__addressFromIndex(pathBase, i);
+                    //     accounts.push({
+                    //         address,
+                    //         balance: null,
+                    //         index: i,
+                    //     });
+                    // } else {
+                    //     reject(e);
+                    // }
+
+                    reject(e);
+                }
+            }
+            resolve(accounts);
+        });
+    };
+
+    async __getPage(increment: number): Promise<PagedAccount[]> {
+        if (!this.initialized) {
+            await this.readKeyring();
+        }
+        if (this.keyringMode === KEYRING_MODE.hd) {
+            return this.__getNormalPage(increment);
+        } else {
+            return this.__getLedgerLivePage(increment);
+        }
     }
 
     getAccounts() {
@@ -256,7 +417,7 @@ export class BaseKeyring {
     }
 
     async signTransaction(address: string, tx: Transaction): Promise<Transaction> {
-        const hdPath = this._pathFromAddress(address);
+        const hdPath = await this._pathFromAddress(address);
         const chainId = tx.common.chainId();
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
@@ -297,7 +458,7 @@ export class BaseKeyring {
 
     async signPersonalMessage(withAccount: string, messageHex: string): Promise<string> {
         const usignedHex = stripHexPrefix(messageHex);
-        const hdPath = this._pathFromAddress(withAccount);
+        const hdPath = await this._pathFromAddress(withAccount);
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
             Buffer.from(usignedHex, 'hex'),
@@ -318,7 +479,7 @@ export class BaseKeyring {
     }
 
     async signTypedData(withAccount: string, typedData: any): Promise<string> {
-        const hdPath = this._pathFromAddress(withAccount);
+        const hdPath = await this._pathFromAddress(withAccount);
         const requestId = uuid.v4();
         const ethSignRequest = EthSignRequest.constructETHRequest(
             Buffer.from(JSON.stringify(typedData), 'utf-8'),
@@ -338,32 +499,58 @@ export class BaseKeyring {
         return '0x' + Buffer.concat([r, s, v]).toString('hex');
     }
 
-    _addressFromIndex(pb: string, i: number): string {
-        this.checkKeyring();
-        if (!this.hdk) {
-            // @ts-ignore
-            this.hdk = HDKey.fromExtendedKey(this.xpub);
-        }
-        const dkey = this.hdk.derive(`${pb}/0/${i}`);
-        const address = '0x' + publicToAddress(dkey.publicKey, true).toString('hex');
-        return toChecksumAddress(address);
-    }
-
-    _pathFromAddress(address: string): string {
-        const checksummedAddress = toChecksumAddress(address);
-        let index = this.paths[checksummedAddress];
-        if (typeof index === 'undefined') {
-            for (let i = 0; i < MAX_INDEX; i++) {
-                if (checksummedAddress === this._addressFromIndex(pathBase, i)) {
-                    index = i;
-                    break;
-                }
+    __addressFromIndex = async (pb: string, i: number): Promise<string> => {
+        if (this.keyringMode === KEYRING_MODE.hd) {
+            this.checkKeyring();
+            if (!this.hdk) {
+                // @ts-ignore
+                this.hdk = HDKey.fromExtendedKey(this.xpub);
+            }
+            const childrenPath = this.childrenPath.replace('*', String(i)).replaceAll('*', '0');
+            const dkey = this.hdk.derive(`${pb}/${childrenPath}`);
+            const address = '0x' + publicToAddress(dkey.publicKey, true).toString('hex');
+            return toChecksumAddress(address);
+        } else {
+            const result = Object.entries(this.paths).find((entry) => {
+                // @ts-ignore
+                const [_, path] = entry;
+                return path.split('/')[3].replace("'", '').toString() === i.toString();
+            });
+            if (result) {
+                // @ts-ignore
+                const [address, _] = result;
+                return toChecksumAddress(address);
+            } else {
+                //should not be here, just fallback
+                throw new Error(`KeystoneError#ledger_live.no_expected_account`);
             }
         }
+    };
 
-        if (typeof index === 'undefined') {
-            throw new Error('Unknown address');
+    async _pathFromAddress(address: string): Promise<string> {
+        if (this.keyringMode === KEYRING_MODE.hd) {
+            const checksummedAddress = toChecksumAddress(address);
+            let index = this.indexes[checksummedAddress];
+            if (typeof index === 'undefined') {
+                for (let i = 0; i < MAX_INDEX; i++) {
+                    if (checksummedAddress === (await this.__addressFromIndex(pathBase, i))) {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+
+            if (typeof index === 'undefined') {
+                throw new Error('Unknown address');
+            }
+            return `${this.hdPath}/0/${index}`;
+        } else {
+            const checksummedAddress = toChecksumAddress(address);
+            const path = this.paths[checksummedAddress];
+            if (typeof path === 'undefined') {
+                throw new Error('Unknown address');
+            }
+            return path;
         }
-        return `${this.hdPath}/0/${index}`;
     }
 }

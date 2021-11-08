@@ -1,7 +1,7 @@
-import { CryptoHDKey, ETHSignature, EthSignRequest } from '@keystonehq/bc-ur-registry-eth';
+import { CryptoHDKey, ETHSignature, EthSignRequest, CryptoAccount } from '@keystonehq/bc-ur-registry-eth';
 
 export interface InteractionProvider {
-    readCryptoHDKey: () => Promise<CryptoHDKey>;
+    readCryptoHDKeyOrCryptoAccount: () => Promise<CryptoHDKey | CryptoAccount>;
     requestSignature: (
         signRequest: EthSignRequest,
         requestTitle?: string,
