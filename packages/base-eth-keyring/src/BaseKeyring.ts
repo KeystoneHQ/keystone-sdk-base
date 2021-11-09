@@ -52,7 +52,7 @@ export class BaseKeyring {
     private version = 1;
     getInteraction = (): InteractionProvider => {
         throw new Error(
-            '#ktek_error, method getInteraction not implemented, please extend BaseKeyring by overwriting this method.',
+            'KeystoneError#invalid_extends: method getInteraction not implemented, please extend BaseKeyring by overwriting this method.',
         );
     };
     static type = keyringType;
@@ -116,7 +116,7 @@ export class BaseKeyring {
         if (requestIdBuffer) {
             const requestId = uuid.stringify(requestIdBuffer);
             if (requestId !== _requestId) {
-                throw new Error('read signature error: mismatched requestId');
+                throw new Error('KeystoneError#invalid_data: read signature error: mismatched requestId');
             }
         }
         const r = signature.slice(0, 32);
@@ -140,7 +140,7 @@ export class BaseKeyring {
             this.keyringAccount = KEYRING_ACCOUNT.ledger_legacy;
         }
         if (!xfp) {
-            throw new Error('invalid crypto-hdkey, cannot get source fingerprint');
+            throw new Error('KeystoneError#invalid_data: invalid crypto-hdkey, cannot get source fingerprint');
         }
         const xpub = cryptoHDKey.getBip32Key();
         this.xfp = xfp;
@@ -156,11 +156,18 @@ export class BaseKeyring {
     private __readCryptoAccount = (cryptoAccount: CryptoAccount): boolean => {
         const xfp = cryptoAccount.getMasterFingerprint()?.toString('hex');
         if (!xfp) {
-            throw new Error('invalid crypto-account, cannot get master fingerprint');
+            throw new Error('KeystoneError#invalid_data: invalid crypto-account, cannot get master fingerprint');
         }
         this.xfp = xfp;
         this.initialized = true;
         let changed = false;
+        const outputs = cryptoAccount.getOutputDescriptors();
+        if (!outputs || outputs.length === 0) {
+            throw new Error('KeystoneError#invalid_data: invalid crypto-account, no crypto output found');
+        }
+        if (outputs.length % 5 !== 0) {
+            throw new Error('KeystoneError#invalid_data: only support 5x pubkey accounts for now');
+        }
         cryptoAccount.getOutputDescriptors()?.forEach((od) => {
             try {
                 const cryptoHDKey = od.getHDKey();
@@ -178,7 +185,7 @@ export class BaseKeyring {
                     this.paths[toChecksumAddress(address)] = path;
                 }
             } catch (e) {
-                throw new Error(`KeystoneError#invalid_data, ${e}`);
+                throw new Error(`KeystoneError#invalid_data: ${e}`);
             }
         });
         return changed;
@@ -201,10 +208,10 @@ export class BaseKeyring {
     //     if (result.getRegistryType() === extend.RegistryTypes.CRYPTO_ACCOUNT) {
     //         const changed = this.__readCryptoAccount(result as CryptoAccount);
     //         if (!changed) {
-    //             throw new Error(`#KeystoneError#ledger_live.no_new_account`);
+    //             throw new Error(`#KeystoneError#pubkey_account.no_new_account`);
     //         }
     //     } else {
-    //         throw new Error(`KeystoneError#ledger_live.unexpected_urtype`);
+    //         throw new Error(`KeystoneError#pubkey_account.unexpected_urtype`);
     //     }
     // };
 
@@ -214,7 +221,9 @@ export class BaseKeyring {
 
     protected checkKeyring() {
         if (!this.xfp || !this.xpub || !this.hdPath) {
-            throw new Error('keyring not fulfilled, please call function `readKeyring` firstly');
+            throw new Error(
+                'KeystoneError#invalid_keyring: keyring not fulfilled, please call function `readKeyring` firstly',
+            );
         }
     }
 
@@ -501,18 +510,11 @@ export class BaseKeyring {
             const address = '0x' + publicToAddress(dkey.publicKey, true).toString('hex');
             return toChecksumAddress(address);
         } else {
-            const result = Object.entries(this.paths).find((entry) => {
-                // @ts-ignore
-                const [_, path] = entry;
-                return path.split('/')[3].replace("'", '').toString() === i.toString();
-            });
+            const result = Object.keys(this.paths)[i];
             if (result) {
-                // @ts-ignore
-                const [address, _] = result;
-                return toChecksumAddress(address);
+                return toChecksumAddress(result);
             } else {
-                //should not be here, just fallback
-                throw new Error(`KeystoneError#ledger_live.no_expected_account`);
+                throw new Error(`KeystoneError#pubkey_account.no_expected_account`);
             }
         }
     };
