@@ -348,36 +348,26 @@ export class BaseKeyring {
     private __getLedgerLivePage = (increment: number): Promise<PagedAccount[]> => {
         const nextPage = this.page + increment;
         return new Promise(async (resolve, reject) => {
-            const from = (nextPage - 1) * this.perPage;
-            const to = from + this.perPage;
+            try {
+                const from = (nextPage - 1) * this.perPage;
+                const to = from + this.perPage;
 
-            const accounts = [];
+                const accounts = [];
 
-            for (let i = from; i < to; i++) {
-                try {
+                for (let i = from; i < to; i++) {
                     const address = await this.__addressFromIndex(pathBase, i);
                     accounts.push({
                         address,
                         balance: null,
                         index: i,
                     });
-                } catch (e) {
-                    // if (e.message === `KeystoneError#ledger_live.no_expected_account`) {
-                    //     await this.__readLedgerLiveAccounts();
-                    //     const address = await this.__addressFromIndex(pathBase, i);
-                    //     accounts.push({
-                    //         address,
-                    //         balance: null,
-                    //         index: i,
-                    //     });
-                    // } else {
-                    //     reject(e);
-                    // }
-
-                    reject(e);
                 }
+
+                this.page += increment;
+                resolve(accounts);
+            } catch (e) {
+                reject(e);
             }
-            resolve(accounts);
         });
     };
 
