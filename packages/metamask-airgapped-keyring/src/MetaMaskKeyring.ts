@@ -80,6 +80,7 @@ export class MetaMaskKeyring extends BaseKeyring {
         this.xpub = '';
         this.hdPath = '';
         this.indexes = {};
+        this.hdk = undefined;
 
         //pubkey props;
         this.paths = {};
