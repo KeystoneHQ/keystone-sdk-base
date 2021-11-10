@@ -535,7 +535,7 @@ export class BaseKeyring {
             if (typeof index === 'undefined') {
                 throw new Error('Unknown address');
             }
-            return `${this.hdPath}/0/${index}`;
+            return `${this.hdPath}/${this.childrenPath.replace('*', index.toString()).replaceAll('*', '0')}`;
         } else {
             const checksummedAddress = toChecksumAddress(address);
             const path = this.paths[checksummedAddress];
