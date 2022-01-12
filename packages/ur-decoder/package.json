@@ -1,0 +1,35 @@
+{
+  "name": "@keystonehq/ur-decoder",
+  "version": "0.0.1",
+  "description": "bc-ur decoder",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "jest --passWithNoTests"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "soralit <soralitria@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@keystonehq/bc-ur-registry-eth": "^0.6.12",
+    "@ngraveio/bc-ur": "^1.1.6"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/uuid": "^8.3.1",
+    "tsdx": "^0.14.1"
+  }
+}
