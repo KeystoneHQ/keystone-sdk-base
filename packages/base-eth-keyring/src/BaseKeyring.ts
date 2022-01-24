@@ -197,7 +197,7 @@ export class BaseKeyring {
         this.syncKeyring(result);
     }
 
-    syncKeyring(data: CryptoHDKey | CryptoAccount): void {
+    public syncKeyring(data: CryptoHDKey | CryptoAccount): void {
         if (data.getRegistryType() === extend.RegistryTypes.CRYPTO_HDKEY) {
             this.keyringMode = KEYRING_MODE.hd;
             this.__readCryptoHDKey(data as CryptoHDKey);
