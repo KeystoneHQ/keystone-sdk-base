@@ -509,7 +509,7 @@ export class BaseKeyring {
                 // @ts-ignore
                 this.hdk = HDKey.fromExtendedKey(this.xpub);
             }
-            const childrenPath = this.childrenPath.replace('*', String(i)).replaceAll('*', '0');
+            const childrenPath = this.childrenPath.replace('*', String(i)).replace(/\*/g, '0');
             const dkey = this.hdk.derive(`${pb}/${childrenPath}`);
             const address = '0x' + publicToAddress(dkey.publicKey, true).toString('hex');
             return toChecksumAddress(address);
@@ -539,7 +539,7 @@ export class BaseKeyring {
             if (typeof index === 'undefined') {
                 throw new Error('Unknown address');
             }
-            return `${this.hdPath}/${this.childrenPath.replace('*', index.toString()).replaceAll('*', '0')}`;
+            return `${this.hdPath}/${this.childrenPath.replace('*', index.toString()).replace(/\*/g, '0')}`;
         } else {
             const checksummedAddress = toChecksumAddress(address);
             const path = this.paths[checksummedAddress];
