@@ -1,14 +1,14 @@
-# UR-READER
-This repository is a reader for UR. 
+# UR-DECODER
+This repository is a decoder for UR. 
 
 ## Installing
 
 To install, run:
 
 ```bash
-yarn add @keystonehq/bc-ur-registry-eth
+yarn add @keystonehq/ur-decoder
 ```
 
 ```bash
-npm install --save @keystonehq/bc-ur-registry-eth
+npm install --save @keystonehq/ur-decoder
 ```
