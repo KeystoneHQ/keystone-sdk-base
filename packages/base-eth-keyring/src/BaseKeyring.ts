@@ -194,12 +194,16 @@ export class BaseKeyring {
     //initial read
     async readKeyring(): Promise<void> {
         const result = await this.getInteraction().readCryptoHDKeyOrCryptoAccount();
-        if (result.getRegistryType() === extend.RegistryTypes.CRYPTO_HDKEY) {
+        this.syncKeyring(result);
+    }
+
+    public syncKeyring(data: CryptoHDKey | CryptoAccount): void {
+        if (data.getRegistryType() === extend.RegistryTypes.CRYPTO_HDKEY) {
             this.keyringMode = KEYRING_MODE.hd;
-            this.__readCryptoHDKey(result as CryptoHDKey);
+            this.__readCryptoHDKey(data as CryptoHDKey);
         } else {
             this.keyringMode = KEYRING_MODE.pubkey;
-            this.__readCryptoAccount(result as CryptoAccount);
+            this.__readCryptoAccount(data as CryptoAccount);
         }
     }
 
@@ -505,7 +509,7 @@ export class BaseKeyring {
                 // @ts-ignore
                 this.hdk = HDKey.fromExtendedKey(this.xpub);
             }
-            const childrenPath = this.childrenPath.replace('*', String(i)).replaceAll('*', '0');
+            const childrenPath = this.childrenPath.replace('*', String(i)).replace(/\*/g, '0');
             const dkey = this.hdk.derive(`${pb}/${childrenPath}`);
             const address = '0x' + publicToAddress(dkey.publicKey, true).toString('hex');
             return toChecksumAddress(address);
@@ -535,7 +539,7 @@ export class BaseKeyring {
             if (typeof index === 'undefined') {
                 throw new Error('Unknown address');
             }
-            return `${this.hdPath}/${this.childrenPath.replace('*', index.toString()).replaceAll('*', '0')}`;
+            return `${this.hdPath}/${this.childrenPath.replace('*', index.toString()).replace(/\*/g, '0')}`;
         } else {
             const checksummedAddress = toChecksumAddress(address);
             const path = this.paths[checksummedAddress];
