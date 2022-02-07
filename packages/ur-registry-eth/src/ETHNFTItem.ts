@@ -1,0 +1,98 @@
+import { extend, DataItem, RegistryItem } from '@keystonehq/bc-ur-registry';
+import { ExtendedRegistryTypes } from './RegistryType';
+
+const { decodeToDataItem } = extend;
+
+enum Keys {
+    chainId = 1,
+    contractAddress = 2,
+    name,
+    mediaData,
+}
+
+type NFTProps = {
+    chainId: number;
+    contractAddress:string,
+    name: string,
+    mediaData: string,
+    // mediaType: mediaType
+}
+
+
+// export enum mediaType {
+//     png = 1,
+//     jpeg = 2,
+// }
+
+export class ETHNFTItem extends RegistryItem {
+    private chainId: number;
+    private name: string;
+    private contractAddress: string;
+    private mediaData: string;
+
+    getRegistryType = () => ExtendedRegistryTypes.ETH_NFT_ITEM;
+
+    constructor(args: NFTProps) {
+        super();
+        this.setupData(args);
+    }
+
+    private setupData = (args: NFTProps) => {
+        this.chainId = args.chainId;
+        this.name = args.name;
+        this.contractAddress = args.contractAddress;
+        this.mediaData = args.mediaData; // remove the data perfix for android usage
+        
+    };
+
+    public getChainId = () => this.chainId;
+    public getName = () => this.name;
+    public getmediaData = () => this.mediaData;
+    public getContractAddress = () => this.contractAddress;
+    
+    public toDataItem = () => {
+        const map = {};
+        map[Keys.chainId] = this.chainId;
+        map[Keys.name] = this.name;
+        map[Keys.contractAddress] = this.contractAddress;
+        map[Keys.mediaData] = this.mediaData;
+
+        return new DataItem(map);
+    };
+
+    public static fromDataItem = (dataItem) => {
+        const map = dataItem.getData();
+        const chainId = map[Keys.chainId];
+        const name = map[Keys.name];
+        const mediaData = map[Keys.mediaData];
+        const contractAddress = map[Keys.contractAddress];
+
+        return new ETHNFTItem({
+            chainId,
+            name,
+            contractAddress,
+            mediaData,
+        });
+    };
+
+    public static fromCBOR = (_cborPayload: Buffer) => {
+        const dataItem = decodeToDataItem(_cborPayload);
+        return ETHNFTItem.fromDataItem(dataItem);
+    };
+
+    public static constructETHNFTItem(
+        chainId: number,
+        contractAddress: string,
+        name: string,
+        mediaData: string
+    ) {
+        
+
+        return new ETHNFTItem({
+            chainId,
+            contractAddress,
+            mediaData,
+            name
+        });
+    }
+}
