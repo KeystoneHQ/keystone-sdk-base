@@ -10,5 +10,6 @@ cbor.patchTags(
 
 export { EthSignRequest, DataType } from './EthSignRequest';
 export { ETHSignature } from './EthSignature';
+export { ETHNFTItem } from './ETHNFTItem';
 
 export { generateAddressfromXpub, findHDpatfromAddress } from './utlis';
