@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/ur-decoder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "bc-ur decoder",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,7 +24,7 @@
   "author": "soralit <soralitria@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry-eth": "^0.6.12",
+    "@keystonehq/bc-ur-registry-eth": "^0.7.0",
     "@ngraveio/bc-ur": "^1.1.6"
   },
   "devDependencies": {
