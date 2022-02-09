@@ -11,7 +11,7 @@ enum Keys {
     chainId,
     derivationPath,
     address,
-    origin
+    origin,
 }
 
 export enum DataType {
@@ -28,7 +28,7 @@ type signRequestProps = {
     chainId?: number;
     derivationPath: CryptoKeypath;
     address?: Buffer;
-    origin?: String;
+    origin?: string;
 };
 
 export class EthSignRequest extends RegistryItem {
@@ -38,7 +38,7 @@ export class EthSignRequest extends RegistryItem {
     private chainId: number;
     private derivationPath: CryptoKeypath;
     private address: Buffer;
-    private origin: String;
+    private origin: string;
 
     getRegistryType = () => ExtendedRegistryTypes.ETH_SIGN_REQUEST;
 
@@ -77,7 +77,7 @@ export class EthSignRequest extends RegistryItem {
             map[Keys.chainId] = this.chainId;
         }
 
-        if(this.origin) {
+        if (this.origin) {
             map[Keys.origin] = this.origin;
         }
 
@@ -108,7 +108,7 @@ export class EthSignRequest extends RegistryItem {
             chainId,
             derivationPath,
             address,
-            origin
+            origin,
         });
     };
 

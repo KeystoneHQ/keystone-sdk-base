@@ -30,19 +30,23 @@ describe('eth-sign-request', () => {
             chainId: 1,
             derivationPath: signKeyPath,
             requestId: Buffer.from(idBuffer),
-            origin: 'metamask'
-        })
+            origin: 'metamask',
+        });
 
         const cborHex = ethSignRequest.toCBOR().toString('hex');
         const ur = ethSignRequest.toUREncoder(1000).nextPart();
-        expect(ur).toBe('ur:eth-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfksatisjnihjyhsjnhsjkjetlnndant')
+        expect(ur).toBe(
+            'ur:eth-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfksatisjnihjyhsjnhsjkjetlnndant',
+        );
         const ethSignRequstDecoded = EthSignRequest.fromCBOR(Buffer.from(cborHex, 'hex'));
         expect(uuid.stringify(ethSignRequest.getRequestId())).toBe(ethRequestId);
         expect(ethSignRequstDecoded.getChainId()).toBe(1);
         expect(ethSignRequstDecoded.getDataType()).toBe(1);
         expect(ethSignRequest.getOrigin()).toBe('metamask');
-        expect(ethSignRequstDecoded.getSignData().toString("hex")).toEqual("f849808609184e72a00082271094000000000000000000000000000000000000000080a47f7465737432000000000000000000000000000000000000000000000000000000600057808080");    
-    })
+        expect(ethSignRequstDecoded.getSignData().toString('hex')).toEqual(
+            'f849808609184e72a00082271094000000000000000000000000000000000000000080a47f7465737432000000000000000000000000000000000000000000000000000000600057808080',
+        );
+    });
 
     it('should construct an ethSignRequest object from string', () => {
         const hdPath = "M/44'/1'/1'/0/1";

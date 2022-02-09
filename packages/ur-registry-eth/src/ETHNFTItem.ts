@@ -6,18 +6,19 @@ const { decodeToDataItem } = extend;
 enum Keys {
     chainId = 1,
     contractAddress = 2,
+    contractName,
     name,
     mediaData,
 }
 
 type NFTProps = {
     chainId: number;
-    contractAddress:string,
-    name: string,
-    mediaData: string,
+    contractAddress: string;
+    contractName: string;
+    name: string;
+    mediaData: string;
     // mediaType: mediaType
-}
-
+};
 
 // export enum mediaType {
 //     png = 1,
@@ -28,6 +29,7 @@ export class ETHNFTItem extends RegistryItem {
     private chainId: number;
     private name: string;
     private contractAddress: string;
+    private contractName: string;
     private mediaData: string;
 
     getRegistryType = () => ExtendedRegistryTypes.ETH_NFT_ITEM;
@@ -41,20 +43,22 @@ export class ETHNFTItem extends RegistryItem {
         this.chainId = args.chainId;
         this.name = args.name;
         this.contractAddress = args.contractAddress;
+        this.contractName = args.contractName;
         this.mediaData = args.mediaData; // remove the data perfix for android usage
-        
     };
 
     public getChainId = () => this.chainId;
     public getName = () => this.name;
     public getmediaData = () => this.mediaData;
     public getContractAddress = () => this.contractAddress;
-    
+    public getContractName = () => this.contractName;
+
     public toDataItem = () => {
         const map = {};
         map[Keys.chainId] = this.chainId;
         map[Keys.name] = this.name;
         map[Keys.contractAddress] = this.contractAddress;
+        map[Keys.contractName] = this.contractName;
         map[Keys.mediaData] = this.mediaData;
 
         return new DataItem(map);
@@ -66,11 +70,13 @@ export class ETHNFTItem extends RegistryItem {
         const name = map[Keys.name];
         const mediaData = map[Keys.mediaData];
         const contractAddress = map[Keys.contractAddress];
+        const contractName = map[Keys.contractName];
 
         return new ETHNFTItem({
             chainId,
             name,
             contractAddress,
+            contractName,
             mediaData,
         });
     };
@@ -83,16 +89,16 @@ export class ETHNFTItem extends RegistryItem {
     public static constructETHNFTItem(
         chainId: number,
         contractAddress: string,
+        contractName: string,
         name: string,
-        mediaData: string
+        mediaData: string,
     ) {
-        
-
         return new ETHNFTItem({
             chainId,
             contractAddress,
+            contractName,
             mediaData,
-            name
+            name,
         });
     }
 }
