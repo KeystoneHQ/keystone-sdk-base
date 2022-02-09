@@ -1,6 +1,6 @@
-import { CryptoAccount, CryptoHDKey, ETHSignature, EthSignRequest } from "@keystonehq/bc-ur-registry-eth";
-import { InteractionProvider } from "@keystonehq/base-eth-keyring";
-import sdk, { PlayStatus, ReadStatus, SupportedResult } from "@keystonehq/sdk";
+import { CryptoAccount, CryptoHDKey, ETHSignature, EthSignRequest } from '@keystonehq/bc-ur-registry-eth';
+import { InteractionProvider } from '@keystonehq/base-eth-keyring';
+import sdk, { PlayStatus, ReadStatus, SupportedResult } from '@keystonehq/sdk';
 
 export class DefaultInteractionProvider implements InteractionProvider {
     private static instance;
@@ -33,7 +33,7 @@ export class DefaultInteractionProvider implements InteractionProvider {
             const { result } = decodedResult;
             if (result.type === 'crypto-hdkey') {
                 return CryptoHDKey.fromCBOR(result.cbor);
-            }else {
+            } else {
                 return CryptoAccount.fromCBOR(result.cbor);
             }
         } else {
