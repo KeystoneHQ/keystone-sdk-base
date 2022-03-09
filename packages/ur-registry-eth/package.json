@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-eth",
-  "version": "0.8.0-alpha.0",
+  "version": "0.8.0-alpha.1",
   "description": "bc-ur-registry extension for ETH",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
