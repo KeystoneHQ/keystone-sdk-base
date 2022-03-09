@@ -1,5 +1,6 @@
+// @ts-nocheck
+
 import { ETHNFTItem } from '../src';
-import * as uuid from 'uuid';
 
 describe('eth-nft-item', () => {
     it('test should genereate eth-nft-item', () => {
@@ -14,7 +15,6 @@ describe('eth-nft-item', () => {
             base64ImageData,
         );
         const cborHex = ethNftItem.toCBOR().toString('hex');
-        const ur = ethNftItem.toUREncoder(1000).nextPart();
         const ethNftDecoded = ETHNFTItem.fromCBOR(Buffer.from(cborHex, 'hex'));
 
         expect(ethNftDecoded.getChainId()).toEqual(1);

@@ -1,4 +1,4 @@
-import { CryptoKeypath, extend, DataItem, PathComponent, RegistryItem } from '@keystonehq/bc-ur-registry';
+import { CryptoKeypath, extend, DataItem, PathComponent, RegistryItem, DataItemMap } from '@keystonehq/bc-ur-registry';
 import { ExtendedRegistryTypes } from './RegistryType';
 import * as uuid from 'uuid';
 
@@ -32,22 +32,18 @@ type signRequestProps = {
 };
 
 export class EthSignRequest extends RegistryItem {
-    private requestId: Buffer;
+    private requestId?: Buffer;
     private signData: Buffer;
     private dataType: DataType;
-    private chainId: number;
+    private chainId?: number;
     private derivationPath: CryptoKeypath;
-    private address: Buffer;
-    private origin: string;
+    private address?: Buffer;
+    private origin?: string;
 
     getRegistryType = () => ExtendedRegistryTypes.ETH_SIGN_REQUEST;
 
     constructor(args: signRequestProps) {
         super();
-        this.setupData(args);
-    }
-
-    private setupData = (args: signRequestProps) => {
         this.requestId = args.requestId;
         this.signData = args.signData;
         this.dataType = args.dataType;
@@ -55,7 +51,7 @@ export class EthSignRequest extends RegistryItem {
         this.derivationPath = args.derivationPath;
         this.address = args.address;
         this.origin = args.origin;
-    };
+    }
 
     public getRequestId = () => this.requestId;
     public getSignData = () => this.signData;
@@ -66,7 +62,7 @@ export class EthSignRequest extends RegistryItem {
     public getOrigin = () => this.origin;
 
     public toDataItem = () => {
-        const map = {};
+        const map: DataItemMap = {};
         if (this.requestId) {
             map[Keys.requestId] = new DataItem(this.requestId, RegistryTypes.UUID.getTag());
         }
@@ -91,7 +87,7 @@ export class EthSignRequest extends RegistryItem {
         return new DataItem(map);
     };
 
-    public static fromDataItem = (dataItem) => {
+    public static fromDataItem = (dataItem: DataItem) => {
         const map = dataItem.getData();
         const signData = map[Keys.signData];
         const dataType = map[Keys.dataType];

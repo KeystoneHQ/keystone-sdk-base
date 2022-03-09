@@ -1,5 +1,4 @@
-import { extend } from '@keystonehq/bc-ur-registry';
-const { RegistryType } = extend;
+import { RegistryType } from '@keystonehq/bc-ur-registry';
 
 export const ExtendedRegistryTypes = {
     ETH_SIGN_REQUEST: new RegistryType('eth-sign-request', 401),

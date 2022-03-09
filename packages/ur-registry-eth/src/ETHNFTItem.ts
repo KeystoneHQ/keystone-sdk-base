@@ -1,4 +1,4 @@
-import { extend, DataItem, RegistryItem } from '@keystonehq/bc-ur-registry';
+import { extend, DataItem, RegistryItem, DataItemMap } from '@keystonehq/bc-ur-registry';
 import { ExtendedRegistryTypes } from './RegistryType';
 
 const { decodeToDataItem } = extend;
@@ -17,13 +17,7 @@ type NFTProps = {
     contractName: string;
     name: string;
     mediaData: string;
-    // mediaType: mediaType
 };
-
-// export enum mediaType {
-//     png = 1,
-//     jpeg = 2,
-// }
 
 export class ETHNFTItem extends RegistryItem {
     private chainId: number;
@@ -36,16 +30,12 @@ export class ETHNFTItem extends RegistryItem {
 
     constructor(args: NFTProps) {
         super();
-        this.setupData(args);
-    }
-
-    private setupData = (args: NFTProps) => {
         this.chainId = args.chainId;
         this.name = args.name;
         this.contractAddress = args.contractAddress;
         this.contractName = args.contractName;
         this.mediaData = args.mediaData; // remove the data perfix for android usage
-    };
+    }
 
     public getChainId = () => this.chainId;
     public getName = () => this.name;
@@ -54,7 +44,7 @@ export class ETHNFTItem extends RegistryItem {
     public getContractName = () => this.contractName;
 
     public toDataItem = () => {
-        const map = {};
+        const map: DataItemMap = {};
         map[Keys.chainId] = this.chainId;
         map[Keys.name] = this.name;
         map[Keys.contractAddress] = this.contractAddress;
@@ -64,7 +54,7 @@ export class ETHNFTItem extends RegistryItem {
         return new DataItem(map);
     };
 
-    public static fromDataItem = (dataItem) => {
+    public static fromDataItem = (dataItem: DataItem) => {
         const map = dataItem.getData();
         const chainId = map[Keys.chainId];
         const name = map[Keys.name];

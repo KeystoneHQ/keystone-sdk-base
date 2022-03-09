@@ -7,6 +7,7 @@
         "declaration": true,
         "sourceMap": true,
         "strict": true,
+        "allowJs": true,
         "esModuleInterop": true,
         "moduleResolution": "node",
         "skipLibCheck": true,
@@ -14,11 +15,10 @@
         "strictNullChecks": false,
         "strictFunctionTypes": true,
         "noImplicitThis": false,
-        "alwaysStrict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
-        "jsx": "react",
+        "jsx": "react"
     },
 }

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ETHSignature } from '../src';
 import * as uuid from 'uuid';
 

@@ -1,19 +1,14 @@
 import KeystoneSubprovider from '../src';
 
-const SupportedResult = {
-    UR_CRYPTO_HDKEY: 'crypto-hdkey',
-    UR_ETH_SIGNATURE: 'eth-signature',
-};
-
 jest.mock('@keystonehq/sdk', () => {
     return {
         bootstrap: () => {
             console.log('bootstraped');
         },
         getSdk: () => ({
-            read: async (a, b) => {
+            read: async (a, _) => {
                 if (a[0] === 'crypto-hdkey') {
-                    return Promise.resolve({
+                    return {
                         status: 'success',
                         result: {
                             cbor: Buffer.from(
@@ -21,7 +16,7 @@ jest.mock('@keystonehq/sdk', () => {
                                 'hex',
                             ),
                         },
-                    });
+                    };
                 } else if (a[0] === 'eth-signature') {
                     return {
                         status: 'success',
@@ -33,8 +28,9 @@ jest.mock('@keystonehq/sdk', () => {
                         },
                     };
                 }
+                throw new Error('Unspecified error');
             },
-            play: async (a, b) => Promise.resolve(1),
+            play: async (_, __) => Promise.resolve(1),
         }),
         SupportedResult: {
             UR_CRYPTO_HDKEY: 'crypto-hdkey',

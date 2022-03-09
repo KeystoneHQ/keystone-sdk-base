@@ -1,5 +1,7 @@
+// @ts-nocheck
+
 import { CryptoKeypath, PathComponent } from '../src';
-import { CryptoHDKey, generateAddressfromXpub } from '../src';
+import { CryptoHDKey } from '../src';
 
 describe('CryptoHDKey', () => {
     it('test it can generate hd key for eth hd key', () => {

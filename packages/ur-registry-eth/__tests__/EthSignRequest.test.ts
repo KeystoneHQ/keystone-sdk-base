@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { EthSignRequest, DataType } from '../src';
 import { CryptoKeypath, PathComponent } from '../src';
 import * as uuid from 'uuid';
