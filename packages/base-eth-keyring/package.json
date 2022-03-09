@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/base-eth-keyring",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "base eth keyring",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@ethereumjs/tx": "3.0.0",
-    "@keystonehq/bc-ur-registry-eth": "^0.7.7",
+    "@keystonehq/bc-ur-registry-eth": "^0.8.0-alpha.0",
     "ethereumjs-util": "^7.0.8",
     "hdkey": "^2.0.1",
     "typescript": "^4.6.2",
