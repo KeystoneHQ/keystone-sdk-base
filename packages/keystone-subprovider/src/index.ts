@@ -8,8 +8,8 @@ import { BN, stripHexPrefix, addHexPrefix } from 'ethereumjs-util';
 import * as uuid from 'uuid';
 import {
     CryptoHDKey,
-    generateAddressfromXpub,
-    findHDpatfromAddress,
+    generateAddressFromXpub,
+    findHDPathFromAddress,
     EthSignRequest,
     DataType,
     ETHSignature,
