@@ -1,125 +1,143 @@
-import { InteractionProvider } from '@keystonehq/base-eth-keyring';
-import { EventEmitter } from 'events';
-import { ObservableStore } from '@metamask/obs-store';
-import { EthSignRequest, ETHSignature, CryptoHDKey, CryptoAccount } from '@keystonehq/bc-ur-registry-eth';
-import * as uuid from 'uuid';
+import { InteractionProvider } from "@keystonehq/base-eth-keyring";
+import { EventEmitter } from "events";
+import { ObservableStore } from "@metamask/obs-store";
+import {
+  EthSignRequest,
+  ETHSignature,
+  CryptoHDKey,
+  CryptoAccount,
+} from "@keystonehq/bc-ur-registry-eth";
+import * as uuid from "uuid";
 
-export class MetamaskInteractionProvider extends EventEmitter implements InteractionProvider {
-    static instance: MetamaskInteractionProvider;
-    public memStore: ObservableStore<{
-        _version: number;
-        sync: {
-            reading: boolean;
+export class MetamaskInteractionProvider
+  extends EventEmitter
+  implements InteractionProvider
+{
+  static instance: MetamaskInteractionProvider;
+  public memStore: ObservableStore<{
+    _version: number;
+    sync: {
+      reading: boolean;
+    };
+    sign: {
+      request?: {
+        requestId: string;
+        payload: {
+          type: string;
+          cbor: string;
         };
-        sign: {
-            request?: {
-                requestId: string;
-                payload: {
-                    type: string;
-                    cbor: string;
-                };
-                title?: string;
-                description?: string;
-            };
-        };
-    }>;
-    constructor() {
-        super();
-        if (MetamaskInteractionProvider.instance) {
-            return MetamaskInteractionProvider.instance;
-        }
-        this.memStore = new ObservableStore({ sync: { reading: false }, sign: {}, _version: 1 });
-        MetamaskInteractionProvider.instance = this;
+        title?: string;
+        description?: string;
+      };
+    };
+  }>;
+  constructor() {
+    super();
+    if (MetamaskInteractionProvider.instance) {
+      return MetamaskInteractionProvider.instance;
     }
-    readCryptoHDKeyOrCryptoAccount = (): Promise<CryptoHDKey | CryptoAccount> => {
-        return new Promise((resolve, reject) => {
-            this.memStore.updateState({
-                sync: { reading: true },
-            });
-            this.on('keystone-sync_success-hdkey', (cbor: string) => {
-                const cryptoHDKey = CryptoHDKey.fromCBOR(Buffer.from(cbor, 'hex'));
-                this.resetState();
-                resolve(cryptoHDKey);
-            });
-            this.on('keystone-sync_success-account', (cbor: string) => {
-                const cryptoAccount = CryptoAccount.fromCBOR(Buffer.from(cbor, 'hex'));
-                this.resetState();
-                resolve(cryptoAccount);
-            });
-            this.on('keystone-sync_cancel', () => {
-                this.resetState();
-                reject(new Error('KeystoneError#sync_cancel. Sync process canceled, please retry'));
-            });
-        });
-    };
+    this.memStore = new ObservableStore({
+      sync: { reading: false },
+      sign: {},
+      _version: 1,
+    });
+    MetamaskInteractionProvider.instance = this;
+  }
+  readCryptoHDKeyOrCryptoAccount = (): Promise<CryptoHDKey | CryptoAccount> => {
+    return new Promise((resolve, reject) => {
+      this.memStore.updateState({
+        sync: { reading: true },
+      });
+      this.on("keystone-sync_success-hdkey", (cbor: string) => {
+        const cryptoHDKey = CryptoHDKey.fromCBOR(Buffer.from(cbor, "hex"));
+        this.resetState();
+        resolve(cryptoHDKey);
+      });
+      this.on("keystone-sync_success-account", (cbor: string) => {
+        const cryptoAccount = CryptoAccount.fromCBOR(Buffer.from(cbor, "hex"));
+        this.resetState();
+        resolve(cryptoAccount);
+      });
+      this.on("keystone-sync_cancel", () => {
+        this.resetState();
+        reject(
+          new Error(
+            "KeystoneError#sync_cancel. Sync process canceled, please retry"
+          )
+        );
+      });
+    });
+  };
 
-    submitCryptoHDKey = (cbor: string) => {
-        this.emit('keystone-sync_success-hdkey', cbor);
-    };
+  submitCryptoHDKey = (cbor: string) => {
+    this.emit("keystone-sync_success-hdkey", cbor);
+  };
 
-    submitCryptoAccount = (cbor: string) => {
-        this.emit('keystone-sync_success-account', cbor);
-    };
+  submitCryptoAccount = (cbor: string) => {
+    this.emit("keystone-sync_success-account", cbor);
+  };
 
-    cancelSync = () => {
-        this.emit('keystone-sync_cancel');
-    };
+  cancelSync = () => {
+    this.emit("keystone-sync_cancel");
+  };
 
-    requestSignature = (
-        signRequest: EthSignRequest,
-        requestTitle?: string,
-        requestDescription?: string,
-    ): Promise<ETHSignature> => {
-        return new Promise((resolve, reject) => {
-            const ur = signRequest.toUR();
-            const requestIdBuffer = signRequest.getRequestId();
-            const requestId = uuid.stringify(requestIdBuffer);
-            const signPayload = {
-                requestId,
-                payload: {
-                    type: ur.type,
-                    cbor: ur.cbor.toString('hex'),
-                },
-                title: requestTitle,
-                description: requestDescription,
-            };
-            this.memStore.updateState({
-                sign: {
-                    request: signPayload,
-                },
-            });
+  requestSignature = (
+    signRequest: EthSignRequest,
+    requestTitle?: string,
+    requestDescription?: string
+  ): Promise<ETHSignature> => {
+    return new Promise((resolve, reject) => {
+      const ur = signRequest.toUR();
+      const requestIdBuffer = signRequest.getRequestId();
+      const requestId = uuid.stringify(requestIdBuffer);
+      const signPayload = {
+        requestId,
+        payload: {
+          type: ur.type,
+          cbor: ur.cbor.toString("hex"),
+        },
+        title: requestTitle,
+        description: requestDescription,
+      };
+      this.memStore.updateState({
+        sign: {
+          request: signPayload,
+        },
+      });
 
-            this.once(`${requestId}-signed`, (cbor: string) => {
-                const ethSignature = ETHSignature.fromCBOR(Buffer.from(cbor, 'hex'));
-                this.resetState();
-                resolve(ethSignature);
-            });
-            this.once(`${requestId}-canceled`, () => {
-                this.resetState();
-                reject(new Error('KeystoneError#Tx_canceled. Signing canceled, please retry'));
-            });
-        });
-    };
+      this.once(`${requestId}-signed`, (cbor: string) => {
+        const ethSignature = ETHSignature.fromCBOR(Buffer.from(cbor, "hex"));
+        this.resetState();
+        resolve(ethSignature);
+      });
+      this.once(`${requestId}-canceled`, () => {
+        this.resetState();
+        reject(
+          new Error("KeystoneError#Tx_canceled. Signing canceled, please retry")
+        );
+      });
+    });
+  };
 
-    submitSignature = (requestId: string, cbor: string) => {
-        this.emit(`${requestId}-signed`, cbor);
-    };
+  submitSignature = (requestId: string, cbor: string) => {
+    this.emit(`${requestId}-signed`, cbor);
+  };
 
-    cancelRequestSignature = () => {
-        const signPayload = this.memStore.getState().sign.request;
-        if (signPayload) {
-            const { requestId } = signPayload;
-            this.memStore.updateState({ sign: {} });
-            this.emit(`${requestId}-canceled`);
-        }
-    };
+  cancelRequestSignature = () => {
+    const signPayload = this.memStore.getState().sign.request;
+    if (signPayload) {
+      const { requestId } = signPayload;
+      this.memStore.updateState({ sign: {} });
+      this.emit(`${requestId}-canceled`);
+    }
+  };
 
-    private resetState = () => {
-        this.memStore.updateState({
-            sync: {
-                reading: false,
-            },
-            sign: {},
-        });
-    };
+  private resetState = () => {
+    this.memStore.updateState({
+      sync: {
+        reading: false,
+      },
+      sign: {},
+    });
+  };
 }

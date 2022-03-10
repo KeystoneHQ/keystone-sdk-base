@@ -7,3 +7,7 @@ tmp
 *.min.js
 *.bundle.*
 node_modules
+.eslintrc.js
+**/*.config.js
+packages/sdk/demo.js
+packages/**/dist

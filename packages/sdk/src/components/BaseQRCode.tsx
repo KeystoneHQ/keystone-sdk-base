@@ -1,14 +1,14 @@
-import React from 'react';
-import QRCode from 'qrcode.react';
+import React from "react";
+import QRCode from "qrcode.react";
 
 export const BaseQRCode = ({
-    size = 200,
-    data = '',
-    ecl = 'L',
+  size = 200,
+  data = "",
+  ecl = "L",
 }: {
-    data: string;
-    size?: number;
-    ecl?: 'L' | 'M' | 'Q' | 'H';
+  data: string;
+  size?: number;
+  ecl?: "L" | "M" | "Q" | "H";
 }) => {
-    return <QRCode value={data} size={size} level={ecl} />;
+  return <QRCode value={data} size={size} level={ecl} />;
 };
