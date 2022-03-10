@@ -22,7 +22,8 @@
     "clean": "rm -rf ./dist",
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "tsc:check": "tsc --noEmit"
   },
   "bugs": {
     "url": "https://github.com/KeystoneHQ/keystone-airgaped-base/issues"
@@ -47,5 +48,5 @@
     "@babel/preset-typescript": "^7.15.0",
     "tsdx": "^0.14.1"
   },
-  "gitHead": "2078c109319ceda7954517b8055a486043edf6b7"
+  "gitHead": "77958e4e7cf949e869b0cbb3ccbb23c499885772"
 }

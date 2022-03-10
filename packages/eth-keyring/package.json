@@ -10,7 +10,8 @@
     "scripts": {
         "clean": "rm -rf ./dist",
         "start": "tsdx watch",
-        "build": "tsdx build"
+        "build": "tsdx build",
+        "tsc:check": "tsc --noEmit"
     },
     "publishConfig": {
         "access": "public"
@@ -36,5 +37,5 @@
         "@types/uuid": "^8.3.1",
         "tsdx": "^0.14.1"
     },
-    "gitHead": "2078c109319ceda7954517b8055a486043edf6b7"
+    "gitHead": "77958e4e7cf949e869b0cbb3ccbb23c499885772"
 }

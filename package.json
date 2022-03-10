@@ -3,10 +3,11 @@
     "private": true,
     "scripts": {
         "clean": "lerna clean",
+        "typescript:check": "lerna run tsc:check",
         "bootstrap": "lerna bootstrap",
         "build": "lerna run build",
         "start": "lerna run start",
-        "prepare": "npm run clean && npm run bootstrap && npm run build",
+        "prepare": "npm run clean && npm run bootstrap && npm run typescript:check && npm run build",
         "lint": "eslint '*/**/*.ts' --quiet --fix",
         "prettier:check": "yarn prettier --check",
         "prettier:fix": "yarn prettier --write",

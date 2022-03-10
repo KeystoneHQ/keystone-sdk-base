@@ -14,7 +14,8 @@
     "build": "tsdx build && npm run copy",
     "test": "jest",
     "protobuf": "npx pbjs -t static-module -w es6 -o src/QRProtocolBuf/proto.js crypto-coin-message-protocol/*.proto; npx pbts -o src/QRProtocolBuf/proto.d.ts src/QRProtocolBuf/proto.js",
-    "update-proto-buffer": "git submodule update --remote && npm run protobuf"
+    "update-proto-buffer": "git submodule update --remote && npm run protobuf",
+    "tsc:check": "tsc --noEmit"
   },
   "files": [
     "src",
@@ -47,5 +48,5 @@
     "@babel/preset-typescript": "^7.15.0",
     "tsdx": "^0.14.1"
   },
-  "gitHead": "2078c109319ceda7954517b8055a486043edf6b7"
+  "gitHead": "77958e4e7cf949e869b0cbb3ccbb23c499885772"
 }

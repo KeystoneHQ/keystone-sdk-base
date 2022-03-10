@@ -54,7 +54,7 @@ export const useController = (): [
         setMode('read');
     };
 
-    const renderPannel = (pageMode: string) => {
+    const renderPannel = (pageMode: string | null) => {
         if (pageMode === 'initial') {
             return <InitialPage walletMode={walletMode} link={link} onButtonClick={goToRead} />;
         } else if (pageMode === 'read') {
@@ -105,7 +105,7 @@ export const useController = (): [
                 });
             },
             read: async (expect, options) => {
-                if (options.renderInitial) {
+                if (options?.renderInitial) {
                     setWalltMode(options.renderInitial.walletMode);
                     setLink(options.renderInitial.link);
                     setMode('initial');

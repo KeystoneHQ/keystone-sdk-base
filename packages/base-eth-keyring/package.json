@@ -23,7 +23,8 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "start": "tsdx watch",
-    "build": "tsdx build"
+    "build": "tsdx build",
+    "tsc:check": "tsc --noEmit"
   },
   "dependencies": {
     "@ethereumjs/tx": "3.0.0",
@@ -42,5 +43,5 @@
   "bugs": {
     "url": "https://github.com/KeystoneHQ/keystone-airgaped-base/issues"
   },
-  "gitHead": "2078c109319ceda7954517b8055a486043edf6b7"
+  "gitHead": "77958e4e7cf949e869b0cbb3ccbb23c499885772"
 }

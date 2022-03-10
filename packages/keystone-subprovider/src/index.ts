@@ -76,12 +76,12 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         tx.s = new BN(0);
         const unsignedBuffer = tx.serialize();
         const requestId = uuid.v4();
-        const addressPath = findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`);
+        const addressPath = findHDPathFromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`);
 
         const ethSignRequest = EthSignRequest.constructETHRequest(
             unsignedBuffer,
             DataType.transaction,
-            addressPath,
+            addressPath as string,
             this.xfp,
             requestId,
             this._networkId,
@@ -116,13 +116,13 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         const eip1559Tx = FeeMarketEIP1559Transaction.fromTxData(txParams, { common });
         const unsignedBuffer = Buffer.from(eip1559Tx.getMessageToSign(false));
         const requestId = uuid.v4();
-        const addressPath = findHDpatfromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`);
+        const addressPath = findHDPathFromAddress(txParams.from, this.xpub, this.accountNumber, `${this.hdpath}`);
 
         console.log('-------------', unsignedBuffer);
         const ethSignRequest = EthSignRequest.constructETHRequest(
             unsignedBuffer,
             DataType.typedTransaction,
-            addressPath,
+            addressPath as string,
             this.xfp,
             requestId,
             this._networkId,
@@ -154,11 +154,11 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         unsigendData = stripHexPrefix(unsigendData);
         const dataHex = Buffer.from(unsigendData, 'hex');
         const requestId = uuid.v4();
-        const addressPath = findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`);
+        const addressPath = findHDPathFromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`);
         const ethSignRequest = EthSignRequest.constructETHRequest(
             dataHex,
             DataType.personalMessage,
-            addressPath,
+            addressPath as string,
             this.xfp,
             requestId,
             undefined,
@@ -182,11 +182,11 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         }
         const dataHex = Buffer.from(typedData, 'utf-8');
         const requestId = uuid.v4();
-        const addressPath = findHDpatfromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`);
+        const addressPath = findHDPathFromAddress(address, this.xpub, this.accountNumber, `${this.hdpath}`);
         const ethSignRequest = EthSignRequest.constructETHRequest(
             dataHex,
             DataType.typedData,
-            addressPath,
+            addressPath as string,
             this.xfp,
             requestId,
             undefined,
@@ -244,8 +244,8 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         if (decodedResult.status === 'success') {
             const { result } = decodedResult;
             const cryptoHDKey = CryptoHDKey.fromCBOR(result.cbor);
-            const hdPath = `m/${cryptoHDKey.getOrigin().getPath()}`;
-            const xfp = cryptoHDKey.getOrigin().getSourceFingerprint()?.toString('hex');
+            const hdPath = `m/${cryptoHDKey.getOrigin()?.getPath()}`;
+            const xfp = cryptoHDKey.getOrigin()?.getSourceFingerprint()?.toString('hex');
             if (!xfp) {
                 throw new Error('invalid crypto-hd-key, cannot get source fingerprint');
             }
@@ -263,7 +263,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
         const result = [];
         for (let i = 0; i < numberOfAddress; i++) {
             const path = `m/0/${i}`;
-            result.push(generateAddressfromXpub(this.xpub, path));
+            result.push(generateAddressFromXpub(this.xpub, path));
         }
         return result;
     }

@@ -16,7 +16,7 @@ export interface URQRCodeData {
     data: string;
 }
 
-let URTypeErrorMessage: string = '';
+let URTypeErrorMessage = '';
 
 export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraReady: boolean }] => {
     const [cameraReady, setCameraReady] = useState<boolean>(false);
@@ -67,7 +67,7 @@ export const useAnimatedQRCodeReader = (): [JSX.Element, { read: Read; cameraRea
                 if (!foundExpected)
                     throw new URTypeError(`received ur type ${result.type}, but expected [${expectTypes.join(',')}]`);
             }
-        } catch (e) {
+        } catch (e: any) {
             if (e instanceof URTypeError) {
                 setError(errorMessgeOnURType);
             } else {
