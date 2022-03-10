@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react";
 
 type Props = {
-    progress: number;
-    total: number;
+  progress: number;
+  total: number;
 };
 
 export const Progress: FunctionComponent<Props> = ({ progress, total }) => {
-    return <p>{`${progress} / ${total}`}</p>;
+  return <p>{`${progress} / ${total}`}</p>;
 };
