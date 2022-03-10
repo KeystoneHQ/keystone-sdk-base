@@ -1,94 +1,99 @@
-import { extend, DataItem, RegistryItem, DataItemMap } from '@keystonehq/bc-ur-registry';
-import { ExtendedRegistryTypes } from './RegistryType';
+import {
+  extend,
+  DataItem,
+  RegistryItem,
+  DataItemMap,
+} from "@keystonehq/bc-ur-registry";
+import { ExtendedRegistryTypes } from "./RegistryType";
 
 const { decodeToDataItem } = extend;
 
 enum Keys {
-    chainId = 1,
-    contractAddress = 2,
-    contractName,
-    name,
-    mediaData,
+  chainId = 1,
+  contractAddress = 2,
+  contractName,
+  name,
+  mediaData,
 }
 
 type NFTProps = {
-    chainId: number;
-    contractAddress: string;
-    contractName: string;
-    name: string;
-    mediaData: string;
+  chainId: number;
+  contractAddress: string;
+  contractName: string;
+  name: string;
+  mediaData: string;
 };
 
 export class ETHNFTItem extends RegistryItem {
-    private chainId: number;
-    private name: string;
-    private contractAddress: string;
-    private contractName: string;
-    private mediaData: string;
+  private chainId: number;
+  private name: string;
+  private contractAddress: string;
+  private contractName: string;
+  private mediaData: string;
 
-    getRegistryType = () => ExtendedRegistryTypes.ETH_NFT_ITEM;
+  getRegistryType = () => ExtendedRegistryTypes.ETH_NFT_ITEM;
 
-    constructor(args: NFTProps) {
-        super();
-        this.chainId = args.chainId;
-        this.name = args.name;
-        this.contractAddress = args.contractAddress;
-        this.contractName = args.contractName;
-        this.mediaData = args.mediaData; // remove the data perfix for android usage
-    }
+  constructor(args: NFTProps) {
+    super();
+    this.chainId = args.chainId;
+    this.name = args.name;
+    this.contractAddress = args.contractAddress;
+    this.contractName = args.contractName;
+    this.mediaData = args.mediaData; // remove the data perfix for android usage
+  }
 
-    public getChainId = () => this.chainId;
-    public getName = () => this.name;
-    public getmediaData = () => this.mediaData;
-    public getContractAddress = () => this.contractAddress;
-    public getContractName = () => this.contractName;
+  public getChainId = () => this.chainId;
+  public getName = () => this.name;
+  public getmediaData = () => this.mediaData;
+  public getContractAddress = () => this.contractAddress;
+  public getContractName = () => this.contractName;
 
-    public toDataItem = () => {
-        const map: DataItemMap = {};
-        map[Keys.chainId] = this.chainId;
-        map[Keys.name] = this.name;
-        map[Keys.contractAddress] = this.contractAddress;
-        map[Keys.contractName] = this.contractName;
-        map[Keys.mediaData] = this.mediaData;
+  public toDataItem = () => {
+    const map: DataItemMap = {};
+    map[Keys.chainId] = this.chainId;
+    map[Keys.name] = this.name;
+    map[Keys.contractAddress] = this.contractAddress;
+    map[Keys.contractName] = this.contractName;
+    map[Keys.mediaData] = this.mediaData;
 
-        return new DataItem(map);
-    };
+    return new DataItem(map);
+  };
 
-    public static fromDataItem = (dataItem: DataItem) => {
-        const map = dataItem.getData();
-        const chainId = map[Keys.chainId];
-        const name = map[Keys.name];
-        const mediaData = map[Keys.mediaData];
-        const contractAddress = map[Keys.contractAddress];
-        const contractName = map[Keys.contractName];
+  public static fromDataItem = (dataItem: DataItem) => {
+    const map = dataItem.getData();
+    const chainId = map[Keys.chainId];
+    const name = map[Keys.name];
+    const mediaData = map[Keys.mediaData];
+    const contractAddress = map[Keys.contractAddress];
+    const contractName = map[Keys.contractName];
 
-        return new ETHNFTItem({
-            chainId,
-            name,
-            contractAddress,
-            contractName,
-            mediaData,
-        });
-    };
+    return new ETHNFTItem({
+      chainId,
+      name,
+      contractAddress,
+      contractName,
+      mediaData,
+    });
+  };
 
-    public static fromCBOR = (_cborPayload: Buffer) => {
-        const dataItem = decodeToDataItem(_cborPayload);
-        return ETHNFTItem.fromDataItem(dataItem);
-    };
+  public static fromCBOR = (_cborPayload: Buffer) => {
+    const dataItem = decodeToDataItem(_cborPayload);
+    return ETHNFTItem.fromDataItem(dataItem);
+  };
 
-    public static constructETHNFTItem(
-        chainId: number,
-        contractAddress: string,
-        contractName: string,
-        name: string,
-        mediaData: string,
-    ) {
-        return new ETHNFTItem({
-            chainId,
-            contractAddress,
-            contractName,
-            mediaData,
-            name,
-        });
-    }
+  public static constructETHNFTItem(
+    chainId: number,
+    contractAddress: string,
+    contractName: string,
+    name: string,
+    mediaData: string
+  ) {
+    return new ETHNFTItem({
+      chainId,
+      contractAddress,
+      contractName,
+      mediaData,
+      name,
+    });
+  }
 }

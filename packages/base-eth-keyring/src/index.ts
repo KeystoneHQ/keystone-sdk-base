@@ -1,2 +1,2 @@
-export { BaseKeyring, StoredKeyring } from './BaseKeyring';
-export { InteractionProvider } from './InteractionProvider';
+export { BaseKeyring, StoredKeyring } from "./BaseKeyring";
+export { InteractionProvider } from "./InteractionProvider";

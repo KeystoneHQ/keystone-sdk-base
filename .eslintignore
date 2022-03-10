@@ -7,3 +7,6 @@ tmp
 *.min.js
 *.bundle.*
 node_modules
+.eslintrc.js
+babel.config.js
+packages/**/dist

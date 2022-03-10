@@ -1,1 +1,1 @@
-export { DefaultKeyring as default } from './DefaultKeyring';
+export { DefaultKeyring as default } from "./DefaultKeyring";

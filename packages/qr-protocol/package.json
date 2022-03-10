@@ -45,7 +45,8 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
-    "tsdx": "^0.14.1"
+    "tsdx": "^0.14.1",
+    "typescript": "^4.6.2"
   },
-  "gitHead": "2078c109319ceda7954517b8055a486043edf6b7"
+  "gitHead": "77958e4e7cf949e869b0cbb3ccbb23c499885772"
 }
