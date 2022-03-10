@@ -13,10 +13,10 @@ const styleBase = {
   borderWidth: 1,
   color: "white",
   outline: "none",
-  margin: 2
+  margin: 2,
 };
 
-export const Button: FunctionComponent<Props> = props => {
+export const Button: FunctionComponent<Props> = (props) => {
   const { onClick, children } = props;
   return (
     <button onClick={onClick} style={styleBase}>

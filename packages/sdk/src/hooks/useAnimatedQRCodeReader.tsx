@@ -41,7 +41,7 @@ export const useAnimatedQRCodeReader = (): [
 
   const handleStop = () => {
     ee.emit("read", {
-      status: "canceled"
+      status: "canceled",
     });
   };
 
@@ -57,12 +57,12 @@ export const useAnimatedQRCodeReader = (): [
       } else {
         const result = urDecoder.resultUR();
         let foundExpected = false;
-        expectTypes.forEach(et => {
+        expectTypes.forEach((et) => {
           if (et === result.type) {
             foundExpected = true;
             ee.emit("read", {
               result,
-              status: "success"
+              status: "success",
             });
             return;
           }
@@ -88,7 +88,7 @@ export const useAnimatedQRCodeReader = (): [
       style={{
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
       }}
     >
       {title && (
@@ -105,7 +105,7 @@ export const useAnimatedQRCodeReader = (): [
                 position: "absolute",
                 top: "50%",
                 left: "50%",
-                transform: "translate(-50%, -50%)"
+                transform: "translate(-50%, -50%)",
               }}
             >
               <LoadingSpinner />
@@ -120,7 +120,7 @@ export const useAnimatedQRCodeReader = (): [
             }}
             delay={100}
             style={{ width: "100%" }}
-            onError={e => {
+            onError={(e) => {
               setError(e.message);
             }}
           />
@@ -139,7 +139,7 @@ export const useAnimatedQRCodeReader = (): [
     element,
     {
       read: (expect, options) => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           setExpectTypes(expect);
           if (options) {
             options.title && setTitle(options.title);
@@ -148,13 +148,13 @@ export const useAnimatedQRCodeReader = (): [
               ? options.URTypeErrorMessage
               : "";
           }
-          ee.once("read", result => {
+          ee.once("read", (result) => {
             reset();
             resolve(result);
           });
         });
       },
-      cameraReady
-    }
+      cameraReady,
+    },
   ];
 };

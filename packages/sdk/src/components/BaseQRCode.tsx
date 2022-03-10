@@ -4,7 +4,7 @@ import QRCode from "qrcode.react";
 export const BaseQRCode = ({
   size = 200,
   data = "",
-  ecl = "L"
+  ecl = "L",
 }: {
   data: string;
   size?: number;

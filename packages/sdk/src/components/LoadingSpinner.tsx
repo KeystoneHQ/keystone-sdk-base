@@ -9,7 +9,7 @@ export const LoadingSpinner = () => {
         display: "block",
         shapeRendering: "auto",
         animationPlayState: "running",
-        animationDelay: "0s"
+        animationDelay: "0s",
       }}
       width="200px"
       height="200px"

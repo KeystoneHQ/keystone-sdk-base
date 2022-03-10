@@ -8,5 +8,6 @@ tmp
 *.bundle.*
 node_modules
 .eslintrc.js
-babel.config.js
+**/*.config.js
+packages/sdk/demo.js
 packages/**/dist

@@ -8,7 +8,7 @@ import { InitialPage } from "../components/InitialPage";
 
 const customStyles = {
   overlay: {
-    zIndex: 999
+    zIndex: 999,
   },
   content: {
     top: "50%",
@@ -19,8 +19,8 @@ const customStyles = {
     width: "37rem",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    postion: "relative"
-  }
+    postion: "relative",
+  },
 };
 
 export const useController = (): [
@@ -37,10 +37,8 @@ export const useController = (): [
   const [link, setLink] = useState("");
   const [mode, setMode] = useState<"read" | "play" | "initial" | null>(null);
   const [AnimatedQRCodePlayer, { play }] = useAnimatedQRCodePlayer();
-  const [
-    AnimatedQRCodeReader,
-    { read, cameraReady }
-  ] = useAnimatedQRCodeReader();
+  const [AnimatedQRCodeReader, { read, cameraReady }] =
+    useAnimatedQRCodeReader();
   const close = () => {
     ee.emit("close");
     reset();
@@ -91,7 +89,7 @@ export const useController = (): [
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          color: "#002237"
+          color: "#002237",
         }}
       >
         {renderPannel(mode)}
@@ -102,7 +100,7 @@ export const useController = (): [
     element,
     {
       play: (data, options) => {
-        return new Promise<PlayStatus>(resolve => {
+        return new Promise<PlayStatus>((resolve) => {
           ee.once("close", () => {
             resolve(PlayStatus.canceled);
           });
@@ -131,7 +129,7 @@ export const useController = (): [
           return result;
         }
       },
-      cameraReady
-    }
+      cameraReady,
+    },
   ];
 };

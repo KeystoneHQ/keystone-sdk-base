@@ -18,7 +18,7 @@ export const InitialPage = (props: {
           style={{
             fontSize: "1.25rem",
             fontWeight: "bold",
-            marginLeft: "1rem"
+            marginLeft: "1rem",
           }}
         >
           Sync Keystone
@@ -29,7 +29,7 @@ export const InitialPage = (props: {
           marginTop: "2rem",
           listStyleType: "none",
           padding: 0,
-          fontSize: "1rem"
+          fontSize: "1rem",
         }}
       >
         <li style={{ marginBottom: "0.75rem" }}>
@@ -53,7 +53,7 @@ export const InitialPage = (props: {
           style={{
             marginTop: "1.25rem",
             color: "#784FFE",
-            textDecoration: "none"
+            textDecoration: "none",
           }}
           href={props.link}
           target="_blank"

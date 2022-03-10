@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-export const ButtonGroup: FunctionComponent = props => {
+export const ButtonGroup: FunctionComponent = (props) => {
   return (
     <div
       style={{
@@ -9,7 +9,7 @@ export const ButtonGroup: FunctionComponent = props => {
         display: "flex",
         flexDirection: "row-reverse",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       {props.children}

@@ -55,7 +55,7 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
       style={{
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
       }}
     >
       {title && (
@@ -77,7 +77,7 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
     element,
     {
       play: (data, options) => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           setData(data);
           if (options) {
             options.refreshSpeed && setRefreshSpeed(options.refreshSpeed);
@@ -90,7 +90,7 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
             resolve(PlayStatus.success);
           });
         });
-      }
-    }
+      },
+    },
   ];
 };

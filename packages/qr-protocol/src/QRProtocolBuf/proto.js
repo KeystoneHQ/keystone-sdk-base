@@ -17,7 +17,7 @@ export const protoc = ($root.protoc = (() => {
    */
   const protoc = {};
 
-  protoc.Base = (function() {
+  protoc.Base = (function () {
     /**
      * Properties of a Base.
      * @memberof protoc
@@ -103,7 +103,7 @@ export const protoc = ($root.protoc = (() => {
      */
     Object.defineProperty(Base.prototype, "Content", {
       get: $util.oneOfGetter(($oneOfFields = ["hotVersion", "coldVersion"])),
-      set: $util.oneOfSetter($oneOfFields)
+      set: $util.oneOfSetter($oneOfFields),
     });
 
     /**
@@ -357,7 +357,7 @@ export const protoc = ($root.protoc = (() => {
     return Base;
   })();
 
-  protoc.Payload = (function() {
+  protoc.Payload = (function () {
     /**
      * Properties of a Payload.
      * @memberof protoc
@@ -457,10 +457,10 @@ export const protoc = ($root.protoc = (() => {
           "signTx",
           "signMsg",
           "verifyAddr",
-          "signTxResult"
+          "signTxResult",
         ])
       ),
-      set: $util.oneOfSetter($oneOfFields)
+      set: $util.oneOfSetter($oneOfFields),
     });
 
     /**
@@ -867,7 +867,7 @@ export const protoc = ($root.protoc = (() => {
      * @property {number} TYPE_STAKING=8 TYPE_STAKING value
      * @property {number} TYPE_SIGN_TX_RESULT=9 TYPE_SIGN_TX_RESULT value
      */
-    Payload.Type = (function() {
+    Payload.Type = (function () {
       const valuesById = {},
         values = Object.create(valuesById);
       values[(valuesById[0] = "TYPE_RESERVE")] = 0;
@@ -886,7 +886,7 @@ export const protoc = ($root.protoc = (() => {
     return Payload;
   })();
 
-  protoc.Account = (function() {
+  protoc.Account = (function () {
     /**
      * Properties of an Account.
      * @memberof protoc
@@ -1145,7 +1145,7 @@ export const protoc = ($root.protoc = (() => {
     return Account;
   })();
 
-  protoc.Coin = (function() {
+  protoc.Coin = (function () {
     /**
      * Properties of a Coin.
      * @memberof protoc
@@ -1404,7 +1404,7 @@ export const protoc = ($root.protoc = (() => {
     return Coin;
   })();
 
-  protoc.Sync = (function() {
+  protoc.Sync = (function () {
     /**
      * Properties of a Sync.
      * @memberof protoc
@@ -1610,7 +1610,7 @@ export const protoc = ($root.protoc = (() => {
     return Sync;
   })();
 
-  protoc.SignTransaction = (function() {
+  protoc.SignTransaction = (function () {
     /**
      * Properties of a SignTransaction.
      * @memberof protoc
@@ -1849,10 +1849,10 @@ export const protoc = ($root.protoc = (() => {
           "eosTx",
           "dotTx",
           "ksmTx",
-          "cfxTx"
+          "cfxTx",
         ])
       ),
-      set: $util.oneOfSetter($oneOfFields)
+      set: $util.oneOfSetter($oneOfFields),
     });
 
     /**
@@ -2536,7 +2536,7 @@ export const protoc = ($root.protoc = (() => {
     return SignTransaction;
   })();
 
-  protoc.BtcTx = (function() {
+  protoc.BtcTx = (function () {
     /**
      * Properties of a BtcTx.
      * @memberof protoc
@@ -2935,7 +2935,7 @@ export const protoc = ($root.protoc = (() => {
     return BtcTx;
   })();
 
-  protoc.Omni = (function() {
+  protoc.Omni = (function () {
     /**
      * Properties of an Omni.
      * @memberof protoc
@@ -3238,7 +3238,7 @@ export const protoc = ($root.protoc = (() => {
     return Omni;
   })();
 
-  protoc.Input = (function() {
+  protoc.Input = (function () {
     /**
      * Properties of an Input.
      * @memberof protoc
@@ -3500,7 +3500,7 @@ export const protoc = ($root.protoc = (() => {
     return Input;
   })();
 
-  protoc.utxo = (function() {
+  protoc.utxo = (function () {
     /**
      * Properties of an utxo.
      * @memberof protoc
@@ -3766,7 +3766,7 @@ export const protoc = ($root.protoc = (() => {
     return utxo;
   })();
 
-  protoc.Output = (function() {
+  protoc.Output = (function () {
     /**
      * Properties of an Output.
      * @memberof protoc
@@ -4064,7 +4064,7 @@ export const protoc = ($root.protoc = (() => {
     return Output;
   })();
 
-  protoc.EthTx = (function() {
+  protoc.EthTx = (function () {
     /**
      * Properties of an EthTx.
      * @memberof protoc
@@ -4389,7 +4389,7 @@ export const protoc = ($root.protoc = (() => {
       return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    EthTx.Override = (function() {
+    EthTx.Override = (function () {
       /**
        * Properties of an Override.
        * @memberof protoc.EthTx
@@ -4676,7 +4676,7 @@ export const protoc = ($root.protoc = (() => {
     return EthTx;
   })();
 
-  protoc.EtcTx = (function() {
+  protoc.EtcTx = (function () {
     /**
      * Properties of an EtcTx.
      * @memberof protoc
@@ -4964,7 +4964,7 @@ export const protoc = ($root.protoc = (() => {
     return EtcTx;
   })();
 
-  protoc.LatestBlock = (function() {
+  protoc.LatestBlock = (function () {
     /**
      * Properties of a LatestBlock.
      * @memberof protoc
@@ -5235,7 +5235,7 @@ export const protoc = ($root.protoc = (() => {
     return LatestBlock;
   })();
 
-  protoc.Override = (function() {
+  protoc.Override = (function () {
     /**
      * Properties of an Override.
      * @memberof protoc
@@ -5483,7 +5483,7 @@ export const protoc = ($root.protoc = (() => {
     return Override;
   })();
 
-  protoc.TronTx = (function() {
+  protoc.TronTx = (function () {
     /**
      * Properties of a TronTx.
      * @memberof protoc
@@ -5877,7 +5877,7 @@ export const protoc = ($root.protoc = (() => {
     return TronTx;
   })();
 
-  protoc.BchTx = (function() {
+  protoc.BchTx = (function () {
     /**
      * Properties of a BchTx.
      * @memberof protoc
@@ -6246,7 +6246,7 @@ export const protoc = ($root.protoc = (() => {
       return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    BchTx.Input = (function() {
+    BchTx.Input = (function () {
       /**
        * Properties of an Input.
        * @memberof protoc.BchTx
@@ -6573,7 +6573,7 @@ export const protoc = ($root.protoc = (() => {
     return BchTx;
   })();
 
-  protoc.DashTx = (function() {
+  protoc.DashTx = (function () {
     /**
      * Properties of a DashTx.
      * @memberof protoc
@@ -6942,7 +6942,7 @@ export const protoc = ($root.protoc = (() => {
       return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    DashTx.Input = (function() {
+    DashTx.Input = (function () {
       /**
        * Properties of an Input.
        * @memberof protoc.DashTx
@@ -7269,7 +7269,7 @@ export const protoc = ($root.protoc = (() => {
     return DashTx;
   })();
 
-  protoc.LtcTx = (function() {
+  protoc.LtcTx = (function () {
     /**
      * Properties of a LtcTx.
      * @memberof protoc
@@ -7639,7 +7639,7 @@ export const protoc = ($root.protoc = (() => {
     return LtcTx;
   })();
 
-  protoc.DcrTx = (function() {
+  protoc.DcrTx = (function () {
     /**
      * Properties of a DcrTx.
      * @memberof protoc
@@ -8039,7 +8039,7 @@ export const protoc = ($root.protoc = (() => {
       return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    DcrTx.Input = (function() {
+    DcrTx.Input = (function () {
       /**
        * Properties of an Input.
        * @memberof protoc.DcrTx
@@ -8342,7 +8342,7 @@ export const protoc = ($root.protoc = (() => {
     return DcrTx;
   })();
 
-  protoc.XzcTx = (function() {
+  protoc.XzcTx = (function () {
     /**
      * Properties of a XzcTx.
      * @memberof protoc
@@ -8742,7 +8742,7 @@ export const protoc = ($root.protoc = (() => {
       return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    XzcTx.Input = (function() {
+    XzcTx.Input = (function () {
       /**
        * Properties of an Input.
        * @memberof protoc.XzcTx
@@ -9049,7 +9049,7 @@ export const protoc = ($root.protoc = (() => {
     return XzcTx;
   })();
 
-  protoc.XrpTx = (function() {
+  protoc.XrpTx = (function () {
     /**
      * Properties of a XrpTx.
      * @memberof protoc
@@ -9528,7 +9528,7 @@ export const protoc = ($root.protoc = (() => {
     return XrpTx;
   })();
 
-  protoc.IostTx = (function() {
+  protoc.IostTx = (function () {
     /**
      * Properties of an IostTx.
      * @memberof protoc
@@ -9923,7 +9923,7 @@ export const protoc = ($root.protoc = (() => {
       return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    IostTx.Config = (function() {
+    IostTx.Config = (function () {
       /**
        * Properties of a Config.
        * @memberof protoc.IostTx
@@ -10279,7 +10279,7 @@ export const protoc = ($root.protoc = (() => {
     return IostTx;
   })();
 
-  protoc.OmniTx = (function() {
+  protoc.OmniTx = (function () {
     /**
      * Properties of an OmniTx.
      * @memberof protoc
@@ -10738,7 +10738,7 @@ export const protoc = ($root.protoc = (() => {
       return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    OmniTx.Input = (function() {
+    OmniTx.Input = (function () {
       /**
        * Properties of an Input.
        * @memberof protoc.OmniTx
@@ -11012,7 +11012,7 @@ export const protoc = ($root.protoc = (() => {
       return Input;
     })();
 
-    OmniTx.utxo = (function() {
+    OmniTx.utxo = (function () {
       /**
        * Properties of an utxo.
        * @memberof protoc.OmniTx
@@ -11288,7 +11288,7 @@ export const protoc = ($root.protoc = (() => {
     return OmniTx;
   })();
 
-  protoc.EosTx = (function() {
+  protoc.EosTx = (function () {
     /**
      * Properties of an EosTx.
      * @memberof protoc
@@ -11566,7 +11566,7 @@ export const protoc = ($root.protoc = (() => {
       return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    EosTx.Data = (function() {
+    EosTx.Data = (function () {
       /**
        * Properties of a Data.
        * @memberof protoc.EosTx
@@ -11958,7 +11958,7 @@ export const protoc = ($root.protoc = (() => {
       return Data;
     })();
 
-    EosTx.Header = (function() {
+    EosTx.Header = (function () {
       /**
        * Properties of a Header.
        * @memberof protoc.EosTx
@@ -12363,7 +12363,7 @@ export const protoc = ($root.protoc = (() => {
     return EosTx;
   })();
 
-  protoc.DotTx = (function() {
+  protoc.DotTx = (function () {
     /**
      * Properties of a DotTx.
      * @memberof protoc
@@ -13129,7 +13129,7 @@ export const protoc = ($root.protoc = (() => {
     return DotTx;
   })();
 
-  protoc.KsmTx = (function() {
+  protoc.KsmTx = (function () {
     /**
      * Properties of a KsmTx.
      * @memberof protoc
@@ -13895,7 +13895,7 @@ export const protoc = ($root.protoc = (() => {
     return KsmTx;
   })();
 
-  protoc.CfxTx = (function() {
+  protoc.CfxTx = (function () {
     /**
      * Properties of a CfxTx.
      * @memberof protoc
@@ -14308,7 +14308,7 @@ export const protoc = ($root.protoc = (() => {
       return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    CfxTx.Override = (function() {
+    CfxTx.Override = (function () {
       /**
        * Properties of an Override.
        * @memberof protoc.CfxTx
@@ -14595,7 +14595,7 @@ export const protoc = ($root.protoc = (() => {
     return CfxTx;
   })();
 
-  protoc.SignMessage = (function() {
+  protoc.SignMessage = (function () {
     /**
      * Properties of a SignMessage.
      * @memberof protoc
@@ -14825,7 +14825,7 @@ export const protoc = ($root.protoc = (() => {
     return SignMessage;
   })();
 
-  protoc.VerifyAddress = (function() {
+  protoc.VerifyAddress = (function () {
     /**
      * Properties of a VerifyAddress.
      * @memberof protoc
@@ -15063,7 +15063,7 @@ export const protoc = ($root.protoc = (() => {
     return VerifyAddress;
   })();
 
-  protoc.SignTransactionResult = (function() {
+  protoc.SignTransactionResult = (function () {
     /**
      * Properties of a SignTransactionResult.
      * @memberof protoc
@@ -15289,7 +15289,7 @@ export const protoc = ($root.protoc = (() => {
     return SignTransactionResult;
   })();
 
-  protoc.DashStaking = (function() {
+  protoc.DashStaking = (function () {
     /**
      * Properties of a DashStaking.
      * @memberof protoc
@@ -15562,7 +15562,7 @@ export const protoc = ($root.protoc = (() => {
     return DashStaking;
   })();
 
-  protoc.Staking = (function() {
+  protoc.Staking = (function () {
     /**
      * Properties of a Staking.
      * @memberof protoc
@@ -15603,7 +15603,7 @@ export const protoc = ($root.protoc = (() => {
      */
     Object.defineProperty(Staking.prototype, "data", {
       get: $util.oneOfGetter(($oneOfFields = ["dash"])),
-      set: $util.oneOfSetter($oneOfFields)
+      set: $util.oneOfSetter($oneOfFields),
     });
 
     /**
