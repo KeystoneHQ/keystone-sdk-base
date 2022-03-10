@@ -1,40 +1,40 @@
 {
-    "name": "@keystonehq/eth-keyring",
-    "version": "0.11.4-alpha.0",
-    "description": "eth-keyring interact with keystone",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "files": [
-        "dist"
-    ],
-    "scripts": {
-        "clean": "rm -rf ./dist",
-        "start": "tsdx watch",
-        "build": "tsdx build"
-    },
-    "publishConfig": {
-        "access": "public"
-    },
-    "author": "soralit <soralitria@gmail.com>",
-    "license": "ISC",
-    "dependencies": {
-        "@ethereumjs/tx": "3.0.0",
-        "@keystonehq/base-eth-keyring": "^0.3.4-alpha.0",
-        "@keystonehq/bc-ur-registry-eth": "^0.8.0-alpha.1",
-        "@keystonehq/sdk": "^0.9.3-alpha.0",
-        "@metamask/obs-store": "^7.0.0",
-        "bs58check": "^2.1.2",
-        "ethereumjs-util": "^7.0.8",
-        "hdkey": "^2.0.1",
-        "uuid": "^8.3.2"
-    },
-    "devDependencies": {
-        "@babel/preset-typescript": "^7.15.0",
-        "@types/bs58check": "^2.1.0",
-        "@types/hdkey": "2.0.0",
-        "@types/uuid": "^8.3.1",
-        "tsdx": "^0.14.1",
-        "typescript": "^4.6.2"
-    },
-    "gitHead": "77958e4e7cf949e869b0cbb3ccbb23c499885772"
+  "name": "@keystonehq/eth-keyring",
+  "version": "0.11.5-alpha.0",
+  "description": "eth-keyring interact with keystone",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "start": "tsdx watch",
+    "build": "tsdx build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "soralit <soralitria@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@ethereumjs/tx": "3.0.0",
+    "@keystonehq/base-eth-keyring": "^0.3.5-alpha.0",
+    "@keystonehq/bc-ur-registry-eth": "^0.8.1-alpha.0",
+    "@keystonehq/sdk": "^0.9.4-alpha.0",
+    "@metamask/obs-store": "^7.0.0",
+    "bs58check": "^2.1.2",
+    "ethereumjs-util": "^7.0.8",
+    "hdkey": "^2.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/bs58check": "^2.1.0",
+    "@types/hdkey": "2.0.0",
+    "@types/uuid": "^8.3.1",
+    "tsdx": "^0.14.1",
+    "typescript": "^4.6.2"
+  },
+  "gitHead": "77958e4e7cf949e869b0cbb3ccbb23c499885772"
 }

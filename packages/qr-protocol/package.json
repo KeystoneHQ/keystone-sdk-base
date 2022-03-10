@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/qr-protocol",
-  "version": "0.8.8-alpha.0",
+  "version": "0.8.9-alpha.0",
   "description": "QRCode Protocol",
   "main": "dist/index.js",
   "types": "src/index.ts",
