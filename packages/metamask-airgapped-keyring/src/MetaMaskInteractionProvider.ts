@@ -9,28 +9,30 @@ import {
 } from "@keystonehq/bc-ur-registry-eth";
 import * as uuid from "uuid";
 
+export type IMemState = ObservableStore<{
+  _version: number;
+  sync: {
+    reading: boolean;
+  };
+  sign: {
+    request?: {
+      requestId: string;
+      payload: {
+        type: string;
+        cbor: string;
+      };
+      title?: string;
+      description?: string;
+    };
+  };
+}>;
+
 export class MetamaskInteractionProvider
   extends EventEmitter
   implements InteractionProvider
 {
   static instance: MetamaskInteractionProvider;
-  public memStore: ObservableStore<{
-    _version: number;
-    sync: {
-      reading: boolean;
-    };
-    sign: {
-      request?: {
-        requestId: string;
-        payload: {
-          type: string;
-          cbor: string;
-        };
-        title?: string;
-        description?: string;
-      };
-    };
-  }>;
+  public memStore: IMemState;
   constructor() {
     super();
     if (MetamaskInteractionProvider.instance) {
@@ -43,6 +45,18 @@ export class MetamaskInteractionProvider
     });
     MetamaskInteractionProvider.instance = this;
   }
+
+  private cleanSyncListeners = () => {
+    this.removeAllListeners("keystone-sync_success-hdkey");
+    this.removeAllListeners("keystone-sync_success-account");
+    this.removeAllListeners("keystone-sync_cancel");
+  };
+
+  private cleanSignListeners = (requestId: string) => {
+    this.removeAllListeners(`${requestId}-signed`);
+    this.removeAllListeners(`${requestId}-canceled`);
+  };
+
   readCryptoHDKeyOrCryptoAccount = (): Promise<CryptoHDKey | CryptoAccount> => {
     return new Promise((resolve, reject) => {
       this.memStore.updateState({
@@ -130,6 +144,16 @@ export class MetamaskInteractionProvider
       this.memStore.updateState({ sign: {} });
       this.emit(`${requestId}-canceled`);
     }
+  };
+
+  public reset = () => {
+    this.cleanSyncListeners();
+    const signPayload = this.memStore.getState().sign.request;
+    if (signPayload) {
+      const { requestId } = signPayload;
+      this.cleanSignListeners(requestId);
+    }
+    this.resetState();
   };
 
   private resetState = () => {
