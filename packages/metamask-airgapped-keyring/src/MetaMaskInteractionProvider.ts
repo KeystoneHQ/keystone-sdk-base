@@ -43,6 +43,18 @@ export class MetamaskInteractionProvider
     });
     MetamaskInteractionProvider.instance = this;
   }
+
+  private cleanSyncListeners = () => {
+    this.removeAllListeners("keystone-sync_success-hdkey");
+    this.removeAllListeners("keystone-sync_success-account");
+    this.removeAllListeners("keystone-sync_cancel");
+  };
+
+  private cleanSignListeners = (requestId: string) => {
+    this.removeAllListeners(`${requestId}-signed`);
+    this.removeAllListeners(`${requestId}-canceled`);
+  };
+
   readCryptoHDKeyOrCryptoAccount = (): Promise<CryptoHDKey | CryptoAccount> => {
     return new Promise((resolve, reject) => {
       this.memStore.updateState({
@@ -130,6 +142,16 @@ export class MetamaskInteractionProvider
       this.memStore.updateState({ sign: {} });
       this.emit(`${requestId}-canceled`);
     }
+  };
+
+  public reset = () => {
+    this.cleanSyncListeners();
+    const signPayload = this.memStore.getState().sign.request;
+    if (signPayload) {
+      const { requestId } = signPayload;
+      this.cleanSignListeners(requestId);
+    }
+    this.resetState();
   };
 
   private resetState = () => {
