@@ -25,6 +25,10 @@ export class MetaMaskKeyring extends BaseKeyring {
     return new MetamaskInteractionProvider();
   };
 
+  resetStore = (): void => {
+    this.getInteraction().reset();
+  };
+
   getMemStore = () => {
     return this.getInteraction().memStore;
   };
