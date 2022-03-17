@@ -9,28 +9,30 @@ import {
 } from "@keystonehq/bc-ur-registry-eth";
 import * as uuid from "uuid";
 
+export type MemState = ObservableStore<{
+  _version: number;
+  sync: {
+    reading: boolean;
+  };
+  sign: {
+    request?: {
+      requestId: string;
+      payload: {
+        type: string;
+        cbor: string;
+      };
+      title?: string;
+      description?: string;
+    };
+  };
+}>;
+
 export class MetamaskInteractionProvider
   extends EventEmitter
   implements InteractionProvider
 {
   static instance: MetamaskInteractionProvider;
-  public memStore: ObservableStore<{
-    _version: number;
-    sync: {
-      reading: boolean;
-    };
-    sign: {
-      request?: {
-        requestId: string;
-        payload: {
-          type: string;
-          cbor: string;
-        };
-        title?: string;
-        description?: string;
-      };
-    };
-  }>;
+  public memStore: MemState;
   constructor() {
     super();
     if (MetamaskInteractionProvider.instance) {
