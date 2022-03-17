@@ -1,4 +1,3 @@
-// @ts-ignore
 import HDKey from "hdkey";
 import {
   toChecksumAddress,
@@ -80,7 +79,7 @@ export class BaseKeyring {
   protected page: number;
   protected perPage: number;
   protected indexes: Record<string, number>;
-  protected hdk: HDKey;
+  protected hdk: any;
   protected name: string;
   protected paths: Record<string, string>;
   protected keyringAccount: KEYRING_ACCOUNT;
