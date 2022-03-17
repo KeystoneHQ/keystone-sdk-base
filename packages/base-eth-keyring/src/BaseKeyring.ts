@@ -1,3 +1,4 @@
+// @ts-ignore
 import HDKey from "hdkey";
 import {
   toChecksumAddress,
