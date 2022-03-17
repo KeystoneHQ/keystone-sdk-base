@@ -220,7 +220,10 @@ export class BaseKeyring {
   }
 
   public syncKeyring(data: CryptoHDKey | CryptoAccount): void {
-    if (data.getRegistryType() === extend.RegistryTypes.CRYPTO_HDKEY) {
+    if (
+      data.getRegistryType().getType() ===
+      extend.RegistryTypes.CRYPTO_HDKEY.getType()
+    ) {
       this.keyringMode = KEYRING_MODE.hd;
       this.__readCryptoHDKey(data as CryptoHDKey);
     } else {
