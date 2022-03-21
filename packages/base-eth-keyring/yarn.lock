@@ -1268,13 +1268,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/hdkey@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@types/hdkey/-/hdkey-2.0.0.tgz#b5d9c30726ae02896eccc5cd200e8a380bf2c872"
-  integrity sha512-tq+EUqdxFKX+opzlGudmq+l00rKCWS4ngZzcSgUSe+DTCu8GzUQ6QHmX0IhTxT/3XGyxfwyWiZwhoQKh1Yid8Q==
-  dependencies:
-    "@types/node" "*"
-
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.3.tgz#4ba8ddb720221f432e443bd5f9117fd22cfd4762"

@@ -1250,10 +1250,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@keystonehq/bc-ur-registry@^0.5.0-alpha.4":
-  version "0.5.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry/-/bc-ur-registry-0.5.0-alpha.4.tgz#73c7e58feb3c2e77eb1d992e7380e4a3dede4b87"
-  integrity sha512-OEwOFQ19Cca5N4tnVAVS5zf0qBK9qsAatbNGcnMG4YYNNWq2Db2TT12LIDcwXTyWjQoBAM3//aTa0kQciLo5zQ==
+"@keystonehq/bc-ur-registry@^0.5.0-alpha.5":
+  version "0.5.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry/-/bc-ur-registry-0.5.0-alpha.5.tgz#3d1a7eab980e8445c1596cdde704215c96d6b88a"
+  integrity sha512-T80XI+c8pWnkq9ZbuadlhFq/+8o4TcHtq+LQsK1XfjkhBqH75tcwim0310gKxavOhaSoC1i8dSqAnrFpj+5dJw==
   dependencies:
     "@ngraveio/bc-ur" "^1.1.5"
     base58check "^2.0.0"
@@ -1373,13 +1373,6 @@
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@types/bn.js/-/bn.js-5.1.0.tgz#32c5d271503a12653c62cf4d2b45e6eab8cebc68"
   integrity sha512-QSSVYj7pYFN49kW77o2s9xTCwZ8F2xLbjLLSEVh8D2F4JUhZtPAGOFLTD+ffqksBx/u4cE/KImFjyhqCjn/LIA==
-  dependencies:
-    "@types/node" "*"
-
-"@types/bs58check@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@types/bs58check/-/bs58check-2.1.0.tgz#7d25a8b88fe7a9e315d2647335ee3c43c8fdb0c0"
-  integrity sha512-OxsysnJQh82vy9DRbOcw9m2j/WiyqZLn0YBhKxdQ+aCwoHj+tWzyCgpwAkr79IfDXZKxc6h7k89T9pwS78CqTQ==
   dependencies:
     "@types/node" "*"
 
