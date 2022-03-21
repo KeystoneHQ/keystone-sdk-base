@@ -79,7 +79,7 @@ export class BaseKeyring {
   protected page: number;
   protected perPage: number;
   protected indexes: Record<string, number>;
-  protected hdk: HDKey;
+  protected hdk: any;
   protected name: string;
   protected paths: Record<string, string>;
   protected keyringAccount: KEYRING_ACCOUNT;
@@ -220,7 +220,10 @@ export class BaseKeyring {
   }
 
   public syncKeyring(data: CryptoHDKey | CryptoAccount): void {
-    if (data.getRegistryType() === extend.RegistryTypes.CRYPTO_HDKEY) {
+    if (
+      data.getRegistryType().getType() ===
+      extend.RegistryTypes.CRYPTO_HDKEY.getType()
+    ) {
       this.keyringMode = KEYRING_MODE.hd;
       this.__readCryptoHDKey(data as CryptoHDKey);
     } else {
