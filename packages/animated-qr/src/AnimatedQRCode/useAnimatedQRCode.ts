@@ -22,7 +22,9 @@ export const useAnimatedQRCode = ({
     [cbor, type]
   );
 
-  const [currentQRCode, setCurrentQRCode] = useState(urEncoder.nextPart());
+  const [currentQRCode, setCurrentQRCode] = useState(
+    urEncoder.nextPart().toUpperCase()
+  );
 
   useEffect(() => {
     const id = setInterval(() => {
