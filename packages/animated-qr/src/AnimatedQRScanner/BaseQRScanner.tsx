@@ -58,6 +58,7 @@ export const BaseQRScanner = ({
   return (
     <video
       id={VIDEO_ID}
+      data-testid={VIDEO_ID}
       style={{
         display: canplay ? "block" : "none",
         width: "100%",
