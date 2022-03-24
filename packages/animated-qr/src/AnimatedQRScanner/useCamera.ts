@@ -31,7 +31,6 @@ export const useCamera = (
       }
     } catch (error) {
       if (mounted.current) {
-        console.log("checkPermissions error", error);
         setCameraStatus(CameraStatus.UNKNOWN_ERROR);
       }
     }
@@ -55,10 +54,13 @@ export const useCamera = (
   const checkEnvironment = async () => {
     try {
       const { environmentReady } = await checkStatus(defaultPopup);
-      environmentReady && setCameraStatus(CameraStatus.READY);
+      if (environmentReady) {
+        setCameraStatus(CameraStatus.READY);
+      } else {
+        setCameraStatus(CameraStatus.PERMISSION_NEEDED);
+      }
     } catch (error) {
       if (mounted.current) {
-        console.log("checkEnvironment error", error);
         setCameraStatus(CameraStatus.UNKNOWN_ERROR);
       }
     }

@@ -34,6 +34,10 @@ export const useAnimatedScan = ({
           return;
         }
 
+        if (urDecoder.isError()) {
+          handleError(QRCodeError.INVALID_QR_CODE);
+        }
+
         if (urDecoder.isSuccess()) {
           const ur = urDecoder.resultUR();
           if (purposeToURType[purpose].includes(ur.type)) {
@@ -41,12 +45,10 @@ export const useAnimatedScan = ({
           } else {
             handleError(QRCodeError.UNEXPECTED_QRCODE);
           }
-        } else {
-          handleError(urDecoder.resultError());
         }
         setURDecoder(new URRegistryDecoder());
       } catch (e) {
-        handleError(QRCodeError.UNKNOWN_QR_CODE);
+        handleError(QRCodeError.INVALID_QR_CODE);
       }
     },
     [urDecoder, handleError, handleScan]
