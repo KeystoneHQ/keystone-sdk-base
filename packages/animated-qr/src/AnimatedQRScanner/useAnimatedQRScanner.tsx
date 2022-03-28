@@ -36,7 +36,7 @@ export const useAnimatedQRScanner = ({
       });
 
       return (
-        <div style={{ width: rest?.options?.width ?? 300 }}>
+        <div style={{ width: rest?.options?.width || 300 }}>
           <Scanner
             handleScan={handleScanSuccess}
             handleError={handleScanFailure}

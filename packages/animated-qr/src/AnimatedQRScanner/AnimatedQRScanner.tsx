@@ -20,7 +20,7 @@ export const AnimatedQRScanner = ({
   });
 
   return (
-    <div style={{ width: options?.width ?? CAMERA_VIDEO_WIDTH }}>
+    <div style={{ width: options?.width || CAMERA_VIDEO_WIDTH }}>
       <BaseQRScanner
         handleScan={handleScanSuccess}
         handleError={handleScanFailure}
