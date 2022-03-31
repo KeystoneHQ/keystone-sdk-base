@@ -3,7 +3,7 @@ import { BaseQRScanner } from "./BaseQRScanner";
 import { ScannerProps } from "./types";
 import { useAnimatedScan } from "./useAnimatedScan";
 
-const CAMERA_VIDEO_WIDTH = 300;
+export const CAMERA_VIDEO_WIDTH = 300;
 
 export const AnimatedQRScanner = ({
   purpose,

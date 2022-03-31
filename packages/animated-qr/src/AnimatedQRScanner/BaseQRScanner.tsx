@@ -4,7 +4,7 @@ import { BrowserQRCodeReader } from "@zxing/browser";
 
 const VIDEO_ID = "qr-scanner-video";
 
-interface ReaderProps {
+interface BaseQRScannerProps {
   handleScan: (result: string) => void;
   handleError?: (error: string) => void;
   blur?: boolean;
@@ -14,7 +14,7 @@ export const BaseQRScanner = ({
   handleScan,
   handleError,
   blur = true,
-}: ReaderProps): JSX.Element => {
+}: BaseQRScannerProps): JSX.Element => {
   const [canplay, setCanplay] = useState(false);
   const codeReader = useMemo(() => {
     const hint = new Map();

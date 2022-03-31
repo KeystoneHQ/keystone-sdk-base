@@ -88,8 +88,8 @@ const ContainerView = () => {
   }, [])
   
   const { AnimatedQRScanner } = useAnimatedQRScanner({
-    purpose: Purpose.SYNC,
-    Scanner: MyOwnQRScanner // Optional, using Keystone BaseQRScanner by default
+    Scanner: MyOwnQRScanner, // Optional, using Keystone BaseQRScanner by default,
+    scannerProps: { myOwnQRScannerPropsKey: "value" } // Optional
   })
 
   return (

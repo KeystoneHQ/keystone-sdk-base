@@ -1,7 +1,8 @@
 import React, { ReactElement, useMemo } from "react";
-import { Purpose } from "./types";
+import { ScannerProps } from "./types";
 import { BaseQRScanner } from "./BaseQRScanner";
 import { useAnimatedScan } from "./useAnimatedScan";
+import { CAMERA_VIDEO_WIDTH } from "./AnimatedQRScanner";
 
 interface BaseScannerProps {
   handleScan: (ur: string) => void;
@@ -10,24 +11,18 @@ interface BaseScannerProps {
 }
 
 export interface ScannerHookParams {
-  purpose: Purpose;
   Scanner?: (props: BaseScannerProps) => ReactElement;
-  defaultPopup?: string;
+  scannerProps?: Record<string, any>
 }
 
 export const useAnimatedQRScanner = ({
-  purpose,
   Scanner = BaseQRScanner,
-  defaultPopup,
+  scannerProps = {}
 }: ScannerHookParams): {
-  AnimatedQRScanner: (props: BaseScannerProps) => JSX.Element;
+  AnimatedQRScanner: (props: ScannerProps) => ReactElement;
 } => {
   const AnimatedQRScanner = useMemo(() => {
-    return ({
-      handleScan,
-      handleError,
-      ...rest
-    }: BaseScannerProps): JSX.Element => {
+    return ({purpose, handleScan, handleError, defaultPopup, options}: ScannerProps): ReactElement => {
       const { handleScanSuccess, handleScanFailure } = useAnimatedScan({
         purpose,
         handleScan,
@@ -36,11 +31,11 @@ export const useAnimatedQRScanner = ({
       });
 
       return (
-        <div style={{ width: rest?.options?.width || 300 }}>
+        <div style={{ width: options?.width || CAMERA_VIDEO_WIDTH }}>
           <Scanner
             handleScan={handleScanSuccess}
             handleError={handleScanFailure}
-            {...rest}
+            {...scannerProps}
           />
         </div>
       );
