@@ -41,7 +41,7 @@ export const useAnimatedScan = ({
         if (urDecoder.isSuccess()) {
           const ur = urDecoder.resultUR();
           if (purposeToURType[purpose].includes(ur.type)) {
-            handleScan(ur.cbor.toString("hex"));
+            handleScan( { type: ur.type, cbor: ur.cbor.toString("hex") });
           } else {
             handleError(QRCodeError.UNEXPECTED_QRCODE);
           }

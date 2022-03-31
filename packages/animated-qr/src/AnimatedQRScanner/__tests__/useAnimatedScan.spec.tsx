@@ -26,7 +26,7 @@ describe("useAnimatedScan", () => {
         handleScanSuccess(hdKey.ur);
       });
 
-      expect(stubHandleScan).toBeCalledWith(hdKey.hex);
+      expect(stubHandleScan).toBeCalledWith({type: hdKey.type, cbor: hdKey.hex});
     });
 
     it("should enhance the given function to handle phantom QR code", () => {
@@ -48,7 +48,8 @@ describe("useAnimatedScan", () => {
       act(() => {
         handleScanSuccess(hdKey.urSequences[1]);
       });
-      expect(stubHandleScan).toBeCalledWith(hdKey.hex);
+
+      expect(stubHandleScan).toBeCalledWith({type: hdKey.type, cbor: hdKey.hex});
     });
   });
 

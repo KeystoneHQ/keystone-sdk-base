@@ -19,7 +19,7 @@ npm install --save @keystonehq/animated-qr
 
 Component
 
-```
+```jsx
 import { AnimatedQRCode } from '@keystonehq/animated-qr';
 
 const ContainerView = () => {
@@ -31,7 +31,7 @@ const ContainerView = () => {
 
 Hook
 
-```
+```jsx
 import { useAnimatedQRCode } from '@keystonehq/animated-qr';
 
 const ContainerView = () => {
@@ -47,12 +47,12 @@ const ContainerView = () => {
 
 Component
 
-```
+```jsx
 import { AnimatedQRScanner, Purpose } from '@keystonehq/animated-qr';
 
 const ContainerView = () => {
-  const handleScan= useCallback((ur: string) => {
-    console.log("onScanSuccess", ur)
+  const handleScan= useCallback(({type: string, cbor: string}) => {
+    console.log("onScanSuccess", cbor)
   }, [])
 
   const handleError= useCallback((error: string) => {
@@ -75,11 +75,11 @@ const ContainerView = () => {
 
 Hook
 
-```
+```jsx
 import { useAnimatedQRScanner, Purpose } from '@keystonehq/animated-qr';
 
 const ContainerView = () => {
-  const handleScan= useCallback((ur: string) => {
+  const handleScan= useCallback(({type: string, cbor: string}) => {
     console.log("onScanSuccess", ur)
   }, [])
 

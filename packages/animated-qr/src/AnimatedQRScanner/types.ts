@@ -20,7 +20,7 @@ export type ScannerError =
 
 export interface ScannerProps {
   purpose: Purpose;
-  handleScan: (ur: string) => void;
+  handleScan: (ur: { type: string; cbor: string }) => void;
   handleError: (error: ScannerError) => void;
   options?: {
     width?: number;
