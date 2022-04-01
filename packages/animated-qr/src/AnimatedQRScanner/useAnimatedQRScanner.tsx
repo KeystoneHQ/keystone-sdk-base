@@ -22,12 +22,11 @@ export const useAnimatedQRScanner = ({
   AnimatedQRScanner: (props: ScannerProps) => ReactElement;
 } => {
   const AnimatedQRScanner = useMemo(() => {
-    return ({purpose, handleScan, handleError, defaultPopup, options}: ScannerProps): ReactElement => {
+    return ({purpose, handleScan, handleError, options}: ScannerProps): ReactElement => {
       const { handleScanSuccess, handleScanFailure } = useAnimatedScan({
         purpose,
         handleScan,
         handleError,
-        defaultPopup,
       });
 
       return (

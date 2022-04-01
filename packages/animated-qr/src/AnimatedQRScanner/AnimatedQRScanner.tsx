@@ -10,13 +10,11 @@ export const AnimatedQRScanner = ({
   handleScan,
   handleError,
   options,
-  defaultPopup,
 }: ScannerProps) => {
   const { handleScanSuccess, handleScanFailure } = useAnimatedScan({
     purpose,
     handleScan,
     handleError,
-    defaultPopup,
   });
 
   return (

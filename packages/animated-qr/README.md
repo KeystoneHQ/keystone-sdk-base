@@ -17,7 +17,7 @@ npm install --save @keystonehq/animated-qr
 
 ### QR Code
 
-Component
+#### Component
 
 ```jsx
 import { AnimatedQRCode } from '@keystonehq/animated-qr';
@@ -29,7 +29,7 @@ const ContainerView = () => {
 }
 ```
 
-Hook
+#### Hook
 
 ```jsx
 import { useAnimatedQRCode } from '@keystonehq/animated-qr';
@@ -45,7 +45,11 @@ const ContainerView = () => {
 
 ### QR Scanner
 
-Component
+#### Important
+
+Please check camera permission before rendering this Component.
+
+#### Component
 
 ```jsx
 import { AnimatedQRScanner, Purpose } from '@keystonehq/animated-qr';
@@ -73,7 +77,7 @@ const ContainerView = () => {
 }
 ```
 
-Hook
+#### Hook
 
 ```jsx
 import { useAnimatedQRScanner, Purpose } from '@keystonehq/animated-qr';
@@ -104,10 +108,6 @@ const ContainerView = () => {
 
 
 Error List
-- Camera
-  - NO_WEBCAM_FOUND 
-  - NO_WEBCAM_ACCESS 
-  - UNKNOWN_CAMERA_ERROR
 - QR Code
   - UNEXPECTED_QRCODE
   - INVALID_QR_CODE

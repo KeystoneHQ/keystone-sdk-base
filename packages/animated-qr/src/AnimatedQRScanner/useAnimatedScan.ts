@@ -1,8 +1,7 @@
 import { useCallback, useState } from "react";
 import { URRegistryDecoder } from "@keystonehq/ur-decoder";
-import { CameraStatus, QRCodeError, ScannerProps } from "./types";
+import { QRCodeError, ScannerProps } from "./types";
 import { purposeToURType } from "./constant";
-import { useCamera } from "./useCamera";
 
 interface ScannerHook {
   handleScanSuccess: (ur: string) => void;
@@ -13,18 +12,8 @@ export const useAnimatedScan = ({
   purpose,
   handleScan,
   handleError,
-  defaultPopup,
 }: Omit<ScannerProps, "Options">): ScannerHook => {
   const [urDecoder, setURDecoder] = useState(new URRegistryDecoder());
-  const { cameraStatus } = useCamera(defaultPopup);
-
-  if (
-    cameraStatus === CameraStatus.NO_WEBCAM ||
-    cameraStatus === CameraStatus.PERMISSION_NEEDED ||
-    cameraStatus === CameraStatus.UNKNOWN_ERROR
-  ) {
-    handleError(cameraStatus);
-  }
 
   const handleScanSuccess = useCallback(
     (data: string) => {

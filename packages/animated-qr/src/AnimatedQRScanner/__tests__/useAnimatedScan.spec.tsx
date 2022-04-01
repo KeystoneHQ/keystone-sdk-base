@@ -3,12 +3,6 @@ import { useAnimatedScan } from "../useAnimatedScan";
 import { Purpose, QRCodeError } from "../types";
 import { hdKey } from "./factory/ur";
 
-jest.mock("../useCamera", () => ({
-  useCamera: jest.fn().mockReturnValue({
-    cameraStatus: "READY",
-  }),
-}));
-
 describe("useAnimatedScan", () => {
   describe("handleScanSuccess", () => {
     it("should call given handleScan function", () => {
