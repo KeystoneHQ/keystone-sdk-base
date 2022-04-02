@@ -2,10 +2,14 @@ import HDKey from "hdkey";
 import {
   toChecksumAddress,
   publicToAddress,
-  BN,
   stripHexPrefix,
 } from "ethereumjs-util";
-import { Transaction } from "@ethereumjs/tx";
+import {
+  Transaction,
+  FeeMarketEIP1559Transaction,
+  TransactionFactory,
+  TypedTransaction,
+} from "@ethereumjs/tx";
 import {
   CryptoHDKey,
   DataType,
@@ -14,6 +18,7 @@ import {
   CryptoAccount,
 } from "@keystonehq/bc-ur-registry-eth";
 import * as uuid from "uuid";
+import rlp from "rlp";
 import { InteractionProvider } from "./InteractionProvider";
 
 const keyringType = "QR Hardware Wallet Device";
@@ -422,29 +427,26 @@ export class BaseKeyring {
     );
   }
 
-  // tx is an instance of the ethereumjs-transaction class.
-
-  private static serializeTx(tx: Transaction): Buffer {
-    // need use EIP-155
-    // @ts-ignore
-    tx.v = new BN(tx.common.chainId());
-    // @ts-ignore
-    tx.r = new BN(0);
-    // @ts-ignore
-    tx.s = new BN(0);
-    return tx.serialize();
-  }
-
   async signTransaction(
     address: string,
-    tx: Transaction
-  ): Promise<Transaction> {
+    tx: TypedTransaction
+  ): Promise<TypedTransaction> {
+    const dataType =
+      tx.type === 0 ? DataType.transaction : DataType.typedTransaction;
+    let messageToSign;
+    if (tx.type === 0) {
+      messageToSign = rlp.encode((tx as Transaction).getMessageToSign(false));
+    } else {
+      messageToSign = (tx as FeeMarketEIP1559Transaction).getMessageToSign(
+        false
+      );
+    }
     const hdPath = await this._pathFromAddress(address);
     const chainId = tx.common.chainId();
     const requestId = uuid.v4();
     const ethSignRequest = EthSignRequest.constructETHRequest(
-      BaseKeyring.serializeTx(tx),
-      DataType.transaction,
+      messageToSign,
+      dataType,
       hdPath,
       this.xfp,
       requestId,
@@ -457,15 +459,11 @@ export class BaseKeyring {
       "Scan with your Keystone",
       'After your Keystone has signed the transaction, click on "Scan Keystone" to receive the signature'
     );
-    const txJson = tx.toJSON();
-    return Transaction.fromTxData(
+
+    return TransactionFactory.fromTxData(
       {
-        to: txJson["to"],
-        gasLimit: txJson["gasLimit"],
-        gasPrice: txJson["gasPrice"],
-        data: txJson["data"],
-        nonce: txJson["nonce"],
-        value: txJson["value"],
+        ...tx.toJSON(),
+        type: tx.type,
         r,
         s,
         v,
