@@ -1,7 +1,7 @@
 import React, { ReactElement, useMemo } from "react";
 import { ScannerProps } from "./types";
 import { BaseQRScanner } from "./BaseQRScanner";
-import { useAnimatedScan } from "./useAnimatedScan";
+import { getAnimatedScan } from "./getAnimatedScan";
 import { CAMERA_VIDEO_WIDTH } from "./AnimatedQRScanner";
 
 interface BaseScannerProps {
@@ -23,7 +23,7 @@ export const useAnimatedQRScanner = ({
 } => {
   const AnimatedQRScanner = useMemo(() => {
     return ({purpose, handleScan, handleError, options}: ScannerProps): ReactElement => {
-      const { handleScanSuccess, handleScanFailure } = useAnimatedScan({
+      const { handleScanSuccess, handleScanFailure } = getAnimatedScan({
         purpose,
         handleScan,
         handleError,

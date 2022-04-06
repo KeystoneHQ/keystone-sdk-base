@@ -1,14 +1,14 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useAnimatedScan } from "../useAnimatedScan";
+import { getAnimatedScan } from "../getAnimatedScan";
 import { Purpose, QRCodeError } from "../types";
 import { hdKey } from "./factory/ur";
 
-describe("useAnimatedScan", () => {
+describe("getAnimatedScan", () => {
   describe("handleScanSuccess", () => {
     it("should call given handleScan function", () => {
       const stubHandleScan = jest.fn();
       const { result } = renderHook(() =>
-        useAnimatedScan({
+        getAnimatedScan({
           purpose: Purpose.SYNC,
           handleScan: stubHandleScan,
           handleError: jest.fn(),
@@ -26,7 +26,7 @@ describe("useAnimatedScan", () => {
     it("should enhance the given function to handle phantom QR code", () => {
       const stubHandleScan = jest.fn();
       const { result } = renderHook(() =>
-        useAnimatedScan({
+        getAnimatedScan({
           purpose: Purpose.SYNC,
           handleScan: stubHandleScan,
           handleError: jest.fn(),
@@ -51,7 +51,7 @@ describe("useAnimatedScan", () => {
     it("should give UNEXPECTED_QRCODE if ur type is not expected", () => {
       const stubHandleError = jest.fn();
       const { result } = renderHook(() =>
-        useAnimatedScan({
+        getAnimatedScan({
           purpose: Purpose.SIGN,
           handleScan: jest.fn(),
           handleError: stubHandleError,
@@ -69,7 +69,7 @@ describe("useAnimatedScan", () => {
     it("should give INVALID_QR_CODE if ur can't be decoded", () => {
       const stubHandleError = jest.fn();
       const { result } = renderHook(() =>
-        useAnimatedScan({
+        getAnimatedScan({
           purpose: Purpose.SYNC,
           handleScan: jest.fn(),
           handleError: stubHandleError,

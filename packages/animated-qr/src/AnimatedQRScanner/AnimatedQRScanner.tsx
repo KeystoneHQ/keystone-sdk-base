@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseQRScanner } from "./BaseQRScanner";
 import { ScannerProps } from "./types";
-import { useAnimatedScan } from "./useAnimatedScan";
+import { getAnimatedScan } from "./getAnimatedScan";
 
 export const CAMERA_VIDEO_WIDTH = 300;
 
@@ -11,7 +11,7 @@ export const AnimatedQRScanner = ({
   handleError,
   options,
 }: ScannerProps) => {
-  const { handleScanSuccess, handleScanFailure } = useAnimatedScan({
+  const { handleScanSuccess, handleScanFailure } = getAnimatedScan({
     purpose,
     handleScan,
     handleError,
