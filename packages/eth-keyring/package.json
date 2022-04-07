@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/eth-keyring",
-  "version": "0.12.1-alpha.2",
+  "version": "0.12.1-alpha.3",
   "description": "eth-keyring interact with keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@ethereumjs/tx": "3.0.0",
-    "@keystonehq/base-eth-keyring": "^0.4.1-alpha.2",
+    "@keystonehq/base-eth-keyring": "^0.4.1-alpha.3",
     "@keystonehq/bc-ur-registry-eth": "^0.9.1-alpha.2",
     "@keystonehq/sdk": "^0.10.1-alpha.2",
     "@metamask/obs-store": "^7.0.0",
