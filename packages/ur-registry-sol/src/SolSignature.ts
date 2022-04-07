@@ -13,11 +13,11 @@ enum Keys {
   signature,
 }
 
-export class ETHSignature extends RegistryItem {
+export class SolSignature extends RegistryItem {
   private requestId?: Buffer;
   private signature: Buffer;
 
-  getRegistryType = () => ExtendedRegistryTypes.ETH_SIGNATURE;
+  getRegistryType = () => ExtendedRegistryTypes.SOL_SIGNATURE;
 
   constructor(signature: Buffer, requestId?: Buffer) {
     super();
@@ -47,11 +47,11 @@ export class ETHSignature extends RegistryItem {
       ? map[Keys.requestId].getData()
       : undefined;
 
-    return new ETHSignature(signature, requestId);
+    return new SolSignature(signature, requestId);
   };
 
   public static fromCBOR = (_cborPayload: Buffer) => {
     const dataItem = decodeToDataItem(_cborPayload);
-    return ETHSignature.fromDataItem(dataItem);
+    return SolSignature.fromDataItem(dataItem);
   };
 }
