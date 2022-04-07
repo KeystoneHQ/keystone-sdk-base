@@ -3,8 +3,14 @@ import {
   toChecksumAddress,
   publicToAddress,
   stripHexPrefix,
+  rlp,
 } from "ethereumjs-util";
-import { Transaction, FeeMarketEIP1559Transaction, TransactionFactory, TypedTransaction } from "@ethereumjs/tx";
+import {
+  Transaction,
+  FeeMarketEIP1559Transaction,
+  TransactionFactory,
+  TypedTransaction,
+} from "@ethereumjs/tx";
 import {
   CryptoHDKey,
   DataType,
@@ -13,7 +19,6 @@ import {
   CryptoAccount,
 } from "@keystonehq/bc-ur-registry-eth";
 import * as uuid from "uuid";
-import rlp from "rlp";
 import { InteractionProvider } from "./InteractionProvider";
 
 const keyringType = "QR Hardware Wallet Device";
@@ -428,7 +433,7 @@ export class BaseKeyring {
   ): Promise<TypedTransaction> {
     const dataType =
       tx.type === 0 ? DataType.transaction : DataType.typedTransaction;
-    let messageToSign;
+    let messageToSign: Buffer;
     if (tx.type === 0) {
       messageToSign = rlp.encode((tx as Transaction).getMessageToSign(false));
     } else {
@@ -455,12 +460,13 @@ export class BaseKeyring {
       'After your Keystone has signed the transaction, click on "Scan Keystone" to receive the signature'
     );
 
-    return TransactionFactory.fromTxData({
+    return TransactionFactory.fromTxData(
+      {
         ...tx.toJSON(),
         type: tx.type,
         r,
         s,
-        v
+        v,
       },
       { common: tx.common }
     );
