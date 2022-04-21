@@ -7,6 +7,7 @@ import {
 } from "@keystonehq/bc-ur-registry-sol";
 import * as uuid from "uuid";
 import { InteractionProvider } from "./InteractionProvider";
+import bs58 from "bs58";
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -79,7 +80,7 @@ export class BaseKeyring {
     this.name = data.getKeys()[0].getName();
     this.keys = keys.map((each, index) => ({
       hdPath: each.getOrigin().getPath(),
-      pubKey: each.getKey().toString("hex"),
+      pubKey: bs58.encode(each.getKey()),
       index,
     }));
     this.initialized = true;
