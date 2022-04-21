@@ -119,4 +119,26 @@ export class BaseKeyring {
     tx.addSignature(new PublicKey(pubKey), signature);
     return tx;
   }
+
+  async signMessage(
+    pubKey: string,
+    messageHex: Uint8Array
+  ): Promise<Uint8Array> {
+    const requestId = uuid.v4();
+    const account = this.getAccounts().find(
+      (account) => account.pubKey == pubKey
+    );
+    const solSignRequest = SolSignRequest.constructSOLRequest(
+      Buffer.from(messageHex),
+      account.hdPath,
+      this.xfp,
+      requestId,
+    );
+    return this.requestSignature(
+      requestId,
+      solSignRequest,
+      "Scan with your Keystone",
+      'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature'
+    );
+  }
 }
