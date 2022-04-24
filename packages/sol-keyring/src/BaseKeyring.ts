@@ -1,5 +1,3 @@
-import HDKey from "hdkey";
-
 import { PublicKey, Transaction } from "@solana/web3.js";
 import {
   CryptoMultiAccounts,

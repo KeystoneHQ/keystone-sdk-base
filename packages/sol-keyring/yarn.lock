@@ -1208,10 +1208,10 @@
     base58check "^2.0.0"
     tslib "^2.3.0"
 
-"@keystonehq/sdk@0.12.0-alpha.10.1":
-  version "0.12.0-alpha.10.1"
-  resolved "https://registry.yarnpkg.com/@keystonehq/sdk/-/sdk-0.12.0-alpha.10.1.tgz#4f6f5c3056243d8f603f4673c177b85453cc114e"
-  integrity sha512-74o1eNIvrq9V4nwPwPRWHISwAlrqMkZO4unsorYK9hWIC57R9cyrDnDGiO3HNQbUF+/+j5af8m5jsR2LvVYHWA==
+"@keystonehq/sdk@^0.12.0-alpha.10.2":
+  version "0.12.0-alpha.10.2"
+  resolved "https://registry.yarnpkg.com/@keystonehq/sdk/-/sdk-0.12.0-alpha.10.2.tgz#1cff251444296a18f3090b83a353c75d949654b6"
+  integrity sha512-8tKlDgnen/5Coctes9KBPurfV7USbO+G6BaQHFJ9UgPwBnucblCaVpBXYQ4Vl2KeHlH6GPTpBaeJwZ+3alDwnw==
   dependencies:
     "@ngraveio/bc-ur" "^1.0.0"
     qrcode.react "^1.0.1"
@@ -1408,13 +1408,6 @@
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.5.tgz#21ffba0d98da4350db64891f92a9e5db3cdb4e15"
   integrity sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==
-  dependencies:
-    "@types/node" "*"
-
-"@types/hdkey@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@types/hdkey/-/hdkey-2.0.0.tgz#b5d9c30726ae02896eccc5cd200e8a380bf2c872"
-  integrity sha512-tq+EUqdxFKX+opzlGudmq+l00rKCWS4ngZzcSgUSe+DTCu8GzUQ6QHmX0IhTxT/3XGyxfwyWiZwhoQKh1Yid8Q==
   dependencies:
     "@types/node" "*"
 
