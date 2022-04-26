@@ -11,6 +11,7 @@ export interface ScannerProps {
     width?: number;
     blur?: boolean;
   };
+  videoLoaded?: (canPlay: boolean) => void
 }
 
 export enum Purpose {

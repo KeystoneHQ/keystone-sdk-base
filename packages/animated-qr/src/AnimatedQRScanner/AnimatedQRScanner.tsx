@@ -10,6 +10,7 @@ export const AnimatedQRScanner = ({
   handleScan,
   handleError,
   options,
+  videoLoaded,
 }: ScannerProps) => {
   const { handleScanSuccess, handleScanFailure } = getAnimatedScan({
     purpose,
@@ -23,6 +24,7 @@ export const AnimatedQRScanner = ({
         handleScan={handleScanSuccess}
         handleError={handleScanFailure}
         blur={options?.blur}
+        videoLoaded={videoLoaded}
       />
     </div>
   );
