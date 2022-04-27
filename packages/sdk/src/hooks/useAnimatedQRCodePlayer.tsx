@@ -9,6 +9,8 @@ import { UR, UREncoder } from "@ngraveio/bc-ur";
 
 const DEFAULT_SPEED = 100;
 
+const DEFAULT_MAX_FRAGMENT_LENGTH = 400;
+
 const DEFAULT_UR = new UR(Buffer.from("NO DATA", "utf-8"));
 
 export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
@@ -16,11 +18,12 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
   const [shouldShow, setShouldShow] = useState(false);
 
   const [refreshSpeed, setRefreshSpeed] = useState(DEFAULT_SPEED);
+  const [maxFragmentLength, setMaxFragmentLength] = useState(DEFAULT_MAX_FRAGMENT_LENGTH)
   const [hasNext, setHasNext] = useState(false);
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
 
-  const urEncoder = useMemo(() => new UREncoder(data), [data]);
+  const urEncoder = useMemo(() => new UREncoder(data, maxFragmentLength), [data]);
 
   const [qr, setQR] = useState<string>(urEncoder.nextPart());
 
@@ -84,6 +87,7 @@ export const useAnimatedQRCodePlayer = (): [JSX.Element, { play: Play }] => {
             options.hasNext && setHasNext(options.hasNext);
             options.title && setTitle(options.title);
             options.description && setDescription(options.description);
+            options.maxFragmentLength && setMaxFragmentLength(options.maxFragmentLength)
           }
           ee.once("finish", () => {
             reset();

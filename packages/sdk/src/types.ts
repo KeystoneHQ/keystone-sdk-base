@@ -28,6 +28,7 @@ export type Play = (
     hasNext?: boolean;
     title?: string;
     description?: string;
+    maxFragmentLength? : number;
   }
 ) => Promise<PlayStatus>;
 
