@@ -1,7 +1,8 @@
 import React from "react";
 import { BaseQRScanner } from "./BaseQRScanner";
-import { ScannerProps } from "./types";
+import { CameraStatus, ScannerProps } from "./types";
 import { getAnimatedScan } from "./getAnimatedScan";
+import { useCamera } from "./useCamera";
 
 export const CAMERA_VIDEO_WIDTH = 300;
 
@@ -17,6 +18,10 @@ export const AnimatedQRScanner = ({
     handleScan,
     handleError,
   });
+  const { cameraStatus } = useCamera()
+  if(cameraStatus === CameraStatus.PERMISSION_NEEDED){
+    videoLoaded && videoLoaded(false)
+  }
 
   return (
     <div style={{ width: options?.width || CAMERA_VIDEO_WIDTH }}>

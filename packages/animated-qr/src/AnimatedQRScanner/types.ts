@@ -3,6 +3,14 @@ export enum QRCodeError {
   INVALID_QR_CODE = "INVALID_QR_CODE",
 }
 
+export enum CameraStatus {
+  ACCESSING_CAMERA = "ACCESSING_CAMERA",
+  NO_WEBCAM = "NO_WEBCAM_FOUND",
+  PERMISSION_NEEDED = "NO_WEBCAM_ACCESS",
+  READY = "READY",
+  UNKNOWN_ERROR = "UNKNOWN_CAMERA_ERROR",
+}
+
 export interface ScannerProps {
   purpose: Purpose;
   handleScan: (ur: { type: string; cbor: string }) => void;
