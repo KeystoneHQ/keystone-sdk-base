@@ -11,22 +11,26 @@ const { RegistryTypes, decodeToDataItem } = extend;
 enum Keys {
   requestId = 1,
   signature,
+  origin,
 }
 
 export class ETHSignature extends RegistryItem {
   private requestId?: Buffer;
+  private origin?: string;
   private signature: Buffer;
 
   getRegistryType = () => ExtendedRegistryTypes.ETH_SIGNATAURE;
 
-  constructor(signature: Buffer, requestId?: Buffer) {
+  constructor(signature: Buffer, requestId?: Buffer, origin?: string) {
     super();
     this.signature = signature;
     this.requestId = requestId;
+    this.origin = origin;
   }
 
   public getRequestId = () => this.requestId;
   public getSignature = () => this.signature;
+  public getOrigin = () => this.origin;
 
   public toDataItem = () => {
     const map: DataItemMap = {};
@@ -36,6 +40,7 @@ export class ETHSignature extends RegistryItem {
         RegistryTypes.UUID.getTag()
       );
     }
+    if (this.origin) map[Keys.origin] = this.origin;
     map[Keys.signature] = this.signature;
     return new DataItem(map);
   };
@@ -46,8 +51,7 @@ export class ETHSignature extends RegistryItem {
     const requestId = map[Keys.requestId]
       ? map[Keys.requestId].getData()
       : undefined;
-
-    return new ETHSignature(signature, requestId);
+    return new ETHSignature(signature, requestId, map[Keys.origin]);
   };
 
   public static fromCBOR = (_cborPayload: Buffer) => {
