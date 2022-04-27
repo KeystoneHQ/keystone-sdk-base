@@ -16,13 +16,14 @@ describe("eth-sign-request", () => {
 
     const ethSignature = new ETHSignature(
       rlpSignatureData,
-      Buffer.from(idBuffer)
+      Buffer.from(idBuffer),
+      "keystone"
     );
 
     const cborHex = ethSignature.toCBOR().toString("hex");
     const ur = ethSignature.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:eth-signature/oeadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdfptywtosrftahprdctrkbegylogdghjkbafhflamfwlohghtpsseaozorsimnybbtnnbiynlckenbtfmeeamsabnaeoxasjkwswfkekiieckhpecckssptndzelnwfecylbwdlsgvazt"
+      "ur:eth-signature/otadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdfptywtosrftahprdctrkbegylogdghjkbafhflamfwlohghtpsseaozorsimnybbtnnbiynlckenbtfmeeamsabnaeoxasjkwswfkekiieckhpecckssptndzelnwfecylbwaxisjeihkkjkjyjljtihdwlkamiy"
     );
     const ethSignatureDecoded = ETHSignature.fromCBOR(
       Buffer.from(cborHex, "hex")
@@ -33,5 +34,6 @@ describe("eth-sign-request", () => {
     expect(ethSignatureDecoded.getSignature().toString("hex")).toEqual(
       "d4f0a7bcd95bba1fbb1051885054730e3f47064288575aacc102fbbf6a9a14daa066991e360d3e3406c20c00a40973eff37c7d641e5b351ec4a99bfe86f335f713"
     );
+    expect(ethSignatureDecoded.getOrigin()).toBe("keystone")
   });
 });
