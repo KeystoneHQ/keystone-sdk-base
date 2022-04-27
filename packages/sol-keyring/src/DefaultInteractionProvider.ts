@@ -46,6 +46,7 @@ export class DefaultInteractionProvider implements InteractionProvider {
       hasNext: true,
       title: requestTitle,
       description: requestDescription,
+      maxFragmentLength: 400
     });
     if (status === PlayStatus.canceled)
       throw new Error("#ktek_error[play-cancel]: play canceled");

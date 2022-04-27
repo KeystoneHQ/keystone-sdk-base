@@ -101,7 +101,7 @@ export class BaseKeyring {
       (account) => account.pubKey == pubKey
     );
     const solSignRequest = SolSignRequest.constructSOLRequest(
-      tx.serializeMessage(),
+      Buffer.from(tx.serializeMessage() as unknown as ArrayBuffer),
       account.hdPath,
       this.xfp,
       requestId
