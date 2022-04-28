@@ -19,7 +19,7 @@ export const AnimatedQRScanner = ({
     handleError,
   });
   const { cameraStatus } = useCamera()
-  if(cameraStatus === CameraStatus.PERMISSION_NEEDED){
+  if(cameraStatus === CameraStatus.PERMISSION_NEEDED || cameraStatus === CameraStatus.NO_WEBCAM){
     videoLoaded && videoLoaded(false)
   }
 
