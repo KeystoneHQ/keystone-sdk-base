@@ -55,7 +55,7 @@ export const useCamera = (
     try {
       const { environmentReady } = await checkStatus(defaultPopup);
       if (environmentReady) {
-        setCameraStatus(CameraStatus.READY);
+        setCameraStatus(CameraStatus.ENV_READY);
       } else {
         setCameraStatus(CameraStatus.PERMISSION_NEEDED);
       }
@@ -78,7 +78,7 @@ export const useCamera = (
   }, []);
 
   useEffect(() => {
-    if (cameraStatus === CameraStatus.READY) {
+    if (cameraStatus === CameraStatus.ENV_READY) {
       initCamera();
     } else if (cameraStatus === CameraStatus.PERMISSION_NEEDED) {
       checkPermissions();
