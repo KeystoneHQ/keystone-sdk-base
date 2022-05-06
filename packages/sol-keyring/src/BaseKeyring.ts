@@ -2,8 +2,7 @@ import bs58 from "bs58";
 import * as uuid from "uuid";
 import {PublicKey, Transaction} from "@solana/web3.js";
 import {InteractionProvider} from "./InteractionProvider";
-import {CryptoMultiAccounts, SolSignRequest,} from "@keystonehq/bc-ur-registry-sol";
-import {SignType} from "@keystonehq/bc-ur-registry-sol/dist/SolSignRequest";
+import {CryptoMultiAccounts, SolSignRequest,SignType} from "@keystonehq/bc-ur-registry-sol";
 
 const keyringType = "QR Hardware Wallet Device";
 
