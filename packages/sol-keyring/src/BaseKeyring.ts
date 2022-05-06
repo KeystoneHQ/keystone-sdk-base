@@ -1,11 +1,9 @@
-import { PublicKey, Transaction } from "@solana/web3.js";
-import {
-  CryptoMultiAccounts,
-  SolSignRequest,
-} from "@keystonehq/bc-ur-registry-sol";
+import {PublicKey, Transaction} from "@solana/web3.js";
+import {CryptoMultiAccounts, SolSignRequest,} from "@keystonehq/bc-ur-registry-sol";
 import * as uuid from "uuid";
-import { InteractionProvider } from "./InteractionProvider";
+import {InteractionProvider} from "./InteractionProvider";
 import bs58 from "bs58";
+import {SignType} from "@keystonehq/bc-ur-registry-sol/dist/SolSignRequest";
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -104,6 +102,7 @@ export class BaseKeyring {
       Buffer.from(tx.serializeMessage() as unknown as ArrayBuffer),
       account.hdPath,
       this.xfp,
+      SignType.Transaction,
       requestId
     );
 
@@ -130,6 +129,7 @@ export class BaseKeyring {
       Buffer.from(messageHex),
       account.hdPath,
       this.xfp,
+      SignType.Message,
       requestId,
     );
     return this.requestSignature(
