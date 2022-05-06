@@ -1,9 +1,8 @@
 // @ts-nocheck
 
-import { SolSignRequest, DataType } from "../src";
+import { SolSignRequest, SignType } from "../src";
 import { CryptoKeypath, PathComponent } from "../src";
 import * as uuid from "uuid";
-import {SignType} from "../src/SolSignRequest";
 
 describe("sol-sign-request", () => {
   it("test should generate sol-sign-reqeust", () => {

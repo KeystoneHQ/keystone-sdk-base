@@ -8,7 +8,7 @@ patchTags(
     .map((rt) => rt.getTag()) as number[]
 );
 
-export { SolSignRequest } from "./SolSignRequest";
+export { SolSignRequest, SignType } from "./SolSignRequest";
 export { SolSignature } from "./SolSignature";
 export { CryptoMultiAccounts } from "./CryptoMultiAccounts";
 
