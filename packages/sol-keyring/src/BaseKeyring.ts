@@ -131,7 +131,9 @@ export class BaseKeyring {
     );
     return this.requestSignature(
         requestId,
-        solSignRequest
+        solSignRequest,
+        "Scan with your Keystone",
+        'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature'
     );
   }
 }
