@@ -93,25 +93,7 @@ export class BaseKeyring {
   }
 
   async signTransaction(pubKey: string, tx: Transaction): Promise<Transaction> {
-    const requestId = uuid.v4();
-    const account = this.getAccounts().find(
-      (account) => account.pubKey == pubKey
-    );
-    const solSignRequest = SolSignRequest.constructSOLRequest(
-      Buffer.from(tx.serializeMessage() as unknown as ArrayBuffer),
-      account.hdPath,
-      this.xfp,
-      SignType.Transaction,
-      requestId
-    );
-
-    const signature = await this.requestSignature(
-      requestId,
-      solSignRequest,
-      "Scan with your Keystone",
-      'After your Keystone has signed the transaction, click on "Scan Keystone" to receive the signature'
-    );
-
+    const signature = await this._getSignature(pubKey, Buffer.from(tx.serializeMessage() as unknown as ArrayBuffer), SignType.Transaction)
     tx.addSignature(new PublicKey(pubKey), signature);
     return tx;
   }
@@ -120,23 +102,7 @@ export class BaseKeyring {
     pubKey: string,
     messageHex: Uint8Array
   ): Promise<Uint8Array> {
-    const requestId = uuid.v4();
-    const account = this.getAccounts().find(
-      (account) => account.pubKey == pubKey
-    );
-    const solSignRequest = SolSignRequest.constructSOLRequest(
-      Buffer.from(messageHex),
-      account.hdPath,
-      this.xfp,
-      SignType.Message,
-      requestId,
-    );
-    return this.requestSignature(
-      requestId,
-      solSignRequest,
-      "Scan with your Keystone",
-      'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature'
-    );
+    return await this._getSignature(pubKey, Buffer.from(messageHex), SignType.Message)
   }
 
   async createSignature(pubKey: string, messageHex: Uint8Array): Promise<Uint8Array>{
@@ -144,11 +110,28 @@ export class BaseKeyring {
       const messageInstance = Message.from(messageHex);
       const transaction = Transaction.populate(messageInstance, []);
       if (transaction) {
-        const signedTransaction = await this.signTransaction(pubKey, transaction);
-        return signedTransaction.signature
+        return this._getSignature(pubKey, Buffer.from(messageHex),SignType.Transaction)
       }
     }catch(e){
     }
     return this.signMessage(pubKey, messageHex)
+  }
+
+  async _getSignature(pubKey: string, messageHex: Buffer, signType): Promise<Buffer>{
+    const requestId = uuid.v4();
+    const account = this.getAccounts().find(
+        (account) => account.pubKey == pubKey
+    );
+    const solSignRequest = SolSignRequest.constructSOLRequest(
+        messageHex,
+        account.hdPath,
+        this.xfp,
+        signType,
+        requestId,
+    );
+    return this.requestSignature(
+        requestId,
+        solSignRequest
+    );
   }
 }
