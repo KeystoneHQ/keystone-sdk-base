@@ -26,7 +26,7 @@ export class DefaultInteractionProvider implements InteractionProvider {
           link: "https://keyst.one/defi",
         },
         URTypeErrorMessage:
-          "The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again ( Keystone firmware V1.3.0 or newer required).",
+          "The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again",
       }
     );
     if (decodedResult.status === ReadStatus.success) {
