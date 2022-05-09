@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/sol-keyring",
-  "version": "0.1.1-y.0",
+  "version": "0.1.1-20.0",
   "description": "sol-keyring interact with keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
