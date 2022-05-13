@@ -65,6 +65,7 @@ export class EthSignRequest extends RegistryItem {
   public getDataType = () => this.dataType;
   public getChainId = () => this.chainId;
   public getDerivationPath = () => this.derivationPath.getPath();
+  public getSourceFingerprint = () => this.derivationPath.getSourceFingerprint();
   public getSignRequestAddress = () => this.address;
   public getOrigin = () => this.origin;
 

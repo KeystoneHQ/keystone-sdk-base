@@ -53,7 +53,8 @@ export class MetaMaskKeyring extends BaseKeyring {
       hdPath,
       this.xfp,
       requestId,
-      chainId
+      chainId,
+      address
     );
     const { r, s, v } = await this.requestSignature(
       requestId,
