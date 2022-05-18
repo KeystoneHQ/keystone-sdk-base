@@ -1,6 +1,8 @@
 import { Purpose } from "./types";
 
 export const purposeToURType: Record<Purpose, string[]> = {
-  [Purpose.SYNC]: ["crypto-hdkey", "crypto-account", "crypto-multi-accounts"],
-  [Purpose.SIGN]: ["eth-signature", "sol-signature"],
+  [Purpose.SYNC]: ["crypto-hdkey", "crypto-account"],
+  [Purpose.SIGN]: ["eth-signature"],
+  [Purpose.SOL_SYNC]: ["crypto-multi-accounts"],
+  [Purpose.SOL_SIGN]: ["sol-signature"],
 };

@@ -26,4 +26,6 @@ export interface ScannerProps {
 export enum Purpose {
   SYNC = "sync",
   SIGN = "sign",
+  SOL_SYNC = 'sol-sync',
+  SOL_SIGN = 'sol-sign'
 }
