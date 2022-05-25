@@ -1189,10 +1189,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@keystonehq/bc-ur-registry-sol@^0.1.0-alpha.1":
-  version "0.1.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry-sol/-/bc-ur-registry-sol-0.1.0-alpha.1.tgz#2d82b295ae12697f20bcdb082e01265969f14c76"
-  integrity sha512-WzNf5kMuQEnIZY4PVU9k20agj6qZmCA618+SCDuh/aCdXWA+00Pq0waNOJS4vZAsvM/ib2VuKQzqC6hQM1FRrQ==
+"@keystonehq/bc-ur-registry-sol@^0.1.0-alpha.5":
+  version "0.1.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry-sol/-/bc-ur-registry-sol-0.1.0-alpha.5.tgz#94f0c23dd0b780a2ff4bb4447bcdcc4ab36989a8"
+  integrity sha512-Bb3C374zJ3biHulaN/M/8hV8+3HZl0pPnajP5OTUzCaau58bhNQ4C7eZ8zG/1dbUdXYlFGaSJFPIRAZE1ONLJA==
   dependencies:
     "@keystonehq/bc-ur-registry" "^0.5.0-alpha.5"
     ethereumjs-util "^7.0.8"
@@ -1208,7 +1208,7 @@
     base58check "^2.0.0"
     tslib "^2.3.0"
 
-"@keystonehq/sdk@^0.12.0-alpha.10.2":
+"@keystonehq/sdk@^0.12.0-alpha.10.3":
   version "0.12.0-alpha.10.3"
   resolved "https://registry.yarnpkg.com/@keystonehq/sdk/-/sdk-0.12.0-alpha.10.3.tgz#091dc8110c011b6e3bdc3d081f1823a5af1adefb"
   integrity sha512-Uvh1rh1lLFLeMf6CFSHcE3FVMXMWt4yPFvYhkTGU9lrju5gIA63PzDS3qVx1yTmHqSiEKmbFUm9s1RL0+apK8w==

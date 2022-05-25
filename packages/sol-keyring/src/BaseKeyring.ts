@@ -12,6 +12,13 @@ export interface HDKey {
   index: number;
 }
 
+interface KeyringInitData {
+  xfp: string;
+  keys: HDKey[];
+  name?: string;
+  device?: string;
+}
+
 export class BaseKeyring {
   getInteraction = (): InteractionProvider => {
     throw new Error(
@@ -78,6 +85,14 @@ export class BaseKeyring {
       pubKey: bs58.encode(each.getKey()),
       index,
     }));
+    this.initialized = true;
+  }
+
+  public syncKeyringData({xfp, keys, name = "QR Hardware", device}: KeyringInitData): void {
+    this.xfp = xfp
+    this.name = name
+    this.keys = keys
+    this.device = device
     this.initialized = true;
   }
 
