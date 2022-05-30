@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { EventEmitter } from "events";
 import { useAnimatedQRCodePlayer } from "./useAnimatedQRCodePlayer";
 import { useAnimatedQRCodeReader } from "./useAnimatedQRCodeReader";
-import { Play, PlayStatus, Read } from "../types";
+import { Play, PlayStatus, Read, ReadStatus } from "../types";
 import { InitialPage } from "../components/InitialPage";
 
 const customStyles = {
@@ -113,21 +113,31 @@ export const useController = (): [
         });
       },
       read: async (expect, options) => {
-        if (options.renderInitial) {
-          setWalltMode(options.renderInitial.walletMode);
-          setLink(options.renderInitial.link);
-          setMode("initial");
-          setVisible(true);
-          const result = await read(expect, options);
-          reset();
-          return result;
-        } else {
-          setMode("read");
-          setVisible(true);
-          const result = await read(expect, options);
-          reset();
-          return result;
-        }
+        return new Promise((resolve) => {
+          ee.once("close", () => {
+            reset();
+            resolve({
+              status: ReadStatus.canceled,
+            });
+          });
+          if (options.renderInitial) {
+            setWalltMode(options.renderInitial.walletMode);
+            setLink(options.renderInitial.link);
+            setMode("initial");
+            setVisible(true);
+            read(expect, options).then((result) => {
+              reset();
+              resolve(result);
+            });
+          } else {
+            setMode("read");
+            setVisible(true);
+            read(expect, options).then((result) => {
+              reset();
+              resolve(result);
+            });
+          }
+        });
       },
       cameraReady,
     },

@@ -1,4 +1,4 @@
-export { AnimatedQRCode, useAnimatedQRCode } from "./AnimatedQRCode";
+export { AnimatedQRCode, useAnimatedQRCode, withAnimatedQRCode } from "./AnimatedQRCode";
 
 export {
   AnimatedQRScanner,
