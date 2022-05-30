@@ -13,8 +13,8 @@ export const AnimatedQRScanner = ({
   options,
   videoLoaded,
 }: ScannerProps) => {
-  const { cameraStatus } = useCamera()
-  const camera = useRef(CameraStatus.ACCESSING_CAMERA)
+  const camera = useRef(CameraStatus.ACCESSING_CAMERA);
+  const { cameraStatus } = useCamera();
   const { handleScanSuccess, handleScanFailure } = getAnimatedScan({
     purpose,
     handleScan,
@@ -22,16 +22,19 @@ export const AnimatedQRScanner = ({
   });
 
   useEffect(() => {
-    if(!videoLoaded || camera.current === cameraStatus){
-      return
+    if (!videoLoaded || camera.current === cameraStatus) {
+      return;
     }
 
-    if(cameraStatus === CameraStatus.PERMISSION_NEEDED || cameraStatus === CameraStatus.NO_WEBCAM){
-      videoLoaded(false)
+    if (
+      cameraStatus === CameraStatus.PERMISSION_NEEDED ||
+      cameraStatus === CameraStatus.NO_WEBCAM
+    ) {
+      videoLoaded(false);
     } else if (cameraStatus === CameraStatus.READY) {
-      videoLoaded(true)
+      videoLoaded(true);
     }
-  }, [cameraStatus])
+  }, [cameraStatus]);
 
   return (
     <div style={{ width: options?.width || CAMERA_VIDEO_WIDTH }}>
