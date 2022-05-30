@@ -8,12 +8,14 @@ interface BaseQRScannerProps {
   handleScan: (result: string) => void;
   handleError?: (error: string) => void;
   blur?: boolean;
+  videoLoaded?: (canPlay: boolean) => void
 }
 
 export const BaseQRScanner = ({
   handleScan,
   handleError,
   blur = true,
+  videoLoaded
 }: BaseQRScannerProps): JSX.Element => {
   const [canplay, setCanplay] = useState(false);
   const codeReader = useMemo(() => {
@@ -29,6 +31,7 @@ export const BaseQRScanner = ({
     const videoElement = document.getElementById(VIDEO_ID) as HTMLVideoElement;
     const canplayListener = () => {
       setCanplay(true);
+      videoLoaded && videoLoaded(true)
     };
     videoElement.addEventListener("canplay", canplayListener);
 
