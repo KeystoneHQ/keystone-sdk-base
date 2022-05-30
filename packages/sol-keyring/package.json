@@ -1,0 +1,34 @@
+{
+  "name": "@keystonehq/sol-keyring",
+  "version": "0.1.0",
+  "description": "sol-keyring interact with keystone",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "start": "tsdx watch",
+    "build": "tsdx build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "soralit <soralitria@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@keystonehq/bc-ur-registry-sol": "^0.1.0-alpha.5",
+    "@keystonehq/sdk": "^0.12.0-alpha.10.2",
+    "@solana/web3.js": "^1.36.0",
+    "bs58": "^5.0.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/bs58": "^4.0.1",
+    "@types/uuid": "^8.3.1",
+    "tsdx": "^0.14.1",
+    "typescript": "^4.6.2"
+  }
+}
