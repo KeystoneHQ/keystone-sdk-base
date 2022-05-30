@@ -11,12 +11,18 @@ import * as uuid from "uuid";
 
 const { decodeToDataItem, RegistryTypes } = extend;
 
+export enum SignType {
+  Transaction = 1,
+  Message = 2,
+}
+
 enum Keys {
   requestId = 1,
   signData,
   derivationPath,
   address,
   origin,
+  signType ,
 }
 
 type signRequestProps = {
@@ -25,6 +31,7 @@ type signRequestProps = {
   derivationPath: CryptoKeypath;
   address?: Buffer;
   origin?: string;
+  signType: SignType;
 };
 
 export class SolSignRequest extends RegistryItem {
@@ -33,6 +40,7 @@ export class SolSignRequest extends RegistryItem {
   private derivationPath: CryptoKeypath;
   private address?: Buffer;
   private origin?: string;
+  private signType: SignType;
 
   getRegistryType = () => ExtendedRegistryTypes.SOL_SIGN_REQUEST;
 
@@ -43,6 +51,7 @@ export class SolSignRequest extends RegistryItem {
     this.derivationPath = args.derivationPath;
     this.address = args.address;
     this.origin = args.origin;
+    this.signType = args.signType;
   }
 
   public getRequestId = () => this.requestId;
@@ -50,6 +59,7 @@ export class SolSignRequest extends RegistryItem {
   public getDerivationPath = () => this.derivationPath.getPath();
   public getSignRequestAddress = () => this.address;
   public getOrigin = () => this.origin;
+  public getSignType = () => this.signType;
 
   public toDataItem = () => {
     const map: DataItemMap = {};
@@ -68,6 +78,7 @@ export class SolSignRequest extends RegistryItem {
     }
 
     map[Keys.signData] = this.signData;
+    map[Keys.signType] = this.signType;
 
     const keyPath = this.derivationPath.toDataItem();
     keyPath.setTag(this.derivationPath.getRegistryType().getTag());
@@ -85,6 +96,7 @@ export class SolSignRequest extends RegistryItem {
       ? map[Keys.requestId].getData()
       : undefined;
     const origin = map[Keys.origin] ? map[Keys.origin] : undefined;
+    const signType = map[Keys.signType];
 
     return new SolSignRequest({
       requestId,
@@ -92,6 +104,7 @@ export class SolSignRequest extends RegistryItem {
       derivationPath,
       address,
       origin,
+      signType
     });
   };
 
@@ -104,6 +117,7 @@ export class SolSignRequest extends RegistryItem {
     signData: Buffer,
     hdPath: string,
     xfp: string,
+    signType: SignType,
     uuidString?: string,
     address?: string,
     origin?: string
@@ -131,6 +145,7 @@ export class SolSignRequest extends RegistryItem {
         ? Buffer.from(address.replace("0x", ""), "hex")
         : undefined,
       origin: origin || undefined,
+      signType,
     });
   }
 }
