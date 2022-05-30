@@ -1458,10 +1458,10 @@
     base58check "^2.0.0"
     tslib "^2.3.0"
 
-"@keystonehq/ur-decoder@^0.2.3-alpha.0":
-  version "0.2.3-alpha.0"
-  resolved "https://registry.yarnpkg.com/@keystonehq/ur-decoder/-/ur-decoder-0.2.3-alpha.0.tgz#01e24954cb445026d88fe64c2f52c69024ba9d3c"
-  integrity sha512-nqjykJWMKsVnYJ+kgityfbEY1V2OEDLbS+VHOCB7CfcG25Qtr8QiFLzYen88u1gcagf861q3mmS8TkasZwbvNA==
+"@keystonehq/ur-decoder@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@keystonehq/ur-decoder/-/ur-decoder-0.5.1.tgz#0b862c50d1fe57dd38b0c355ff181e1ee6487fe2"
+  integrity sha512-LFFKEbSMExPaPg2sY3btxuiPDaHf57ZgJi0PuP/8jG9ALFvilyNCkADuyqskO68/7q4s3FI+PG095gK7XqyVyw==
   dependencies:
     "@keystonehq/bc-ur-registry-eth" "^0.6.12"
     "@ngraveio/bc-ur" "^1.1.6"

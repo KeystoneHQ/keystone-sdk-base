@@ -18,8 +18,8 @@
   "author": "soralit <soralitria@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry-sol": "^0.1.0-alpha.5",
-    "@keystonehq/sdk": "^0.12.0-alpha.10.2",
+    "@keystonehq/bc-ur-registry-sol": "^0.2.0",
+    "@keystonehq/sdk": "^0.12.0",
     "@solana/web3.js": "^1.36.0",
     "bs58": "^5.0.0",
     "uuid": "^8.3.2"

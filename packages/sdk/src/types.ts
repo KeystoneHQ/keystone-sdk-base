@@ -28,6 +28,7 @@ export type Play = (
     hasNext?: boolean;
     title?: string;
     description?: string;
+    maxFragmentLength? : number;
   }
 ) => Promise<PlayStatus>;
 
@@ -50,4 +51,7 @@ export enum SupportedResult {
   UR_CRYPTO_ACCOUNT = "crypto-account",
   UR_ETH_SIGN_REQUEST = "eth-sign-request",
   UR_ETH_SIGNATURE = "eth-signature",
+  UR_CRYPTO_MULTI_ACCOUNTS = "crypto-multi-accounts",
+  UR_SOL_SIGN_REQUEST = "sol-sign-request",
+  UR_SOL_SIGNATURE = "sol-signature",
 }

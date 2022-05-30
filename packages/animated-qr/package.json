@@ -27,7 +27,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@keystonehq/ur-decoder": "^0.2.3-alpha.0",
+    "@keystonehq/ur-decoder": "^0.5.1",
     "@ngraveio/bc-ur": "^1.1.6",
     "@zxing/browser": "^0.1.1",
     "@zxing/library": "^0.19.1",
