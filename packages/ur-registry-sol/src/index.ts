@@ -11,3 +11,4 @@ patchTags(
 export { SolSignRequest, SignType } from "./SolSignRequest";
 export { SolSignature } from "./SolSignature";
 export { CryptoMultiAccounts } from "./CryptoMultiAccounts";
+export { SOLNFTItem } from "./SOLNFTItem";
