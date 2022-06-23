@@ -112,7 +112,7 @@ export class NearSignRequest extends RegistryItem {
     return NearSignRequest.fromDataItem(dataItem);
   };
 
-  public static constructSOLRequest(
+  public static constructNearRequest(
     signData: Buffer,
     hdPath: string,
     xfp: string,
