@@ -8,6 +8,6 @@ patchTags(
     .map((rt) => rt.getTag()) as number[]
 );
 
-export { NearSignRequest, SignType } from "./NearSignRequest";
+export { NearSignRequest } from "./NearSignRequest";
 export { NearSignature } from "./NearSignature";
 export { CryptoMultiAccounts } from './CryptoMultiAccounts';

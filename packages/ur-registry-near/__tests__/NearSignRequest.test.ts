@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { NearSignRequest, SignType } from "../src";
+import { NearSignRequest } from "../src";
 import { CryptoKeypath, PathComponent } from "../src";
 import * as uuid from "uuid";
 
@@ -30,13 +30,12 @@ describe("near-sign-request", () => {
       derivationPath: signKeyPath,
       requestId: Buffer.from(idBuffer),
       origin: "nearwallet",
-      signType: SignType.Transaction,
     });
 
     const cborHex = nearSignRequest.toCBOR().toString("hex");
     const ur = nearSignRequest.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:near-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxtaaddyoeadlecsdwykcfadlgykaeykaeykadykaocykscnayaaahimjtihhsjpkthsjzjzihjyamadhnlbmoti"
+      "ur:near-sign-request/oxadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxtaaddyoeadlecsdwykcfadlgykaeykaeykadykaocykscnayaaahimjtihhsjpkthsjzjzihjyosgaaxlp"
     );
     const nearSignRequestDecoded = NearSignRequest.fromCBOR(
       Buffer.from(cborHex, "hex")
@@ -46,7 +45,6 @@ describe("near-sign-request", () => {
     expect(nearSignRequestDecoded.getSignData().toString("hex")).toEqual(
       "8e53e7b10656816de70824e3016fc1a277e77825e12825dc4f239f418ab2e04e"
     );
-    expect(nearSignRequestDecoded.getSignType()).toBe(SignType.Transaction);
   });
 
   it("should construct an nearSignRequest object from string", () => {
@@ -62,14 +60,13 @@ describe("near-sign-request", () => {
       nearData,
       hdPath,
       xfp,
-      SignType.Transaction,
       requestID,
       undefined,
       "nearwallet"
     );
     const ur = request.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:near-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxtaaddyoeadlecsdwykcfadlgykaeykaeykadykaocykscnayaaahimjtihhsjpkthsjzjzihjyamadhnlbmoti"
+      "ur:near-sign-request/oxadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxtaaddyoeadlecsdwykcfadlgykaeykaeykadykaocykscnayaaahimjtihhsjpkthsjzjzihjyosgaaxlp"
     );
   });
 });

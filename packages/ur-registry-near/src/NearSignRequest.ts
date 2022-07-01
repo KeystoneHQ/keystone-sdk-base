@@ -11,17 +11,12 @@ import * as uuid from "uuid";
 
 const { decodeToDataItem, RegistryTypes } = extend;
 
-export enum SignType {
-  Transaction = 1,
-}
-
 enum Keys {
   requestId = 1,
   signData,
   derivationPath,
   account,
   origin,
-  signType,
 }
 
 type signRequestProps = {
@@ -30,7 +25,6 @@ type signRequestProps = {
   derivationPath: CryptoKeypath;
   account?: string;
   origin?: string;
-  signType: SignType;
 };
 
 export class NearSignRequest extends RegistryItem {
@@ -39,7 +33,6 @@ export class NearSignRequest extends RegistryItem {
   private derivationPath: CryptoKeypath;
   private account?: string;
   private origin?: string;
-  private signType: SignType;
 
   getRegistryType = () => ExtendedRegistryTypes.NEAR_SIGN_REQUEST;
 
@@ -50,7 +43,6 @@ export class NearSignRequest extends RegistryItem {
     this.derivationPath = args.derivationPath;
     this.account = args.account;
     this.origin = args.origin;
-    this.signType = args.signType;
   }
 
   public getRequestId = () => this.requestId;
@@ -58,7 +50,6 @@ export class NearSignRequest extends RegistryItem {
   public getDerivationPath = () => this.derivationPath.getPath();
   public getSignRequestAccount = () => this.account;
   public getOrigin = () => this.origin;
-  public getSignType = () => this.signType;
 
   public toDataItem = () => {
     const map: DataItemMap = {};
@@ -77,7 +68,6 @@ export class NearSignRequest extends RegistryItem {
     }
 
     map[Keys.signData] = this.signData;
-    map[Keys.signType] = this.signType;
 
     const keyPath = this.derivationPath.toDataItem();
     keyPath.setTag(this.derivationPath.getRegistryType().getTag());
@@ -95,7 +85,6 @@ export class NearSignRequest extends RegistryItem {
       ? map[Keys.requestId].getData()
       : undefined;
     const origin = map[Keys.origin] ? map[Keys.origin] : undefined;
-    const signType = map[Keys.signType];
 
     return new NearSignRequest({
       requestId,
@@ -103,7 +92,6 @@ export class NearSignRequest extends RegistryItem {
       derivationPath,
       account,
       origin,
-      signType,
     });
   };
 
@@ -116,7 +104,6 @@ export class NearSignRequest extends RegistryItem {
     signData: Buffer,
     hdPath: string,
     xfp: string,
-    signType: SignType,
     uuidString?: string,
     account?: string,
     origin?: string
@@ -142,7 +129,6 @@ export class NearSignRequest extends RegistryItem {
       derivationPath: hdpathObject,
       account: account || undefined,
       origin: origin || undefined,
-      signType,
     });
   }
 }
