@@ -14,7 +14,13 @@ const keyringType = "QR Hardware Wallet Device";
 export interface HDKey {
   hdPath: string;
   pubKey: string;
-  index: number;
+}
+
+interface KeyringInitData {
+  xfp: string;
+  keys: HDKey[];
+  name?: string;
+  device?: string;
 }
 
 export class BaseKeyring {
@@ -67,6 +73,19 @@ export class BaseKeyring {
   public getName = (): string => {
     return this.name;
   };
+
+  public syncKeyringData({
+    xfp,
+    keys,
+    name = "QR Hardware",
+    device,
+  }: KeyringInitData): void {
+    this.xfp = xfp;
+    this.name = name;
+    this.keys = keys;
+    this.device = device;
+    this.initialized = true;
+  }
 
   getAccounts() {
     if (!this.initialized) {
