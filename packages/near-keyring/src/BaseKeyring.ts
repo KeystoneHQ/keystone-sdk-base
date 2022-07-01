@@ -1,10 +1,7 @@
 import * as uuid from "uuid";
-import bs58 from "bs58";
 import { InteractionProvider } from "./InteractionProvider";
 import {
-  CryptoMultiAccounts,
   NearSignRequest,
-  SignType,
 } from "@keystonehq/bc-ur-registry-near";
 
 const keyringType = "QR Hardware Wallet Device";
@@ -13,13 +10,6 @@ export interface HDKey {
   hdPath: string;
   pubKey: string;
   index: number;
-}
-
-interface KeyringInitData {
-  xfp: string;
-  keys: HDKey[];
-  name?: string;
-  device?: string;
 }
 
 export class BaseKeyring {
@@ -69,42 +59,6 @@ export class BaseKeyring {
     return signature;
   };
 
-  //initial read
-  async readKeyring(): Promise<void> {
-    const result = await this.getInteraction().readCryptoMultiAccounts();
-    this.syncKeyring(result);
-  }
-
-  public syncKeyring(data: CryptoMultiAccounts): void {
-    const keys = data.getKeys();
-    this.device = data.getDevice();
-    this.xfp = data
-      .getKeys()[0]
-      .getOrigin()
-      .getSourceFingerprint()
-      ?.toString("hex");
-    this.name = data.getKeys()[0].getName();
-    this.keys = keys.map((each, index) => ({
-      hdPath: each.getOrigin().getPath(),
-      pubKey: `ed25519:${bs58.encode(each.getKey())}`,
-      index,
-    }));
-    this.initialized = true;
-  }
-
-  public syncKeyringData({
-    xfp,
-    keys,
-    name = "QR Hardware",
-    device,
-  }: KeyringInitData): void {
-    this.xfp = xfp;
-    this.name = name;
-    this.keys = keys;
-    this.device = device;
-    this.initialized = true;
-  }
-
   public getName = (): string => {
     return this.name;
   };
@@ -128,7 +82,6 @@ export class BaseKeyring {
       Buffer.from(txData),
       account.hdPath,
       this.xfp,
-      SignType.Transaction,
       requestId
     );
     return this.requestSignature(
