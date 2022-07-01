@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/near-keyring",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "near-keyring interact with keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
   "author": "soralit <soralitria@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry-near": "^0.2.4-alpha.3",
+    "@keystonehq/bc-ur-registry-near": "^0.2.4-alpha.4",
     "bs58": "^5.0.0",
     "uuid": "^8.3.2"
   },
