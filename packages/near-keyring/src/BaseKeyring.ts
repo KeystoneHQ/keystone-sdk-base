@@ -1,8 +1,13 @@
 import * as uuid from "uuid";
 import { InteractionProvider } from "./InteractionProvider";
+import { NearSignRequest } from "@keystonehq/bc-ur-registry-near";
 import {
-  NearSignRequest,
-} from "@keystonehq/bc-ur-registry-near";
+  SCHEMA,
+  Signature,
+  SignedTransaction,
+  Transaction,
+} from "near-api-js/lib/transaction";
+import borsh from "borsh";
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -71,24 +76,32 @@ export class BaseKeyring {
   }
 
   async signTransaction(
-    pubKey: string,
-    txData: Uint8Array
-  ): Promise<Uint8Array> {
+    tx: Transaction,
+    pubKey: string
+  ): Promise<SignedTransaction> {
     const requestId = uuid.v4();
     const account = this.getAccounts().find(
       (account) => account.pubKey == pubKey
     );
+    const txData = borsh.serialize(SCHEMA, tx);
     const nearSignRequest = NearSignRequest.constructNearRequest(
       Buffer.from(txData),
       account.hdPath,
       this.xfp,
       requestId
     );
-    return this.requestSignature(
+    const signature = this.requestSignature(
       requestId,
       nearSignRequest,
       "Scan with your Keystone",
       'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature'
     );
+    return new SignedTransaction({
+      txData,
+      signature: new Signature({
+        keyType: tx.publicKey.keyType,
+        data: signature,
+      }),
+    });
   }
 }
