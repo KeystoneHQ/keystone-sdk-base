@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/near-keyring",
-  "version": "0.0.1-alpha.1.1",
+  "version": "0.0.1-alpha.1.2",
   "description": "near-keyring interact with keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
