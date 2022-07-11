@@ -41,14 +41,10 @@ export class BaseKeyring {
 
   protected requestSignature = async (
     _requestId: string,
-    signRequest: NearSignRequest,
-    requestTitle?: string,
-    requestDescription?: string
+    signRequest: NearSignRequest
   ): Promise<Buffer> => {
     const nearSignature = await this.getInteraction().requestSignature(
-      signRequest,
-      requestTitle,
-      requestDescription
+      signRequest
     );
     const requestIdBuffer = nearSignature.getRequestId();
     const signature = nearSignature.getSignature();
@@ -104,9 +100,7 @@ export class BaseKeyring {
     );
     return this.requestSignature(
       requestId,
-      nearSignRequest,
-      "Scan with your Keystone",
-      'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature'
+      nearSignRequest
     );
   }
 }
