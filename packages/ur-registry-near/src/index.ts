@@ -10,4 +10,3 @@ patchTags(
 
 export { NearSignRequest } from "./NearSignRequest";
 export { NearSignature } from "./NearSignature";
-export { CryptoMultiAccounts } from './CryptoMultiAccounts';
