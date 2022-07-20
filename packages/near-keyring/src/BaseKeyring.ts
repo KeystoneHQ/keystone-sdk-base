@@ -42,7 +42,7 @@ export class BaseKeyring {
   protected requestSignature = async (
     _requestId: string,
     signRequest: NearSignRequest
-  ): Promise<Buffer> => {
+  ): Promise<Buffer[]> => {
     const nearSignature = await this.getInteraction().requestSignature(
       signRequest
     );
@@ -84,16 +84,16 @@ export class BaseKeyring {
   }
 
   async signTransaction(
-    txData: Uint8Array,
+    txData: Buffer[],
     pubKey: string
-  ): Promise<Uint8Array> {
+  ): Promise<Buffer[]> {
     const requestId = uuid.v4();
     const account = this.getAccounts().find(
       (account) => account.pubKey == pubKey
     );
     // const txData = borsh.serialize(transaction.SCHEMA, tx);
     const nearSignRequest = NearSignRequest.constructNearRequest(
-      Buffer.from(txData),
+      txData,
       account.hdPath,
       this.xfp,
       requestId
