@@ -15,11 +15,11 @@ enum Keys {
 
 export class NearSignature extends RegistryItem {
   private requestId?: Buffer;
-  private signature: Buffer;
+  private signature: Buffer[];
 
   getRegistryType = () => ExtendedRegistryTypes.NEAR_SIGNATURE;
 
-  constructor(signature: Buffer, requestId?: Buffer) {
+  constructor(signature: Buffer[], requestId?: Buffer) {
     super();
     this.signature = signature;
     this.requestId = requestId;

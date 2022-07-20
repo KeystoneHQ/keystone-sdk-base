@@ -26,7 +26,7 @@ describe("near-sign-request", () => {
     const idBuffer = uuid.parse(nearRequestId) as Uint8Array;
 
     const nearSignRequest = new NearSignRequest({
-      signData: nearData,
+      signData: [nearData, nearData],
       derivationPath: signKeyPath,
       requestId: Buffer.from(idBuffer),
       origin: "nearwallet",
@@ -35,14 +35,17 @@ describe("near-sign-request", () => {
     const cborHex = nearSignRequest.toCBOR().toString("hex");
     const ur = nearSignRequest.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:near-sign-request/oxadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxtaaddyoeadlecsdwykcfadlgykaeykaeykadykaocykscnayaaahimjtihhsjpkthsjzjzihjyosgaaxlp"
+      "ur:near-sign-request/oxadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaolfhdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglhdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxtaaddyoeadlecsdwykcfadlgykaeykaeykadykaocykscnayaaahimjtihhsjpkthsjzjzihjyrdahdssk"
     );
     const nearSignRequestDecoded = NearSignRequest.fromCBOR(
       Buffer.from(cborHex, "hex")
     );
     expect(uuid.stringify(nearSignRequest.getRequestId())).toBe(nearRequestId);
     expect(nearSignRequest.getOrigin()).toBe("nearwallet");
-    expect(nearSignRequestDecoded.getSignData().toString("hex")).toEqual(
+    expect(nearSignRequestDecoded.getSignData()[0].toString("hex")).toEqual(
+      "8e53e7b10656816de70824e3016fc1a277e77825e12825dc4f239f418ab2e04e"
+    );
+    expect(nearSignRequestDecoded.getSignData()[1].toString("hex")).toEqual(
       "8e53e7b10656816de70824e3016fc1a277e77825e12825dc4f239f418ab2e04e"
     );
   });
