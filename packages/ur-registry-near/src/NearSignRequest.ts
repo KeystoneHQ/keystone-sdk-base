@@ -21,7 +21,7 @@ enum Keys {
 
 type signRequestProps = {
   requestId?: Buffer;
-  signData: Buffer;
+  signData: Buffer[];
   derivationPath: CryptoKeypath;
   account?: string;
   origin?: string;
@@ -29,7 +29,7 @@ type signRequestProps = {
 
 export class NearSignRequest extends RegistryItem {
   private requestId?: Buffer;
-  private signData: Buffer;
+  private signData: Buffer[];
   private derivationPath: CryptoKeypath;
   private account?: string;
   private origin?: string;
@@ -101,7 +101,7 @@ export class NearSignRequest extends RegistryItem {
   };
 
   public static constructNearRequest(
-    signData: Buffer,
+    signData: Buffer[],
     hdPath: string,
     xfp: string,
     uuidString?: string,
