@@ -1,8 +1,5 @@
-import {
-  CryptoMultiAccounts,
-  SolSignature,
-  SolSignRequest,
-} from "@keystonehq/bc-ur-registry-sol";
+import { SolSignature, SolSignRequest } from "@keystonehq/bc-ur-registry-sol";
+import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
 
 export interface InteractionProvider {
   readCryptoMultiAccounts: () => Promise<CryptoMultiAccounts>;
