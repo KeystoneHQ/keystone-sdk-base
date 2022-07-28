@@ -1,6 +1,7 @@
-import {CryptoMultiAccounts, SolSignature, SolSignRequest} from "@keystonehq/bc-ur-registry-sol";
+import { SolSignature, SolSignRequest } from "@keystonehq/bc-ur-registry-sol";
 import { InteractionProvider } from "./InteractionProvider";
 import sdk, { PlayStatus, ReadStatus, SupportedResult } from "@keystonehq/sdk";
+import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
 
 export class DefaultInteractionProvider implements InteractionProvider {
   private static instance;
