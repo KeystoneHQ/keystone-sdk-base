@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/sol-keyring",
-  "version": "0.3.0",
+  "version": "0.3.1-alpha.0",
   "description": "sol-keyring interact with keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,8 +19,8 @@
   "license": "ISC",
   "dependencies": {
     "@keystonehq/bc-ur-registry": "^0.5.0",
-    "@keystonehq/bc-ur-registry-sol": "^0.3.0",
-    "@keystonehq/sdk": "^0.13.0",
+    "@keystonehq/bc-ur-registry-sol": "^0.3.1-alpha.0",
+    "@keystonehq/sdk": "^0.13.1-alpha.0",
     "@solana/web3.js": "^1.36.0",
     "bs58": "^5.0.0",
     "uuid": "^8.3.2"
