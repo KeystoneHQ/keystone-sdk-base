@@ -1,6 +1,7 @@
 import * as uuid from "uuid";
 import { InteractionProvider } from "./InteractionProvider";
 import { NearSignRequest } from "@keystonehq/bc-ur-registry-near";
+import { Tracker } from "./Tracker";
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -63,17 +64,22 @@ export class BaseKeyring {
     return this.name;
   };
 
-  public syncKeyringData({
+  public async syncKeyringData({
     xfp,
     keys,
     name = "QR Hardware",
     device,
-  }: KeyringInitData): void {
+  }: KeyringInitData): Promise<void> {
     this.xfp = xfp;
     this.name = name;
     this.keys = keys;
     this.device = device;
     this.initialized = true;
+    await Tracker.track("sync", {
+      distinctId: device,
+      time: Date.now(),
+      xfp,
+    });
   }
 
   getAccounts() {
@@ -83,10 +89,7 @@ export class BaseKeyring {
     return this.keys;
   }
 
-  async signTransaction(
-    txData: Buffer[],
-    pubKey: string
-  ): Promise<Buffer[]> {
+  async signTransaction(txData: Buffer[], pubKey: string): Promise<Buffer[]> {
     const requestId = uuid.v4();
     const account = this.getAccounts().find(
       (account) => account.pubKey == pubKey
@@ -97,9 +100,14 @@ export class BaseKeyring {
       this.xfp,
       requestId
     );
-    return this.requestSignature(
-      requestId,
-      nearSignRequest
-    );
+
+    const signature = await this.requestSignature(requestId, nearSignRequest);
+    await Tracker.track("sign", {
+      distinctId: this.device,
+      time: Date.now(),
+      xfp: this.xfp,
+      requestId: requestId,
+    });
+    return signature;
   }
 }

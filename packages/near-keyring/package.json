@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "start": "tsdx watch",
-    "build": "tsdx build"
+    "build": "./build.sh"
   },
   "publishConfig": {
     "access": "public"
@@ -19,9 +19,10 @@
   "license": "ISC",
   "dependencies": {
     "@keystonehq/bc-ur-registry": "^0.5.0",
-    "@keystonehq/bc-ur-registry-near": "^0.2.4-alpha.6",
+    "@keystonehq/bc-ur-registry-near": "^0.3.0",
     "borsh": "^0.7.0",
     "bs58": "^5.0.0",
+    "ky": "^0.31.1",
     "near-api-js": "^0.44.2",
     "uuid": "^8.3.2"
   },
