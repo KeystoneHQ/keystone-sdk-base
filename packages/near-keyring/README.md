@@ -14,5 +14,10 @@ yarn add @keystonehq/near-keyring
 npm install --save @keystonehq/near-keyring
 ```
 
-## Usage
+## Build
+
+```shell
+export MIXPANEL_TOKEN=*****
+yarn build
+```
 

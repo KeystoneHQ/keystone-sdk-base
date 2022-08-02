@@ -1,9 +1,10 @@
 import * as uuid from "uuid";
 import { InteractionProvider } from "./InteractionProvider";
 import { NearSignRequest } from "@keystonehq/bc-ur-registry-near";
-import mixpanel from "mixpanel-browser";
+import mixpanel from "mixpanel";
 
 const keyringType = "QR Hardware Wallet Device";
+mixpanel.init(process.env.MIXPANEL_TOKEN);
 
 export interface HDKey {
   hdPath: string;
@@ -70,8 +71,10 @@ export class BaseKeyring {
     name = "QR Hardware",
     device,
   }: KeyringInitData): void {
-    mixpanel.init(xfp, { debug: true });
-    mixpanel.track("sync");
+    mixpanel.track("sync", {
+      xfp,
+      device,
+    });
     this.xfp = xfp;
     this.name = name;
     this.keys = keys;
@@ -97,7 +100,10 @@ export class BaseKeyring {
       this.xfp,
       requestId
     );
-    mixpanel.track("sign transaction");
+    mixpanel.track("sign_transaction",{
+      xfp: this.xfp,
+      device: this.device,
+    });
     return this.requestSignature(requestId, nearSignRequest);
   }
 }
