@@ -64,18 +64,18 @@ export class BaseKeyring {
     return this.name;
   };
 
-  public syncKeyringData({
+  public async syncKeyringData({
     xfp,
     keys,
     name = "QR Hardware",
     device,
-  }: KeyringInitData): void {
+  }: KeyringInitData): Promise<void> {
     this.xfp = xfp;
     this.name = name;
     this.keys = keys;
     this.device = device;
     this.initialized = true;
-    Tracker.track("sync", {
+    await Tracker.track("sync", {
       distinctId: device,
       time: Date.now(),
       xfp,
@@ -102,7 +102,7 @@ export class BaseKeyring {
     );
 
     const signature = await this.requestSignature(requestId, nearSignRequest);
-    Tracker.track("sign", {
+    await Tracker.track("sign", {
       distinctId: this.device,
       time: Date.now(),
       xfp: this.xfp,

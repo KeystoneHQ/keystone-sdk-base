@@ -31,9 +31,11 @@ export class Tracker {
       },
       body,
     };
-    fetch(url, options)
-      .then((res) => res.json())
-      .then()
-      .catch((err) => console.error("error:" + err));
+    try{
+      const res = await fetch(url, options);
+      return res.json();
+    }catch(err){
+       console.error("error:" + err)
+    }
   }
 }
