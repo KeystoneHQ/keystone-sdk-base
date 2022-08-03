@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import axios from "axios";
 import { MP_TOKEN, MP_PROJECT_ID } from "./Secret";
 
 interface MPPayload {
@@ -10,8 +10,8 @@ interface MPPayload {
 export class Tracker {
   public static async track(event_name, payload: MPPayload) {
     const url = `https://api.mixpanel.com/import?strict=1&project_id=${MP_PROJECT_ID}`;
-    const insertId = payload.requestId ? payload.requestId: payload.xfp;
-    const body = JSON.stringify([
+    const insertId = payload.requestId ? payload.requestId : payload.xfp;
+    const data = [
       {
         properties: {
           distinct_id: payload.distinctId,
@@ -21,21 +21,22 @@ export class Tracker {
         },
         event: event_name,
       },
-    ]);
+    ];
     const options = {
       method: "POST",
+      url,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Basic ${MP_TOKEN}`,
       },
-      body,
+      data,
     };
-    try{
-      const res = await fetch(url, options);
-      return res.json();
-    }catch(err){
-       console.error("error:" + err)
+    try {
+      await axios.request(options);
+    } catch (err) {
+      console.error("error:" + err);
     }
+    return;
   }
 }
