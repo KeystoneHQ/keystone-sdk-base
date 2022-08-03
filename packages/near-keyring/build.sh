@@ -1,5 +1,11 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -eu
 
-MIXPANEL_TOKEN=$MIXPANEL_TOKEN && tsdx build
+cd $(dirname $0)/
+
+if [ ! -f "src/Secret.ts" ]; then
+    echo "src/Secret.ts does not exist!"
+fi
+
+tsdx build
