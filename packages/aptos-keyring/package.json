@@ -1,0 +1,34 @@
+{
+  "name": "@keystonehq/aptos-keyring",
+  "version": "0.0.0",
+  "description": "aptos-keyring interact with keystone",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "start": "tsdx watch",
+    "build": "tsdx build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Zhao Mengru<zhaomengru2018@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@keystonehq/bc-ur-registry": "^0.5.0",
+    "@keystonehq/bc-ur-registry-aptos": "^0.0.0",
+
+    "bs58": "^5.0.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/bs58": "^4.0.1",
+    "@types/uuid": "^8.3.1",
+    "tsdx": "^0.14.1",
+    "typescript": "^4.6.2"
+  }
+}
