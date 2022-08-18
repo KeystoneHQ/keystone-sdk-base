@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-aptos",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "description": "bc-ur-registry extension for Aptos",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
