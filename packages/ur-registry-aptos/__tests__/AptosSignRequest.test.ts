@@ -15,7 +15,7 @@ describe("aptos-sign-request", () => {
       "hex"
     );
 
-    const signKeyPath = new CryptoKeypath(
+    const signKeyPath0 = new CryptoKeypath(
       [
         new PathComponent({ index: 44, hardened: true }),
         new PathComponent({ index: 637, hardened: true }),
@@ -25,13 +25,23 @@ describe("aptos-sign-request", () => {
       ],
       Buffer.from("78230804", "hex")
     );
+    const signKeyPath1 = new CryptoKeypath(
+      [
+        new PathComponent({ index: 44, hardened: true }),
+        new PathComponent({ index: 637, hardened: true }),
+        new PathComponent({ index: 0, hardened: true }),
+        new PathComponent({ index: 0, hardened: true }),
+        new PathComponent({ index: 1, hardened: true })
+      ],
+      Buffer.from("78230805", "hex")
+    );
 
     const aptosRequestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d";
     const idBuffer = uuid.parse(aptosRequestId) as Uint8Array;
 
     const aptosSignRequest = new AptosSignRequest({
       signData: aptosData,
-      authenticationKeyDerivationPaths: [signKeyPath, signKeyPath],
+      authenticationKeyDerivationPaths: [signKeyPath0, signKeyPath1],
       requestId: Buffer.from(idBuffer),
       origin: "aptosWallet",
       accounts: [
@@ -44,7 +54,7 @@ describe("aptos-sign-request", () => {
     const cborHex = aptosSignRequest.toCBOR().toString("hex");
     const ur = aptosSignRequest.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:aptos-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxlftaaddyoeadlecsdwykcfaokiykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaokiykaeykaeykaeykaocykscnayaaaalfksfwdykshshsemeeeydyiaenetiaeheneneeecememecihiaiyeneshseciheyiyiehshseeiyetesieeoeyeseohsihihdyieieeyetdyiheyieesemhsieemidetemesenecdyksfwdyksesemiyesechsiaiyiddyeeiyeteeieeyeyetieiaihesidiehseehsieemiheyhseciaideoeyeeieecihiyieieenhsemiydyidesecesihemececihidideohsemdyahjehsjojyjljkhghsjzjzihjyamaejydposlg"
+      "ur:aptos-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxlftaaddyoeadlecsdwykcfaokiykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaokiykaeykaeykadykaocykscnayahaalfksfwdykshshsemeeeydyiaenetiaeheneneeecememecihiaiyeneshseciheyiyiehshseeiyetesieeoeyeseohsihihdyieieeyetdyiheyieesemhsieemidetemesenecdyksfwdyksesemiyesechsiaiyiddyeeiyeteeieeyeyetieiaihesidiehseehsieemiheyhseciaideoeyeeieecihiyieieenhsemiydyidesecesihemececihidideohsemdyahjehsjojyjljkhghsjzjzihjyamadpdoxayuo"
     );
     const aptosSignRequestDecoded = AptosSignRequest.fromCBOR(
       Buffer.from(cborHex, "hex")
@@ -61,7 +71,7 @@ describe("aptos-sign-request", () => {
     ).toEqual("44'/637'/0'/0'/0'");
     expect(
       aptosSignRequestDecoded.getAuthenticationKeyDerivationPaths()[1]
-    ).toEqual("44'/637'/0'/0'/0'");
+    ).toEqual("44'/637'/0'/0'/1'");
     expect(aptosSignRequestDecoded.getSignType()).toBe(SignType.SingleSign);
     expect(aptosSignRequestDecoded.getSignRequestAccounts()[0]).toEqual(
       "0xaa7420c68c16645775ecf69a5e2fdaa4f89d3293aee0dd280e2d97ad7b879650"
@@ -72,8 +82,8 @@ describe("aptos-sign-request", () => {
   });
 
   it("should construct an aptosSignRequest object from string", () => {
-    const authKeyHdPaths = ["m/44'/637'/0'/0'/0'", "m/44'/637'/0'/0'/0'"];
-    const xfp = "78230804";
+    const authKeyHdPaths = ["m/44'/637'/0'/0'/0'", "m/44'/637'/0'/0'/1'"];
+    const xfps = ["78230804", "78230805"];
     const aptosData = Buffer.from(
       "8e53e7b10656816de70824e3016fc1a277e77825e12825dc4f239f418ab2e04e",
       "hex"
@@ -87,7 +97,7 @@ describe("aptos-sign-request", () => {
     const request = AptosSignRequest.constructAptosRequest(
       aptosData,
       authKeyHdPaths,
-      xfp,
+      xfps,
       SignType.SingleSign,
       requestID,
       accounts,
@@ -95,7 +105,7 @@ describe("aptos-sign-request", () => {
     );
     const ur = request.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:aptos-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxlftaaddyoeadlecsdwykcfaokiykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaokiykaeykaeykaeykaocykscnayaaaalfksfwdykshshsemeeeydyiaenetiaeheneneeecememecihiaiyeneshseciheyiyiehshseeiyetesieeoeyeseohsihihdyieieeyetdyiheyieesemhsieemidetemesenecdyksfwdyksesemiyesechsiaiyiddyeeiyeteeieeyeyetieiaihesidiehseehsieemiheyhseciaideoeyeeieecihiyieieenhsemiydyidesecesihemececihidideohsemdyahjehsjojyjljkhghsjzjzihjyamaejydposlg"
+      "ur:aptos-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxlftaaddyoeadlecsdwykcfaokiykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaokiykaeykaeykadykaocykscnayahaalfksfwdykshshsemeeeydyiaenetiaeheneneeecememecihiaiyeneshseciheyiyiehshseeiyetesieeoeyeseohsihihdyieieeyetdyiheyieesemhsieemidetemesenecdyksfwdyksesemiyesechsiaiyiddyeeiyeteeieeyeyetieiaihesidiehseehsieemiheyhseciaideoeyeeieecihiyieieenhsemiydyidesecesihemececihidideohsemdyahjehsjojyjljkhghsjzjzihjyamadpdoxayuo"
     );
   });
 });

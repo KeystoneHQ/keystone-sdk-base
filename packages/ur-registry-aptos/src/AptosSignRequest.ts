@@ -12,8 +12,8 @@ import * as uuid from "uuid";
 const { decodeToDataItem, RegistryTypes } = extend;
 
 export enum SignType {
-  SingleSign,
-  MultiSign
+  SingleSign = 1,
+  MultiSign = 2
 }
 enum Keys {
   requestId = 1,
@@ -118,13 +118,13 @@ export class AptosSignRequest extends RegistryItem {
   public static constructAptosRequest(
     signData: Buffer,
     authKeyHdPath: string[],
-    xfp: string,
+    xfps: string[],
     signType: SignType,
     uuidString: string,
     accounts?: Buffer[],
     origin?: string
   ) {
-    const authKeyHdPathObjects = authKeyHdPath.map(path => {
+    const authKeyHdPathObjects = authKeyHdPath.map((path, index) => {
       const paths = path.replace(/[m|M]\//, "").split("/");
       const pathComponent = paths.map(path => {
         const index = parseInt(path.replace("'", ""));
@@ -134,7 +134,7 @@ export class AptosSignRequest extends RegistryItem {
         }
         return new PathComponent({ index, hardened: isHardened });
       });
-      return new CryptoKeypath(pathComponent, Buffer.from(xfp, "hex"));
+      return new CryptoKeypath(pathComponent, Buffer.from(xfps[index], "hex"));
     });
 
     return new AptosSignRequest({
