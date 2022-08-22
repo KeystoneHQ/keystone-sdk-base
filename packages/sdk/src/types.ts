@@ -54,4 +54,6 @@ export enum SupportedResult {
   UR_CRYPTO_MULTI_ACCOUNTS = "crypto-multi-accounts",
   UR_SOL_SIGN_REQUEST = "sol-sign-request",
   UR_SOL_SIGNATURE = "sol-signature",
+  UR_APTOS_SIGN_REQUEST='aptos-sign-request',
+ UR_APTOS_SIGNATURE = 'aptos-signature',
 }
