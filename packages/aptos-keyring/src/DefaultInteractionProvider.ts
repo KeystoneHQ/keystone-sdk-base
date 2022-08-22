@@ -1,4 +1,7 @@
-import { SolSignature, SolSignRequest } from "@keystonehq/bc-ur-registry-sol";
+import {
+  AptosSignature,
+  AptosSignRequest
+} from "@keystonehq/bc-ur-registry-aptos";
 import { InteractionProvider } from "./InteractionProvider";
 import sdk, { PlayStatus, ReadStatus, SupportedResult } from "@keystonehq/sdk";
 import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
@@ -23,11 +26,11 @@ export class DefaultInteractionProvider implements InteractionProvider {
         title: "Sync Keystone",
         description: "Please scan the QR code displayed on your Keystone",
         renderInitial: {
-          walletMode: "Solflare",
-          link: "https://keyst.one/defi",
+          walletMode: "Aptos",
+          link: "https://keyst.one/defi"
         },
         URTypeErrorMessage:
-          "The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again",
+          "The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again"
       }
     );
     if (decodedResult.status === ReadStatus.success) {
@@ -39,11 +42,11 @@ export class DefaultInteractionProvider implements InteractionProvider {
   };
 
   public requestSignature = async (
-    solSignRequest: SolSignRequest,
+    aptosSignRequest: AptosSignRequest,
     requestTitle?: string,
     requestDescription?: string
   ) => {
-    const status = await this.keystoneSDK.play(solSignRequest.toUR(), {
+    const status = await this.keystoneSDK.play(aptosSignRequest.toUR(), {
       hasNext: true,
       title: requestTitle,
       description: requestDescription,
@@ -52,7 +55,7 @@ export class DefaultInteractionProvider implements InteractionProvider {
     if (status === PlayStatus.canceled)
       throw new Error("#ktek_error[play-cancel]: play canceled");
     const result = await this.keystoneSDK.read(
-      [SupportedResult.UR_SOL_SIGNATURE],
+      [SupportedResult.UR_APTOS_SIGN_REQUEST],
       {
         title: "Scan Keystone",
         description: "Please scan the QR code displayed on your Keystone",
@@ -61,7 +64,7 @@ export class DefaultInteractionProvider implements InteractionProvider {
     if (result.status === ReadStatus.canceled) {
       throw new Error("#ktek_error[read-cancel]: read signature canceled");
     } else {
-      return SolSignature.fromCBOR(result.result.cbor);
+      return AptosSignature.fromCBOR(result.result.cbor);
     }
   };
 }
