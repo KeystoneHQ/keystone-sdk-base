@@ -30,4 +30,6 @@ export enum Purpose {
   SOL_SIGN = "sol-sign",
   NEAR_SYNC = "near-sync",
   NEAR_SIGN = "near-sign",
+  APTOS_SYNC = "aptos-sync",
+  APTOS_SIGN = "aptos-sign",
 }
