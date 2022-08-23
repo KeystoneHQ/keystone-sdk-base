@@ -1,11 +1,7 @@
 import * as uuid from "uuid";
 import { InteractionProvider } from "./InteractionProvider";
 import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
-import {
-  AptosSignature,
-  AptosSignRequest,
-  SignType
-} from "@keystonehq/bc-ur-registry-aptos";
+import { AptosSignRequest, SignType } from "@keystonehq/bc-ur-registry-aptos";
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -49,7 +45,7 @@ export class BaseKeyring {
     signRequest: AptosSignRequest,
     requestTitle?: string,
     requestDescription?: string
-  ): Promise<AptosSignature> => {
+  ) => {
     const aptosSignature = await this.getInteraction().requestSignature(
       signRequest,
       requestTitle,
@@ -57,7 +53,7 @@ export class BaseKeyring {
     );
     const requestIdBuffer = aptosSignature.getRequestId();
     const signature = aptosSignature.getSignature();
-    const authKey = aptosSignature.getAuthenticationPublicKey();
+    const authPubKey = aptosSignature.getAuthenticationPublicKey();
     if (requestIdBuffer) {
       const requestId = uuid.stringify(requestIdBuffer);
       if (requestId !== _requestId) {
@@ -66,7 +62,7 @@ export class BaseKeyring {
         );
       }
     }
-    return new AptosSignature(signature, requestIdBuffer, authKey);
+    return { signature, authPubKey };
   };
 
   //initial read
@@ -109,28 +105,41 @@ export class BaseKeyring {
     return this.name;
   };
 
-  getAuthKeys() {
+  getPubKeys() {
     if (!this.initialized) {
       return [];
     }
     return this.keys;
   }
 
-  async signMessage(
-    authKey: string,
+  _ensureHex(hexStr) {
+    if (hexStr.startsWith("0x")) {
+      return hexStr;
+    } else {
+      return `0x${hexStr}`;
+    }
+  }
+  async _getSignature(
+    authPubKey: string,
     msg: Uint8Array,
+    signType: SignType,
     senderAddress?: string,
     origin?: string
-  ): Promise<AptosSignature> {
+  ) {
     const requestId = uuid.v4();
-    const key = this.getAuthKeys().find(key => key.pubKey == authKey);
+    const key = this.getPubKeys().find(
+      key => key.pubKey === this._ensureHex(authPubKey)
+    );
+    const accounts = senderAddress
+      ? [Buffer.from(this._ensureHex(senderAddress).slice(2))]
+      : [];
     const atosSignRequest = AptosSignRequest.constructAptosRequest(
       Buffer.from(msg),
       [key.hdPath],
       [this.xfp],
-      SignType.SingleSign,
+      signType,
       requestId,
-      [Buffer.from(senderAddress, "hex")],
+      accounts,
       origin
     );
     return this.requestSignature(
@@ -138,6 +147,35 @@ export class BaseKeyring {
       atosSignRequest,
       "Scan with your Keystone",
       'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature'
+    );
+  }
+  async signMessage(
+    authPubKey: string,
+    msg: Uint8Array,
+    senderAddress?: string,
+    origin?: string
+  ) {
+    return this._getSignature(
+      authPubKey,
+      msg,
+      SignType.SignMessage,
+      senderAddress,
+      origin
+    );
+  }
+
+  async signTransaction(
+    authPubKey: string,
+    msg: Uint8Array,
+    senderAddress?: string,
+    origin?: string
+  ) {
+    return this._getSignature(
+      authPubKey,
+      msg,
+      SignType.SingleSign,
+      senderAddress,
+      origin
     );
   }
 }

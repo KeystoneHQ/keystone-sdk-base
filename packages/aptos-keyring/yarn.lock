@@ -1168,10 +1168,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@keystonehq/bc-ur-registry-aptos@^0.0.1-alpha.1":
-  version "0.0.1-alpha.1"
-  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry-aptos/-/bc-ur-registry-aptos-0.0.1-alpha.1.tgz#ea2609f5f161c86400387d2005529d248fb15474"
-  integrity sha512-Hl/JwFV0YW4hbhkqN1Fewja0dv7B+n2KM+icRRV6BZGSwKvd2n5BSnhvFtff52AycKX2tUVOAexZCC3+zgznsA==
+"@keystonehq/bc-ur-registry-aptos@^0.0.1-alpha.2":
+  version "0.0.1-alpha.2"
+  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry-aptos/-/bc-ur-registry-aptos-0.0.1-alpha.2.tgz#46b340d2839d281d649194d05370449956e70980"
+  integrity sha512-MEjEXerf4iLqa98j4xLyyFXm64h0OHkTPXAL2pnr/NNudMaXsjAtfr3yrCE3MEHTX/aHJ9MWOCEE5eYRppbvBg==
   dependencies:
     "@keystonehq/bc-ur-registry" "^0.5.0"
     bs58check "^2.1.2"
