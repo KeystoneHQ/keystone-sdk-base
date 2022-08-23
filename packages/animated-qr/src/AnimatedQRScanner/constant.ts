@@ -7,4 +7,6 @@ export const purposeToURType: Record<Purpose, string[]> = {
   [Purpose.SOL_SIGN]: ["sol-signature"],
   [Purpose.NEAR_SYNC]: ["crypto-multi-accounts"],
   [Purpose.NEAR_SIGN]: ["near-signature"],
+  [Purpose.APTOS_SYNC]: ["crypto-multi-accounts"],
+  [Purpose.APTOS_SIGN]: ["aptos-signature"],
 };
