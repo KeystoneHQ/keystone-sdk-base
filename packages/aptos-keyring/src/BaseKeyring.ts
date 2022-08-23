@@ -74,11 +74,7 @@ export class BaseKeyring {
   public syncKeyring(data: CryptoMultiAccounts): void {
     const keys = data.getKeys();
     this.device = data.getDevice();
-    this.xfp = data
-      .getKeys()[0]
-      .getOrigin()
-      .getSourceFingerprint()
-      ?.toString("hex");
+    this.xfp = data.getMasterFingerprint().toString("hex");
     this.name = data.getKeys()[0].getName();
     this.keys = keys.map((each, index) => ({
       hdPath: each.getOrigin().getPath(),
@@ -128,7 +124,7 @@ export class BaseKeyring {
   ) {
     const requestId = uuid.v4();
     const key = this.getPubKeys().find(
-      key => key.pubKey === this._ensureHex(authPubKey)
+      key => this._ensureHex(key.pubKey) === this._ensureHex(authPubKey)
     );
     const accounts = senderAddress
       ? [Buffer.from(this._ensureHex(senderAddress).slice(2))]
