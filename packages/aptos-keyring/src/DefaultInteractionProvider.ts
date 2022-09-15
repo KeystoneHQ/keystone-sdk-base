@@ -55,7 +55,7 @@ export class DefaultInteractionProvider implements InteractionProvider {
     if (status === PlayStatus.canceled)
       throw new Error("#ktek_error[play-cancel]: play canceled");
     const result = await this.keystoneSDK.read(
-      [SupportedResult.UR_APTOS_SIGN_REQUEST],
+      [SupportedResult.UR_APTOS_SIGNATURE],
       {
         title: "Scan Keystone",
         description: "Please scan the QR code displayed on your Keystone",
