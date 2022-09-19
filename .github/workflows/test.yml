@@ -31,6 +31,9 @@ jobs:
       - name: Install Dependencies
         run: npx lerna clean --yes && npx lerna bootstrap
 
+      - name: Prepare Compile
+        run: npx lerna run ci:prepare
+
       # Runs a single command using the runners shell
       - name: Compile
         run: npx lerna run build
