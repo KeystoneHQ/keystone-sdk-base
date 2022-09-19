@@ -1,6 +1,6 @@
 // @ts-ignore
 import HDKey from "hdkey";
-import { toChecksumAddress, publicToAddress } from "ethereumjs-util";
+import { toChecksumAddress, publicToAddress } from "@ethereumjs/util";
 
 export const generateAddressFromXpub = (xpub: string, derivePath: string) => {
   // @ts-ignore

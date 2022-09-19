@@ -25,8 +25,8 @@
   "author": "soralit <soralitria@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@ethereumjs/util": "^8.0.0",
     "@keystonehq/bc-ur-registry": "^0.5.0-alpha.5",
-    "ethereumjs-util": "^7.0.8",
     "hdkey": "^2.0.1",
     "uuid": "^8.3.2"
   },
