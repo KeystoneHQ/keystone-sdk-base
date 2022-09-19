@@ -3,8 +3,8 @@ import {
   toChecksumAddress,
   publicToAddress,
   stripHexPrefix,
-  rlp,
-} from "ethereumjs-util";
+} from "@ethereumjs/util";
+import rlp from "rlp";
 import {
   Transaction,
   FeeMarketEIP1559Transaction,
@@ -435,7 +435,9 @@ export class BaseKeyring {
       tx.type === 0 ? DataType.transaction : DataType.typedTransaction;
     let messageToSign: Buffer;
     if (tx.type === 0) {
-      messageToSign = rlp.encode((tx as Transaction).getMessageToSign(false));
+      messageToSign = Buffer.from(
+        rlp.encode((tx as Transaction).getMessageToSign(false))
+      );
     } else {
       messageToSign = (tx as FeeMarketEIP1559Transaction).getMessageToSign(
         false

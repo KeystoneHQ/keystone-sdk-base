@@ -27,9 +27,10 @@
   },
   "dependencies": {
     "@ethereumjs/tx": "3.5.1",
+    "@ethereumjs/util": "^8.0.0",
     "@keystonehq/bc-ur-registry-eth": "^0.12.0",
-    "ethereumjs-util": "^7.0.8",
     "hdkey": "^2.0.1",
+    "rlp": "^3.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
