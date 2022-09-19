@@ -2,3 +2,7 @@ node_modules
 yarn-error.log
 .idea
 dist
+
+packages/near-keyring/config.ts
+
+packages/near-keyring/src/Secret.ts
