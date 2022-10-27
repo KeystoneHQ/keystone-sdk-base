@@ -9,7 +9,7 @@ interface ScannerHook {
 
 export const getAnimatedScan = ({
   purpose,
-  urTypes,
+  urTypes = [],
   handleScan,
   handleError,
 }: Omit<ScannerProps, "Options">): ScannerHook => {
@@ -31,9 +31,7 @@ export const getAnimatedScan = ({
         if (purpose && purposeToURType[purpose]) {
           types.push(...purposeToURType[purpose])
         }
-        if (urTypes instanceof Array) {
-          types.push(...urTypes)
-        }
+        types.push(...urTypes)
         if (types.includes(ur.type)) {
           handleScan({ type: ur.type, cbor: ur.cbor.toString("hex") });
         } else {
