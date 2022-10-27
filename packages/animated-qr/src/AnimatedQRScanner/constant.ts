@@ -1,10 +1,12 @@
-import { Purpose } from "./types";
+import { Purpose, URType } from "./types";
 
 export const purposeToURType: Record<Purpose, string[]> = {
-  [Purpose.SYNC]: ["crypto-hdkey", "crypto-account"],
-  [Purpose.SIGN]: ["eth-signature"],
-  [Purpose.SOL_SYNC]: ["crypto-multi-accounts"],
-  [Purpose.SOL_SIGN]: ["sol-signature"],
-  [Purpose.NEAR_SYNC]: ["crypto-multi-accounts"],
-  [Purpose.NEAR_SIGN]: ["near-signature"],
+  [Purpose.SYNC]: [URType.CRYPTO_HDKEY, URType.CRYPTO_ACCOUNT],
+  [Purpose.SIGN]: [URType.ETH_SIGNATURE],
+  [Purpose.SOL_SYNC]: [URType.CRYPTO_MULTI_ACCOUNTS],
+  [Purpose.SOL_SIGN]: [URType.SOL_SIGNATURE],
+  [Purpose.NEAR_SYNC]: [URType.CRYPTO_MULTI_ACCOUNTS],
+  [Purpose.NEAR_SIGN]: [URType.NEAR_SIGNATURE],
+  [Purpose.COSMOS_SYNC]: [URType.CRYPTO_MULTI_ACCOUNTS],
+  [Purpose.COSMOS_SIGN]: [URType.COSMOS_SIGNATURE],
 };

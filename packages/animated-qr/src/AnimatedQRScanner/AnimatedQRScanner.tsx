@@ -6,6 +6,7 @@ import { useCamera } from "./useCamera";
 
 export const AnimatedQRScanner = ({
   purpose,
+  urTypes,
   handleScan,
   handleError,
   options,
@@ -15,6 +16,7 @@ export const AnimatedQRScanner = ({
   const { cameraStatus } = useCamera();
   const { handleScanSuccess, handleScanFailure } = getAnimatedScan({
     purpose,
+    urTypes,
     handleScan,
     handleError,
   });

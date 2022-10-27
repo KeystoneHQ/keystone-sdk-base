@@ -12,7 +12,8 @@ export enum CameraStatus {
 }
 
 export interface ScannerProps {
-  purpose: Purpose
+  purpose?: Purpose
+  urTypes?: string[]
   handleScan: (ur: { type: string; cbor: string }) => void
   handleError: (error: string) => void
   options?: {
@@ -30,4 +31,16 @@ export enum Purpose {
   SOL_SIGN = "sol-sign",
   NEAR_SYNC = "near-sync",
   NEAR_SIGN = "near-sign",
+  COSMOS_SYNC = "cosmos-sync",
+  COSMOS_SIGN = "cosmos-sign",
+}
+
+export enum URType {
+  CRYPTO_HDKEY = "crypto-hdkey",
+  CRYPTO_ACCOUNT = "crypto-account",
+  CRYPTO_MULTI_ACCOUNTS = "crypto-multi-accounts",
+  ETH_SIGNATURE = "eth-signature",
+  SOL_SIGNATURE = "sol-signature",
+  NEAR_SIGNATURE = "near-signature",
+  COSMOS_SIGNATURE = "cosmos-signature",
 }

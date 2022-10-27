@@ -9,6 +9,7 @@ interface ScannerHook {
 
 export const getAnimatedScan = ({
   purpose,
+  urTypes,
   handleScan,
   handleError,
 }: Omit<ScannerProps, "Options">): ScannerHook => {
@@ -26,7 +27,14 @@ export const getAnimatedScan = ({
 
       if (urDecoder.isSuccess()) {
         const ur = urDecoder.resultUR();
-        if (purposeToURType[purpose].includes(ur.type)) {
+        const types = []
+        if (purpose && purposeToURType[purpose]) {
+          types.push(...purposeToURType[purpose])
+        }
+        if (urTypes instanceof Array) {
+          types.push(...urTypes)
+        }
+        if (types.includes(ur.type)) {
           handleScan({ type: ur.type, cbor: ur.cbor.toString("hex") });
         } else {
           handleError(QRCodeError.UNEXPECTED_QRCODE);
