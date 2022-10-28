@@ -5,4 +5,5 @@ export {
   useAnimatedQRScanner,
   Purpose,
   QRCodeError,
+  URType,
 } from "./AnimatedQRScanner";
