@@ -55,5 +55,7 @@ export enum SupportedResult {
   UR_SOL_SIGN_REQUEST = "sol-sign-request",
   UR_SOL_SIGNATURE = "sol-signature",
   UR_APTOS_SIGN_REQUEST='aptos-sign-request',
- UR_APTOS_SIGNATURE = 'aptos-signature',
+  UR_APTOS_SIGNATURE = 'aptos-signature',
+  UR_COSMOS_SIGN_REQUEST = 'cosmos-sign-request',
+  UR_COSMOS_SIGNATURE = 'cosmos-ignature'
 }
