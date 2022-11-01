@@ -55,8 +55,14 @@ export enum SupportedResult {
   UR_SOL_SIGN_REQUEST = "sol-sign-request",
   UR_SOL_SIGNATURE = "sol-signature",
   UR_APTOS_SIGN_REQUEST='aptos-sign-request',
+<<<<<<< HEAD
  UR_APTOS_SIGNATURE = 'aptos-signature',
   UR_ARWEAVE_SIGN_REQUEST = 'arweave-sign-request',
   UR_ARWEAVE_SIGNATURE = 'arweave-signature',
   UR_ARWEAVE_CRYPTO_ACCOUNT = 'arweave-crypto-account',
+=======
+  UR_APTOS_SIGNATURE = 'aptos-signature',
+  UR_COSMOS_SIGN_REQUEST = 'cosmos-sign-request',
+  UR_COSMOS_SIGNATURE = 'cosmos-signature'
+>>>>>>> 7caf4a8 (feat: support cosmos in sdk)
 }
