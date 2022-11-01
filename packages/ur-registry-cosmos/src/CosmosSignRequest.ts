@@ -159,3 +159,4 @@ export class CosmosSignRequest extends RegistryItem {
     });
   }
 }
+
