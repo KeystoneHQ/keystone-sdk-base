@@ -56,4 +56,7 @@ export enum SupportedResult {
   UR_SOL_SIGNATURE = "sol-signature",
   UR_APTOS_SIGN_REQUEST='aptos-sign-request',
  UR_APTOS_SIGNATURE = 'aptos-signature',
+  UR_ARWEAVE_SIGN_REQUEST = 'arweave-sign-request',
+  UR_ARWEAVE_SIGNATURE = 'arweave-signature',
+  UR_ARWEAVE_CRYPTO_ACCOUNT = 'arweave-crypto-account',
 }
