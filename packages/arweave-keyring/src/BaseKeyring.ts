@@ -63,6 +63,13 @@ export class BaseKeyring {
     return this.name;
   };
 
+  getKeyData() {
+    if (!this.initialized) {
+      return null;
+    }
+    return this.keyData;
+  }
+
   async signTransaction(
     txBuf: Buffer,
     saltLen: number
