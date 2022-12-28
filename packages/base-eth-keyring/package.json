@@ -26,7 +26,7 @@
     "build": "tsdx build"
   },
   "dependencies": {
-    "@ethereumjs/tx": "3.5.1",
+    "@ethereumjs/tx": "^4.0.2",
     "@ethereumjs/util": "^8.0.0",
     "@keystonehq/bc-ur-registry-eth": "^0.13.0",
     "hdkey": "^2.0.1",

@@ -69,7 +69,11 @@ export abstract class BaseWalletSubprovider extends Subprovider {
           accounts = await this.getAccountsAsync();
           end(null, accounts[0]);
         } catch (err) {
-          end(err);
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 
@@ -78,7 +82,11 @@ export abstract class BaseWalletSubprovider extends Subprovider {
           accounts = await this.getAccountsAsync();
           end(null, accounts);
         } catch (err) {
-          end(err);
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 
@@ -93,7 +101,11 @@ export abstract class BaseWalletSubprovider extends Subprovider {
           const response = await this._emitSendTransactionAsync(signedTx);
           end(null, response.result);
         } catch (err) {
-          end(err);
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 
@@ -110,7 +122,11 @@ export abstract class BaseWalletSubprovider extends Subprovider {
           };
           end(null, result);
         } catch (err) {
-          end(err);
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 
@@ -127,7 +143,11 @@ export abstract class BaseWalletSubprovider extends Subprovider {
           );
           end(null, ecSignatureHex);
         } catch (err) {
-          end(err);
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
       case "eth_signTypedData":
@@ -136,7 +156,11 @@ export abstract class BaseWalletSubprovider extends Subprovider {
           const signature = await this.signTypedDataAsync(address, typedData);
           end(null, signature);
         } catch (err) {
-          end(err);
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 

@@ -20,7 +20,7 @@
   "author": "soralit <soralitria@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry": "^0.5.0",
+    "@keystonehq/bc-ur-registry": "0.5.4",
     "@keystonehq/bc-ur-registry-near": "^0.4.0",
     "borsh": "^0.7.0",
     "bs58": "^5.0.0",
