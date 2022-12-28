@@ -8,7 +8,7 @@ import {
   FeeMarketEIP1559TxData,
   Transaction,
 } from "@ethereumjs/tx";
-import { addHexPrefix, stripHexPrefix } from "ethereumjs-util";
+import { addHexPrefix, stripHexPrefix, rlp } from "ethereumjs-util";
 import * as uuid from "uuid";
 import {
   CryptoHDKey,
@@ -71,16 +71,13 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
       data: txParams.data,
       nonce: txParams.nonce,
       value: txParams.value,
-      v: this._common.chainId(),
-      r: BigInt(0),
-      s: BigInt(0),
     };
 
     const tx = Transaction.fromTxData(_txParams, {
       common: this._common,
       freeze: false,
     });
-    const unsignedBuffer = tx.serialize();
+    const unsignedBuffer = rlp.encode(tx.getMessageToSign(false));
     const requestId = uuid.v4();
     const addressPath = findHDPathFromAddress(
       txParams.from,
