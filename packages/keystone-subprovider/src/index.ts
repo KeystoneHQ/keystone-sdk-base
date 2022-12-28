@@ -2,21 +2,21 @@ import { assert } from "@0x/assert";
 import { PartialTxParams } from "@0x/subproviders";
 import { BaseWalletSubprovider } from "./baseWalletSubprovider";
 import sdk, { SupportedResult } from "@keystonehq/sdk";
-import Common, { Hardfork } from "@ethereumjs/common";
+import { Common, Hardfork } from "@ethereumjs/common";
 import {
-  Transaction,
   FeeMarketEIP1559Transaction,
   FeeMarketEIP1559TxData,
+  Transaction,
 } from "@ethereumjs/tx";
-import { BN, stripHexPrefix, addHexPrefix } from "ethereumjs-util";
+import { addHexPrefix, stripHexPrefix } from "ethereumjs-util";
 import * as uuid from "uuid";
 import {
   CryptoHDKey,
-  generateAddressFromXpub,
-  findHDPathFromAddress,
-  EthSignRequest,
   DataType,
   ETHSignature,
+  EthSignRequest,
+  findHDPathFromAddress,
+  generateAddressFromXpub,
 } from "@keystonehq/bc-ur-registry-eth";
 
 type KeystoneSubproviderConfigs = {
@@ -41,9 +41,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     sdk.bootstrap();
     this.keystoneSdk = sdk.getSdk();
     this.synced = false;
-    this._common = Common.forCustomChain("mainnet", {
-      chainId: this._networkId,
-    });
+    this._common = Common.custom({ chainId: this._networkId });
   }
 
   public getPath(): string {
@@ -73,18 +71,15 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
       data: txParams.data,
       nonce: txParams.nonce,
       value: txParams.value,
+      v: this._common.chainId(),
+      r: BigInt(0),
+      s: BigInt(0),
     };
 
     const tx = Transaction.fromTxData(_txParams, {
       common: this._common,
       freeze: false,
     });
-    //@ts-ignore
-    tx.v = new BN(tx.common.chainId());
-    // @ts-ignore
-    tx.r = new BN(0);
-    // @ts-ignore
-    tx.s = new BN(0);
     const unsignedBuffer = tx.serialize();
     const requestId = uuid.v4();
     const addressPath = findHDPathFromAddress(
@@ -130,10 +125,11 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
       await this.getAccountsAsync();
     }
 
-    const common = Common.forCustomChain(
-      "mainnet",
-      { chainId: this._networkId },
-      Hardfork.London
+    const common = Common.custom(
+      {
+        chainId: this._networkId,
+      },
+      { baseChain: "mainnet", hardfork: Hardfork.London }
     );
     const eip1559Tx = FeeMarketEIP1559Transaction.fromTxData(txParams, {
       common,
@@ -169,7 +165,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
 
     const { r, s, v } = await this.readSignature(requestId);
     const numberV = v.readUInt8(0);
-    const signedTx = eip1559Tx._processSignature(numberV, r, s);
+    const signedTx = eip1559Tx._processSignature(BigInt(numberV), r, s);
     return `0x${signedTx.serialize().toString("hex")}`;
   }
 

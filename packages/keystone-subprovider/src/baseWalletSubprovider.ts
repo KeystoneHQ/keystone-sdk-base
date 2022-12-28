@@ -68,7 +68,7 @@ export abstract class BaseWalletSubprovider extends Subprovider {
         try {
           accounts = await this.getAccountsAsync();
           end(null, accounts[0]);
-        } catch (err) {
+        } catch (err: any) {
           end(err);
         }
         return;
@@ -77,7 +77,7 @@ export abstract class BaseWalletSubprovider extends Subprovider {
         try {
           accounts = await this.getAccountsAsync();
           end(null, accounts);
-        } catch (err) {
+        } catch (err: any) {
           end(err);
         }
         return;
@@ -92,7 +92,7 @@ export abstract class BaseWalletSubprovider extends Subprovider {
           const signedTx = await this.signTransactionAsync(filledParams);
           const response = await this._emitSendTransactionAsync(signedTx);
           end(null, response.result);
-        } catch (err) {
+        } catch (err: any) {
           end(err);
         }
         return;
@@ -109,7 +109,7 @@ export abstract class BaseWalletSubprovider extends Subprovider {
             tx: txParams,
           };
           end(null, result);
-        } catch (err) {
+        } catch (err: any) {
           end(err);
         }
         return;
@@ -126,7 +126,7 @@ export abstract class BaseWalletSubprovider extends Subprovider {
             address
           );
           end(null, ecSignatureHex);
-        } catch (err) {
+        } catch (err: any) {
           end(err);
         }
         return;
@@ -135,7 +135,7 @@ export abstract class BaseWalletSubprovider extends Subprovider {
         try {
           const signature = await this.signTypedDataAsync(address, typedData);
           end(null, signature);
-        } catch (err) {
+        } catch (err: any) {
           end(err);
         }
         return;

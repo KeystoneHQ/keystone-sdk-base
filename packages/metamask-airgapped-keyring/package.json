@@ -26,7 +26,7 @@
     "build": "tsdx build"
   },
   "dependencies": {
-    "@ethereumjs/tx": "^3.3.0",
+    "@ethereumjs/tx": "^4.0.2",
     "@keystonehq/base-eth-keyring": "^0.8.0",
     "@keystonehq/bc-ur-registry-eth": "^0.13.0",
     "@metamask/obs-store": "^7.0.0",

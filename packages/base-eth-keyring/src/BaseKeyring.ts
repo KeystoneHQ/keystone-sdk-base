@@ -444,7 +444,7 @@ export class BaseKeyring {
       );
     }
     const hdPath = await this._pathFromAddress(address);
-    const chainId = tx.common.chainId();
+    const chainId = Number(tx.common.chainId());
     const requestId = uuid.v4();
     const ethSignRequest = EthSignRequest.constructETHRequest(
       messageToSign,
