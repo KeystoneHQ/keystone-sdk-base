@@ -24,7 +24,7 @@
   "author": "Zhao Mengru<zhaomengru2018@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry": "^0.5.0",
+    "@keystonehq/bc-ur-registry": "0.5.4",
     "bs58check": "^2.1.2",
     "uuid": "^8.3.2"
   },

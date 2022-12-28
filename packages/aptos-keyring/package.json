@@ -18,7 +18,7 @@
   "author": "Zhao Mengru<zhaomengru2018@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry": "^0.5.0",
+    "@keystonehq/bc-ur-registry": "0.5.4",
     "@keystonehq/bc-ur-registry-aptos": "^0.0.1-alpha.2",
     "@keystonehq/sdk": "^0.14.0",
     "aptos": "^1.3.7",

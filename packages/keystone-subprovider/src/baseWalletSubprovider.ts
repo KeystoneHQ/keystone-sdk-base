@@ -68,8 +68,12 @@ export abstract class BaseWalletSubprovider extends Subprovider {
         try {
           accounts = await this.getAccountsAsync();
           end(null, accounts[0]);
-        } catch (err: any) {
-          end(err);
+        } catch (err) {
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 
@@ -77,8 +81,12 @@ export abstract class BaseWalletSubprovider extends Subprovider {
         try {
           accounts = await this.getAccountsAsync();
           end(null, accounts);
-        } catch (err: any) {
-          end(err);
+        } catch (err) {
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 
@@ -92,8 +100,12 @@ export abstract class BaseWalletSubprovider extends Subprovider {
           const signedTx = await this.signTransactionAsync(filledParams);
           const response = await this._emitSendTransactionAsync(signedTx);
           end(null, response.result);
-        } catch (err: any) {
-          end(err);
+        } catch (err) {
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 
@@ -109,8 +121,12 @@ export abstract class BaseWalletSubprovider extends Subprovider {
             tx: txParams,
           };
           end(null, result);
-        } catch (err: any) {
-          end(err);
+        } catch (err) {
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 
@@ -126,8 +142,12 @@ export abstract class BaseWalletSubprovider extends Subprovider {
             address
           );
           end(null, ecSignatureHex);
-        } catch (err: any) {
-          end(err);
+        } catch (err) {
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
       case "eth_signTypedData":
@@ -135,8 +155,12 @@ export abstract class BaseWalletSubprovider extends Subprovider {
         try {
           const signature = await this.signTypedDataAsync(address, typedData);
           end(null, signature);
-        } catch (err: any) {
-          end(err);
+        } catch (err) {
+          if (err instanceof Error) {
+            end(err);
+          } else {
+            end(null);
+          }
         }
         return;
 
