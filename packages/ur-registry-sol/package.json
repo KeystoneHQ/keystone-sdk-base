@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-sol",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "bc-ur-registry extension for Solana",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

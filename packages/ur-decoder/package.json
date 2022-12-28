@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/ur-decoder",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "bc-ur decoder",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
