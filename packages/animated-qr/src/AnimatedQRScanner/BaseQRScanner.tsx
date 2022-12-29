@@ -42,9 +42,12 @@ export const BaseQRScanner = ({
     const promise = codeReader.decodeFromVideoDevice(
       undefined,
       videoElement,
-      (result) => {
+      (result, error) => {
         if (result) {
           handleScan(result.getText());
+        }
+        if (error) {
+          handleError(error.message);
         }
       }
     );

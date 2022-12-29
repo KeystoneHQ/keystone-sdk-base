@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-near",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "bc-ur-registry extension for Near",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
