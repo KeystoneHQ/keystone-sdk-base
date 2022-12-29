@@ -57,7 +57,7 @@ export const BaseQRScanner = ({
           }
         })
         .catch((error) => {
-          handleError && handleError(error);
+          console.error(error);
         });
     };
   }, []);
