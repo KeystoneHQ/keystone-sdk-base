@@ -22,8 +22,7 @@
   ],
   "dependencies": {
     "@ngraveio/bc-ur": "^1.0.0",
-    "protobufjs": "^6.10.1",
-    "typescript": "^4.6.2"
+    "protobufjs": "^6.10.1"
   },
   "repository": {
     "type": "git",
