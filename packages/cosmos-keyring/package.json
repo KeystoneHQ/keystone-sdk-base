@@ -1,34 +1,29 @@
 {
     "name": "@keystonehq/cosmos-keyring",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "cosmos-keyring interact with Keystone",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "files":
-    [
+    "files": [
         "dist"
     ],
-    "scripts":
-    {
+    "scripts": {
         "clean": "rm -rf ./dist",
         "start": "tsdx watch",
         "build": "tsdx build"
     },
-    "publishConfig":
-    {
+    "publishConfig": {
         "access": "public"
     },
     "author": "Zhu yu<yu@keyst.one>",
     "license": "ISC",
-    "dependencies":
-    {
+    "dependencies": {
         "@keystonehq/bc-ur-registry": "^0.5.0",
         "@keystonehq/bc-ur-registry-cosmos": "^0.1.1",
-        "@keystonehq/sdk": "^0.15.1-alpha.0",
+        "@keystonehq/sdk": "^0.15.2",
         "uuid": "^8.3.2"
     },
-    "devDependencies":
-    {
+    "devDependencies": {
         "@babel/preset-typescript": "^7.15.0",
         "@types/uuid": "^8.3.1",
         "tsdx": "^0.14.1",
