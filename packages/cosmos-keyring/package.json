@@ -1,6 +1,6 @@
 {
     "name": "@keystonehq/cosmos-keyring",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "cosmos-keyring interact with Keystone",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
