@@ -20,7 +20,7 @@
     "dependencies": {
       "@keystonehq/bc-ur-registry": "^0.5.0",
       "@keystonehq/bc-ur-registry-cosmos": "^0.0.2-alpha.1",
-      "@keystonehq/sdk": "^0.15.1",
+      "@keystonehq/sdk": "0.14.1-alpha.1",
       "uuid": "^8.3.2"
     },
     "devDependencies": {
