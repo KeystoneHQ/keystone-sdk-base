@@ -1,5 +1,5 @@
 import React from "react";
-import QRCode from "qrcode.react";
+import { QRCodeCanvas } from "qrcode.react";
 
 interface Props {
   value: string;
@@ -22,6 +22,6 @@ export const BaseQRCode = ({
       alignItems: "center",
     }}
   >
-    <QRCode value={value} size={size - 10} />
+    <QRCodeCanvas value={value} size={size - 10} />
   </div>
 );
