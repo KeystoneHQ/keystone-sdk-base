@@ -1,7 +1,5 @@
 import React from "react";
 
-const QRCode = ({ value }) => {
+export const QRCodeCanvas = ({ value }) => {
   return <div>{value}</div>;
 };
-
-export default QRCode;
