@@ -23,7 +23,9 @@ export const useAnimatedQRScanner = ({
   setIsDone: (isDone: boolean) => void;
 } => {
   const [isDone, setIsDone] = useState(false);
-  const isScanDone = useRef(false);
+  // Prevent AnimatedQRScanner from redrawing without using isDone as a dependency.
+  // Using ref to get the latest state in AnimatedQRScanner.
+  const isScanDone = useRef(isDone);
 
   const AnimatedQRScanner = useMemo(() => {
     return ({
