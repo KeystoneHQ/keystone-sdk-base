@@ -1,0 +1,2 @@
+export const MP_TOKEN = "$SHOULD_BE_REPLACED";
+export const MP_PROJECT_ID = "$SHOULD_BE_REPLACED";
