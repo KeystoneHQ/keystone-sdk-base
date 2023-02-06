@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-arweave",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "bc-ur-registry extension for Arweave",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/aptos-keyring",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "aptos-keyring interact with Keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,7 +22,7 @@
   "dependencies": {
     "@keystonehq/bc-ur-registry": "0.5.4",
     "@keystonehq/bc-ur-registry-aptos": "^0.0.1-alpha.2",
-    "@keystonehq/sdk": "^0.15.4",
+    "@keystonehq/sdk": "^0.15.5",
     "aptos": "^1.3.7",
     "uuid": "^8.3.2"
   },
