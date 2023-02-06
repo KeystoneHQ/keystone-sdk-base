@@ -1,6 +1,7 @@
 import * as uuid from "uuid";
 import {InteractionProvider} from "./InteractionProvider";
 import {ArweaveCryptoAccount, ArweaveSignRequest, SignType,} from "@keystonehq/bc-ur-registry-arweave";
+import { Tracker } from "./Tracker";
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -22,7 +23,7 @@ export class BaseKeyring {
     //common props
     this.name = "QR Hardware";
     this.initialized = false;
-    this.device = "";
+    this.device = "Arweave";
     this.xfp = "";
   }
 
@@ -43,6 +44,12 @@ export class BaseKeyring {
         );
       }
     }
+    Tracker.track("sign", {
+      distinctId: this.device,
+      time: Date.now(),
+      xfp: this.xfp,
+      requestId: _requestId
+    });
     return signature;
   };
 
@@ -53,10 +60,16 @@ export class BaseKeyring {
   }
 
   public syncKeyring(data: ArweaveCryptoAccount): void {
+    const xfp = data.getMasterFingerprint().toString("hex");
     this.keyData = data.getKeyData();
     this.device = data.getDevice();
-    this.xfp = data.getMasterFingerprint().toString("hex");
+    this.xfp = xfp;
     this.initialized = true;
+    Tracker.track("sync", {
+      distinctId: data.getDevice(),
+      time: Date.now(),
+      xfp
+    });
   }
 
   public getName = (): string => {
