@@ -1,4 +1,3 @@
-import ky from "ky";
 import { MP_TOKEN, MP_PROJECT_ID } from "./Secret";
 
 interface MPPayload {
@@ -32,8 +31,8 @@ export class Tracker {
       body,
     };
     try {
-      const res = await ky.post(url, options);
-      return res.json();
+      const res = await fetch(url, options);
+      return await res.json();
     } catch (err) {
       console.error("error:" + err);
     }
