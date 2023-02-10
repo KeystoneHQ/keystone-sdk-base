@@ -148,7 +148,7 @@ export class Keyring {
     pubKey: string,
     msg: Uint8Array,
     dataType: SignDataType,
-    chainId: number,
+    chainId?: number,
     address?: string,
     origin?: string
   ) {
@@ -177,7 +177,7 @@ export class Keyring {
   public async signCosmosAmino(
     pubKey: string,
     msg: Uint8Array,
-    chainId: number,
+    chainId?: number,
     address?: string,
     origin?: string,
   ) {
@@ -194,7 +194,7 @@ export class Keyring {
   public async signCosmosDirect(
     pubKey: string,
     msg: Uint8Array,
-    chainId: number,
+    chainId?: number,
     address?: string,
     origin?: string,
   ) {
@@ -211,7 +211,7 @@ export class Keyring {
   public async signArbitrary(
     pubKey: string,
     msg: Uint8Array,
-    chainId: number,
+    chainId?: number,
     address?: string,
     origin?: string,
   ) {
