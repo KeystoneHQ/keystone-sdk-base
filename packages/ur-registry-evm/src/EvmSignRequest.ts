@@ -7,7 +7,7 @@ import {
   DataItemMap
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
-import * as uuid from "uuid";
+import { parse as uuidParse} from "uuid";
 
 const { decodeToDataItem, RegistryTypes } = extend;
 
@@ -139,7 +139,7 @@ export class EvmSignRequest extends RegistryItem {
     origin?: string
   ) {
     return new EvmSignRequest({
-      requestId: Buffer.from(uuid.parse(uuidString) as Uint8Array),
+      requestId: Buffer.from(uuidParse(uuidString) as Uint8Array),
       signData,
       dataType: dataType || SignDataType.arbitrary,
       chainId,

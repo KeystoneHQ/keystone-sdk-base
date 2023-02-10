@@ -11,30 +11,25 @@ import {
   enum Keys {
     requestId = 1,
     signature,
-    publicKey
   }
 
   export class EvmSignature extends RegistryItem {
     private requestId: Buffer;
     private signature: Buffer;
-    private publicKey: Buffer;
   
     getRegistryType = () => ExtendedRegistryTypes.EVM_SIGNATURE;
   
     constructor(
       signature: Buffer,
       requestId: Buffer,
-      publicKey: Buffer
     ) {
       super();
       this.signature = signature;
       this.requestId = requestId;
-      this.publicKey = publicKey;
     }
   
     public getRequestId = () => this.requestId;
     public getSignature = () => this.signature;
-    public getPublicKey = () => this.publicKey;
     public toDataItem = () => {
       const map: DataItemMap = {};
       map[Keys.requestId] = new DataItem(
@@ -42,7 +37,6 @@ import {
         RegistryTypes.UUID.getTag()
       );
       map[Keys.signature] = this.signature;
-      map[Keys.publicKey] = this.publicKey;
       return new DataItem(map);
     };
   
@@ -50,8 +44,7 @@ import {
       const map = dataItem.getData();
       const signature = map[Keys.signature];
       const requestId = map[Keys.requestId].getData();
-      const authenticationPublicKey = map[Keys.publicKey];
-      return new EvmSignature(signature, requestId, authenticationPublicKey);
+      return new EvmSignature(signature, requestId);
     };
   
     public static fromCBOR = (_cborPayload: Buffer) => {
