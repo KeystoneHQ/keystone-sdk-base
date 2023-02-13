@@ -14,7 +14,7 @@ describe("evm-sign-request", () => {
       "8e53e7b10656816de70824e3016fc1a277e77825e12825dc4f239f418ab2e04e",
       "hex"
     );
-    const chainId = 9000;
+    const customChainIdentifier = 9000;
 
     const signKeyPath = new CryptoKeypath(
       [
@@ -35,7 +35,7 @@ describe("evm-sign-request", () => {
       requestId: Buffer.from(idBuffer),
       signData: evmData,
       dataType: SignDataType.cosmosAmino,
-      chainId,
+      customChainIdentifier,
       derivationPath: signKeyPath,
       address,
       origin: "evm wallet",
@@ -61,12 +61,12 @@ describe("evm-sign-request", () => {
       evmSignRequestDecoded.getDerivationPath()
     ).toEqual("44'/9000'/0'/0/0");
     expect(evmSignRequestDecoded.getDataype()).toBe(SignDataType.cosmosAmino);
-    expect(evmSignRequestDecoded.getChainId()).toBe(chainId);
+    expect(evmSignRequestDecoded.getCustomChainIdentifier()).toBe(customChainIdentifier);
     expect(evmSignRequestDecoded.getAddress()).toEqual(address);
   });
 
   it("should construct an evmSignRequest object from string", () => {
-    const chainId = 9000;
+    const customChainIdentifier = 9000;
     const derivationHdPath = "m/44'/9000'/0'/0/0";
     const xfp = "78230804";
     const evmData = Buffer.from(
@@ -81,7 +81,7 @@ describe("evm-sign-request", () => {
       xfp,
       evmData,
       SignDataType.cosmosAmino,
-      chainId,
+      customChainIdentifier,
       derivationHdPath,
       address,
       "evm wallet"

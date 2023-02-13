@@ -148,7 +148,7 @@ export class Keyring {
     pubKey: string,
     msg: Uint8Array,
     dataType: SignDataType,
-    chainId?: number,
+    customChainIdentifier?: number,
     address?: string,
     origin?: string
   ) {
@@ -162,7 +162,7 @@ export class Keyring {
       this.xfp,
       Buffer.from(msg),
       dataType,
-      chainId,
+      customChainIdentifier,
       key.hdPath,
       Buffer.from(address),
       origin
@@ -177,7 +177,7 @@ export class Keyring {
   public async signCosmosAmino(
     pubKey: string,
     msg: Uint8Array,
-    chainId?: number,
+    customChainIdentifier?: number,
     address?: string,
     origin?: string,
   ) {
@@ -185,7 +185,7 @@ export class Keyring {
       pubKey,
       msg,
       SignDataType.cosmosAmino,
-      chainId,
+      customChainIdentifier,
       address,
       origin,
     );
@@ -194,7 +194,7 @@ export class Keyring {
   public async signCosmosDirect(
     pubKey: string,
     msg: Uint8Array,
-    chainId?: number,
+    customChainIdentifier?: number,
     address?: string,
     origin?: string,
   ) {
@@ -202,7 +202,7 @@ export class Keyring {
       pubKey,
       msg,
       SignDataType.cosmosDirect,
-      chainId,
+      customChainIdentifier,
       address,
       origin,
     );
@@ -211,7 +211,7 @@ export class Keyring {
   public async signArbitrary(
     pubKey: string,
     msg: Uint8Array,
-    chainId?: number,
+    customChainIdentifier?: number,
     address?: string,
     origin?: string,
   ) {
@@ -219,7 +219,7 @@ export class Keyring {
       pubKey,
       msg,
       SignDataType.arbitrary,
-      chainId,
+      customChainIdentifier,
       address,
       origin,
     );

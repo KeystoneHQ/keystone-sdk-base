@@ -21,7 +21,7 @@ enum Keys {
   requestId = 1,
   signData,
   dataType,
-  chainId,
+  customChainIdentifier,
   derivationPath,
   address,
   origin,
@@ -31,7 +31,7 @@ type signRequestProps = {
   requestId: Buffer;
   signData: Buffer;
   dataType: SignDataType;
-  chainId: Number,
+  customChainIdentifier: Number,
   derivationPath: CryptoKeypath;
   address?: Buffer;
   origin?: string;
@@ -41,7 +41,7 @@ export class EvmSignRequest extends RegistryItem {
   private requestId: Buffer;
   private signData: Buffer;
   private dataType: SignDataType;
-  private chainId: Number;
+  private customChainIdentifier: Number;
   private derivationPath: CryptoKeypath;
   private address?: Buffer;
   private origin?: string;
@@ -53,7 +53,7 @@ export class EvmSignRequest extends RegistryItem {
     this.requestId = args.requestId;
     this.signData = args.signData;
     this.dataType = args.dataType;
-    this.chainId = args.chainId;
+    this.customChainIdentifier = args.customChainIdentifier;
     this.derivationPath = args.derivationPath;
     this.address = args.address;
     this.origin = args.origin;
@@ -62,7 +62,7 @@ export class EvmSignRequest extends RegistryItem {
   public getRequestId = () => this.requestId;
   public getSignData = () => this.signData;
   public getDataype = () => this.dataType;
-  public getChainId = () => this.chainId;
+  public getCustomChainIdentifier = () => this.customChainIdentifier;
   public getDerivationPath= () => this.derivationPath.getPath();
   public getAddress = () => this.address;
   public getOrigin = () => this.origin;
@@ -75,7 +75,7 @@ export class EvmSignRequest extends RegistryItem {
     );
     map[Keys.signData] = this.signData;
     map[Keys.dataType] = this.dataType;
-    map[Keys.chainId] = this.chainId;
+    map[Keys.customChainIdentifier] = this.customChainIdentifier;
 
     const derivationPath = this.derivationPath.toDataItem();
     derivationPath.setTag(this.derivationPath.getRegistryType().getTag());
@@ -103,7 +103,7 @@ export class EvmSignRequest extends RegistryItem {
       requestId,
       signData: map[Keys.signData],
       dataType: map[Keys.dataType],
-      chainId: map[Keys.chainId],
+      customChainIdentifier: map[Keys.customChainIdentifier],
       derivationPath: CryptoKeypath.fromDataItem(map[Keys.derivationPath]),
       address: map[Keys.address],
       origin: map[Keys.origin],
@@ -133,7 +133,7 @@ export class EvmSignRequest extends RegistryItem {
     xfp: string,
     signData: Buffer,
     dataType: SignDataType,
-    chainId: Number,
+    customChainIdentifier: Number,
     derivationHDPath: string,  
     address?: Buffer,
     origin?: string
@@ -142,7 +142,7 @@ export class EvmSignRequest extends RegistryItem {
       requestId: Buffer.from(uuidParse(uuidString) as Uint8Array),
       signData,
       dataType: dataType || SignDataType.arbitrary,
-      chainId,
+      customChainIdentifier,
       derivationPath: EvmSignRequest.parsePath(derivationHDPath, xfp),
       address,
       origin,
