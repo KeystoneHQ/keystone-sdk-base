@@ -1204,16 +1204,7 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@keystonehq/bc-ur-registry-evm@^0.1.1-alpha.0":
-  version "0.1.1-alpha.0"
-  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry-evm/-/bc-ur-registry-evm-0.1.1-alpha.0.tgz#4376cae15a07fb312835cd1f413ec005f5e6625e"
-  integrity sha512-jIl3/qc1ebn2T0guwu6Jp+tI7dMiSKe31x8gNFCwPnLmmQFP9FRD208xK3llDrQ6VW/Fbin7NJrzfjM13XhxDg==
-  dependencies:
-    "@keystonehq/bc-ur-registry" "0.5.4"
-    bs58check "^2.1.2"
-    uuid "^9.0.0"
-
-"@keystonehq/bc-ur-registry@0.5.4", "@keystonehq/bc-ur-registry@^0.5.0":
+"@keystonehq/bc-ur-registry@^0.5.0":
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry/-/bc-ur-registry-0.5.4.tgz#5802486a29f5d772520d15579d40fba02860e27f"
   integrity sha512-z7bZe10I5k0zz9znmDTXh+o3Rzb5XsRVpwAzexubOaLxVdZ0F7aMbe2LoEsw766Hpox/7zARi7UGmLz5C8BAzA==
