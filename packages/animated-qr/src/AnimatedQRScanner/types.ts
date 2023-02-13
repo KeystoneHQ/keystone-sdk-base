@@ -43,4 +43,5 @@ export enum URType {
   SOL_SIGNATURE = "sol-signature",
   NEAR_SIGNATURE = "near-signature",
   COSMOS_SIGNATURE = "cosmos-signature",
+  EVM_SIGNATURE = "evm-signature",
 }
