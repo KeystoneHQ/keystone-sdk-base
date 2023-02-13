@@ -10,3 +10,5 @@ patchTags(
 
 export { EvmSignRequest, SignDataType } from "./EvmSignRequest";
 export { EvmSignature } from "./EvmSignature";
+
+console.log('test')
