@@ -26,7 +26,7 @@ export const BaseQRScanner = ({
     const hint = new Map();
     hint.set(DecodeHintType.POSSIBLE_FORMATS, [BarcodeFormat.QR_CODE]);
     return new BrowserQRCodeReader(hint, {
-      delayBetweenScanAttempts: 100,
+      delayBetweenScanAttempts: 50,
       delayBetweenScanSuccess: 100,
     });
   }, []);
