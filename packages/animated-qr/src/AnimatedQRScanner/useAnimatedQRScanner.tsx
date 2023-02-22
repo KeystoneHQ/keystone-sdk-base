@@ -1,7 +1,8 @@
 import React, { ReactElement, useEffect, useMemo, useRef, useState } from "react";
-import { ScannerProps } from "./types";
+import { CameraStatus, ScannerProps } from "./types";
 import { BaseQRScanner } from "./BaseQRScanner";
 import { getAnimatedScan } from "./getAnimatedScan";
+import { useCamera } from './useCamera';
 
 interface BaseScannerProps {
   handleScan: (ur: string) => void;
@@ -19,13 +20,18 @@ export const useAnimatedQRScanner = ({
   scannerProps = {},
 }: ScannerHookParams): {
   isDone: boolean;
+  hasPermission: boolean;
   AnimatedQRScanner: (props: ScannerProps) => ReactElement;
   setIsDone: (isDone: boolean) => void;
 } => {
   const [isDone, setIsDone] = useState(false);
+  const [hasPermission, setHasPermission] = useState<boolean>(true);
   // Prevent AnimatedQRScanner from redrawing without using isDone as a dependency.
   // Using ref to get the latest state in AnimatedQRScanner.
   const isScanDone = useRef(isDone);
+
+  // Check permission
+  const { cameraStatus } = useCamera();
 
   const AnimatedQRScanner = useMemo(() => {
     return ({
@@ -87,8 +93,18 @@ export const useAnimatedQRScanner = ({
     isScanDone.current = isDone;
   }, [isDone]);
 
+  useEffect(() => {
+    if (
+      cameraStatus === CameraStatus.PERMISSION_NEEDED ||
+      cameraStatus === CameraStatus.NO_WEBCAM
+    ) {
+      setHasPermission(false);
+    }
+  }, [cameraStatus]);
+
   return {
     isDone,
+    hasPermission,
     AnimatedQRScanner,
     setIsDone,
   };
