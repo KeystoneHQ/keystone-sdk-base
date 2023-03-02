@@ -9,7 +9,9 @@ yalc.lock
 packages/near-keyring/config.ts
 packages/aptos-keyring/config.ts
 packages/arweave-keyring/config.ts
+packages/sol-keyring/config.ts
 
 packages/near-keyring/src/Secret.ts
 packages/aptos-keyring/src/Secret.ts
 packages/arweave-keyring/src/Secret.ts
+packages/sol-keyring/src/Secret.ts
