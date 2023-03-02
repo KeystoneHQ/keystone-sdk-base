@@ -4,6 +4,7 @@ import { Message, PublicKey, Transaction } from "@solana/web3.js";
 import { InteractionProvider } from "./InteractionProvider";
 import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
 import { SolSignRequest, SignType } from "@keystonehq/bc-ur-registry-sol";
+import { Tracker } from './Tracker';
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -33,6 +34,8 @@ export class BaseKeyring {
   protected keys: HDKey[];
   protected name: string;
   protected device: string;
+  public isTracking: boolean;
+
   constructor() {
     //common props
     this.keys = [];
@@ -40,6 +43,7 @@ export class BaseKeyring {
     this.initialized = false;
     this.device = "";
     this.xfp = "";
+    this.isTracking = true;
   }
 
   protected requestSignature = async (
@@ -62,6 +66,14 @@ export class BaseKeyring {
           "KeystoneError#invalid_data: read signature error: mismatched requestId"
         );
       }
+    }
+    if (this.isTracking) {
+      Tracker.track("sign", {
+        distinctId: this.device,
+        time: Date.now(),
+        xfp: this.xfp,
+        requestId: _requestId,
+      });
     }
     return signature;
   };
@@ -87,6 +99,13 @@ export class BaseKeyring {
       index,
     }));
     this.initialized = true;
+    if (this.isTracking) {
+      Tracker.track("sync", {
+        distinctId: this.device,
+        time: Date.now(),
+        xfp: this.xfp,
+      });
+    }
   }
 
   public syncKeyringData({xfp, keys, name = "QR Hardware", device}: KeyringInitData): void {
