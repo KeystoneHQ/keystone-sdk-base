@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { BarcodeFormat, DecodeHintType } from "@zxing/library";
-import { BrowserQRCodeReader } from "@zxing/browser";
+import { BrowserQRCodeReader, IScannerControls } from "@zxing/browser";
 
 const VIDEO_ID = "qr-scanner-video";
 
@@ -12,6 +12,10 @@ interface BaseQRScannerProps {
   width?: string | number;
   height?: string | number;
 }
+
+type HTMLVideoElementScanPreview = HTMLVideoElement & {
+  pendingScanRequest?: Promise<IScannerControls | undefined>;
+};
 
 export const BaseQRScanner = ({
   handleScan,
@@ -32,36 +36,48 @@ export const BaseQRScanner = ({
   }, []);
 
   useEffect(() => {
-    const videoElement = document.getElementById(VIDEO_ID) as HTMLVideoElement;
+    const videoElement = document.getElementById(
+      VIDEO_ID
+    ) as HTMLVideoElementScanPreview;
     const canplayListener = () => {
       setCanplay(true);
       videoLoaded && videoLoaded(true);
     };
     videoElement.addEventListener("canplay", canplayListener);
 
-    const promise = codeReader.decodeFromVideoDevice(
-      undefined,
-      videoElement,
-      (result, error) => {
-        if (result) {
-          handleScan(result.getText());
-        }
-        if (error) {
-          handleError(error.message);
-        }
-      }
-    );
+    const pendingScanRequest =
+      videoElement?.pendingScanRequest ?? Promise.resolve(undefined);
+    const scanRequest = pendingScanRequest
+      .then(() =>
+        codeReader.decodeFromVideoDevice(
+          undefined,
+          videoElement,
+          (result, error) => {
+            if (result) {
+              handleScan(result.getText());
+            }
+            if (error) {
+              handleError(error.message);
+            }
+          }
+        )
+      )
+      .catch((error) => {
+        console.error(error);
+        return undefined;
+      });
+
+    if (videoElement) {
+      videoElement.pendingScanRequest = scanRequest;
+    }
+
     return () => {
       videoElement.removeEventListener("canplay", canplayListener);
-      promise
-        .then((controls) => {
-          if (controls) {
-            controls.stop();
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      scanRequest.then((controls) => {
+        if (controls) {
+          controls.stop();
+        }
+      });
     };
   }, []);
 
