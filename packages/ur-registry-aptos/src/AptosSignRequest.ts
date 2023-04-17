@@ -13,7 +13,8 @@ const { decodeToDataItem, RegistryTypes } = extend;
 
 export enum SignType {
   SingleSign = 1,
-  MultiSign = 2
+  MultiSign = 2,
+  SignMessage = 3,
 }
 enum Keys {
   requestId = 1,
