@@ -1,0 +1,30 @@
+{
+  "name": "@keystonehq/bc-ur-registry-utxo",
+  "version": "0.1.0",
+  "description": "bc-ur-registry extension for UTXO",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "jest --passWithNoTests"
+  },
+  "author": "Renfeng Shi<renfeng@keyst.one>",
+  "license": "ISC",
+  "dependencies": {
+    "@keystonehq/bc-ur-registry": "0.5.4"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "tsdx": "^0.14.1",
+    "typescript": "^4.9.4"
+  }
+}
