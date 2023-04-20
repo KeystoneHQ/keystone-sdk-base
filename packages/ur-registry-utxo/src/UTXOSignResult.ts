@@ -9,7 +9,7 @@ import { ExtendedRegistryTypes } from "./RegistryType";
 const { decodeToDataItem } = extend;
 
 enum Keys {
-  signResult,
+  signResult = 1,
 }
 
 export class UTXOSignResult extends RegistryItem {
