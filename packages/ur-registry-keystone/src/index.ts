@@ -8,5 +8,5 @@ patchTags(
     .map(rt => rt.getTag()) as number[]
 );
 
-export { UTXOSignRequest } from "./UTXOSignRequest";
-export { UTXOSignResult } from "./UTXOSignResult";
+export { KeystoneSignRequest } from "./KeystoneSignRequest";
+export { KeystoneSignResult } from "./KeystoneSignResult";

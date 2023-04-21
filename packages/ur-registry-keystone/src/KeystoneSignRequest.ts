@@ -18,11 +18,11 @@ type SignRequestProps = {
   origin?: string;
 };
 
-export class UTXOSignRequest extends RegistryItem {
+export class KeystoneSignRequest extends RegistryItem {
   private signData: Buffer;
   private origin?: string;
 
-  getRegistryType = () => ExtendedRegistryTypes.UTXO_SIGN_REQUEST;
+  getRegistryType = () => ExtendedRegistryTypes.KEYSTONE_SIGN_REQUEST;
 
   constructor(args: SignRequestProps) {
     super();
@@ -47,7 +47,7 @@ export class UTXOSignRequest extends RegistryItem {
   public static fromDataItem = (dataItem: DataItem) => {
     const map = dataItem.getData();
 
-    return new UTXOSignRequest({
+    return new KeystoneSignRequest({
       signData: map[Keys.signData],
       origin: map[Keys.origin],
     });
@@ -55,14 +55,14 @@ export class UTXOSignRequest extends RegistryItem {
 
   public static fromCBOR = (_cborPayload: Buffer) => {
     const dataItem = decodeToDataItem(_cborPayload);
-    return UTXOSignRequest.fromDataItem(dataItem);
+    return KeystoneSignRequest.fromDataItem(dataItem);
   };
 
-  public static constructUTXORequest(
+  public static constructKeystoneRequest(
     signData: Buffer,
     origin?: string
   ) {
-    return new UTXOSignRequest({
+    return new KeystoneSignRequest({
       signData,
       origin,
     });

@@ -12,10 +12,10 @@ enum Keys {
   signResult = 1,
 }
 
-export class UTXOSignResult extends RegistryItem {
+export class KeystoneSignResult extends RegistryItem {
   private signResult: Buffer;
 
-  getRegistryType = () => ExtendedRegistryTypes.UTXO_SIGNATURE;
+  getRegistryType = () => ExtendedRegistryTypes.KEYSTONE_SIGN_RESULT;
 
   constructor(
     signResult: Buffer,
@@ -34,11 +34,11 @@ export class UTXOSignResult extends RegistryItem {
   public static fromDataItem = (dataItem: DataItem) => {
     const map = dataItem.getData();
     const signResult = map[Keys.signResult];
-    return new UTXOSignResult(signResult);
+    return new KeystoneSignResult(signResult);
   };
 
   public static fromCBOR = (_cborPayload: Buffer) => {
     const dataItem = decodeToDataItem(_cborPayload);
-    return UTXOSignResult.fromDataItem(dataItem);
+    return KeystoneSignResult.fromDataItem(dataItem);
   };
 }
