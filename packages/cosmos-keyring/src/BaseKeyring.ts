@@ -2,7 +2,7 @@ import * as uuid from "uuid";
 import { InteractionProvider } from "./InteractionProvider";
 import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
 import { CosmosSignRequest, SignDataType } from "@keystonehq/bc-ur-registry-cosmos";
-
+import { Tracker } from './Tracker';
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -32,6 +32,8 @@ export class BaseKeyring {
   protected keys: HDKey[];
   protected name: string;
   protected device: string;
+  public isTracking: boolean;
+
   constructor() {
     //common props
     this.keys = [];
@@ -39,6 +41,7 @@ export class BaseKeyring {
     this.initialized = false;
     this.device = "";
     this.xfp = "";
+    this.isTracking = true;
   }
 
   protected requestSignature = async (
@@ -63,6 +66,14 @@ export class BaseKeyring {
         );
       }
     }
+    if (this.isTracking) {
+      Tracker.track("sign", {
+        distinctId: this.device,
+        time: Date.now(),
+        xfp: this.xfp,
+        requestId: _requestId,
+      });
+    }
     return { signature, pubKey };
   };
 
@@ -83,6 +94,13 @@ export class BaseKeyring {
       index
     }));
     this.initialized = true;
+    if (this.isTracking) {
+      Tracker.track("sync", {
+        distinctId: this.device,
+        time: Date.now(),
+        xfp: this.xfp,
+      });
+    }
   }
 
   public syncKeyringData({
