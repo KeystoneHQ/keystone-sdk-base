@@ -10,7 +10,9 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "start": "tsdx watch",
-    "build": "tsdx build"
+    "ci:prepare": "./prepare.sh",
+    "copy:config": "cp ./config.ts ./src/Secret.ts",
+    "build": "npm run copy:config && ./build.sh"
   },
   "publishConfig": {
     "access": "public"
