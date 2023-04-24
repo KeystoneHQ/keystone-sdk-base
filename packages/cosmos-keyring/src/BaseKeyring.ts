@@ -2,8 +2,7 @@ import * as uuid from "uuid";
 import { InteractionProvider } from "./InteractionProvider";
 import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
 import { CosmosSignRequest, SignDataType } from "@keystonehq/bc-ur-registry-cosmos";
-import { Tracker } from 'Tracker';
-
+import { Tracker } from './Tracker';
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -115,13 +114,6 @@ export class BaseKeyring {
     this.keys = keys;
     this.device = device;
     this.initialized = true;
-    if (this.isTracking) {
-      Tracker.track("sync", {
-        distinctId: this.device,
-        time: Date.now(),
-        xfp: this.xfp,
-      });
-    }
   }
 
   public getName = (): string => {
