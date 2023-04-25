@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-evm",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "bc-ur-registry extension for EVM",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

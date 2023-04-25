@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/cosmos-keyring",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "cosmos-keyring interact with Keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,8 +21,8 @@
   "license": "ISC",
   "dependencies": {
     "@keystonehq/bc-ur-registry": "^0.5.4",
-    "@keystonehq/bc-ur-registry-cosmos": "^0.3.0",
-    "@keystonehq/sdk": "^0.17.0",
+    "@keystonehq/bc-ur-registry-cosmos": "^0.4.0",
+    "@keystonehq/sdk": "^0.18.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
