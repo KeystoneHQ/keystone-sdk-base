@@ -1,9 +1,10 @@
 // @ts-nocheck
 
-import { CardanoSignRequest } from "../src";
+import { CardanoCertKey, CardanoSignRequest } from "../src";
 import { CryptoKeypath, PathComponent } from "../src";
 import * as uuid from "uuid";
 import { CardanoUtxo, CardanoUtxoData } from "../src/CardanoUtxo";
+import { CardanoCertKeyData } from "../src/CardanoCertKey";
 
 describe("cardano-sign-request", () => {
   it("test should generate cardano-sign-request", () => {
@@ -59,12 +60,34 @@ describe("cardano-sign-request", () => {
       }),
     ];
 
+    const certKeyPath = new CryptoKeypath(
+      [
+        new PathComponent({ index: 1852, hardened: true }),
+        new PathComponent({ index: 1815, hardened: true }),
+        new PathComponent({ index: 0, hardened: true }),
+        new PathComponent({ index: 2, hardened: false }),
+        new PathComponent({ index: 0, hardened: false }),
+      ],
+      Buffer.from("73c5da0a", "hex")
+    );
+
+    const certKeys = [
+      new CardanoCertKey({
+        keyHash: Buffer.from(
+          "e557890352095f1cf6fd2b7d1a28e3c3cb029f48cf34ff890a28d176",
+          "hex"
+        ),
+        keyPath: certKeyPath,
+      }),
+    ];
+
     const cardanoRequestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d";
     const idBuffer = uuid.parse(cardanoRequestId);
 
     const cardanoSignRequest = new CardanoSignRequest({
       signData,
       utxos,
+      certKeys,
       requestId: Buffer.from(idBuffer),
       origin: "cardano-wallet",
     });
@@ -72,7 +95,7 @@ describe("cardano-sign-request", () => {
     const cborHex = cardanoSignRequest.toCBOR().toString("hex");
     const ur = cardanoSignRequest.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:cardano-sign-request/oxadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdoylroxaelflfhdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaxlfhdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaaadlfoeaehdcahskkurgskpylhsjnkicttensrfcyjtolqzbkbtkgldzeoldlrtmhndjzemadcfsrgdoeaehdcahssopfsokoctttuoaaaapytlhyztldgddsidlugdecpsidfnhsgwrdtiehadcfsrgdaocfmnsbaxaenbykynaxlftaaynlonadtpdahdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaoaxaxcyaemkmtlaaataaddyoeadlecfatfnykcfatchykaeykaewkaewkaocyjksktnbkahksiohsieiejpehjskkethsiaemjsjskkdykojykpjzkkjzemktjtjyjnjkksiaenktihksetdyiokoiakkimkkeoeojsiyiyjpisjnemjkiseseyemkkjkksecjkiyjykpktdyiejziyjydyeciekneoiaemjpihkojoiyemimksdyksjtjziaimkneoioenesjnjseehsiyieiskotaaynlonadtpdahdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaoaaaxcyadbgynnbaataaddyoeadlecfatfnykcfatchykaeykaewkadwkaocyjksktnbkahksiohsieiejpehjskkkneteceneseoioeeiyjpetiaececjniykkksishsihetimeykpdyeejokkieksjpiojsjpemeokojnktjokseohsknkoeeieiojekkjpiokkjzimeckkjzeyjndyimjzjoiejoihjkktkkkkknimjkdykoisktkojtjzenksioesiyemjkjkjpksjeknesdyaajtiahsjpiehsjtjldpkthsjzjzihjyatzmwfoy"
+      "ur:cardano-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdoylroxaelflfhdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaxlfhdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaaadlfoeaehdcahskkurgskpylhsjnkicttensrfcyjtolqzbkbtkgldzeoldlrtmhndjzemadcfsrgdoeaehdcahssopfsokoctttuoaaaapytlhyztldgddsidlugdecpsidfnhsgwrdtiehadcfsrgdaocfmnsbaxaenbykynaxlftaaynlonadtpdahdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaoaxaxcyaemkmtlaaataaddyoeadlecfatfnykcfatchykaeykaewkaewkaocyjksktnbkahksiohsieiejpehjskkethsiaemjsjskkdykojykpjzkkjzemktjtjyjnjkksiaenktihksetdyiokoiakkimkkeoeojsiyiyjpisjnemjkiseseyemkkjkksecjkiyjykpktdyiejziyjydyeciekneoiaemjpihkojoiyemimksdyksjtjziaimkneoioenesjnjseehsiyieiskotaaynlonadtpdahdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaoaaaxcyadbgynnbaataaddyoeadlecfatfnykcfatchykaeykaewkadwkaocyjksktnbkahksiohsieiejpehjskkkneteceneseoioeeiyjpetiaececjniykkksishsihetimeykpdyeejokkieksjpiojsjpemeokojnktjokseohsknkoeeieiojekkjpiokkjzimeckkjzeyjndyimjzjoiejoihjkktkkkkknimjkdykoisktkojtjzenksioesiyemjkjkjpksjeknesdyaalytaaynsoeadhdcevwhgldaxgmasheceynzcdnkicydevlsrsbaonefdtkeezmldbkdettkoaotaaddyoeadlecfatfnykcfatchykaeykaowkaewkaocyjksktnbkahjtiahsjpiehsjtjldpkthsjzjzihjydmcljnfl"
     );
 
     const cardanoSignRequestDecoded = CardanoSignRequest.fromCBOR(
@@ -91,7 +114,7 @@ describe("cardano-sign-request", () => {
     expect(cardanoSignRequestDecoded.getUtxos()[1].getIndex()).toEqual(4);
   });
 
-  it("should construct an nearSignRequest object from string", () => {
+  it("should construct an cardano-sign-request object from string", () => {
     const signData = Buffer.from(
       "84a400828258204e3a6e7fdcb0d0efa17bf79c13aed2b4cb9baf37fb1aa2e39553d5bd720c5c99038258204e3a6e7fdcb0d0efa17bf79c13aed2b4cb9baf37fb1aa2e39553d5bd720c5c99040182a200581d6179df4c75f7616d7d1fd39cbc1a6ea6b40a0d7b89fea62fc0909b6c370119c350a200581d61c9b0c9761fd1dc0404abd55efc895026628b5035ac623c614fbad0310119c35002198ecb0300a0f5f6",
       "hex"
@@ -120,15 +143,25 @@ describe("cardano-sign-request", () => {
       },
     ];
 
+    const certKeys: CardanoCertKeyData[] = [
+      {
+        keyHash: "e557890352095f1cf6fd2b7d1a28e3c3cb029f48cf34ff890a28d176",
+        xfp: "73c5da0a",
+        keyPath: "m/1852'/1815'/0'/2/0",
+      },
+    ];
+
     const request = CardanoSignRequest.constructCardanoSignRequest(
       signData,
       utxos,
+      certKeys,
       requestID,
       "cardano-wallet"
     );
-    const ur = request.toUREncoder(1000).nextPart();
+
+    const ur = request.toUREncoder(2000).nextPart();
     expect(ur).toBe(
-      "ur:cardano-sign-request/oxadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdoylroxaelflfhdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaxlfhdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaaadlfoeaehdcahskkurgskpylhsjnkicttensrfcyjtolqzbkbtkgldzeoldlrtmhndjzemadcfsrgdoeaehdcahssopfsokoctttuoaaaapytlhyztldgddsidlugdecpsidfnhsgwrdtiehadcfsrgdaocfmnsbaxaenbykynaxlftaaynlonadtpdahdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaoaxaxcyaemkmtlaaataaddyoeadlecfatfnykcfatchykaeykaewkaewkaocyjksktnbkahksiohsieiejpehjskkethsiaemjsjskkdykojykpjzkkjzemktjtjyjnjkksiaenktihksetdyiokoiakkimkkeoeojsiyiyjpisjnemjkiseseyemkkjkksecjkiyjykpktdyiejziyjydyeciekneoiaemjpihkojoiyemimksdyksjtjziaimkneoioenesjnjseehsiyieiskotaaynlonadtpdahdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaoaaaxcyadbgynnbaataaddyoeadlecfatfnykcfatchykaeykaewkadwkaocyjksktnbkahksiohsieiejpehjskkkneteceneseoioeeiyjpetiaececjniykkksishsihetimeykpdyeejokkieksjpiojsjpemeokojnktjokseohsknkoeeieiojekkjpiokkjzimeckkjzeyjndyimjzjoiejoihjkktkkkkknimjkdykoisktkojtjzenksioesiyemjkjkjpksjeknesdyaajtiahsjpiehsjtjldpkthsjzjzihjyatzmwfoy"
+      "ur:cardano-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdoylroxaelflfhdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaxlfhdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaaadlfoeaehdcahskkurgskpylhsjnkicttensrfcyjtolqzbkbtkgldzeoldlrtmhndjzemadcfsrgdoeaehdcahssopfsokoctttuoaaaapytlhyztldgddsidlugdecpsidfnhsgwrdtiehadcfsrgdaocfmnsbaxaenbykynaxlftaaynlonadtpdahdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaoaxaxcyaemkmtlaaataaddyoeadlecfatfnykcfatchykaeykaewkaewkaocyjksktnbkahksiohsieiejpehjskkethsiaemjsjskkdykojykpjzkkjzemktjtjyjnjkksiaenktihksetdyiokoiakkimkkeoeojsiyiyjpisjnemjkiseseyemkkjkksecjkiyjykpktdyiejziyjydyeciekneoiaemjpihkojoiyemimksdyksjtjziaimkneoioenesjnjseehsiyieiskotaaynlonadtpdahdcxglftjtlbuopftiwsoykgylnsbwpltdqzsbndpeemzocyoevlmdgutlryjpbnhhnlaoaaaxcyadbgynnbaataaddyoeadlecfatfnykcfatchykaeykaewkadwkaocyjksktnbkahksiohsieiejpehjskkkneteceneseoioeeiyjpetiaececjniykkksishsihetimeykpdyeejokkieksjpiojsjpemeokojnktjokseohsknkoeeieiojekkjpiokkjzimeckkjzeyjndyimjzjoiejoihjkktkkkkknimjkdykoisktkojtjzenksioesiyemjkjkjpksjeknesdyaalytaaynsoeadhdcevwhgldaxgmasheceynzcdnkicydevlsrsbaonefdtkeezmldbkdettkoaotaaddyoeadlecfatfnykcfatchykaeykaowkaewkaocyjksktnbkahjtiahsjpiehsjtjldpkthsjzjzihjydmcljnfl"
     );
   });
 });

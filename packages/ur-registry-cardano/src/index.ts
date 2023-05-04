@@ -11,3 +11,5 @@ patchTags(
 export { CardanoSignRequest } from "./CardanoSignRequest";
 export { CardanoSignature } from "./CardanoSignature";
 export { CardanoUtxoData } from "./CardanoUtxo";
+export { CardanoCertKeyData } from "./CardanoCertKey";
+export { CardanoCertKey } from "./CardanoCertKey";

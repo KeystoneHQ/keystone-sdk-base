@@ -112,10 +112,7 @@ export class CardanoUtxo extends RegistryItem {
     const hdpathObject = new CryptoKeypath(
       paths.map((path) => {
         const index = parseInt(path.replace("'", ""));
-        let isHardened = false;
-        if (path.endsWith("'")) {
-          isHardened = true;
-        }
+        const isHardened = path.endsWith("'");
         return new PathComponent({ index, hardened: isHardened });
       }),
       Buffer.from(xfp, "hex")
