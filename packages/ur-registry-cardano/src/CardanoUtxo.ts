@@ -8,7 +8,7 @@ import {
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 
-const { decodeToDataItem, RegistryTypes } = extend;
+const { decodeToDataItem } = extend;
 
 enum Keys {
   transactionHash = 1,
@@ -62,10 +62,7 @@ export class CardanoUtxo extends RegistryItem {
   public toDataItem = () => {
     const map: DataItemMap = {};
     if (this.transactionHash) {
-      map[Keys.transactionHash] = new DataItem(
-        this.transactionHash,
-        RegistryTypes.UUID.getTag()
-      );
+      map[Keys.transactionHash] = this.transactionHash;
     }
     map[Keys.index] = this.index;
     map[Keys.amount] = this.amount;
@@ -80,7 +77,7 @@ export class CardanoUtxo extends RegistryItem {
 
   public static fromDataItem = (dataItem: DataItem) => {
     const map = dataItem.getData();
-    const transactionHash = map[Keys.transactionHash].getData();
+    const transactionHash = map[Keys.transactionHash];
     const index = map[Keys.index];
     const keyPath = CryptoKeypath.fromDataItem(map[Keys.keyPath]);
     const address = map[Keys.address];
