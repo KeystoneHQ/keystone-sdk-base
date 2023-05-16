@@ -45,15 +45,15 @@ describe("sui-sign-request", () => {
       derivationPaths: [signKeyPath0, signKeyPath1],
       origin: "Sui Wallet",
       addresses: [
-        "0x86ac6179ca6ad9a7b1ccb47202d06ae09a131e66309944922af9c73d3c203b66",
-        "0x68a42711caf03f82e5e45452eb4f1223675aeed4a80b4465892495c48648e3c7"
+        Buffer.from("86ac6179ca6ad9a7b1ccb47202d06ae09a131e66309944922af9c73d3c203b66", 'hex'),
+        Buffer.from("68a42711caf03f82e5e45452eb4f1223675aeed4a80b4465892495c48648e3c7", 'hex'),
       ],
     });
 
     const cborHex = signRequest.toCBOR().toString("hex");
     const ur = signRequest.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:sui-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdtaaeaeaoaecxlnpshskksgimtaospasfqzjpaotiimvtnybwckiydynlfymodrytstfsfncxfriyaeaybediaeaeaeaeaeaeaoaoaeadadadaeadadaoaeaeadaeaebagtmubwzohpfhcmjerpwzplonltwernclzoceasfyjpsftiaowfgrntameostcfadtpeopdwdrfinknbddmcnjybksgkgwlpfrhvyhfbkestdwfmhtkdaeewlfydtytcewebnaeaeaeaeaeaecxcfbnnbtbfwbzpsiaykbtrszsflhfeeaacscnaavtsebaotbdhygtiocwjsjkotgsbagtmubwzohpfhcmjerpwzplonltwernclzoceasfyjpsftiaowfgrntameostcfvsaxaeaeaeaeaeaeieaeaeaeaeaeaeaeaeaxadaalftaaddyoeadlecsdwykcfaxbeykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaxbeykaeykaeykadykaocykscnayahahlfksfwdyksetenhsiaenehemesiahsenhsieeshsemidehiaiaideeemeydyeyiedyenhsihdyeshseheoehiheneneodyeseseeeeeseyeyhsiyesiaemeoieeoiaeydyeoidenenksfwdyksenethseeeyemehehiahsiydyeoiyeteyiheciheeeceeeceyihideeiyeheyeyeoenemechsihihieeehsetdyideeeeeneceteseyeeeseciaeeeteneeetiheoiaemamimgukpincxhghsjzjzihjyynckseva"
+      "ur:sui-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdtaaeaeaoaecxlnpshskksgimtaospasfqzjpaotiimvtnybwckiydynlfymodrytstfsfncxfriyaeaybediaeaeaeaeaeaeaoaoaeadadadaeadadaoaeaeadaeaebagtmubwzohpfhcmjerpwzplonltwernclzoceasfyjpsftiaowfgrntameostcfadtpeopdwdrfinknbddmcnjybksgkgwlpfrhvyhfbkestdwfmhtkdaeewlfydtytcewebnaeaeaeaeaeaecxcfbnnbtbfwbzpsiaykbtrszsflhfeeaacscnaavtsebaotbdhygtiocwjsjkotgsbagtmubwzohpfhcmjerpwzplonltwernclzoceasfyjpsftiaowfgrntameostcfvsaxaeaeaeaeaeaeieaeaeaeaeaeaeaeaeaxadaalftaaddyoeadlecsdwykcfaxbeykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaxbeykaeykaeykadykaocykscnayahahlfhdcxlnpshskksgimtaospasfqzjpaotiimvtnybwckiydynlfymodrytstfsfncxfriyhdcxisoxdibysgwtfhlfvwveghgmwmgwbgcniohtwytypdbdfyihlddkmdsslnfdvlstamimgukpincxhghsjzjzihjyzmpmwevo"
     );
     const signRequestDecoded = SuiSignRequest.fromCBOR(
       Buffer.from(cborHex, "hex")
@@ -67,10 +67,10 @@ describe("sui-sign-request", () => {
     expect(signRequestDecoded.getDerivationPaths()[1]).toEqual("44'/784'/0'/0'/1'");
     expect(signRequestDecoded.getSignType()).toBe(SignType.Single);
     expect(signRequestDecoded.getAddresses()[0]).toEqual(
-      "0x86ac6179ca6ad9a7b1ccb47202d06ae09a131e66309944922af9c73d3c203b66"
+      Buffer.from("86ac6179ca6ad9a7b1ccb47202d06ae09a131e66309944922af9c73d3c203b66", 'hex')
     );
     expect(signRequestDecoded.getAddresses()[1]).toEqual(
-      "0x68a42711caf03f82e5e45452eb4f1223675aeed4a80b4465892495c48648e3c7"
+      Buffer.from("68a42711caf03f82e5e45452eb4f1223675aeed4a80b4465892495c48648e3c7", 'hex')
     );
   });
 
@@ -83,8 +83,8 @@ describe("sui-sign-request", () => {
     );
     const requestID = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d";
     const addresses = [
-      "0xaa7420c68c16645775ecf69a5e2fdaa4f89d3293aee0dd280e2d97ad7b879650",
-      "0x97f95acfb04f84d228dce9bda4ad7e2a5cb324d5efdd6a7f0b959e755ebb3a70"
+      Buffer.from("aa7420c68c16645775ecf69a5e2fdaa4f89d3293aee0dd280e2d97ad7b879650", 'hex'),
+      Buffer.from("97f95acfb04f84d228dce9bda4ad7e2a5cb324d5efdd6a7f0b959e755ebb3a70", 'hex'),
     ];
 
     const request = SuiSignRequest.constructSuiRequest(
@@ -98,7 +98,7 @@ describe("sui-sign-request", () => {
     );
     const ur = request.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:sui-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdtaaeaeaoaecxlnpshskksgimtaospasfqzjpaotiimvtnybwckiydynlfymodrytstfsfncxfriyaeaybediaeaeaeaeaeaeaoaoaeadadadaeadadaoaeaeadaeaebagtmubwzohpfhcmjerpwzplonltwernclzoceasfyjpsftiaowfgrntameostcfadtpeopdwdrfinknbddmcnjybksgkgwlpfrhvyhfbkestdwfmhtkdaeewlfydtytcewebnaeaeaeaeaeaecxcfbnnbtbfwbzpsiaykbtrszsflhfeeaacscnaavtsebaotbdhygtiocwjsjkotgsbagtmubwzohpfhcmjerpwzplonltwernclzoceasfyjpsftiaowfgrntameostcfvsaxaeaeaeaeaeaeieaeaeaeaeaeaeaeaeaxadaalftaaddyoeadlecsdwykcfaxbeykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaxbeykaeykaeykadykaocykscnayahahlfksfwdykshshsemeeeydyiaenetiaeheneneeecememecihiaiyeneshseciheyiyiehshseeiyetesieeoeyeseohsihihdyieieeyetdyiheyieesemhsieemidetemesenecdyksfwdyksesemiyesechsiaiyiddyeeiyeteeieeyeyetieiaihesidiehseehsieemiheyhseciaideoeyeeieecihiyieieenhsemiydyidesecesihemececihidideohsemdyamimgukpincxhghsjzjzihjygeamehvs"
+      "ur:sui-sign-request/oladtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdtaaeaeaoaecxlnpshskksgimtaospasfqzjpaotiimvtnybwckiydynlfymodrytstfsfncxfriyaeaybediaeaeaeaeaeaeaoaoaeadadadaeadadaoaeaeadaeaebagtmubwzohpfhcmjerpwzplonltwernclzoceasfyjpsftiaowfgrntameostcfadtpeopdwdrfinknbddmcnjybksgkgwlpfrhvyhfbkestdwfmhtkdaeewlfydtytcewebnaeaeaeaeaeaecxcfbnnbtbfwbzpsiaykbtrszsflhfeeaacscnaavtsebaotbdhygtiocwjsjkotgsbagtmubwzohpfhcmjerpwzplonltwernclzoceasfyjpsftiaowfgrntameostcfvsaxaeaeaeaeaeaeieaeaeaeaeaeaeaeaeaxadaalftaaddyoeadlecsdwykcfaxbeykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaxbeykaeykaeykadykaocykscnayahahlfhdcxpkjycxswlkcmiehgkpwpynnyhydltnoxyanteymuplvtutdebadpmspmkgltmtgdhdcxmsythttkpfgwlrtddeuowlryoxpmkbdrhhqddktlwsutimlbbdmdnnkphyrkftjoamimgukpincxhghsjzjzihjysgtksbay"
     );
   });
 });
