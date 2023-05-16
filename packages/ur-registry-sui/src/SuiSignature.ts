@@ -34,7 +34,7 @@ export class SuiSignature extends RegistryItem {
 
   public getRequestId = () => this.requestId;
   public getSignature = () => this.signature;
-  public getpublicKey = () => this.publicKey;
+  public getPublicKey = () => this.publicKey;
   public toDataItem = () => {
     const map: DataItemMap = {};
     if (this.requestId) {
