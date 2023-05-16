@@ -1,0 +1,36 @@
+{
+  "name": "@keystonehq/bc-ur-registry-sui",
+  "version": "0.1.0",
+  "description": "bc-ur-registry extension for Sui",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "jest --passWithNoTests"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Renfeng Shi",
+  "license": "ISC",
+  "dependencies": {
+    "@keystonehq/bc-ur-registry": "^0.5.5",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/uuid": "^9.0.1",
+    "tsdx": "^0.14.1",
+    "typescript": "^5.0.4"
+  }
+}
