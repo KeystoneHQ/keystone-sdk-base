@@ -20,7 +20,7 @@
   "author": "Renfeng Shi<renfeng@keyst.one>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry": "0.5.4",
+    "@keystonehq/bc-ur-registry": "^0.5.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

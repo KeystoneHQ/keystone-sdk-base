@@ -1201,19 +1201,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@keystonehq/bc-ur-registry-near@^0.2.1":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry-near/-/bc-ur-registry-near-0.2.2.tgz#1797fef3612a09c954315e9557ce7fcb44621f21"
-  integrity sha512-a4Xl3YHa/gqIg/8RRbvUs3S47iRAGqGwSK0ceQ2be0bzUIfrQJ4qkCEXW4YYQ+B7JdlZyZYSP1ngeSaKaGefSQ==
-  dependencies:
-    "@keystonehq/bc-ur-registry" "0.5.4"
-    bs58check "^2.1.2"
-    uuid "^8.3.2"
-
-"@keystonehq/bc-ur-registry@0.5.4":
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry/-/bc-ur-registry-0.5.4.tgz#5802486a29f5d772520d15579d40fba02860e27f"
-  integrity sha512-z7bZe10I5k0zz9znmDTXh+o3Rzb5XsRVpwAzexubOaLxVdZ0F7aMbe2LoEsw766Hpox/7zARi7UGmLz5C8BAzA==
+"@keystonehq/bc-ur-registry@^0.5.4":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry/-/bc-ur-registry-0.5.5.tgz#b7cd9b08846c627e988933049aac94d3412fbb16"
+  integrity sha512-PoclPHf0OhpIKLfLwzymsu+CjkWf5ZKvaVjpkq3HUalcI4KW8wLk0m8qI2kBVv6F0BQ0ERPqW8OfjLTVqIgWLA==
   dependencies:
     "@ngraveio/bc-ur" "^1.1.5"
     bs58check "^2.1.2"
