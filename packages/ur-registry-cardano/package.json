@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-cardano",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "bc-ur-registry extension for Cardano",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

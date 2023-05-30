@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-keystone",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "bc-ur-registry extension for Keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
