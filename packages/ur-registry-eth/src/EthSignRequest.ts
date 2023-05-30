@@ -65,7 +65,8 @@ export class EthSignRequest extends RegistryItem {
   public getDataType = () => this.dataType;
   public getChainId = () => this.chainId;
   public getDerivationPath = () => this.derivationPath.getPath();
-  public getSourceFingerprint = () => this.derivationPath.getSourceFingerprint();
+  public getSourceFingerprint = () =>
+    this.derivationPath.getSourceFingerprint();
   public getSignRequestAddress = () => this.address;
   public getOrigin = () => this.origin;
 
@@ -81,7 +82,7 @@ export class EthSignRequest extends RegistryItem {
       map[Keys.address] = this.address;
     }
     if (this.chainId) {
-      map[Keys.chainId] = this.chainId;
+      map[Keys.chainId] = Number(this.chainId);
     }
 
     if (this.origin) {
