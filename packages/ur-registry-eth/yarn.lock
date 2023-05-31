@@ -1308,10 +1308,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@keystonehq/bc-ur-registry@^0.5.4":
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry/-/bc-ur-registry-0.5.5.tgz#b7cd9b08846c627e988933049aac94d3412fbb16"
-  integrity sha512-PoclPHf0OhpIKLfLwzymsu+CjkWf5ZKvaVjpkq3HUalcI4KW8wLk0m8qI2kBVv6F0BQ0ERPqW8OfjLTVqIgWLA==
+"@keystonehq/bc-ur-registry@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@keystonehq/bc-ur-registry/-/bc-ur-registry-0.6.0.tgz#7dd8c7f6c4af98dc7a72d8d00938dfe8d78e797d"
+  integrity sha512-E7oVB16lqgNzIgEqPO2eSDvYTwTjvwje3SxKRSz9+CpcArwrlX91iTM3T0pR5po299PcDnORxFgETqqsmHOuoA==
   dependencies:
     "@ngraveio/bc-ur" "^1.1.5"
     bs58check "^2.1.2"
