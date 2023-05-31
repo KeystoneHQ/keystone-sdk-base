@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-sui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "bc-ur-registry extension for Sui",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,5 +32,6 @@
     "@types/uuid": "^9.0.1",
     "tsdx": "^0.14.1",
     "typescript": "^5.0.4"
-  }
+  },
+  "gitHead": "83d8e223d29e5cc71dccc963388d65a87c894636"
 }
