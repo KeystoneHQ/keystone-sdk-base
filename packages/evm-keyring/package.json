@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/evm-keyring",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "evm-keyring interact with Keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,8 +19,8 @@
   "license": "ISC",
   "dependencies": {
     "@keystonehq/bc-ur-registry": "^0.5.4",
-    "@keystonehq/bc-ur-registry-evm": "^0.5.1",
-    "@keystonehq/sdk": "^0.19.1",
+    "@keystonehq/bc-ur-registry-evm": "^0.5.2",
+    "@keystonehq/sdk": "^0.19.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

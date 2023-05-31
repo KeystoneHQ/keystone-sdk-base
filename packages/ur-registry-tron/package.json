@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-tron",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "bc-ur-registry extension for Tron",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
