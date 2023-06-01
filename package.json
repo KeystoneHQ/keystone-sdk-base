@@ -2,16 +2,18 @@
   "name": "keystone-airgaped-base",
   "private": true,
   "scripts": {
-    "clean": "lerna clean",
-    "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
-    "start": "lerna run start",
-    "prepare": "npm run clean && npm run bootstrap && npm run build",
+    "convert": "synp --source-file yarn.lock && pnpm -r exec -- synp --source-file yarn.lock",
+    "pnpm:clean": "pnpm -r clean && rm -rf node_modules && pnpm -r exec -- rm -rf node_modules && pnpm -r exec -- rm -rf yarn.lock",
+    "bootstrap": "pnpm install",
+    "build": "pnpm -r build",
+    "start": "pnpm -r run start",
+    "pnpm:prepare": "pnpm pnpm:clean && pnpm bootstrap && pnpm build",
+    "prepare": "",
     "lint": "eslint '*/**/*.ts' --quiet --fix",
     "prettier:check": "yarn prettier --check",
     "prettier:fix": "yarn prettier --write",
     "prettier": "prettier '*/**/*.{js,jsx,ts,tsx}'",
-    "test": "lerna run test"
+    "test": "pnpm -r test"
   },
   "jest": {
     "modulePathIgnorePatterns": [
@@ -45,7 +47,6 @@
     "git-commit-msg-linter": "^4.1.2",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "lerna": "^4.0.0",
     "lint-staged": "^12.3.5",
     "prettier": "^2.5.1",
     "tsdx": "^0.14.1",
