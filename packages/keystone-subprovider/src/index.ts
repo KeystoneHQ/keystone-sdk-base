@@ -87,7 +87,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     );
 
     const ethSignRequest = EthSignRequest.constructETHRequest(
-      unsignedBuffer,
+      unsignedBuffer as Buffer,
       DataType.transaction,
       addressPath as string,
       this.xfp,
