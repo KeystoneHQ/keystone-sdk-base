@@ -11,6 +11,7 @@ export const AnimatedQRScanner = ({
   handleError,
   options,
   videoLoaded,
+  onProgress,
 }: ScannerProps) => {
   const camera = useRef(CameraStatus.ACCESSING_CAMERA);
   const { cameraStatus } = useCamera();
@@ -19,6 +20,7 @@ export const AnimatedQRScanner = ({
     urTypes,
     handleScan,
     handleError,
+    onProgress,
   });
 
   useEffect(() => {

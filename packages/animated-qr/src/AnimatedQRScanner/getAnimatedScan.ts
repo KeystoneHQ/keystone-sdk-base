@@ -12,12 +12,15 @@ export const getAnimatedScan = ({
   urTypes = [],
   handleScan,
   handleError,
+  onProgress,
 }: Omit<ScannerProps, "Options">): ScannerHook => {
   let urDecoder = new URRegistryDecoder();
   const handleScanSuccess = (data: string) => {
     try {
       urDecoder.receivePart(data);
       if (!urDecoder.isComplete()) {
+        !!onProgress &&
+          onProgress(Math.trunc(urDecoder.estimatedPercentComplete() * 100));
         return;
       }
 
@@ -27,12 +30,13 @@ export const getAnimatedScan = ({
 
       if (urDecoder.isSuccess()) {
         const ur = urDecoder.resultUR();
-        const types = []
+        const types = [];
         if (purpose && purposeToURType[purpose]) {
-          types.push(...purposeToURType[purpose])
+          types.push(...purposeToURType[purpose]);
         }
-        types.push(...urTypes)
+        types.push(...urTypes);
         if (types.includes(ur.type)) {
+          !!onProgress && onProgress(100);
           handleScan({ type: ur.type, cbor: ur.cbor.toString("hex") });
         } else {
           handleError(QRCodeError.UNEXPECTED_QRCODE);

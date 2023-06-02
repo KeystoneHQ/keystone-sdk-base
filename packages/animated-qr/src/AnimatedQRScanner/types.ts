@@ -22,6 +22,7 @@ export interface ScannerProps {
     blur?: boolean
   }
   videoLoaded?: (canPlay: boolean) => void
+  onProgress?: (progress: number) => void
 }
 
 export enum Purpose {
