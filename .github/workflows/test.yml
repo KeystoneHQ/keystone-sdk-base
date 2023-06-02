@@ -27,17 +27,21 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      
+      # Install pnpm
+      - name: Install pnpm
+        run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
       - name: Install Dependencies
-        run: npx lerna clean --yes && npx lerna bootstrap
+        run: pnpm install
 
       - name: Prepare Compile
-        run: npx lerna run ci:prepare
+        run: pnpm run ci:prepare
 
       # Runs a single command using the runners shell
       - name: Compile
-        run: npx lerna run build
+        run: pnpm run build
 
       # Runs a set of commands using the runners shell
       - name: Run Test
-        run: npx lerna run test
+        run: pnpm run test
