@@ -11,6 +11,8 @@ export enum CameraStatus {
   UNKNOWN_ERROR = "UNKNOWN_CAMERA_ERROR",
 }
 
+export type CameraError = "NO_WEBCAM_FOUND" | "NO_WEBCAM_ACCESS"
+
 export interface ScannerProps {
   purpose?: Purpose
   urTypes?: string[]
@@ -21,7 +23,8 @@ export interface ScannerProps {
     height?: number | string
     blur?: boolean
   }
-  videoLoaded?: (canPlay: boolean) => void
+  videoLoaded?: (canPlay: boolean, error?: CameraError) => void
+  onProgress?: (progress: number) => void
 }
 
 export enum Purpose {
