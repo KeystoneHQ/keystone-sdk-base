@@ -2,12 +2,12 @@
   "name": "keystone-airgaped-base",
   "private": true,
   "scripts": {
-    "convert": "synp --source-file yarn.lock && pnpm -r exec -- synp --source-file yarn.lock",
-    "pnpm:clean": "pnpm -r clean && rm -rf node_modules && pnpm -r exec -- rm -rf node_modules && pnpm -r exec -- rm -rf yarn.lock",
+    "convert": "pnpm pnpm:clean && pnpm bootstrap && ./scripts/yarn_to_pnpm.sh",
+    "clean": "./scripts/clean.sh",
     "bootstrap": "pnpm install",
     "build": "pnpm -r build",
     "start": "pnpm -r run start",
-    "pnpm:prepare": "pnpm pnpm:clean && pnpm bootstrap && pnpm build",
+    "pnpm:prepare": "pnpm clean && pnpm bootstrap && pnpm build",
     "prepare": "",
     "lint": "eslint '*/**/*.ts' --quiet --fix",
     "prettier:check": "yarn prettier --check",
@@ -36,6 +36,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.22.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.1",
