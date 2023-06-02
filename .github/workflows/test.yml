@@ -19,22 +19,21 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [16]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: '16'
-      
-      # Install pnpm
-      - name: Install pnpm
-        run: npm install pnpm
-
-      # Add local node_modules/.bin to PATH
-      - name: Add local node_modules/.bin to PATH
-        run: echo "./node_modules/.bin:$PATH" >> $GITHUB_ENV
+          version: 7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Install Dependencies
         run: pnpm install
