@@ -32,6 +32,10 @@ jobs:
       - name: Install pnpm
         run: npm install pnpm
 
+      # Add local node_modules/.bin to PATH
+      - name: Add local node_modules/.bin to PATH
+        run: echo "./node_modules/.bin:$PATH" >> $GITHUB_ENV
+
       - name: Install Dependencies
         run: pnpm install
 
