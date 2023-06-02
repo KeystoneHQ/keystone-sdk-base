@@ -37,7 +37,11 @@ export const getAnimatedScan = ({
         types.push(...urTypes);
         if (types.includes(ur.type)) {
           !!onProgress && onProgress(100);
-          handleScan({ type: ur.type, cbor: ur.cbor.toString("hex") });
+          try {
+            handleScan({ type: ur.type, cbor: ur.cbor.toString("hex") });
+          } catch (e) {
+            handleError("FAILED_TO_HANDLE_QR_CODE");
+          }
         } else {
           handleError(QRCodeError.UNEXPECTED_QRCODE);
         }
