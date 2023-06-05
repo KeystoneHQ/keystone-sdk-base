@@ -81,7 +81,7 @@ describe("Keystone Subprovider", () => {
     );
   });
 
-  it("shoudld generate the eip1559 txhex", async () => {
+  it("should generate the eip1559 txhex", async () => {
     const eip1559TxData = {
       from: "0x9858EfFD232B4033E47d90003D41EC34EcaEda94",
       nonce: 353,
@@ -97,9 +97,9 @@ describe("Keystone Subprovider", () => {
     });
 
     // FIXME: Need to fix the test case
-    // const txHex = provider.signEIP1559TransactionAsync(eip1559TxData);
+    const txHex = provider.signEIP1559TransactionAsync(eip1559TxData);
 
-    // console.log(txHex);
+    console.log(txHex);
   });
 
   it("should throw error if the chainId is missmatched", async () => {
