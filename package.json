@@ -2,13 +2,9 @@
   "name": "keystone-airgaped-base",
   "private": true,
   "scripts": {
-    "convert": "pnpm pnpm:clean && pnpm bootstrap && ./scripts/yarn_to_pnpm.sh",
     "clean": "./scripts/clean.sh",
-    "bootstrap": "pnpm install",
     "build": "pnpm -r build",
-    "start": "pnpm -r run start",
     "ci:prepare": "pnpm -r run ci:prepare --if-present",
-    "pnpm:prepare": "pnpm clean && pnpm bootstrap && pnpm build",
     "prepare": "",
     "lint": "eslint '*/**/*.ts' --quiet --fix",
     "prettier:check": "yarn prettier --check",

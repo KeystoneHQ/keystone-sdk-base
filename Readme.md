@@ -3,19 +3,19 @@
 ## Installation
 
 ```
-    npx lerna bootstrap
+    pnpm install
 ```
 
 ## Test
 
 ```
-    yarn test
+    pnpm test
 ```
 
 ## Build
 
 ```
-    yarn build
+    pnpm build
 ```
 
-note: for using the node vesion should be upper than 10.16
+note: for using the node vesion should be upper than 16
