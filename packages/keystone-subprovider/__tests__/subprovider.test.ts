@@ -96,7 +96,6 @@ describe("Keystone Subprovider", () => {
       networkId: 1,
     });
 
-    // FIXME: Need to fix the test case
     const txHex = provider.signEIP1559TransactionAsync(eip1559TxData);
 
     console.log(txHex);
