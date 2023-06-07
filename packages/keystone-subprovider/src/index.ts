@@ -8,7 +8,8 @@ import {
   FeeMarketEIP1559TxData,
   Transaction,
 } from "@ethereumjs/tx";
-import { addHexPrefix, stripHexPrefix, rlp } from "ethereumjs-util";
+import { addHexPrefix, stripHexPrefix } from "@ethereumjs/util";
+import { RLP as rlp } from "@ethereumjs/rlp";
 import * as uuid from "uuid";
 import {
   CryptoHDKey,
@@ -87,7 +88,7 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     );
 
     const ethSignRequest = EthSignRequest.constructETHRequest(
-      unsignedBuffer,
+      unsignedBuffer as Buffer,
       DataType.transaction,
       addressPath as string,
       this.xfp,
@@ -161,7 +162,17 @@ export default class KeystoneSubprovider extends BaseWalletSubprovider {
     });
 
     const { r, s, v } = await this.readSignature(requestId);
-    const numberV = v.readUInt8(0);
+
+    // FIXME: Verify the correctness of this function for various chainIDs and V values
+    const correctVvalueWithoutChainId = (v: number, chainID = 1) => {
+      if (v >= 35) {
+        return v - (2 * chainID + 35) + 27;
+      }
+      return v;
+    };
+
+    const numberV = correctVvalueWithoutChainId(v.readUInt8(0));
+
     const signedTx = eip1559Tx._processSignature(BigInt(numberV), r, s);
     return `0x${signedTx.serialize().toString("hex")}`;
   }

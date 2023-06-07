@@ -2,16 +2,16 @@
   "name": "keystone-airgaped-base",
   "private": true,
   "scripts": {
-    "clean": "lerna clean",
-    "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
-    "start": "lerna run start",
-    "prepare": "npm run clean && npm run bootstrap && npm run build",
+    "clean": "./scripts/clean.sh",
+    "build": "pnpm -r build",
+    "bootstrap": "pnpm clean && pnpm install && pnpm prepare",
+    "ci:prepare": "pnpm -r run ci:prepare --if-present",
+    "prepare": "pnpm -r run ci:prepare --if-present",
     "lint": "eslint '*/**/*.ts' --quiet --fix",
-    "prettier:check": "yarn prettier --check",
-    "prettier:fix": "yarn prettier --write",
+    "prettier:check": "pnpm run prettier --check",
+    "prettier:fix": "pnpm run prettier --write",
     "prettier": "prettier '*/**/*.{js,jsx,ts,tsx}'",
-    "test": "lerna run test"
+    "test": "pnpm -r test"
   },
   "jest": {
     "modulePathIgnorePatterns": [
@@ -33,7 +33,13 @@
       "prettier --write"
     ]
   },
+  "pnpm": {
+    "neverBuiltDependencies": ["node-hid"]
+  },
   "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.22.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.1",
@@ -45,7 +51,6 @@
     "git-commit-msg-linter": "^4.1.2",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "lerna": "^4.0.0",
     "lint-staged": "^12.3.5",
     "prettier": "^2.5.1",
     "tsdx": "^0.14.1",

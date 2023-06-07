@@ -81,7 +81,7 @@ describe("Keystone Subprovider", () => {
     );
   });
 
-  it("shoudld generate the eip1559 txhex", async () => {
+  it("should generate the eip1559 txhex", async () => {
     const eip1559TxData = {
       from: "0x9858EfFD232B4033E47d90003D41EC34EcaEda94",
       nonce: 353,
