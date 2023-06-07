@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/sdk",
-  "version": "0.19.0",
+  "version": "0.19.2",
   "description": "Keystone airgaped wallet SDK",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
@@ -57,5 +57,5 @@
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
-  "gitHead": "77958e4e7cf949e869b0cbb3ccbb23c499885772"
+  "gitHead": "83d8e223d29e5cc71dccc963388d65a87c894636"
 }

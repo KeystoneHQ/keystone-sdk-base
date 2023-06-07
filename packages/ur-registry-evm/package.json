@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-evm",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "description": "bc-ur-registry extension for EVM",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,5 +33,5 @@
     "tsdx": "^0.14.1",
     "typescript": "^4.9.4"
   },
-  "gitHead": ""
+  "gitHead": "83d8e223d29e5cc71dccc963388d65a87c894636"
 }

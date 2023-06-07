@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/qr-protocol",
-  "version": "0.18.0",
+  "version": "0.18.2",
   "description": "QRCode Protocol",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -47,5 +47,5 @@
     "tsdx": "^0.14.1",
     "typescript": "^4.6.2"
   },
-  "gitHead": "77958e4e7cf949e869b0cbb3ccbb23c499885772"
+  "gitHead": "83d8e223d29e5cc71dccc963388d65a87c894636"
 }
