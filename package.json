@@ -7,8 +7,8 @@
     "ci:prepare": "pnpm -r run ci:prepare --if-present",
     "prepare": "",
     "lint": "eslint '*/**/*.ts' --quiet --fix",
-    "prettier:check": "yarn prettier --check",
-    "prettier:fix": "yarn prettier --write",
+    "prettier:check": "pnpm run prettier --check",
+    "prettier:fix": "pnpm run prettier --write",
     "prettier": "prettier '*/**/*.{js,jsx,ts,tsx}'",
     "test": "pnpm -r test"
   },
