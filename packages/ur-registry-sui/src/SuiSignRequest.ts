@@ -4,7 +4,7 @@ import {
   DataItem,
   PathComponent,
   RegistryItem,
-  DataItemMap
+  DataItemMap,
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 import * as uuid from "uuid";
@@ -47,7 +47,8 @@ export class SuiSignRequest extends RegistryItem {
 
   public getRequestId = () => this.requestId;
   public getIntentMessage = () => this.intentMessage;
-  public getDerivationPaths = () => this.derivationPaths.map(key => key.getPath());
+  public getDerivationPaths = () =>
+    this.derivationPaths.map((key) => key.getPath());
   public getAddresses = () => this.addresses;
   public getOrigin = () => this.origin;
 
@@ -67,7 +68,7 @@ export class SuiSignRequest extends RegistryItem {
     }
 
     map[Keys.intentMessage] = this.intentMessage;
-    map[Keys.derivationPaths] = this.derivationPaths.map(item => {
+    map[Keys.derivationPaths] = this.derivationPaths.map((item) => {
       const dataItem = item.toDataItem();
       dataItem.setTag(item.getRegistryType().getTag());
       return dataItem;
@@ -78,9 +79,13 @@ export class SuiSignRequest extends RegistryItem {
   public static fromDataItem = (dataItem: DataItem) => {
     const map = dataItem.getData();
     const intentMessage = map[Keys.intentMessage];
-    const derivationPaths = map[Keys.derivationPaths].map((item: DataItem) => CryptoKeypath.fromDataItem(item));
+    const derivationPaths = map[Keys.derivationPaths].map((item: DataItem) =>
+      CryptoKeypath.fromDataItem(item)
+    );
     const addresses = map[Keys.addresses] ? map[Keys.addresses] : undefined;
-    const requestId = map[Keys.requestId] ? map[Keys.requestId].getData() : undefined;
+    const requestId = map[Keys.requestId]
+      ? map[Keys.requestId].getData()
+      : undefined;
     const origin = map[Keys.origin] ? map[Keys.origin] : undefined;
     return new SuiSignRequest({
       requestId,
@@ -106,7 +111,7 @@ export class SuiSignRequest extends RegistryItem {
   ) {
     const publicKeyHdPathObjects = publicKeyHdPath.map((path, index) => {
       const paths = path.replace(/[m|M]\//, "").split("/");
-      const pathComponent = paths.map(path => {
+      const pathComponent = paths.map((path) => {
         const index = parseInt(path.replace("'", ""));
         let isHardened = false;
         if (path.endsWith("'")) {

@@ -4,9 +4,9 @@ export * from "@keystonehq/bc-ur-registry";
 
 patchTags(
   Object.values(ExtendedRegistryTypes)
-    .filter(rt => !!rt.getTag())
-    .map(rt => rt.getTag()) 
+    .filter((rt) => !!rt.getTag())
+    .map((rt) => rt.getTag())
 );
 
-export { SuiSignRequest, SignType } from "./SuiSignRequest";
+export { SuiSignRequest } from "./SuiSignRequest";
 export { SuiSignature } from "./SuiSignature";
