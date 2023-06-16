@@ -4,23 +4,16 @@ import {
   DataItem,
   PathComponent,
   RegistryItem,
-  DataItemMap
+  DataItemMap,
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 import * as uuid from "uuid";
 
 const { decodeToDataItem, RegistryTypes } = extend;
 
-export enum SignType {
-  Single = 1,
-  Multi = 2,
-  Message = 3,
-}
-
 enum Keys {
   requestId = 1,
-  signData,
-  signType,
+  intentMessage,
   derivationPaths,
   addresses,
   origin,
@@ -28,8 +21,7 @@ enum Keys {
 
 type signRequestProps = {
   requestId?: Buffer;
-  signData: Buffer;
-  signType: SignType;
+  intentMessage: Buffer;
   derivationPaths: CryptoKeypath[];
   addresses?: Buffer[];
   origin?: string;
@@ -37,8 +29,7 @@ type signRequestProps = {
 
 export class SuiSignRequest extends RegistryItem {
   private requestId?: Buffer;
-  private signData: Buffer;
-  private signType: SignType;
+  private intentMessage: Buffer;
   private derivationPaths: CryptoKeypath[];
   private addresses?: Buffer[];
   private origin?: string;
@@ -48,19 +39,18 @@ export class SuiSignRequest extends RegistryItem {
   constructor(args: signRequestProps) {
     super();
     this.requestId = args.requestId;
-    this.signData = args.signData;
-    this.signType = args.signType;
+    this.intentMessage = args.intentMessage;
     this.derivationPaths = args.derivationPaths;
     this.addresses = args.addresses;
     this.origin = args.origin;
   }
 
   public getRequestId = () => this.requestId;
-  public getSignData = () => this.signData;
-  public getDerivationPaths = () => this.derivationPaths.map(key => key.getPath());
+  public getIntentMessage = () => this.intentMessage;
+  public getDerivationPaths = () =>
+    this.derivationPaths.map((key) => key.getPath());
   public getAddresses = () => this.addresses;
   public getOrigin = () => this.origin;
-  public getSignType = () => this.signType;
 
   public toDataItem = () => {
     const map: DataItemMap = {};
@@ -77,9 +67,8 @@ export class SuiSignRequest extends RegistryItem {
       map[Keys.origin] = this.origin;
     }
 
-    map[Keys.signData] = this.signData;
-    map[Keys.signType] = this.signType;
-    map[Keys.derivationPaths] = this.derivationPaths.map(item => {
+    map[Keys.intentMessage] = this.intentMessage;
+    map[Keys.derivationPaths] = this.derivationPaths.map((item) => {
       const dataItem = item.toDataItem();
       dataItem.setTag(item.getRegistryType().getTag());
       return dataItem;
@@ -89,16 +78,18 @@ export class SuiSignRequest extends RegistryItem {
 
   public static fromDataItem = (dataItem: DataItem) => {
     const map = dataItem.getData();
-    const signData = map[Keys.signData];
-    const signType = map[Keys.signType];
-    const derivationPaths = map[Keys.derivationPaths].map((item: DataItem) => CryptoKeypath.fromDataItem(item));
+    const intentMessage = map[Keys.intentMessage];
+    const derivationPaths = map[Keys.derivationPaths].map((item: DataItem) =>
+      CryptoKeypath.fromDataItem(item)
+    );
     const addresses = map[Keys.addresses] ? map[Keys.addresses] : undefined;
-    const requestId = map[Keys.requestId] ? map[Keys.requestId].getData() : undefined;
+    const requestId = map[Keys.requestId]
+      ? map[Keys.requestId].getData()
+      : undefined;
     const origin = map[Keys.origin] ? map[Keys.origin] : undefined;
     return new SuiSignRequest({
       requestId,
-      signData,
-      signType,
+      intentMessage,
       derivationPaths,
       addresses,
       origin,
@@ -111,17 +102,16 @@ export class SuiSignRequest extends RegistryItem {
   };
 
   public static constructSuiRequest(
-    signData: Buffer,
+    intentMessage: Buffer,
     publicKeyHdPath: string[],
     xfps: string[],
-    signType: SignType,
     uuidString: string,
     addresses?: Buffer[],
     origin?: string
   ) {
     const publicKeyHdPathObjects = publicKeyHdPath.map((path, index) => {
       const paths = path.replace(/[m|M]\//, "").split("/");
-      const pathComponent = paths.map(path => {
+      const pathComponent = paths.map((path) => {
         const index = parseInt(path.replace("'", ""));
         let isHardened = false;
         if (path.endsWith("'")) {
@@ -134,8 +124,7 @@ export class SuiSignRequest extends RegistryItem {
 
     return new SuiSignRequest({
       requestId: Buffer.from(uuid.parse(uuidString)),
-      signData,
-      signType: signType || SignType.Single,
+      intentMessage,
       derivationPaths: publicKeyHdPathObjects,
       addresses: addresses || undefined,
       origin: origin || undefined,
