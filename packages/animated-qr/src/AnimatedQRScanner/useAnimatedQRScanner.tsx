@@ -1,8 +1,14 @@
-import React, { ReactElement, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  ReactElement,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { CameraStatus, ScannerProps } from "./types";
 import { BaseQRScanner } from "./BaseQRScanner";
 import { getAnimatedScan } from "./getAnimatedScan";
-import { useCamera } from './useCamera';
+import { useCamera } from "./useCamera";
 
 interface BaseScannerProps {
   handleScan: (ur: string) => void;
@@ -15,10 +21,9 @@ export interface ScannerHookParams {
   scannerProps?: Record<string, any>;
 }
 
-export const useAnimatedQRScanner = ({
-  Scanner = BaseQRScanner,
-  scannerProps = {},
-}: ScannerHookParams): {
+export const useAnimatedQRScanner = (
+  props?: ScannerHookParams
+): {
   isDone: boolean;
   hasPermission: boolean;
   AnimatedQRScanner: (props: ScannerProps) => ReactElement;
@@ -39,7 +44,9 @@ export const useAnimatedQRScanner = ({
       urTypes,
       handleScan,
       handleError,
+      videoLoaded,
       options,
+      ...args
     }: ScannerProps): ReactElement => {
       // Error 5 times in 500ms, then trigger the error handler.
       const errTimes = [];
@@ -54,7 +61,7 @@ export const useAnimatedQRScanner = ({
           return;
         }
         const i = 4;
-        const t = Date.now()
+        const t = Date.now();
         errTimes.unshift(t);
         if (errTimes[i] && t - errTimes[i] < 500) {
           errTimes.length = 0;
@@ -63,7 +70,7 @@ export const useAnimatedQRScanner = ({
         }
       };
 
-      const onSuccess = (ur: {type: string, cbor: string}) => {
+      const onSuccess = (ur: { type: string; cbor: string }) => {
         if (isScanDone.current) {
           return;
         }
@@ -78,12 +85,23 @@ export const useAnimatedQRScanner = ({
         handleError: onError,
       });
 
+      const onVideoLoaded = (canPlay: boolean) => {
+        setHasPermission(canPlay);
+        if (typeof videoLoaded === "function") {
+          videoLoaded(canPlay);
+        }
+      };
+
+      const ScannerComponent = props?.Scanner ?? BaseQRScanner;
+
       return (
-        <Scanner
+        <ScannerComponent
           handleScan={handleScanSuccess}
           handleError={handleScanFailure}
-          {...scannerProps}
+          videoLoaded={onVideoLoaded}
+          {...props?.scannerProps}
           {...options}
+          {...args}
         />
       );
     };
