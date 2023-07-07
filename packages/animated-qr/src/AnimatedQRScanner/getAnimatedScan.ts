@@ -54,6 +54,10 @@ export const getAnimatedScan = ({
   };
 
   const handleScanFailure = (error: string) => {
+    // Ignore Error of "Dimensions could be not found.".
+    if (error === "Dimensions could be not found.") {
+      return;
+    }
     if (handleError && error) {
       handleError(error);
     }
