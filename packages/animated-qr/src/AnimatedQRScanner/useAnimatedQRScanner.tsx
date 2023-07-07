@@ -48,26 +48,12 @@ export const useAnimatedQRScanner = (
       options,
       ...args
     }: ScannerProps): ReactElement => {
-      // Error 5 times in 500ms, then trigger the error handler.
-      const errTimes = [];
       const onError = (err: string) => {
         if (isScanDone.current) {
           return;
         }
-        // Error "Dimensions could be not found." is triggered too frequently.
-        if (!/^Dimensions/i.test(err)) {
-          setIsDone(true);
-          handleError(err);
-          return;
-        }
-        const i = 4;
-        const t = Date.now();
-        errTimes.unshift(t);
-        if (errTimes[i] && t - errTimes[i] < 500) {
-          errTimes.length = 0;
-          setIsDone(true);
-          handleError(err);
-        }
+        setIsDone(true);
+        handleError(err);
       };
 
       const onSuccess = (ur: { type: string; cbor: string }) => {
