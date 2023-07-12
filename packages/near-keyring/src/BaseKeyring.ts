@@ -1,7 +1,6 @@
 import * as uuid from "uuid";
 import { InteractionProvider } from "./InteractionProvider";
 import { NearSignRequest } from "@keystonehq/bc-ur-registry-near";
-import { Tracker } from "./Tracker";
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -75,11 +74,6 @@ export class BaseKeyring {
     this.keys = keys;
     this.device = device;
     this.initialized = true;
-    await Tracker.track("sync", {
-      distinctId: device,
-      time: Date.now(),
-      xfp,
-    });
   }
 
   getAccounts() {
@@ -102,12 +96,6 @@ export class BaseKeyring {
     );
 
     const signature = await this.requestSignature(requestId, nearSignRequest);
-    await Tracker.track("sign", {
-      distinctId: this.device,
-      time: Date.now(),
-      xfp: this.xfp,
-      requestId: requestId,
-    });
     return signature;
   }
 }
