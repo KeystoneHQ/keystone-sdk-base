@@ -1,6 +1,6 @@
 import {
   CosmosSignature,
-  CosmosSignRequest
+  CosmosSignRequest,
 } from "@keystonehq/bc-ur-registry-cosmos";
 import { InteractionProvider } from "./InteractionProvider";
 import sdk, { PlayStatus, ReadStatus, SupportedResult } from "@keystonehq/sdk";
@@ -27,10 +27,10 @@ export class DefaultInteractionProvider implements InteractionProvider {
         description: "Please scan the QR code displayed on your Keystone",
         renderInitial: {
           walletMode: "Cosmos",
-          link: "https://keyst.one/defi"
+          link: "https://keyst.one/defi",
         },
         URTypeErrorMessage:
-          "The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again"
+          "The scanned QR code is not the sync code from the Keystone hardware wallet. Please verify the code and try again",
       }
     );
     if (decodedResult.status === ReadStatus.success) {
@@ -50,7 +50,7 @@ export class DefaultInteractionProvider implements InteractionProvider {
       hasNext: true,
       title: requestTitle,
       description: requestDescription,
-      maxFragmentLength: 400
+      maxFragmentLength: 400,
     });
     if (status === PlayStatus.canceled)
       throw new Error("#ktek_error[play-cancel]: play canceled");

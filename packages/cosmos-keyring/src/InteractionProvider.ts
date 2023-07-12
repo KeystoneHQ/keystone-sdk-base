@@ -1,6 +1,6 @@
 import {
   CosmosSignature,
-  CosmosSignRequest
+  CosmosSignRequest,
 } from "@keystonehq/bc-ur-registry-cosmos";
 import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
 
