@@ -1,7 +1,10 @@
 import * as uuid from "uuid";
-import {InteractionProvider} from "./InteractionProvider";
-import {ArweaveCryptoAccount, ArweaveSignRequest, SignType,} from "@keystonehq/bc-ur-registry-arweave";
-import { Tracker } from "./Tracker";
+import { InteractionProvider } from "./InteractionProvider";
+import {
+  ArweaveCryptoAccount,
+  ArweaveSignRequest,
+  SignType,
+} from "@keystonehq/bc-ur-registry-arweave";
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -29,7 +32,7 @@ export class BaseKeyring {
 
   protected requestSignature = async (
     signRequest: ArweaveSignRequest,
-    _requestId?: string,
+    _requestId?: string
   ): Promise<Buffer> => {
     const arweaveSignature = await this.getInteraction().requestSignature(
       signRequest
@@ -44,12 +47,6 @@ export class BaseKeyring {
         );
       }
     }
-    Tracker.track("sign", {
-      distinctId: this.device,
-      time: Date.now(),
-      xfp: this.xfp,
-      requestId: _requestId
-    });
     return signature;
   };
 
@@ -65,11 +62,6 @@ export class BaseKeyring {
     this.device = data.getDevice();
     this.xfp = xfp;
     this.initialized = true;
-    Tracker.track("sync", {
-      distinctId: data.getDevice(),
-      time: Date.now(),
-      xfp
-    });
   }
 
   public getName = (): string => {
@@ -83,30 +75,24 @@ export class BaseKeyring {
     return this.keyData;
   }
 
-  async signTransaction(
-    txBuf: Buffer,
-    saltLen: number
-  ): Promise<Buffer> {
+  async signTransaction(txBuf: Buffer, saltLen: number): Promise<Buffer> {
     const requestId = uuid.v4();
     const arweaveSignRequest = ArweaveSignRequest.constructArweaveRequest(
-        txBuf,
-        this.xfp,
-        SignType.Transaction,
-        saltLen,
-        requestId
+      txBuf,
+      this.xfp,
+      SignType.Transaction,
+      saltLen,
+      requestId
     );
     return this.requestSignature(arweaveSignRequest, requestId);
   }
 
-  async signMessage(
-    messageHex: Buffer,
-    saltLen: number
-  ): Promise<Buffer> {
+  async signMessage(messageHex: Buffer, saltLen: number): Promise<Buffer> {
     const arweaveSignRequest = ArweaveSignRequest.constructArweaveRequest(
-        messageHex,
-        this.xfp,
-        SignType.Message,
-        saltLen,
+      messageHex,
+      this.xfp,
+      SignType.Message,
+      saltLen
     );
     return this.requestSignature(arweaveSignRequest);
   }

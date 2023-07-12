@@ -41,9 +41,7 @@ export class DefaultInteractionProvider implements InteractionProvider {
     }
   };
 
-  public requestSignature = async (
-    arweaveSignRequest: ArweaveSignRequest
-  ) => {
+  public requestSignature = async (arweaveSignRequest: ArweaveSignRequest) => {
     const status = await this.keystoneSDK.play(arweaveSignRequest.toUR(), {
       hasNext: true,
       maxFragmentLength: 400,

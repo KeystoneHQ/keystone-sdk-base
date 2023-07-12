@@ -1,12 +1,12 @@
 {
   "name": "keystone-airgaped-base",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "./scripts/clean.sh",
     "build": "pnpm -r build",
-    "bootstrap": "pnpm clean && pnpm install && pnpm prepare",
-    "ci:prepare": "pnpm -r run ci:prepare --if-present",
-    "prepare": "pnpm -r run ci:prepare --if-present",
+    "bootstrap": "pnpm clean && pnpm install",
     "lint": "eslint '*/**/*.ts' --quiet --fix",
     "prettier:check": "pnpm run prettier --check",
     "prettier:fix": "pnpm run prettier --write",

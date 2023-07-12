@@ -1,6 +1,6 @@
 import {
   AptosSignature,
-  AptosSignRequest
+  AptosSignRequest,
 } from "@keystonehq/bc-ur-registry-aptos";
 import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
 
