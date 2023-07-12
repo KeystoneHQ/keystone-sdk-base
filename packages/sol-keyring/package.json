@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/sol-keyring",
-  "version": "0.19.2",
+  "version": "0.19.3",
   "description": "sol-keyring interact with keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,9 +10,7 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "start": "tsdx watch",
-    "ci:prepare": "./prepare.sh",
-    "copy:config": "cp ./config.ts ./src/Secret.ts",
-    "build": "npm run copy:config && ./build.sh"
+    "build": "tsdx build"
   },
   "publishConfig": {
     "access": "public"
