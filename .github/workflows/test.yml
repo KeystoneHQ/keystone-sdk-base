@@ -37,9 +37,6 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Prepare Compile
-        run: pnpm run ci:prepare
-
       # Runs a single command using the runners shell
       - name: Compile
         run: pnpm run build
