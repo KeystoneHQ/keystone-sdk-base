@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/cosmos-keyring",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "cosmos-keyring interact with Keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,9 +10,7 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "start": "tsdx watch",
-    "ci:prepare": "./prepare.sh",
-    "copy:config": "cp ./config.ts ./src/Secret.ts",
-    "build": "npm run copy:config && ./build.sh"
+    "build": "tsdx build"
   },
   "publishConfig": {
     "access": "public"
@@ -30,6 +28,5 @@
     "@types/uuid": "^8.3.1",
     "tsdx": "^0.14.1",
     "typescript": "^4.6.2"
-  },
-  "gitHead": "83d8e223d29e5cc71dccc963388d65a87c894636"
+  }
 }
