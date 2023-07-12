@@ -4,7 +4,6 @@ import { Message, PublicKey, Transaction } from "@solana/web3.js";
 import { InteractionProvider } from "./InteractionProvider";
 import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
 import { SolSignRequest, SignType } from "@keystonehq/bc-ur-registry-sol";
-import { Tracker } from './Tracker';
 
 const keyringType = "QR Hardware Wallet Device";
 
@@ -34,7 +33,6 @@ export class BaseKeyring {
   protected keys: HDKey[];
   protected name: string;
   protected device: string;
-  public isTracking: boolean;
 
   constructor() {
     //common props
@@ -43,7 +41,6 @@ export class BaseKeyring {
     this.initialized = false;
     this.device = "";
     this.xfp = "";
-    this.isTracking = true;
   }
 
   protected requestSignature = async (
@@ -66,14 +63,6 @@ export class BaseKeyring {
           "KeystoneError#invalid_data: read signature error: mismatched requestId"
         );
       }
-    }
-    if (this.isTracking) {
-      Tracker.track("sign", {
-        distinctId: this.device,
-        time: Date.now(),
-        xfp: this.xfp,
-        requestId: _requestId,
-      });
     }
     return signature;
   };
@@ -99,20 +88,18 @@ export class BaseKeyring {
       index,
     }));
     this.initialized = true;
-    if (this.isTracking) {
-      Tracker.track("sync", {
-        distinctId: this.device,
-        time: Date.now(),
-        xfp: this.xfp,
-      });
-    }
   }
 
-  public syncKeyringData({xfp, keys, name = "QR Hardware", device}: KeyringInitData): void {
-    this.xfp = xfp
-    this.name = name
-    this.keys = keys
-    this.device = device
+  public syncKeyringData({
+    xfp,
+    keys,
+    name = "QR Hardware",
+    device,
+  }: KeyringInitData): void {
+    this.xfp = xfp;
+    this.name = name;
+    this.keys = keys;
+    this.device = device;
     this.initialized = true;
   }
 
@@ -128,7 +115,11 @@ export class BaseKeyring {
   }
 
   async signTransaction(pubKey: string, tx: Transaction): Promise<Transaction> {
-    const signature = await this._getSignature(pubKey, Buffer.from(tx.serializeMessage() as unknown as ArrayBuffer), SignType.Transaction)
+    const signature = await this._getSignature(
+      pubKey,
+      Buffer.from(tx.serializeMessage() as unknown as ArrayBuffer),
+      SignType.Transaction
+    );
     tx.addSignature(new PublicKey(pubKey), signature);
     return tx;
   }
@@ -137,38 +128,54 @@ export class BaseKeyring {
     pubKey: string,
     messageHex: Uint8Array
   ): Promise<Uint8Array> {
-    return await this._getSignature(pubKey, Buffer.from(messageHex), SignType.Message)
+    return await this._getSignature(
+      pubKey,
+      Buffer.from(messageHex),
+      SignType.Message
+    );
   }
 
-  async createSignature(pubKey: string, messageHex: Uint8Array): Promise<Uint8Array>{
-    try{
+  async createSignature(
+    pubKey: string,
+    messageHex: Uint8Array
+  ): Promise<Uint8Array> {
+    try {
       const messageInstance = Message.from(messageHex);
       const transaction = Transaction.populate(messageInstance, []);
       if (transaction) {
-        return this._getSignature(pubKey, Buffer.from(messageHex),SignType.Transaction)
+        return this._getSignature(
+          pubKey,
+          Buffer.from(messageHex),
+          SignType.Transaction
+        );
       }
-    }catch(e){
+    } catch (e) {
+      console.error(e);
     }
-    return this.signMessage(pubKey, messageHex)
+    return this.signMessage(pubKey, messageHex);
   }
 
-  async _getSignature(pubKey: string, messageHex: Buffer, signType): Promise<Buffer>{
+  async _getSignature(
+    pubKey: string,
+    messageHex: Buffer,
+    signType
+  ): Promise<Buffer> {
     const requestId = uuid.v4();
     const account = this.getAccounts().find(
-        (account) => account.pubKey == pubKey
+      (account) => account.pubKey == pubKey
     );
     const solSignRequest = SolSignRequest.constructSOLRequest(
-        messageHex,
-        account.hdPath,
-        this.xfp,
-        signType,
-        requestId,
+      messageHex,
+      account.hdPath,
+      this.xfp,
+      signType,
+      requestId
     );
     return this.requestSignature(
-        requestId,
-        solSignRequest,
-        "Scan with your Keystone",
-        'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature'
+      requestId,
+      solSignRequest,
+      "Scan with your Keystone",
+      'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature'
     );
   }
 }
