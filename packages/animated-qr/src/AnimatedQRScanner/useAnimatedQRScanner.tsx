@@ -13,6 +13,7 @@ import { useCamera } from "./useCamera";
 interface BaseScannerProps {
   handleScan: (ur: string) => void;
   handleError: (error: string) => void;
+  onProgress?: (progress: number) => void;
   [otherProps: string]: any;
 }
 
@@ -45,6 +46,7 @@ export const useAnimatedQRScanner = (
       handleScan,
       handleError,
       videoLoaded,
+      onProgress,
       options,
       ...args
     }: ScannerProps): ReactElement => {
@@ -69,6 +71,7 @@ export const useAnimatedQRScanner = (
         urTypes,
         handleScan: onSuccess,
         handleError: onError,
+        onProgress,
       });
 
       const onVideoLoaded = (canPlay: boolean) => {
