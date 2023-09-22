@@ -21,7 +21,7 @@ enum Keys {
 export interface CardanoUtxoProps {
   transactionHash: Buffer;
   index: number;
-  amount: number;
+  amount: string; // e.g. "10000000000000"
   keyPath: CryptoKeypath;
   address: string;
 }
@@ -29,7 +29,7 @@ export interface CardanoUtxoProps {
 export interface CardanoUtxoData {
   transactionHash: string;
   index: number;
-  amount: number;
+  amount: string;
   xfp: string;
   hdPath: string;
   address: string;
@@ -38,7 +38,7 @@ export interface CardanoUtxoData {
 export class CardanoUtxo extends RegistryItem {
   private transactionHash: Buffer;
   private index: number;
-  private amount: number;
+  private amount: string;
   private keyPath: CryptoKeypath;
   private address: string;
 

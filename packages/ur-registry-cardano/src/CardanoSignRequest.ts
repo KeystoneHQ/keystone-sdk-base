@@ -15,7 +15,7 @@ enum Keys {
   requestId = 1,
   signData,
   utxos,
-  certKeys,
+  extraSigners,
   origin,
 }
 
@@ -23,7 +23,7 @@ type signRequestProps = {
   requestId?: Buffer;
   signData: Buffer;
   utxos: CardanoUtxo[];
-  certKeys: CardanoCertKey[];
+  extraSigners: CardanoCertKey[];
   origin?: string;
 };
 
@@ -31,7 +31,7 @@ export class CardanoSignRequest extends RegistryItem {
   private requestId?: Buffer;
   private signData: Buffer;
   private utxos: CardanoUtxo[];
-  private certKeys: CardanoCertKey[];
+  private extraSigners: CardanoCertKey[];
   private origin?: string;
 
   getRegistryType = () => ExtendedRegistryTypes.CARDANO_SIGN_REQUEST;
@@ -41,14 +41,14 @@ export class CardanoSignRequest extends RegistryItem {
     this.requestId = args.requestId;
     this.signData = args.signData;
     this.utxos = args.utxos;
-    this.certKeys = args.certKeys;
+    this.extraSigners = args.extraSigners;
     this.origin = args.origin;
   }
 
   public getRequestId = () => this.requestId;
   public getSignData = () => this.signData;
   public getUtxos = () => this.utxos;
-  public getCertKeys = () => this.certKeys;
+  public getAdditionalSigners = () => this.extraSigners;
   public getOrigin = () => this.origin;
 
   public toDataItem = () => {
@@ -68,9 +68,9 @@ export class CardanoSignRequest extends RegistryItem {
       return res;
     });
 
-    map[Keys.certKeys] = this.certKeys.map((certKey) => {
-      const res = certKey.toDataItem();
-      res.setTag(certKey.getRegistryType().getTag());
+    map[Keys.extraSigners] = this.extraSigners.map((signer) => {
+      const res = signer.toDataItem();
+      res.setTag(signer.getRegistryType().getTag());
       return res;
     });
 
@@ -86,7 +86,7 @@ export class CardanoSignRequest extends RegistryItem {
     const utxos: CardanoUtxo[] = map[Keys.utxos].map((utxo: DataItem) =>
       CardanoUtxo.fromDataItem(utxo)
     );
-    const certKeys: CardanoCertKey[] = map[Keys.certKeys].map(
+    const additionalSigners: CardanoCertKey[] = map[Keys.extraSigners].map(
       (certKey: DataItem) => CardanoCertKey.fromDataItem(certKey)
     );
     const requestId = map[Keys.requestId]
@@ -98,7 +98,7 @@ export class CardanoSignRequest extends RegistryItem {
       requestId,
       signData,
       utxos,
-      certKeys,
+      extraSigners: additionalSigners,
       origin,
     });
   };
@@ -111,14 +111,14 @@ export class CardanoSignRequest extends RegistryItem {
   public static constructCardanoSignRequest(
     signData: Buffer,
     utxos: CardanoUtxoData[],
-    certKeys: CardanoCertKeyData[],
+    extraSigners: CardanoCertKeyData[],
     uuidString?: string,
     origin?: string
   ) {
     const cardanoUtxos = utxos.map((utxo) =>
       CardanoUtxo.constructCardanoUtxo(utxo)
     );
-    const cardanoCertKeys = certKeys.map((certKey) =>
+    const signers = extraSigners.map((certKey) =>
       CardanoCertKey.constructCardanoCertKey(certKey)
     );
     return new CardanoSignRequest({
@@ -127,7 +127,7 @@ export class CardanoSignRequest extends RegistryItem {
         : undefined,
       signData,
       utxos: cardanoUtxos,
-      certKeys: cardanoCertKeys,
+      extraSigners: signers,
       origin: origin || undefined,
     });
   }
