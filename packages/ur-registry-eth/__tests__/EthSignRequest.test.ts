@@ -3,6 +3,8 @@
 import { EthSignRequest, DataType } from "../src";
 import { CryptoKeypath, PathComponent } from "../src";
 import * as uuid from "uuid";
+import * as rlp from "rlp";
+import { LegacyTransaction } from "@ethereumjs/tx";
 
 describe("eth-sign-request", () => {
   it("test should genereate eth-sign-reqeust", () => {
@@ -76,4 +78,36 @@ describe("eth-sign-request", () => {
       "ur:eth-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfkswdtklffd"
     );
   });
+
+  it("test should genereate erc20 eth-sign-reqeust", () => {
+    let erc20data = "a9059cbb0000000000000000000000005df9b87991262f6ba471f09758cde1c0fc1de7340000000000000000000000000000000000000000000000008ac7230489e80000";
+    let tx = new LegacyTransaction({ nonce: 0, gasLimit: 5000n, gasPrice: 50000n, to: "0x1111111111111111111111111111111111111111", value: 100000000n, data: Buffer.from(erc20data, 'hex') });
+    let txhex = tx.getMessageToSign();
+
+    const signKeyPath = new CryptoKeypath(
+      [
+        new PathComponent({ index: 44, hardened: true }),
+        new PathComponent({ index: 1, hardened: true }),
+        new PathComponent({ index: 1, hardened: true }),
+        new PathComponent({ index: 0, hardened: false }),
+        new PathComponent({ index: 1, hardened: false }),
+      ],
+      Buffer.from("12345678", "hex")
+    );
+
+    // const ethRequestId = uuid.v4(); 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d as example
+    const ethRequestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d";
+    const idBuffer = uuid.parse(ethRequestId) as Uint8Array;
+
+    const ethSignRequest = new EthSignRequest({
+      signData: Buffer.from(txhex, 'hex'),
+      dataType: DataType.transaction,
+      chainId: 1,
+      derivationPath: signKeyPath,
+      requestId: Buffer.from(idBuffer),
+      origin: "metamask",
+    });
+    const ur = ethSignRequest.toUREncoder(1000).nextPart();
+    console.log(ur);
+  })
 });
