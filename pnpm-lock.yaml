@@ -403,8 +403,8 @@ importers:
         specifier: ^0.19.1
         version: link:../ur-registry-eth
       '@metamask/obs-store':
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^9.0.0
+        version: 9.0.0
       rlp:
         specifier: ^2.2.6
         version: 2.2.6
@@ -3374,8 +3374,21 @@ packages:
       through2: 2.0.5
     dev: false
 
+  /@metamask/obs-store@9.0.0:
+    resolution: {integrity: sha512-GDsEh2DTHgmISzJt8erf9T4Ph38iwD2yDJ6J1YFq/IcWRGnT1bkgSEVqZMv9c9JloX02T5bFIUK6+9m9EycI6A==}
+    engines: {node: ^14.21 || ^16.20 || ^18.16 || >=20}
+    dependencies:
+      '@metamask/safe-event-emitter': 3.0.0
+      readable-stream: 3.6.2
+    dev: false
+
   /@metamask/safe-event-emitter@2.0.0:
     resolution: {integrity: sha512-/kSXhY692qiV1MXu6EeOZvg5nECLclxNXcKCxJ3cXQgYuRymRHpdx/t7JXfsK+JLjwA1e1c1/SBrlQYpusC29Q==}
+    dev: false
+
+  /@metamask/safe-event-emitter@3.0.0:
+    resolution: {integrity: sha512-j6Z47VOmVyGMlnKXZmL0fyvWfEYtKWCA9yGZkU3FCsGZUT5lHGmvaV9JA5F2Y+010y7+ROtR3WMXIkvl/nVzqQ==}
+    engines: {node: '>=12.0.0'}
     dev: false
 
   /@ngraveio/bc-ur@1.1.6:
