@@ -4,6 +4,7 @@
   "description": "bc-ur-registry extension for BTC",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "packageManager": "pnpm@6.35.1",
   "directories": {
     "lib": "src",
     "test": "__tests__"
