@@ -3,6 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "packageManager": "pnpm@8.15.5",
   "scripts": {
     "clean": "./scripts/clean.sh",
     "build": "pnpm -r build",
