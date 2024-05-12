@@ -1,6 +1,5 @@
 import { assert } from "@0x/assert";
-import { PartialTxParams } from "@0x/subproviders";
-import { BaseWalletSubprovider } from "./baseWalletSubprovider";
+import { BaseWalletSubprovider, PartialTxParams } from "./baseWalletSubprovider";
 import sdk, { SupportedResult } from "@keystonehq/sdk";
 import { Common, Hardfork } from "@ethereumjs/common";
 import {
