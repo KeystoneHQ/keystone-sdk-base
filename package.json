@@ -12,7 +12,8 @@
     "prettier:check": "pnpm run prettier --check",
     "prettier:fix": "pnpm run prettier --write",
     "prettier": "prettier '*/**/*.{js,jsx,ts,tsx}'",
-    "test": "pnpm -r test"
+    "test": "pnpm -r test",
+    "prepack": "pnpm -r build"
   },
   "jest": {
     "modulePathIgnorePatterns": [
