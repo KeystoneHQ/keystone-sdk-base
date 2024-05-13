@@ -329,7 +329,7 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1(@babel/core@7.22.1)
       '@keystonehq/keystone-subprovider':
-        specifier: ^0.19.2
+        specifier: ^0.20.0
         version: link:../keystone-subprovider
       '@web3-react/abstract-connector':
         specifier: ^6.0.7
