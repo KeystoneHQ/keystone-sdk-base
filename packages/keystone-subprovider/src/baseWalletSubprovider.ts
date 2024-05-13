@@ -3,11 +3,27 @@ import { addressUtils } from "@0x/utils";
 import { JSONRPCRequestPayload, JSONRPCResponsePayload } from "ethereum-types";
 
 import {
-  Callback,
-  ErrorCallback,
-  PartialTxParams,
   Subprovider,
 } from "@0x/subproviders";
+
+
+// From @0xproject/subproviders v8.0.1
+export interface PartialTxParams {
+  nonce: string;
+  gasPrice?: string;
+  maxFeePerGas?: string;
+  maxPriorityFeePerGas?: string;
+  gas: string;
+  to: string;
+  from: string;
+  value?: string;
+  data?: string;
+  type?: number;
+  accessList?: Array<{
+    address: string;
+    storageKeys: string[];
+  }>;
+}
 
 export enum WalletSubproviderErrors {
   AddressNotFound = "ADDRESS_NOT_FOUND",
@@ -55,8 +71,8 @@ export abstract class BaseWalletSubprovider extends Subprovider {
   // tslint:disable-next-line:async-suffix
   public async handleRequest(
     payload: JSONRPCRequestPayload,
-    next: Callback,
-    end: ErrorCallback
+    next: () => void,
+    end: (err: Error | null, data?: any) => void
   ): Promise<void> {
     let accounts;
     let txParams;
