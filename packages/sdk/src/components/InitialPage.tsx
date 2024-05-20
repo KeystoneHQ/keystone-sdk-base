@@ -3,7 +3,13 @@ import { Button } from "./Button";
 
 export const InitialPage = (props: {
   walletMode: string;
-  link: string;
+  link: string | undefined;
+  description?: {
+    first: string;
+    second: string;
+    third: string;
+    fourth: string;
+  },
   onButtonClick: () => void;
 }) => {
   return (
@@ -33,22 +39,21 @@ export const InitialPage = (props: {
         }}
       >
         <li style={{ marginBottom: "0.75rem" }}>
-          1. Turn on your Keystone hardware device
+          {props.description ? props.description.first : '1. Turn on your Keystone hardware device'}
         </li>
         <li
           style={{ marginBottom: "0.75rem" }}
-        >{`2. Select your "${props.walletMode}" as your Watch-only wallet(Companion App)`}</li>
+        >{props.description ? props.description.second : `2. Select your "${props.walletMode}" as your Watch-only wallet(Companion App)`}</li>
         <li style={{ marginBottom: "0.75rem" }}>
           {" "}
-          3. Press the "Scan Keystone" button and scan the QR Code displayed on
-          your Keystone hardware wallet
+          {props.description ? props.description.third : '3. Press the "Scan Keystone" button and scan the QR Code displayed on your Keystone hardware wallet'}
         </li>
         <li style={{ marginBottom: "0.75rem" }}>
           {" "}
-          4. Select account and check your watch-only wallet
+          {props.description ? props.description.fourth : "4. Select account and check your watch-only wallet"}
         </li>
       </ul>
-      <div style={{ marginBottom: "1rem" }}>
+      {props.link && (<div style={{ marginBottom: "1rem" }}>
         <a
           style={{
             marginTop: "1.25rem",
@@ -61,7 +66,7 @@ export const InitialPage = (props: {
         >
           Click here to view detailed tutorial
         </a>
-      </div>
+      </div>)}
       <Button onClick={props.onButtonClick}>Sync Keystone</Button>
     </div>
   );

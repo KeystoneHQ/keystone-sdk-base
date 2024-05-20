@@ -60,5 +60,6 @@ export enum SupportedResult {
   UR_ARWEAVE_SIGNATURE = 'arweave-signature',
   UR_ARWEAVE_CRYPTO_ACCOUNT = 'arweave-crypto-account',
   UR_COSMOS_SIGN_REQUEST = 'cosmos-sign-request',
-  UR_COSMOS_SIGNATURE = 'cosmos-signature'
+  UR_COSMOS_SIGNATURE = 'cosmos-signature',
+  UR_PSBT = "crypto-psbt",
 }
