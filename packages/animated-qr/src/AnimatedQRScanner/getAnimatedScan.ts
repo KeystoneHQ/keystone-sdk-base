@@ -1,4 +1,4 @@
-import { URRegistryDecoder } from "@keystonehq/ur-decoder";
+import { URDecoder } from "@ngraveio/bc-ur";
 import { QRCodeError, ScannerProps } from "./types";
 import { purposeToURType } from "./constant";
 
@@ -14,7 +14,7 @@ export const getAnimatedScan = ({
   handleError,
   onProgress,
 }: Omit<ScannerProps, "Options">): ScannerHook => {
-  let urDecoder = new URRegistryDecoder();
+  let urDecoder = new URDecoder();
   const handleScanSuccess = (data: string) => {
     try {
       urDecoder.receivePart(data);
@@ -45,11 +45,11 @@ export const getAnimatedScan = ({
         } else {
           handleError(QRCodeError.UNEXPECTED_QRCODE);
         }
-        urDecoder = new URRegistryDecoder();
+        urDecoder = new URDecoder();
       }
     } catch (e) {
       handleError(QRCodeError.INVALID_QR_CODE);
-      urDecoder = new URRegistryDecoder();
+      urDecoder = new URDecoder();
     }
   };
 
