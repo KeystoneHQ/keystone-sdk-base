@@ -40,6 +40,7 @@ export type Read = (
     renderInitial?: {
       walletMode: string;
       link: string;
+      description?: string[];
     };
     URTypeErrorMessage?: string;
   }
