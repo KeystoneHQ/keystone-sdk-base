@@ -8,7 +8,7 @@ import { InitialPage } from "../components/InitialPage";
 
 const customStyles = {
   overlay: {
-    zIndex: 999,
+    zIndex: 9999,
   },
   content: {
     top: "50%",
@@ -35,6 +35,7 @@ export const useController = (): [
   const [visible, setVisible] = useState(false);
   const [walletMode, setWalltMode] = useState("");
   const [link, setLink] = useState("");
+  const [description, setDescription] = useState(undefined);
   const [mode, setMode] = useState<"read" | "play" | "initial" | null>(null);
   const [AnimatedQRCodePlayer, { play }] = useAnimatedQRCodePlayer();
   const [AnimatedQRCodeReader, { read, cameraReady }] =
@@ -61,6 +62,7 @@ export const useController = (): [
         <InitialPage
           walletMode={walletMode}
           link={link}
+          description={description}
           onButtonClick={goToRead}
         />
       );
@@ -123,6 +125,7 @@ export const useController = (): [
           if (options.renderInitial) {
             setWalltMode(options.renderInitial.walletMode);
             setLink(options.renderInitial.link);
+            setDescription(options.renderInitial.description);
             setMode("initial");
             setVisible(true);
             read(expect, options).then((result) => {
