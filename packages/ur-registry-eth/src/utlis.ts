@@ -7,7 +7,7 @@ export const generateAddressFromXpub = (xpub: string, derivePath: string) => {
   const node = HDKey.fromExtendedKey(xpub);
   const publicKey = node.derive(derivePath);
   const address =
-    "0x" + publicToAddress(publicKey.publicKey, true).toString("hex");
+    "0x" + Buffer.from(publicToAddress(publicKey.publicKey, true)).toString("hex");
   return toChecksumAddress(address);
 };
 
