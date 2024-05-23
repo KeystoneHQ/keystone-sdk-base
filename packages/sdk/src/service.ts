@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import Root from "./Root";
 import React from "react";
-import { Play, Read } from "./types";
+import { Play, Read, SDK } from "./types";
 import Modal from "react-modal";
 
 let initialized = false;
@@ -29,7 +29,7 @@ export const setupSdk = (r: Read, p: Play, status: boolean) => {
 
 const sdk = {
   bootstrap,
-  getSdk: () => {
+  getSdk: () : SDK => {
     if (initialized) {
       return {
         read,

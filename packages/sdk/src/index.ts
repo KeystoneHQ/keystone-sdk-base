@@ -1,3 +1,3 @@
 import sdk from "./service";
-export { SupportedResult, PlayStatus, ReadStatus } from "./types";
+export { SupportedResult, PlayStatus, ReadStatus, SDK } from "./types";
 export default sdk;
