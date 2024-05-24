@@ -3,7 +3,9 @@ import { URDecoder } from "@ngraveio/bc-ur";
 
 sdk.bootstrap();
 
-const keystonehqSdk = sdk.getSdk();
+let keystonehqSdk;
+
+
 
 const showRead = async () => {
   const decodedResult = await keystonehqSdk.read(
@@ -25,6 +27,8 @@ const showRead = async () => {
 
 // showRead().then(console.log)
 
+
+
 const showPlay = async () => {
   const ur =
     "ur:eth-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdgryagalalnascsgljpnbaelfdibemwaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaelaoxlbjyihjkjyeyaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaehnaehglalalaaxadaaadahtaaddyoeadlecsdwykadykadykaewkadwkaocybgeehfkswdtklffd";
@@ -36,4 +40,5 @@ const showPlay = async () => {
   });
 };
 
-showPlay().then(console.log);
+sdk.getSdk().then((sdk) => keystonehqSdk = sdk).then(showRead);
+// showRead().then(console.log);

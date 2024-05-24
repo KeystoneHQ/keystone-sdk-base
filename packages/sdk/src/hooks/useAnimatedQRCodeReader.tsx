@@ -7,8 +7,7 @@ import { Read, SupportedResult } from "../types";
 import { ButtonGroup } from "../components/ButtonGroup";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { URDecoder } from "@ngraveio/bc-ur";
-
-const QrReader = React.lazy(() => import("react-qr-reader"));
+import { Scanner } from '@yudiel/react-qr-scanner';
 
 export interface URQRCodeData {
   total: number;
@@ -97,7 +96,7 @@ export const useAnimatedQRCodeReader = (): [
       {description && (
         <p style={{ fontSize: "1rem", textAlign: "center" }}>{description}</p>
       )}
-      <Suspense fallback={<div />}>
+      <Suspense fallback={<div style={{ position: "relative", width: "100%" }} />}>
         <div style={{ position: "relative", width: "100%" }}>
           {!cameraReady ? (
             <div
@@ -111,18 +110,19 @@ export const useAnimatedQRCodeReader = (): [
               <LoadingSpinner />
             </div>
           ) : null}
-          <QrReader
-            onScan={(data: any) => {
+          <Scanner
+            onResult={(data: any) => {
               if (data) {
                 setCameraReady(true);
                 processQRCode(data, URTypeErrorMessage);
               }
             }}
-            delay={100}
-            style={{ width: "100%" }}
+            styles={{ container: { width: "100%" }, finderBorder: 0 }}
             onError={(e) => {
               setError(e.message);
             }}
+            options={{ delayBetweenScanSuccess: 100, delayBetweenScanAttempts: 100 }}
+            components={{ tracker: false, audio: false, torch: false, count: false, onOff: false }}
           />
         </div>
       </Suspense>

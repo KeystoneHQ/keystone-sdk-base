@@ -1,6 +1,10 @@
-import React, { FunctionComponent } from "react";
+import React, { ReactNode } from 'react';
 
-export const ButtonGroup: FunctionComponent = (props) => {
+interface Props {
+  children: ReactNode;
+}
+
+export const ButtonGroup: React.FC<Props> = (props:Props) => {
   return (
     <div
       style={{
