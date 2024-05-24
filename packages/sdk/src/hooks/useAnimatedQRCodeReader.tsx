@@ -32,6 +32,7 @@ export const useAnimatedQRCodeReader = (): [
   const reset = () => {
     setURDecoder(new URDecoder());
     setError("");
+    setProgress(0);
   };
 
   const processQRCode = (qr: string, errorMessgeOnURType: string) => {
@@ -126,7 +127,7 @@ export const useAnimatedQRCodeReader = (): [
           />
         </div>
       </Suspense>
-      <p>{(progress * 100).toFixed(0)} %</p>
+      {progress > 0 && progress <= 1 && <p>{(progress * 100).toFixed(0)} %</p>}
       {error && <p style={{ color: "red", fontSize: "1rem" }}>{error}</p>}
       <ButtonGroup>
         <Button onClick={handleStop}>Close</Button>
