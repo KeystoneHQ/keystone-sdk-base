@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 
 type Props = {
+  children: React.ReactNode;
   onClick: () => any;
 };
 

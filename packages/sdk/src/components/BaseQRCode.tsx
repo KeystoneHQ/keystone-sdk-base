@@ -1,5 +1,5 @@
 import React from "react";
-import QRCode from "qrcode.react";
+import QRCodeSVG from "qrcode.react";
 
 export const BaseQRCode = ({
   size = 200,
@@ -10,5 +10,5 @@ export const BaseQRCode = ({
   size?: number;
   ecl?: "L" | "M" | "Q" | "H";
 }) => {
-  return <QRCode value={data} size={size} level={ecl} />;
+  return <QRCodeSVG value={data} size={size} level={ecl} />;
 };
