@@ -2,7 +2,7 @@ import {
   extend,
   DataItem,
   RegistryItem,
-  DataItemMap
+  DataItemMap,
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 
@@ -21,11 +21,7 @@ export class TonSignature extends RegistryItem {
 
   getRegistryType = () => ExtendedRegistryTypes.TRON_SIGNATURE;
 
-  constructor(
-    signature: Buffer,
-    requestId?: Buffer,
-    origin?: string,
-  ) {
+  constructor(signature: Buffer, requestId?: Buffer, origin?: string) {
     super();
     this.signature = signature;
     this.requestId = requestId;
@@ -38,20 +34,30 @@ export class TonSignature extends RegistryItem {
 
   public toDataItem = () => {
     const map: DataItemMap = {};
-    map[Keys.requestId] = new DataItem(
-      this.requestId,
-      RegistryTypes.UUID.getTag()
-    );
+    if (this.requestId) {
+      map[Keys.requestId] = new DataItem(
+        this.requestId,
+        RegistryTypes.UUID.getTag()
+      );
+    }
+    if (this.origin) {
+      map[Keys.origin] = this.origin;
+    }
     map[Keys.signature] = this.signature;
-    map[Keys.origin] = this.origin;
     return new DataItem(map);
   };
 
   public static fromDataItem = (dataItem: DataItem) => {
     const map = dataItem.getData();
     const signature = map[Keys.signature];
-    const requestId = map[Keys.requestId].getData();
-    const origin = map[Keys.origin];
+    let requestId = undefined;
+    let origin = undefined;
+    if (map[Keys.requestId]) {
+      requestId = map[Keys.requestId].getData();
+    }
+    if (map[Keys.origin]) {
+      origin = map[Keys.origin];
+    }
     return new TonSignature(signature, requestId, origin);
   };
 
