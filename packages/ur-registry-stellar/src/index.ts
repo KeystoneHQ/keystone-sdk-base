@@ -10,4 +10,3 @@ patchTags(
 
 export { StellarSignRequest, SignType } from "./StellarSignRequest";
 export { StellarSignature } from "./StellarSignature";
-export { StellarNFTItem } from "./StellarNFTItem";
