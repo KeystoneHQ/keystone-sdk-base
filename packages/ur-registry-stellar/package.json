@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-stellar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "bc-ur-registry extension for Stellar",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

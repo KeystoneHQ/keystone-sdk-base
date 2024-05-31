@@ -63,7 +63,7 @@ describe("stellar-sign-request", () => {
       stellarData,
       hdPath,
       xfp,
-      SignType.Message,
+      SignType.TransactionHash,
       requestID,
       undefined,
       "solflare"
