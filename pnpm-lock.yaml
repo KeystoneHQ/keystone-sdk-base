@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 neverBuiltDependencies:
   - node-hid
@@ -820,6 +824,31 @@ importers:
         version: 4.9.5
 
   packages/ur-registry-sol:
+    dependencies:
+      '@keystonehq/bc-ur-registry':
+        specifier: ^0.5.4
+        version: 0.5.5
+      bs58check:
+        specifier: ^2.1.2
+        version: 2.1.2
+      uuid:
+        specifier: ^8.3.2
+        version: 8.3.2
+    devDependencies:
+      '@babel/preset-typescript':
+        specifier: ^7.15.0
+        version: 7.24.1(@babel/core@7.24.5)
+      '@types/uuid':
+        specifier: ^8.3.1
+        version: 8.3.4
+      tsdx:
+        specifier: ^0.14.1
+        version: 0.14.1
+      typescript:
+        specifier: ^4.6.2
+        version: 4.9.5
+
+  packages/ur-registry-stellar:
     dependencies:
       '@keystonehq/bc-ur-registry':
         specifier: ^0.5.4
