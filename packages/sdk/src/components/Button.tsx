@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from "react";
 
 type Props = {
+  children: React.ReactNode;
   onClick: () => any;
 };
 
 const styleBase = {
-  minWidth: "16rem",
+  width: "50%",
   height: "3rem",
   background: "#784FFE",
   borderColor: "grey",

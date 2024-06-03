@@ -46,6 +46,12 @@ export type Read = (
   }
 ) => Promise<DecodedResult>;
 
+export type SDK = {
+  read: Read,
+  play: Play,
+  cameraReady: boolean
+}
+
 export enum SupportedResult {
   UR_BYTES = "bytes",
   UR_CRYPTO_HDKEY = "crypto-hdkey",

@@ -16,7 +16,8 @@ const customStyles = {
     right: "auto",
     bottom: "auto",
     borderRadius: "10px",
-    width: "37rem",
+    maxWidth: "37rem",
+    width: "85%",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     postion: "relative",
@@ -85,7 +86,7 @@ export const useController = (): [
       </div>
       <div
         style={{
-          width: "35rem",
+          maxWidth: "35rem",
           padding: 18,
           flex: 1,
           flexDirection: "column",
