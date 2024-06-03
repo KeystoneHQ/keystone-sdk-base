@@ -6,7 +6,7 @@ type Props = {
 };
 
 const styleBase = {
-  minWidth: "16rem",
+  width: "50%",
   height: "3rem",
   background: "#784FFE",
   borderColor: "grey",

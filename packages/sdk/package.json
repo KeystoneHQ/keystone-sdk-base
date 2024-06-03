@@ -20,7 +20,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "start": "webpack serve --open",
+    "start": "pnpm run  build && webpack serve --open",
     "build": "tsdx build",
     "test": "jest --passWithNoTests"
   },
