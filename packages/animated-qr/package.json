@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/animated-qr",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "animated qr code and scanner",
   "author": "LiYanLance <liyan1924@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
@@ -27,6 +27,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@keystonehq/animated-qr-base": "^0.0.1",
     "@ngraveio/bc-ur": "^1.1.6",
     "@zxing/browser": "^0.1.1",
     "@zxing/library": "^0.19.1",

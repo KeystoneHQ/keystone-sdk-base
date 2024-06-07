@@ -5,9 +5,12 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { CameraStatus, ScannerProps } from "./types";
+import {
+  CameraStatus,
+  ScannerProps,
+  getAnimatedScan,
+} from "@keystonehq/animated-qr-base";
 import { BaseQRScanner } from "./BaseQRScanner";
-import { getAnimatedScan } from "./getAnimatedScan";
 import { useCamera } from "./useCamera";
 
 interface BaseScannerProps {

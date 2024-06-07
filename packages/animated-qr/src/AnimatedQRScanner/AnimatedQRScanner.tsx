@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from "react";
+import {
+  CameraStatus,
+  ScannerProps,
+  getAnimatedScan,
+} from "@keystonehq/animated-qr-base";
 import { BaseQRScanner } from "./BaseQRScanner";
-import { CameraStatus, ScannerProps } from "./types";
-import { getAnimatedScan } from "./getAnimatedScan";
 import { useCamera } from "./useCamera";
 
 export const AnimatedQRScanner = ({

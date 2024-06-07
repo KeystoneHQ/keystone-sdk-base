@@ -1,6 +1,9 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { getAnimatedScan } from "../getAnimatedScan";
-import { Purpose, QRCodeError } from "../types";
+import {
+  Purpose,
+  QRCodeError,
+  getAnimatedScan,
+} from "@keystonehq/animated-qr-base";
 import { hdKey } from "./factory/ur";
 
 describe("getAnimatedScan", () => {
@@ -20,7 +23,10 @@ describe("getAnimatedScan", () => {
         handleScanSuccess(hdKey.ur);
       });
 
-      expect(stubHandleScan).toBeCalledWith({type: hdKey.type, cbor: hdKey.hex});
+      expect(stubHandleScan).toBeCalledWith({
+        type: hdKey.type,
+        cbor: hdKey.hex,
+      });
     });
 
     it("should enhance the given function to handle phantom QR code", () => {
@@ -43,7 +49,10 @@ describe("getAnimatedScan", () => {
         handleScanSuccess(hdKey.urSequences[1]);
       });
 
-      expect(stubHandleScan).toBeCalledWith({type: hdKey.type, cbor: hdKey.hex});
+      expect(stubHandleScan).toBeCalledWith({
+        type: hdKey.type,
+        cbor: hdKey.hex,
+      });
     });
   });
 
