@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { CameraStatus } from "./types";
-import { checkStatus } from "./webcamUtils";
+import { CameraStatus, checkStatus } from "@keystonehq/animated-qr-base";
 
 export const MILLISECOND = 1;
 export const SECOND = MILLISECOND * 1000;

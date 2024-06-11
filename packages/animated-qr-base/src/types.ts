@@ -11,21 +11,7 @@ export enum CameraStatus {
   UNKNOWN_ERROR = "UNKNOWN_CAMERA_ERROR",
 }
 
-export type CameraError = "NO_WEBCAM_FOUND" | "NO_WEBCAM_ACCESS"
-
-export interface ScannerProps {
-  purpose?: Purpose
-  urTypes?: string[]
-  handleScan: (ur: { type: string; cbor: string }) => void
-  handleError: (error: string) => void
-  options?: {
-    width?: number | string
-    height?: number | string
-    blur?: boolean
-  }
-  videoLoaded?: (canPlay: boolean, error?: CameraError) => void
-  onProgress?: (progress: number) => void
-}
+export type CameraError = "NO_WEBCAM_FOUND" | "NO_WEBCAM_ACCESS";
 
 export enum Purpose {
   SYNC = "sync",
@@ -47,4 +33,18 @@ export enum URType {
   NEAR_SIGNATURE = "near-signature",
   COSMOS_SIGNATURE = "cosmos-signature",
   EVM_SIGNATURE = "evm-signature",
+}
+
+export interface ScannerProps {
+  purpose?: Purpose;
+  urTypes?: string[];
+  handleScan: (ur: { type: string; cbor: string }) => void;
+  handleError: (error: string) => void;
+  options?: {
+    width?: number | string;
+    height?: number | string;
+    blur?: boolean;
+  };
+  videoLoaded?: (canPlay: boolean, error?: CameraError) => void;
+  onProgress?: (progress: number) => void;
 }

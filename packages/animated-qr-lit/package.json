@@ -1,0 +1,28 @@
+{
+  "name": "@keystonehq/animated-qr-lit",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
+  "scripts": {
+    "dev": "pnpm run cleanup && tsc -w",
+    "build": "pnpm run cleanup && tsc",
+    "cleanup": "rimraf ./dist",
+    "test": "jest --passWithNoTests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rimraf": "^5.0.7"
+  },
+  "dependencies": {
+    "@keystonehq/animated-qr-base": "^0.0.1",
+    "@ngraveio/bc-ur": "^1.1.13",
+    "@zxing/browser": "^0.1.1",
+    "@zxing/library": "^0.19.1",
+    "lit": "^3.1.4",
+    "qrcode": "^1.5.3"
+  }
+}
