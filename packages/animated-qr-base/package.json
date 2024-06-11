@@ -2,9 +2,15 @@
   "name": "@keystonehq/animated-qr-base",
   "version": "0.0.1",
   "description": "",
+  "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
+  "directories": {
+    "lib": "dist"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "pnpm run cleanup && tsc -w",
     "build": "pnpm run cleanup && tsc",
@@ -14,6 +20,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "rimraf": "^5.0.7"
   },
