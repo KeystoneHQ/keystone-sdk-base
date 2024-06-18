@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-sui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "bc-ur-registry extension for Sui",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,7 +24,7 @@
   "author": "Renfeng Shi",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry": "^0.5.5",
+    "@keystonehq/bc-ur-registry": "^0.6.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

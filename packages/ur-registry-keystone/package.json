@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-keystone",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "bc-ur-registry extension for Keystone",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,7 +20,7 @@
   "author": "Renfeng Shi<renfeng@keyst.one>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry": "^0.5.4"
+    "@keystonehq/bc-ur-registry": "^0.6.4"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
