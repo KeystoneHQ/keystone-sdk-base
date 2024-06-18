@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-ton",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "bc-ur-registry extension for Tron",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,7 +20,7 @@
   "author": "Sora Li<sora@keyst.one>",
   "license": "ISC",
   "dependencies": {
-    "@keystonehq/bc-ur-registry": "^0.5.4",
+    "@keystonehq/bc-ur-registry": "^0.6.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

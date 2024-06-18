@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -633,8 +633,8 @@ importers:
   packages/ur-registry-aptos:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       bs58check:
         specifier: ^2.1.2
         version: 2.1.2
@@ -658,8 +658,8 @@ importers:
   packages/ur-registry-arweave:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       uuid:
         specifier: ^8.3.2
         version: 8.3.2
@@ -680,8 +680,8 @@ importers:
   packages/ur-registry-btc:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       uuid:
         specifier: ^8.3.2
         version: 8.3.2
@@ -702,8 +702,8 @@ importers:
   packages/ur-registry-cardano:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       uuid:
         specifier: ^8.3.2
         version: 8.3.2
@@ -724,8 +724,8 @@ importers:
   packages/ur-registry-cosmos:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       bs58check:
         specifier: ^2.1.2
         version: 2.1.2
@@ -752,7 +752,7 @@ importers:
         specifier: ^9.0.3
         version: 9.0.3
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.6.0
+        specifier: ^0.6.4
         version: 0.6.4
       hdkey:
         specifier: ^2.0.1
@@ -790,13 +790,13 @@ importers:
         version: 5.91.0(webpack-cli@4.10.0)
       webpack-cli:
         specifier: ^4.10.0
-        version: 4.10.0(webpack-dev-server@3.11.3)(webpack@5.91.0)
+        version: 4.10.0(webpack@5.91.0)
 
   packages/ur-registry-evm:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       bs58check:
         specifier: ^2.1.2
         version: 2.1.2
@@ -820,8 +820,8 @@ importers:
   packages/ur-registry-keystone:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
     devDependencies:
       '@babel/preset-typescript':
         specifier: ^7.15.0
@@ -836,8 +836,8 @@ importers:
   packages/ur-registry-near:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       bs58check:
         specifier: ^2.1.2
         version: 2.1.2
@@ -861,8 +861,8 @@ importers:
   packages/ur-registry-sol:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       bs58check:
         specifier: ^2.1.2
         version: 2.1.2
@@ -886,8 +886,8 @@ importers:
   packages/ur-registry-stellar:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       bs58check:
         specifier: ^2.1.2
         version: 2.1.2
@@ -911,8 +911,8 @@ importers:
   packages/ur-registry-sui:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.5
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       uuid:
         specifier: ^9.0.0
         version: 9.0.1
@@ -933,8 +933,8 @@ importers:
   packages/ur-registry-ton:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       uuid:
         specifier: ^9.0.0
         version: 9.0.1
@@ -958,8 +958,8 @@ importers:
   packages/ur-registry-tron:
     dependencies:
       '@keystonehq/bc-ur-registry':
-        specifier: ^0.5.4
-        version: 0.5.5
+        specifier: ^0.6.4
+        version: 0.6.4
       uuid:
         specifier: ^9.0.0
         version: 9.0.1
@@ -4258,6 +4258,18 @@ packages:
     dependencies:
       envinfo: 7.13.0
       webpack-cli: 4.10.0(webpack-dev-server@3.11.3)(webpack@5.91.0)
+    dev: true
+
+  /@webpack-cli/serve@1.7.0(webpack-cli@4.10.0):
+    resolution: {integrity: sha512-oxnCNGj88fL+xzV+dacXs44HcDwf1ovs3AuEzvP7mqXw7fQntqIhQ1BRmynh4qEKQSSSRSWVyXRjmTbZIX9V2Q==}
+    peerDependencies:
+      webpack-cli: 4.x.x
+      webpack-dev-server: '*'
+    peerDependenciesMeta:
+      webpack-dev-server:
+        optional: true
+    dependencies:
+      webpack-cli: 4.10.0(webpack@5.91.0)
     dev: true
 
   /@webpack-cli/serve@1.7.0(webpack-cli@4.10.0)(webpack-dev-server@3.11.3):
@@ -14802,6 +14814,41 @@ packages:
       rechoir: 0.7.1
       webpack: 5.91.0(webpack-cli@4.10.0)
       webpack-dev-server: 3.11.3(webpack-cli@4.10.0)(webpack@5.91.0)
+      webpack-merge: 5.10.0
+    dev: true
+
+  /webpack-cli@4.10.0(webpack@5.91.0):
+    resolution: {integrity: sha512-NLhDfH/h4O6UOy+0LSso42xvYypClINuMNBVVzX4vX98TmTaTUxwRbXdhucbFMd2qLaCTcLq/PdYrvi8onw90w==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      '@webpack-cli/generators': '*'
+      '@webpack-cli/migrate': '*'
+      webpack: 4.x.x || 5.x.x
+      webpack-bundle-analyzer: '*'
+      webpack-dev-server: '*'
+    peerDependenciesMeta:
+      '@webpack-cli/generators':
+        optional: true
+      '@webpack-cli/migrate':
+        optional: true
+      webpack-bundle-analyzer:
+        optional: true
+      webpack-dev-server:
+        optional: true
+    dependencies:
+      '@discoveryjs/json-ext': 0.5.7
+      '@webpack-cli/configtest': 1.2.0(webpack-cli@4.10.0)(webpack@5.91.0)
+      '@webpack-cli/info': 1.5.0(webpack-cli@4.10.0)
+      '@webpack-cli/serve': 1.7.0(webpack-cli@4.10.0)
+      colorette: 2.0.20
+      commander: 7.2.0
+      cross-spawn: 7.0.3
+      fastest-levenshtein: 1.0.16
+      import-local: 3.1.0
+      interpret: 2.2.0
+      rechoir: 0.7.1
+      webpack: 5.91.0(webpack-cli@4.10.0)
       webpack-merge: 5.10.0
     dev: true
 
