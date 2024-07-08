@@ -7,6 +7,7 @@ import {
   DataItemMap,
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
+import { CardanoDelegation } from "./CardanoDelegation";
 import * as uuid from "uuid";
 
 const { decodeToDataItem, RegistryTypes } = extend;
@@ -32,14 +33,9 @@ interface CardanoCatalystRawDelegationProps {
 export type CardanoCatalystRawDelegationsProps =
   CardanoCatalystRawDelegationProps[];
 
-interface CardanoCatalystDelegationProps {
-  hdPath: CryptoKeypath;
-  weight: number;
-}
-
 interface CardanoCatalystRequestProps {
   requestId?: Buffer;
-  delegations: CardanoCatalystDelegationProps[];
+  delegations: CardanoDelegation[];
   stakePub: Buffer;
   paymentAddress: Buffer;
   nonce: number;
@@ -47,11 +43,6 @@ interface CardanoCatalystRequestProps {
   derivationPath: CryptoKeypath;
   origin?: string;
 }
-
-type CardanoCatalystDelegation = {
-  hdPath: CryptoKeypath;
-  weight: number;
-};
 
 const genCryptoKeypath = (path: string, xfp: string) => {
   const paths = path.replace(/[m|M]\//, "").split("/");
@@ -70,7 +61,7 @@ const genCryptoKeypath = (path: string, xfp: string) => {
 
 export class CardanoCatalystRequest extends RegistryItem {
   private requestId?: Buffer;
-  private delegations: CardanoCatalystDelegation[];
+  private delegations: CardanoDelegation[];
   private stakePub: Buffer;
   private paymentAddress: Buffer;
   private nonce: number;
@@ -117,8 +108,8 @@ export class CardanoCatalystRequest extends RegistryItem {
     map[Keys.voting_purpose] = this.voting_purpose;
 
     map[Keys.delegations] = this.delegations.map((delegation) => {
-      const res = delegation.hdPath.toDataItem();
-      res.setTag(delegation.hdPath.getRegistryType().getTag());
+      const res = delegation.toDataItem();
+      res.setTag(delegation.getRegistryType().getTag());
       return res;
     });
 
@@ -135,14 +126,8 @@ export class CardanoCatalystRequest extends RegistryItem {
 
   public static fromDataItem = (dataItem: DataItem) => {
     const map = dataItem.getData();
-    const delegations: CardanoCatalystDelegation[] = map[Keys.delegations].map(
-      (delegation: DataItem) => {
-        const hdPath = CryptoKeypath.fromDataItem(delegation);
-        return {
-          hdPath,
-          weight: 0,
-        };
-      }
+    const delegations: CardanoDelegation[] = map[Keys.delegations].map(
+      (delegation: DataItem) => CardanoDelegation.fromDataItem(delegation)
     );
     const stakePub = map[Keys.stakePub];
     const paymentAddress = map[Keys.paymentAddress];
@@ -185,10 +170,12 @@ export class CardanoCatalystRequest extends RegistryItem {
     const requestId = uuidString
       ? Buffer.from(uuid.parse(uuidString) as Uint8Array)
       : undefined;
-    const cardanoDelegations = delegations.map((delegation) => ({
-      hdPath: genCryptoKeypath(delegation.hdPath, delegation.xfp),
-      weight: delegation.weight,
-    }));
+    const cardanoDelegations = delegations.map((delegation) =>
+      CardanoDelegation.constructCardanoDelegation({
+        hdPath: genCryptoKeypath(delegation.hdPath, delegation.xfp),
+        weight: delegation.weight,
+      })
+    );
 
     return new CardanoCatalystRequest({
       requestId,
