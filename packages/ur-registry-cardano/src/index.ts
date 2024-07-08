@@ -15,3 +15,8 @@ export { CardanoSignDataSignature } from "./CardanoSignDataSignature";
 export { CardanoUtxoData } from "./CardanoUtxo";
 export { CardanoCertKeyData } from "./CardanoCertKey";
 export { CardanoCertKey } from "./CardanoCertKey";
+export {
+  CardanoCatalystRequest,
+  CardanoCatalystRawDelegationsProps,
+} from "./CardanoCatalystRequest";
+export { CardanoCatalystSignature } from "./CardanoCatalystSignature";
