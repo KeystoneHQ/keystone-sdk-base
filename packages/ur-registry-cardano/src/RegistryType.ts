@@ -13,4 +13,12 @@ export const ExtendedRegistryTypes = {
     "cardano-sign-data-signature",
     2206
   ),
+  CARDANO_CATALYST_VOTING_REGISTRATION: new RegistryType(
+    "cardano-catalyst-voting-registration",
+    2207
+  ),
+  CARDANO_CATALYST_VOTING_REGISTRATION_SIGNATURE: new RegistryType(
+    "cardano-catalyst-voting-registration-signature",
+    2208
+  ),
 };
