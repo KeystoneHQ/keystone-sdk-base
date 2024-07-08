@@ -21,4 +21,5 @@ export const ExtendedRegistryTypes = {
     "cardano-catalyst-voting-registration-signature",
     2208
   ),
+  CARDANO_DELEGATION: new RegistryType("cardano-delegation", 2209),
 };
