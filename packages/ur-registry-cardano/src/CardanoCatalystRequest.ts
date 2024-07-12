@@ -25,7 +25,6 @@ enum Keys {
 }
 
 interface CardanoCatalystRawDelegationProps {
-  xfp: string;
   hdPath: string;
   weight: number;
 }
@@ -172,7 +171,7 @@ export class CardanoCatalystRequest extends RegistryItem {
       : undefined;
     const cardanoDelegations = delegations.map((delegation) =>
       CardanoDelegation.constructCardanoDelegation({
-        hdPath: genCryptoKeypath(delegation.hdPath, delegation.xfp),
+        hdPath: genCryptoKeypath(delegation.hdPath, xfp),
         weight: delegation.weight,
       })
     );
