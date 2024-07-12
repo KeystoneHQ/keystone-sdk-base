@@ -1,6 +1,6 @@
 import bs58 from "bs58";
 import * as uuid from "uuid";
-import { Message, PublicKey, Transaction } from "@solana/web3.js";
+import { Message, Transaction } from "@solana/web3.js";
 import { InteractionProvider } from "./InteractionProvider";
 import { CryptoMultiAccounts } from "@keystonehq/bc-ur-registry";
 import { SolSignRequest, SignType } from "@keystonehq/bc-ur-registry-sol";
@@ -114,14 +114,13 @@ export class BaseKeyring {
     return this.keys;
   }
 
-  async signTransaction(pubKey: string, tx: Transaction): Promise<Transaction> {
+  async signTransaction(pubKey: string, txHex: Uint8Array): Promise<Uint8Array> {
     const signature = await this._getSignature(
       pubKey,
-      Buffer.from(tx.serializeMessage() as unknown as ArrayBuffer),
+      Buffer.from(txHex),
       SignType.Transaction
     );
-    tx.addSignature(new PublicKey(pubKey), signature);
-    return tx;
+    return signature;
   }
 
   async signMessage(
