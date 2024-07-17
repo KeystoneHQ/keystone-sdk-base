@@ -1,5 +1,4 @@
 import {
-  CryptoKeypath,
   extend,
   DataItem,
   RegistryItem,
@@ -10,37 +9,34 @@ import { ExtendedRegistryTypes } from "./RegistryType";
 const { decodeToDataItem } = extend;
 
 export interface CardanoCatalystDelegationProps {
-  hdPath: CryptoKeypath;
+  pubKey: Buffer;
   weight: number;
 }
 
 enum Keys {
-  hdPath = 1,
+  pubKey = 1,
   weight,
 }
 
 export class CardanoDelegation extends RegistryItem {
-  private hdPath: CryptoKeypath;
+  private pubKey: Buffer;
   private weight: number;
 
   getRegistryType = () => ExtendedRegistryTypes.CARDANO_DELEGATION;
 
   constructor(args: CardanoCatalystDelegationProps) {
     super();
-    this.hdPath = args.hdPath;
+    this.pubKey = args.pubKey;
     this.weight = args.weight;
   }
 
-  public getHdPath = () => this.hdPath;
+  public getPubKey = () => this.pubKey;
   public getWeight = () => this.weight;
 
   public toDataItem = () => {
     const map: DataItemMap = {};
 
-    const keyPath = this.getHdPath().toDataItem();
-    keyPath.setTag(this.getHdPath().getRegistryType().getTag());
-    map[Keys.hdPath] = keyPath;
-
+    map[Keys.pubKey] = this.getPubKey();
     map[Keys.weight] = this.getWeight();
 
     return new DataItem(map);
@@ -48,9 +44,9 @@ export class CardanoDelegation extends RegistryItem {
 
   public static fromDataItem = (dataItem: DataItem) => {
     const map = dataItem.getData();
-    const hdPath = CryptoKeypath.fromDataItem(map[Keys.hdPath]);
+    const pubKey = map[Keys.pubKey];
     const weight = map[Keys.weight];
-    return new CardanoDelegation({ hdPath, weight });
+    return new CardanoDelegation({ pubKey, weight });
   };
 
   public static fromCBOR = (_cborPayload: Buffer) => {
@@ -59,9 +55,9 @@ export class CardanoDelegation extends RegistryItem {
   };
 
   public static constructCardanoDelegation({
-    hdPath,
+    pubKey,
     weight,
   }: CardanoCatalystDelegationProps) {
-    return new CardanoDelegation({ hdPath, weight });
+    return new CardanoDelegation({ pubKey, weight });
   }
 }

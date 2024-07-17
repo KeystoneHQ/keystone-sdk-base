@@ -10,14 +10,9 @@ describe("cardano-catalyst-request", () => {
       path: "m/1852'/1815'/0'/2/0",
       delegations: [
         {
-          xfp: "52744703",
-          hdPath: "m/1694'/1815'/0'/0'/0'",
+          pubKey:
+            "a6a3c0447aeb9cc54cf6422ba32b294e5e1c3ef6d782f2acff4a70694c4d1663",
           weight: 1,
-        },
-        {
-          xfp: "52744703",
-          hdPath: "m/1694'/1815'/1'/0'/0'",
-          weight: 3,
         },
       ],
       stakePub:
@@ -44,7 +39,7 @@ describe("cardano-catalyst-request", () => {
 
     const ur = request.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:cardano-catalyst-voting-registration/pdadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaolftaayoyoeadtaaddyoeadlecfamnnykcfatchykaeykaeykaeykaocygmjyflaxaoadtaayoyoeadtaaddyoeadlecfamnnykcfatchykadykaeykaeykaocygmjyflaxaoaxaxhdcxpmgrmwlnnlcfeneeotnttljlktnydtgyoeflkkpmgmpkkkcmynmednmnssjodwwyaahdesaehdmnmncacssbonkooxtehghdamnewlglguynetrpzsylrtkglerydnsksksnwyflrpbauoktjplpgudkspgdeoswetenfwbbsbztiydilonelyssahcyaegunsdnamaeattaaddyoeadlecfatfnykcfatchykaeykaowkaewkaocygmjyflaxayjtiahsjpiehsjtjldpkthsjzjzihjyrtmhkoee"
+      "ur:cardano-catalyst-voting-registration/pdadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaolytaayoyoeadhdcxolotrtfyknwmnsskgsynfwdnotdndtglhycefmyntslfwzpszmgejoingsgtcmiaaoadaxhdcxpmgrmwlnnlcfeneeotnttljlktnydtgyoeflkkpmgmpkkkcmynmednmnssjodwwyaahdesaehdmnmncacssbonkooxtehghdamnewlglguynetrpzsylrtkglerydnsksksnwyflrpbauoktjplpgudkspgdeoswetenfwbbsbztiydilonelyssahcyaegunsdnamaeattaaddyoeadlecfatfnykcfatchykaeykaowkaewkaocygmjyflaxayjtiahsjpiehsjtjldpkthsjzjzihjyvomsehee"
     );
   });
 });
