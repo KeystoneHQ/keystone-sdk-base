@@ -11,27 +11,23 @@ const { RegistryTypes, decodeToDataItem } = extend;
 enum Keys {
   requestId = 1,
   signature,
-  votePrvKeys,
 }
 
 export class CardanoCatalystSignature extends RegistryItem {
   private requestId?: Buffer;
   private signature: Buffer;
-  private votePrvKeys: Buffer[] = [];
 
   getRegistryType = () =>
     ExtendedRegistryTypes.CARDANO_CATALYST_VOTING_REGISTRATION_SIGNATURE;
 
-  constructor(signature: Buffer, votePrvKeys: Buffer[], requestId?: Buffer) {
+  constructor(signature: Buffer, requestId?: Buffer) {
     super();
     this.signature = signature;
     this.requestId = requestId;
-    this.votePrvKeys = votePrvKeys;
   }
 
   public getRequestId = () => this.requestId;
   public getSignature = () => this.signature;
-  public getVotePrvKeys = () => this.votePrvKeys;
 
   public toDataItem = () => {
     const map: DataItemMap = {};
@@ -42,7 +38,6 @@ export class CardanoCatalystSignature extends RegistryItem {
       );
     }
     map[Keys.signature] = this.getSignature();
-    map[Keys.votePrvKeys] = this.getVotePrvKeys();
     return new DataItem(map);
   };
 
@@ -52,8 +47,7 @@ export class CardanoCatalystSignature extends RegistryItem {
     const requestId = map[Keys.requestId]
       ? map[Keys.requestId].getData()
       : undefined;
-    const votePrvKeys = map[Keys.votePrvKeys];
-    return new CardanoCatalystSignature(signature, votePrvKeys, requestId);
+    return new CardanoCatalystSignature(signature, requestId);
   };
 
   public static fromCBOR = (_cborPayload: Buffer) => {
