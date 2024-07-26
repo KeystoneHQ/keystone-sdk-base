@@ -17,13 +17,13 @@ enum Keys {
   derivationPath,
   origin,
   signType,
-  stakePub,
+  xpub,
 }
 
 type signRequestProps = {
   requestId?: Buffer;
   signData: Buffer;
-  stakePub: Buffer;
+  xpub: Buffer;
   derivationPath: CryptoKeypath;
   origin?: string;
 };
@@ -33,7 +33,7 @@ export class CardanoSignDataRequest extends RegistryItem {
   private signData: Buffer;
   private derivationPath: CryptoKeypath;
   private origin?: string;
-  private stakePub: Buffer;
+  private xpub: Buffer;
 
   getRegistryType = () => ExtendedRegistryTypes.CARDANO_SIGN_DATA_REQUEST;
 
@@ -43,14 +43,14 @@ export class CardanoSignDataRequest extends RegistryItem {
     this.signData = args.signData;
     this.derivationPath = args.derivationPath;
     this.origin = args.origin;
-    this.stakePub = args.stakePub;
+    this.xpub = args.xpub;
   }
 
   public getRequestId = () => this.requestId;
   public getSignData = () => this.signData;
   public getDerivationPath = () => this.derivationPath.getPath();
   public getOrigin = () => this.origin;
-  public getStakePub = () => this.stakePub;
+  public getXpub = () => this.xpub;
 
   public toDataItem = () => {
     const map: DataItemMap = {};
@@ -70,7 +70,7 @@ export class CardanoSignDataRequest extends RegistryItem {
     const keyPath = this.derivationPath.toDataItem();
     keyPath.setTag(this.derivationPath.getRegistryType().getTag());
     map[Keys.derivationPath] = keyPath;
-    map[Keys.stakePub] = this.stakePub;
+    map[Keys.xpub] = this.xpub;
 
     return new DataItem(map);
   };
@@ -83,14 +83,14 @@ export class CardanoSignDataRequest extends RegistryItem {
       ? map[Keys.requestId].getData()
       : undefined;
     const origin = map[Keys.origin] ? map[Keys.origin] : undefined;
-    const stakePub = map[Keys.stakePub];
+    const xpub = map[Keys.xpub];
 
     return new CardanoSignDataRequest({
       requestId,
       signData,
       derivationPath,
       origin,
-      stakePub,
+      xpub,
     });
   };
 
@@ -103,7 +103,7 @@ export class CardanoSignDataRequest extends RegistryItem {
     signData: string,
     hdPath: string,
     xfp: string,
-    stakePub: string,
+    xpub: string,
     uuidString?: string,
     origin?: string
   ) {
@@ -127,7 +127,7 @@ export class CardanoSignDataRequest extends RegistryItem {
       signData: Buffer.from(signData, "hex"),
       derivationPath: hdpathObject,
       origin: origin || undefined,
-      stakePub: Buffer.from(stakePub, "hex"),
+      xpub: Buffer.from(xpub, "hex"),
     });
   }
 }
