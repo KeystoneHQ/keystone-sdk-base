@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-eth",
-  "version": "0.20.1",
+  "version": "0.21.0",
   "description": "bc-ur-registry extension for ETH",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,7 +26,7 @@
   "license": "ISC",
   "dependencies": {
     "@ethereumjs/util": "^9.0.3",
-    "@keystonehq/bc-ur-registry": "^0.6.4",
+    "@keystonehq/bc-ur-registry": "^0.7.0",
     "hdkey": "^2.0.1",
     "uuid": "^8.3.2"
   },
