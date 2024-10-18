@@ -22,6 +22,10 @@ enum Keys {
   addressBench32,
   addressFieldType,
 }
+export enum MessageAddressFieldType {
+  ADDRESS = "ADDRESS",
+  KEY_HASH = "KEY_HASH",
+}
 
 type signRequestProps = {
   requestId?: Buffer;
@@ -31,7 +35,7 @@ type signRequestProps = {
   origin?: string;
   hashPayload: boolean;
   addressBench32?: string;
-  addressFieldType: string;
+  addressFieldType: MessageAddressFieldType;
 };
 
 export interface Cip8SignDataContext {
@@ -40,7 +44,7 @@ export interface Cip8SignDataContext {
   signingPath: string;
   xfp: string;
   originWallet?: string;
-  addressFieldType: string;
+  addressFieldType: MessageAddressFieldType;
 }
 
 export class CardanoSignCip8DataRequest extends RegistryItem {
@@ -51,7 +55,7 @@ export class CardanoSignCip8DataRequest extends RegistryItem {
   private xpub: Buffer;
   private hashPayload: boolean;
   private addressBench32?: string;
-  private addressFieldType: string;
+  private addressFieldType: MessageAddressFieldType;
   getRegistryType = () => ExtendedRegistryTypes.CARDANO_SIGN_CIP8_DATA_REQUEST;
 
   constructor(args: signRequestProps) {
@@ -138,7 +142,7 @@ export class CardanoSignCip8DataRequest extends RegistryItem {
     xfp: string,
     xpub: string,
     hashPayload: boolean,
-    addressFieldType: string,
+    addressFieldType: MessageAddressFieldType,
     addressBench32?: string,
     uuidString?: string,
     origin?: string
@@ -165,7 +169,7 @@ export class CardanoSignCip8DataRequest extends RegistryItem {
       xpub: Buffer.from(xpub, "hex"),
       hashPayload: hashPayload,
       addressBench32: addressBench32 || undefined,
-      addressFieldType: addressFieldType,
+      addressFieldType: addressFieldType as MessageAddressFieldType,
     });
   }
 }

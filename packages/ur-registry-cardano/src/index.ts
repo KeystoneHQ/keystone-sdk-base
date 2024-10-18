@@ -22,3 +22,4 @@ export {
 export { CardanoCatalystSignature } from "./CardanoCatalystSignature";
 export { CardanoSignCip8DataRequest } from "./CardanoSignMessageCip8DataRequest";
 export { CardanoSignCip8DataSignature } from "./CardanoSignMessageCip8DataSignature";
+export { MessageAddressFieldType } from "./CardanoSignMessageCip8DataRequest";
