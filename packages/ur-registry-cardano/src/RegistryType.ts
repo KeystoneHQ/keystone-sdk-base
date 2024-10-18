@@ -22,4 +22,12 @@ export const ExtendedRegistryTypes = {
     2208
   ),
   CARDANO_DELEGATION: new RegistryType("cardano-delegation", 2209),
+  CARDANO_SIGN_CIP8_DATA_REQUEST: new RegistryType(
+    "cardano-sign-cip8-data-request",
+    2210
+  ),
+  CARDANO_SIGN_CIP8_DATA_SIGNATURE: new RegistryType(
+    "cardano-sign-cip8-data-signature",
+    2211
+  ),
 };
