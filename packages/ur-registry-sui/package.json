@@ -25,11 +25,11 @@
   "license": "ISC",
   "dependencies": {
     "@keystonehq/bc-ur-registry": "^0.6.4",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
-    "@types/uuid": "^9.0.1",
+    "@types/uuid": "^9.0.8",
     "tsdx": "^0.14.1",
     "typescript": "^5.0.4"
   },
