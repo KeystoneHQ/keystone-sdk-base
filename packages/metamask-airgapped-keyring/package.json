@@ -31,7 +31,7 @@
     "@keystonehq/bc-ur-registry-eth": "^0.19.1",
     "@metamask/obs-store": "^9.0.0",
     "rlp": "^2.2.6",
-    "uuid": "^8.3.2"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",

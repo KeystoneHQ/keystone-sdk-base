@@ -21,11 +21,11 @@
     "@keystonehq/bc-ur-registry": "^0.5.4",
     "@keystonehq/bc-ur-registry-evm": "^0.5.2",
     "@keystonehq/sdk": "^0.19.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
-    "@types/uuid": "^9.0.0",
+    "@types/uuid": "^9.0.8",
     "tsdx": "^0.14.1",
     "typescript": "^4.9.5"
   },
