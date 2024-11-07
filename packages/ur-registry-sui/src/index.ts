@@ -10,3 +10,4 @@ patchTags(
 
 export { SuiSignRequest } from "./SuiSignRequest";
 export { SuiSignature } from "./SuiSignature";
+export { SuiSignHashRequest } from "./SuiSignHashRequest";
