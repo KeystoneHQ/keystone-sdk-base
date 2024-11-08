@@ -35,7 +35,7 @@ describe("sui-sign-hash-request", () => {
     const xfps = ["52744703"];
     const messageHash =
       "ce035bd8ab6499dcaa01d623aa7c977ec9be13798046ca1f86c9f3ebcd2f4d13";
-    const requestID = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d";
+    const requestID = "c267e8c4-f363-464e-9f24-c53aabf84fe0";
     const addresses = [
       Buffer.from(
         "504886c9ec43bff70af37f55865094cc3a799cb54479f252d30cd3717f15ecdc",
@@ -53,7 +53,7 @@ describe("sui-sign-hash-request", () => {
     );
     const ur = request.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:sui-sign-hash-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaoksfziaihdyeoecidieethsideneeesesieiahshsdyehieeneyeohshsemiaesememihiaesidiheheoemesetdyeeeniahsehiyeteniaesiyeoihidiaieeyiyeeieeheoaxlytaaddyoeadlecsdwykcfaxbeykaeykaeykaeykaocygmjyflaxaalyhdcxgdfdlnsowpfxrsylbkwflbgolngdmwsfftkknsrefykkwzgmtebntejslbbzwpuoahihgukpinihjydakpldns"
+      "ur:sui-sign-hash-request/onadtpdagdsaiovssswfiafgglnedkskftpyyagwvtaoksfziaihdyeoecidieethsideneeesesieiahshsdyehieeneyeohshsemiaesememihiaesidiheheoemesetdyeeeniahsehiyeteniaesiyeoihidiaieeyiyeeieeheoaxlytaaddyoeadlecsdwykcfaxbeykaeykaeykaeykaocygmjyflaxaalyhdcxgdfdlnsowpfxrsylbkwflbgolngdmwsfftkknsrefykkwzgmtebntejslbbzwpuoahihgukpinihjylpbdrnmd"
     );
   });
 });
