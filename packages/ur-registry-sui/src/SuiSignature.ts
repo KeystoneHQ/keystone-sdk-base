@@ -2,7 +2,7 @@ import {
   extend,
   DataItem,
   RegistryItem,
-  DataItemMap
+  DataItemMap,
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 
@@ -11,7 +11,7 @@ const { RegistryTypes, decodeToDataItem } = extend;
 enum Keys {
   requestId = 1,
   signature,
-  publicKey
+  publicKey,
 }
 
 export class SuiSignature extends RegistryItem {
@@ -21,11 +21,7 @@ export class SuiSignature extends RegistryItem {
 
   getRegistryType = () => ExtendedRegistryTypes.SUI_SIGNATURE;
 
-  constructor(
-    signature: Buffer,
-    requestId?: Buffer,
-    publicKey?: Buffer
-  ) {
+  constructor(signature: Buffer, requestId?: Buffer, publicKey?: Buffer) {
     super();
     this.signature = signature;
     this.requestId = requestId;

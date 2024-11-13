@@ -1,64 +1,66 @@
 {
-  "name": "keystone-airgaped-base",
-  "publishConfig": {
-    "access": "public"
-  },
-  "packageManager": "pnpm@8.15.5",
-  "scripts": {
-    "clean": "./scripts/clean.sh",
-    "build": "pnpm -r build",
-    "bootstrap": "pnpm clean && pnpm install",
-    "lint": "eslint '*/**/*.ts' --quiet --fix",
-    "prettier:check": "pnpm run prettier --check",
-    "prettier:fix": "pnpm run prettier --write",
-    "prettier": "prettier '*/**/*.{js,jsx,ts,tsx}'",
-    "test": "pnpm -r test",
-    "prepack": "pnpm -r build"
-  },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "__data__"
-    ],
-    "testEnvironment": "node"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+    "name": "keystone-airgaped-base",
+    "publishConfig": {
+        "access": "public"
+    },
+    "packageManager": "pnpm@8.15.5",
+    "scripts": {
+        "clean": "./scripts/clean.sh",
+        "build": "pnpm -r build",
+        "bootstrap": "pnpm clean && pnpm install",
+        "lint": "eslint '*/**/*.ts' --quiet --fix",
+        "prettier:check": "pnpm run prettier --check",
+        "prettier:fix": "pnpm run prettier --write",
+        "prettier": "prettier '*/**/*.{js,jsx,ts,tsx}'",
+        "test": "pnpm -r test",
+        "prepack": "pnpm -r build"
+    },
+    "jest": {
+        "modulePathIgnorePatterns": [
+            "__data__"
+        ],
+        "testEnvironment": "node"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx}": [
+            "prettier --write",
+            "eslint "
+        ],
+        "*.json": [
+            "prettier --write"
+        ]
+    },
+    "pnpm": {
+        "neverBuiltDependencies": [
+            "node-hid"
+        ]
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.21.5",
+        "@babel/core": "^7.22.1",
+        "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-typescript": "^7.16.7",
+        "@types/jest": "^27.4.1",
+        "@typescript-eslint/eslint-plugin": "^5.14.0",
+        "@typescript-eslint/parser": "^5.14.0",
+        "eslint": "^8.10.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "git-commit-msg-linter": "^4.1.2",
+        "husky": "^7.0.4",
+        "jest": "^27.5.1",
+        "lint-staged": "^12.3.5",
+        "prettier": "^2.5.1",
+        "tsdx": "^0.14.1",
+        "typescript": "^4.6.2"
+    },
+    "dependencies": {
+        "uuid": "^8.3.2"
     }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "eslint "
-    ],
-    "*.json": [
-      "prettier --write"
-    ]
-  },
-  "pnpm": {
-    "neverBuiltDependencies": ["node-hid"]
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.21.5",
-    "@babel/core": "^7.22.1",
-    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-typescript": "^7.16.7",
-    "@types/jest": "^27.4.1",
-    "@typescript-eslint/eslint-plugin": "^5.14.0",
-    "@typescript-eslint/parser": "^5.14.0",
-    "eslint": "^8.10.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "git-commit-msg-linter": "^4.1.2",
-    "husky": "^7.0.4",
-    "jest": "^27.5.1",
-    "lint-staged": "^12.3.5",
-    "prettier": "^2.5.1",
-    "tsdx": "^0.14.1",
-    "typescript": "^4.6.2"
-  },
-  "dependencies": {
-    "uuid": "^8.3.2"
-  }
 }
