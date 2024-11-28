@@ -30,4 +30,8 @@ export const ExtendedRegistryTypes = {
     "cardano-sign-cip8-data-signature",
     2211
   ),
+  CARDANO_SIGN_TX_HASH_REQUEST: new RegistryType(
+    "cardano-sign-tx-hash-request",
+    2212
+  ),
 };
