@@ -15,6 +15,7 @@ enum Keys {
   txHash,
   paths,
   origin,
+  address_list,
 }
 
 type CardanoSignTxHashRequestProps = {
@@ -22,6 +23,7 @@ type CardanoSignTxHashRequestProps = {
   txHash: string;
   paths: CryptoKeypath[];
   origin?: string;
+  addressList: string[];
 };
 
 export class CardanoSignTxHashRequest extends RegistryItem {
@@ -29,7 +31,7 @@ export class CardanoSignTxHashRequest extends RegistryItem {
   private txHash: string;
   private paths: CryptoKeypath[];
   private origin?: string;
-
+  private addressList: string[];
   getRegistryType = () => ExtendedRegistryTypes.CARDANO_SIGN_TX_HASH_REQUEST;
 
   constructor(args: CardanoSignTxHashRequestProps) {
@@ -38,13 +40,14 @@ export class CardanoSignTxHashRequest extends RegistryItem {
     this.txHash = args.txHash;
     this.paths = args.paths;
     this.origin = args.origin;
+    this.addressList = args.addressList;
   }
 
   public getRequestId = () => this.requestId;
   public getTxHash = () => this.txHash;
   public getPaths = () => this.paths;
   public getOrigin = () => this.origin;
-
+  public getAddressList = () => this.addressList;
   public toDataItem = () => {
     const map: DataItemMap = {};
     if (this.requestId) {
@@ -64,6 +67,7 @@ export class CardanoSignTxHashRequest extends RegistryItem {
     if (this.origin) {
       map[Keys.origin] = this.origin;
     }
+    map[Keys.address_list] = this.addressList;
     return new DataItem(map);
   };
 
@@ -75,12 +79,13 @@ export class CardanoSignTxHashRequest extends RegistryItem {
       ? map[Keys.requestId].getData()
       : undefined;
     const origin = map[Keys.origin] ? map[Keys.origin] : undefined;
-
+    const addressList = map[Keys.address_list] ? map[Keys.address_list] : [];
     return new CardanoSignTxHashRequest({
       requestId,
       txHash,
       paths,
       origin,
+      addressList,
     });
   };
 
@@ -92,6 +97,7 @@ export class CardanoSignTxHashRequest extends RegistryItem {
   public static constructCardanoSignTxHashRequest(
     txHash: string,
     paths: CryptoKeypath[],
+    addressList: string[],
     uuidString?: string,
     origin?: string
   ) {
@@ -102,6 +108,7 @@ export class CardanoSignTxHashRequest extends RegistryItem {
       txHash,
       paths,
       origin: origin || undefined,
+      addressList,
     });
   }
 }
