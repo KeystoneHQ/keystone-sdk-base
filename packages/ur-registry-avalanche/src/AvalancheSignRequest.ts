@@ -1,18 +1,6 @@
-import {
-  extend,
-  DataItem,
-  RegistryItem,
-  DataItemMap,
-} from "@keystonehq/bc-ur-registry";
+import { DataItem, RegistryItem } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 import * as uuid from "uuid";
-
-const { decodeToDataItem, RegistryTypes } = extend;
-
-enum Keys {
-  requestId = 1,
-  data,
-}
 
 type signRequestProps = {
   requestId?: Buffer;
@@ -35,35 +23,7 @@ export class AvalancheSignRequest extends RegistryItem {
   public getSignData = () => this.data;
 
   public toDataItem = () => {
-    const map: DataItemMap = {};
-    if (this.requestId) {
-      map[Keys.requestId] = new DataItem(
-        this.requestId,
-        RegistryTypes.UUID.getTag()
-      );
-    }
-
-    map[Keys.data] = this.data;
-
-    return new DataItem(map);
-  };
-
-  public static fromDataItem = (dataItem: DataItem) => {
-    const map = dataItem.getData();
-    const data = map[Keys.data];
-    const requestId = map[Keys.requestId]
-      ? map[Keys.requestId].getData()
-      : undefined;
-
-    return new AvalancheSignRequest({
-      requestId,
-      data,
-    });
-  };
-
-  public static fromCBOR = (_cborPayload: Buffer) => {
-    const dataItem = decodeToDataItem(_cborPayload);
-    return AvalancheSignRequest.fromDataItem(dataItem);
+    return new DataItem(this.data);
   };
 
   public static constructAvalancheRequest(data: Buffer, uuidString?: string) {
