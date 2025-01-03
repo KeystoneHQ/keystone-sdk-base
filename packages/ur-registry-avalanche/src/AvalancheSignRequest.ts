@@ -1,6 +1,7 @@
 import { DataItem, RegistryItem } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 import * as uuid from "uuid";
+import { Buffer } from "buffer";
 
 type signRequestProps = {
   requestId?: Buffer;

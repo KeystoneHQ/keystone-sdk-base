@@ -25,6 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "@keystonehq/bc-ur-registry": "^0.6.4",
+    "buffer": "^6.0.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
