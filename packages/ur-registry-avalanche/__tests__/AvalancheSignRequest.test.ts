@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import { AvalancheSignRequest, AvalancheSignature } from "../src";
-import * as uuid from "uuid";
 
 describe("avalanche-sign-request", () => {
   it("test should generate avalanche-sign-reqeust", () => {

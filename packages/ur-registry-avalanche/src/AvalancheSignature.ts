@@ -5,7 +5,6 @@ import {
   DataItemMap,
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
-import * as uuid from "uuid";
 
 const { RegistryTypes, decodeToDataItem } = extend;
 
