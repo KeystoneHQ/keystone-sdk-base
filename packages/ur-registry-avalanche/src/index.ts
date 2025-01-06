@@ -9,3 +9,4 @@ patchTags(
 );
 
 export { AvalancheSignRequest } from "./AvalancheSignRequest";
+export { AvalancheSignature } from "./AvalancheSignature";

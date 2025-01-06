@@ -64,6 +64,27 @@ export class AvalancheSignRequest extends RegistryItem {
     return new DataItem(map);
   };
 
+  public static fromDataItem = (dataItem: DataItem) => {
+    const map = dataItem.getData();
+    const masterFingerprint = Buffer.alloc(4);
+    const _masterFingerprint = map[Keys.mfp];
+    masterFingerprint.writeUInt32BE(_masterFingerprint, 0);
+    const requestId = map[Keys.requestId]
+      ? map[Keys.requestId].getData()
+      : undefined;
+    const data = map[Keys.signData];
+    const xpub = map[Keys.xpub];
+    const walletIndex = map[Keys.signData];
+
+    return new AvalancheSignRequest({
+      requestId,
+      data,
+      xpub,
+      walletIndex,
+      mfp: masterFingerprint,
+    });
+  };
+
   public static constructAvalancheRequest(
     data: Buffer,
     mfp: string,
@@ -75,7 +96,7 @@ export class AvalancheSignRequest extends RegistryItem {
     return new AvalancheSignRequest({
       data,
       requestId: Buffer.from(uuid.parse(uuidString) as Uint8Array),
-      mfp: Buffer.from(mfp),
+      mfp: Buffer.from(mfp, "hex"),
       xpub,
       walletIndex,
     });
