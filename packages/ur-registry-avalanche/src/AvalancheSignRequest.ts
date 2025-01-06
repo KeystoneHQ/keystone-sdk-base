@@ -6,7 +6,6 @@ import {
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 import * as uuid from "uuid";
-import { Buffer } from "buffer";
 
 const { RegistryTypes } = extend;
 
@@ -56,7 +55,7 @@ export class AvalancheSignRequest extends RegistryItem {
       );
     }
 
-    map[Keys.signData] = this.data;
+    map[Keys.signData] = Buffer.from(this.data);
     map[Keys.mfp] = this.mfp.readUInt32BE(0);
     map[Keys.xpub] = this.xpub;
     map[Keys.walletIndex] = Number(this.walletIndex);
@@ -89,13 +88,14 @@ export class AvalancheSignRequest extends RegistryItem {
     data: Buffer,
     mfp: string,
     xpub: string,
-    walletIndex: number
+    walletIndex: number,
+    uuidString?: string
   ) {
-    const uuidString = uuid.v4();
-
     return new AvalancheSignRequest({
       data,
-      requestId: Buffer.from(uuid.parse(uuidString) as Uint8Array),
+      requestId: uuidString
+        ? Buffer.from(uuid.parse(uuidString) as Uint8Array)
+        : undefined,
       mfp: Buffer.from(mfp, "hex"),
       xpub,
       walletIndex,
