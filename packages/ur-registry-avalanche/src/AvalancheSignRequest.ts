@@ -89,13 +89,20 @@ export class AvalancheSignRequest extends RegistryItem {
     mfp: string,
     xpub: string,
     walletIndex: number,
-    uuidString?: string
+    requestId?: string | Buffer
   ) {
+    let _requestId;
+    if (typeof requestId === "string") {
+      _requestId = Buffer.from(uuid.parse(requestId) as Uint8Array);
+    } else if (requestId instanceof Buffer) {
+      _requestId = requestId;
+    } else {
+      _requestId = Buffer.from(uuid.parse(uuid.v4()));
+    }
+
     return new AvalancheSignRequest({
       data,
-      requestId: uuidString
-        ? Buffer.from(uuid.parse(uuidString) as Uint8Array)
-        : undefined,
+      requestId: _requestId,
       mfp: Buffer.from(mfp, "hex"),
       xpub,
       walletIndex,
