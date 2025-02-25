@@ -4,9 +4,9 @@ import {
   publicToAddress,
   stripHexPrefix,
 } from "@ethereumjs/util";
-import rlp from "rlp";
+import { RLP } from "@ethereumjs/rlp";
 import {
-  Transaction,
+  LegacyTransaction as Transaction,
   FeeMarketEIP1559Transaction,
   TransactionFactory,
   TypedTransaction,
@@ -436,11 +436,11 @@ export class BaseKeyring {
     let messageToSign: Buffer;
     if (tx.type === 0) {
       messageToSign = Buffer.from(
-        rlp.encode((tx as Transaction).getMessageToSign(false))
+        RLP.encode((tx as Transaction).getMessageToSign())
       );
     } else {
-      messageToSign = (tx as FeeMarketEIP1559Transaction).getMessageToSign(
-        false
+      messageToSign = Buffer.from(
+        (tx as FeeMarketEIP1559Transaction).serialize()
       );
     }
     const hdPath = await this._pathFromAddress(address);
@@ -500,7 +500,14 @@ export class BaseKeyring {
       "Scan with your Keystone",
       'After your Keystone has signed this message, click on "Scan Keystone" to receive the signature'
     );
-    return "0x" + Buffer.concat([r, s, v]).toString("hex");
+    return (
+      "0x" +
+      Buffer.concat([
+        Uint8Array.from(r),
+        Uint8Array.from(s),
+        Uint8Array.from(v),
+      ]).toString("hex")
+    );
   }
 
   async signTypedData(withAccount: string, typedData: any): Promise<string> {
@@ -521,7 +528,14 @@ export class BaseKeyring {
       "Scan with your Keystone",
       'After your Keystone has signed this data, click on "Scan Keystone" to receive the signature'
     );
-    return "0x" + Buffer.concat([r, s, v]).toString("hex");
+    return (
+      "0x" +
+      Buffer.concat([
+        Uint8Array.from(r),
+        Uint8Array.from(s),
+        Uint8Array.from(v),
+      ]).toString("hex")
+    );
   }
 
   __addressFromIndex = async (pb: string, i: number): Promise<string> => {
