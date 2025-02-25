@@ -2,12 +2,12 @@ import { BaseKeyring, StoredKeyring } from "@keystonehq/base-eth-keyring";
 import { MetamaskInteractionProvider } from "./MetaMaskInteractionProvider";
 import {
   TransactionFactory,
-  Transaction,
+  LegacyTransaction as Transaction,
   FeeMarketEIP1559Transaction,
 } from "@ethereumjs/tx";
 import { DataType, EthSignRequest } from "@keystonehq/bc-ur-registry-eth";
 import * as uuid from "uuid";
-import rlp from "rlp";
+import { RLP } from "@ethereumjs/rlp";
 
 export class MetaMaskKeyring extends BaseKeyring {
   static type = BaseKeyring.type;
@@ -38,10 +38,12 @@ export class MetaMaskKeyring extends BaseKeyring {
       tx.type === 0 ? DataType.transaction : DataType.typedTransaction;
     let messageToSign;
     if (tx.type === 0) {
-      messageToSign = rlp.encode((tx as Transaction).getMessageToSign(false));
+      messageToSign = Buffer.from(
+        RLP.encode((tx as Transaction).getMessageToSign())
+      );
     } else {
-      messageToSign = (tx as FeeMarketEIP1559Transaction).getMessageToSign(
-        false
+      messageToSign = Buffer.from(
+        (tx as FeeMarketEIP1559Transaction).serialize()
       );
     }
     const hdPath = await this._pathFromAddress(address);
