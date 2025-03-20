@@ -21,6 +21,11 @@ export class MetaMaskKeyring extends BaseKeyring {
     MetaMaskKeyring.instance = this;
   }
 
+  async addAccounts(n = 1): Promise<string[]> {
+    const accounts = await super.addAccounts(n);
+    return accounts.slice(-1 * n);
+  }
+
   getInteraction = (): MetamaskInteractionProvider => {
     return new MetamaskInteractionProvider();
   };
