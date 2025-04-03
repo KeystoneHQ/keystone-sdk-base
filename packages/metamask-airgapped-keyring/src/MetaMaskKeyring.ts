@@ -43,7 +43,7 @@ export class MetaMaskKeyring extends BaseKeyring {
       );
     } else {
       messageToSign = Buffer.from(
-        (tx as FeeMarketEIP1559Transaction).serialize()
+        (tx as FeeMarketEIP1559Transaction).getMessageToSign()
       );
     }
     const hdPath = await this._pathFromAddress(address);
@@ -69,6 +69,7 @@ export class MetaMaskKeyring extends BaseKeyring {
     txJson.s = s;
     txJson.r = r;
     txJson.type = tx.type;
+    debugger
     const transaction = TransactionFactory.fromTxData(txJson, {
       common: tx.common,
     });

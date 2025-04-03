@@ -429,8 +429,8 @@ importers:
   packages/metamask-airgapped-keyring:
     dependencies:
       '@ethereumjs/rlp':
-        specifier: ^4.0.1
-        version: 4.0.1
+        specifier: 5.0.2
+        version: 5.0.2
       '@ethereumjs/tx':
         specifier: 5.1.0
         version: 5.1.0
