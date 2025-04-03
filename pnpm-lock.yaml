@@ -774,6 +774,28 @@ importers:
         specifier: ^4.6.2
         version: 4.9.5
 
+  packages/ur-registry-ergo:
+    dependencies:
+      '@keystonehq/bc-ur-registry':
+        specifier: ^0.6.4
+        version: 0.6.4
+      uuid:
+        specifier: ^8.3.2
+        version: 8.3.2
+    devDependencies:
+      '@babel/preset-typescript':
+        specifier: ^7.15.0
+        version: 7.25.9(@babel/core@7.25.9)
+      '@types/uuid':
+        specifier: ^8.3.1
+        version: 8.3.4
+      tsdx:
+        specifier: ^0.14.1
+        version: 0.14.1(@types/babel__core@7.20.5)(@types/node@22.7.9)(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      typescript:
+        specifier: ^4.6.2
+        version: 4.9.5
+
   packages/ur-registry-eth:
     dependencies:
       '@ethereumjs/util':
@@ -4153,8 +4175,8 @@ packages:
   ethereumjs-abi@0.6.8:
     resolution: {integrity: sha512-Tx0r/iXI6r+lRsdvkFDlut0N08jWMnKRZ6Gkq+Nmw75lZe4e6o3EkSnkaBP5NF6+m5PTGAr9JP43N3LyeoglsA==}
 
-  ethereumjs-abi@https://codeload.github.com/ethereumjs/ethereumjs-abi/tar.gz/ee3994657fa7a427238e6ba92a84d0b529bbcde0:
-    resolution: {tarball: https://codeload.github.com/ethereumjs/ethereumjs-abi/tar.gz/ee3994657fa7a427238e6ba92a84d0b529bbcde0}
+  ethereumjs-abi@git+https://git@github.com:ethereumjs/ethereumjs-abi.git#ee3994657fa7a427238e6ba92a84d0b529bbcde0:
+    resolution: {commit: ee3994657fa7a427238e6ba92a84d0b529bbcde0, repo: git@github.com:ethereumjs/ethereumjs-abi.git, type: git}
     version: 0.6.8
 
   ethereumjs-account@2.0.5:
@@ -12499,7 +12521,7 @@ snapshots:
 
   eth-sig-util@1.4.2:
     dependencies:
-      ethereumjs-abi: https://codeload.github.com/ethereumjs/ethereumjs-abi/tar.gz/ee3994657fa7a427238e6ba92a84d0b529bbcde0
+      ethereumjs-abi: git+https://git@github.com:ethereumjs/ethereumjs-abi.git#ee3994657fa7a427238e6ba92a84d0b529bbcde0
       ethereumjs-util: 5.2.1
 
   ethereum-common@0.0.18: {}
@@ -12541,7 +12563,7 @@ snapshots:
       bn.js: 4.12.0
       ethereumjs-util: 6.2.1
 
-  ethereumjs-abi@https://codeload.github.com/ethereumjs/ethereumjs-abi/tar.gz/ee3994657fa7a427238e6ba92a84d0b529bbcde0:
+  ethereumjs-abi@git+https://git@github.com:ethereumjs/ethereumjs-abi.git#ee3994657fa7a427238e6ba92a84d0b529bbcde0:
     dependencies:
       bn.js: 4.12.0
       ethereumjs-util: 6.2.1
