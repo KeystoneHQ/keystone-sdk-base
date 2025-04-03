@@ -69,7 +69,6 @@ export class MetaMaskKeyring extends BaseKeyring {
     txJson.s = s;
     txJson.r = r;
     txJson.type = tx.type;
-    debugger
     const transaction = TransactionFactory.fromTxData(txJson, {
       common: tx.common,
     });
