@@ -438,7 +438,7 @@ importers:
         specifier: 9.1.0
         version: 9.1.0
       '@keystonehq/base-eth-keyring':
-        specifier: workspace:^
+        specifier: 0.15.1
         version: link:../base-eth-keyring
       '@keystonehq/bc-ur-registry-eth':
         specifier: ^0.19.1
