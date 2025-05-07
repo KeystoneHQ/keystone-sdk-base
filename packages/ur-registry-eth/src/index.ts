@@ -11,5 +11,7 @@ patchTags(
 export { EthSignRequest, DataType } from "./EthSignRequest";
 export { ETHSignature } from "./EthSignature";
 export { ETHNFTItem } from "./ETHNFTItem";
+export { ETHBatchSignRequest } from "./EthBatchSignRequest";
+export { ETHBatchSignature } from "./EthBatchSignature";
 
 export { generateAddressFromXpub, findHDPathFromAddress } from "./utlis";
