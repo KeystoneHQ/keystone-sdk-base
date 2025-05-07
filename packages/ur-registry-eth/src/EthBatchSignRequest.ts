@@ -7,7 +7,7 @@ import {
 import { ExtendedRegistryTypes } from "./RegistryType";
 import { EthSignRequest } from "EthSignRequest";
 
-const { decodeToDataItem, RegistryTypes } = extend;
+const { decodeToDataItem } = extend;
 
 enum Keys {
   requests = 1,
