@@ -9,6 +9,7 @@
     "test": "__tests__"
   },
   "files": [
+    "src",
     "dist"
   ],
   "scripts": {
@@ -26,6 +27,6 @@
     "@babel/preset-typescript": "^7.15.0",
     "@types/uuid": "^9.0.0",
     "tsdx": "^0.14.1",
-    "typescript": "^4.9.4"
+    "typescript": "^5.0.4"
   }
 }
