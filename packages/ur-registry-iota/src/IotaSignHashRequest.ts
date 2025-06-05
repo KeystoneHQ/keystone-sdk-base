@@ -21,7 +21,7 @@ enum Keys {
 
 type SignRequestProps = {
   requestId?: Buffer;
-  messageHash: Buffer;
+  messageHash: string;
   derivationPaths: CryptoKeypath[];
   addresses?: Buffer[];
   origin?: string;
@@ -29,7 +29,7 @@ type SignRequestProps = {
 
 export class IotaSignHashRequest extends RegistryItem {
   private requestId?: Buffer;
-  private messageHash: Buffer;
+  private messageHash: string;
   private derivationPaths: CryptoKeypath[];
   private addresses?: Buffer[];
   private origin?: string;
@@ -114,7 +114,7 @@ export class IotaSignHashRequest extends RegistryItem {
   }
 
   public static constructIotaSignHashRequest(
-    messageHash: Buffer,
+    messageHash: string,
     derivationPaths: string[],
     xfp: string,
     uuidString?: string,
