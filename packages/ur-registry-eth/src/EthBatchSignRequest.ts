@@ -5,9 +5,9 @@ import {
   DataItemMap,
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
-import { EthSignRequest } from "EthSignRequest";
+import { EthSignRequest } from "./EthSignRequest";
 
-const { decodeToDataItem, RegistryTypes } = extend;
+const { decodeToDataItem } = extend;
 
 enum Keys {
   requests = 1,
