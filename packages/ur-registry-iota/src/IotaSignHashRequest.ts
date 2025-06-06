@@ -55,12 +55,14 @@ export class IotaSignHashRequest extends RegistryItem {
     const map: DataItemMap = {};
     map[Keys.messageHash] = this.messageHash;
 
-    const derivationPaths = this.derivationPaths.map((path) => path.toDataItem());
-    derivationPaths.forEach((path) => {
-      path.setTag(path.getTag());
-      map[Keys.derivationPaths] = path;
-    });
-
+    const derivationPaths = this.derivationPaths.map((path) =>
+      {
+        const dataItem = path.toDataItem();
+        dataItem.setTag(path.getRegistryType().getTag());
+        return dataItem;
+      }
+    );
+    map[Keys.derivationPaths] = derivationPaths;
     if (this.requestId) {
       map[Keys.requestId] = new DataItem(
         this.requestId,
