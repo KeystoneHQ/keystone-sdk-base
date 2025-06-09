@@ -21,7 +21,7 @@ enum Keys {
 
 type SignRequestProps = {
   requestId?: Buffer;
-  messageHash: Buffer;
+  messageHash: string;
   derivationPaths: CryptoKeypath[];
   addresses?: Buffer[];
   origin?: string;
@@ -29,7 +29,7 @@ type SignRequestProps = {
 
 export class IotaSignHashRequest extends RegistryItem {
   private requestId?: Buffer;
-  private messageHash: Buffer;
+  private messageHash: string;
   private derivationPaths: CryptoKeypath[];
   private addresses?: Buffer[];
   private origin?: string;
@@ -55,12 +55,14 @@ export class IotaSignHashRequest extends RegistryItem {
     const map: DataItemMap = {};
     map[Keys.messageHash] = this.messageHash;
 
-    const derivationPaths = this.derivationPaths.map((path) => path.toDataItem());
-    derivationPaths.forEach((path) => {
-      path.setTag(path.getTag());
-      map[Keys.derivationPaths] = path;
-    });
-
+    const derivationPaths = this.derivationPaths.map((path) =>
+      {
+        const dataItem = path.toDataItem();
+        dataItem.setTag(path.getRegistryType().getTag());
+        return dataItem;
+      }
+    );
+    map[Keys.derivationPaths] = derivationPaths;
     if (this.requestId) {
       map[Keys.requestId] = new DataItem(
         this.requestId,
@@ -114,7 +116,7 @@ export class IotaSignHashRequest extends RegistryItem {
   }
 
   public static constructIotaSignHashRequest(
-    messageHash: Buffer,
+    messageHash: string,
     derivationPaths: string[],
     xfp: string,
     uuidString?: string,
