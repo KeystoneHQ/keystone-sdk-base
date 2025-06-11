@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/base-eth-keyring",
-  "version": "0.15.1",
+  "version": "0.16.0-alpha.0",
   "description": "base eth keyring",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
@@ -22,8 +22,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "start": "tsdx watch",
-    "build": "tsdx build"
+    "build": "pnpm ts-bridge --project tsconfig.build.json --verbose --clean"
   },
   "dependencies": {
     "@ethereumjs/rlp": "^4.0.1",
