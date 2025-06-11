@@ -97,7 +97,7 @@ export class AvalancheSignRequest extends RegistryItem {
     } else if (requestId instanceof Buffer) {
       _requestId = requestId;
     } else {
-      _requestId = Buffer.from(uuid.parse(uuid.v4()));
+      _requestId = Buffer.from(uuid.parse(uuid.v4()) as Uint8Array);
     }
 
     return new AvalancheSignRequest({

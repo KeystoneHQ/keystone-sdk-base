@@ -1,13 +1,6 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": ["src"],
+  "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "rootDir": "./",
-    "baseUrl": "./",
-    "paths": {
-      "*": ["src/*", "node_modules/*"]
-    }
+    "baseUrl": "./"
   }
 }

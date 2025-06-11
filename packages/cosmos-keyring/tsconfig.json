@@ -1,11 +1,6 @@
 {
-    "extends": "../../tsconfig.json",
-    "include": ["src"],
-    "compilerOptions": {
-      "rootDir": "./",
-      "baseUrl": "./",
-      "paths": {
-        "*": ["src/*", "node_modules/*"]
-      }
-    },
+  "extends": "../../tsconfig.packages.json",
+  "compilerOptions": {
+    "baseUrl": "./"
   }
+}
