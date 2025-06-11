@@ -1,1 +1,1 @@
-export { MetaMaskKeyring } from "./MetaMaskKeyring";
+export { KeystoneUSBKeyring } from "./KeystoneUSBKeyring";

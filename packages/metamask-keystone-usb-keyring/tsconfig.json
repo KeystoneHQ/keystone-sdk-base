@@ -2,5 +2,8 @@
   "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
     "baseUrl": "./"
+  },
+  "paths": {
+    "@keystonehq/base-eth-keyring": ["../base-eth-keyring/src"]
   }
 }

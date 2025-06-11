@@ -293,14 +293,11 @@ importers:
         specifier: 5.4.0
         version: 5.4.0
       '@ethereumjs/util':
-        specifier: 9.1.0
-        version: 9.1.0
+        specifier: 8.1.0
+        version: 8.1.0
       '@keystonehq/base-eth-keyring':
         specifier: 0.15.1
         version: 0.15.1
-      '@keystonehq/bc-ur-registry-eth':
-        specifier: ^0.19.1
-        version: 0.19.1
       '@keystonehq/hw-app-eth':
         specifier: 0.5.0-alpha.2
         version: 0.5.0-alpha.2
