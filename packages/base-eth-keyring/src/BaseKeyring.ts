@@ -464,8 +464,7 @@ export class BaseKeyring {
 
     return TransactionFactory.fromTxData(
       {
-        ...tx.toJSON(),
-        type: tx.type,
+        ...tx,
         r,
         s,
         v,

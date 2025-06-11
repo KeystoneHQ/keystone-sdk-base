@@ -30,8 +30,7 @@
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
     "@types/uuid": "^9.0.1",
-    "tsdx": "^0.14.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.2.2"
   },
   "gitHead": "83d8e223d29e5cc71dccc963388d65a87c894636"
 }

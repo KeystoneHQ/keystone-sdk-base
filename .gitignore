@@ -5,6 +5,8 @@ dist
 .yalc
 yalc.lock
 
+packages/**/tsconfig.build.tsbuildinfo
+
 packages/near-keyring/config.ts
 packages/aptos-keyring/config.ts
 packages/arweave-keyring/config.ts
