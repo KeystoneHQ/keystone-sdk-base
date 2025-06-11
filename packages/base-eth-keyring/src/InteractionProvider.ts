@@ -5,6 +5,16 @@ import {
   CryptoAccount,
 } from "@keystonehq/bc-ur-registry-eth";
 
+export type EthAccount = {
+  xpub: string;
+  path: string;
+}
+
+export type EthAddress = {
+  address: string;
+  path: string;
+}
+
 export interface InteractionProvider {
   readCryptoHDKeyOrCryptoAccount: () => Promise<CryptoHDKey | CryptoAccount>;
   requestSignature: (
@@ -12,4 +22,5 @@ export interface InteractionProvider {
     requestTitle?: string,
     requestDescription?: string
   ) => Promise<ETHSignature>;
+  requestAccounts: () => Promise<EthAccount[]>;
 }

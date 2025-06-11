@@ -3,7 +3,9 @@
     "publishConfig": {
         "access": "public"
     },
-    "packageManager": "pnpm@8.15.5",
+    "workspaces": [
+        "packages/**"
+    ],
     "scripts": {
         "clean": "./scripts/clean.sh",
         "bootstrap": "pnpm clean && pnpm install",

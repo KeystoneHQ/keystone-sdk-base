@@ -1,0 +1,1 @@
+export { MetaMaskKeyring } from "./MetaMaskKeyring";
