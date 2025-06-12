@@ -13,8 +13,7 @@
   ],
   "scripts": {
     "clean": "rm -rf ./dist",
-    "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "pnpm ts-bridge --project tsconfig.build.json --verbose --clean",
     "test": "jest --passWithNoTests"
   },
   "publishConfig": {

@@ -1,7 +1,7 @@
 {
-  "name": "@keystonehq/base-eth-keyring",
-  "version": "0.16.0-alpha.0",
-  "description": "base eth keyring",
+  "name": "@keystonehq/metamask-keystone-usb-keyring",
+  "version": "0.1.0",
+  "description": "keystone usb eth keyring for metamask",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
   "license": "MIT",
@@ -26,16 +26,17 @@
   },
   "dependencies": {
     "@ethereumjs/rlp": "^4.0.1",
-    "@ethereumjs/tx": "^5.4.0",
-    "@ethereumjs/util": "^8.0.0",
-    "@keystonehq/bc-ur-registry-eth": "^0.19.1",
-    "hdkey": "^2.0.1",
-    "rlp": "^3.0.0",
+    "@ethereumjs/tx": "5.4.0",
+    "@ethereumjs/util": "8.1.0",
+    "@keystonehq/base-eth-keyring": "0.15.1",
+    "@keystonehq/hw-app-eth": "0.5.0-alpha.2",
+    "@keystonehq/hw-transport-webusb": "^0.5.1",
+    "@metamask/obs-store": "^9.0.0",
+    "rlp": "^2.2.6",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
-    "@types/uuid": "^8.3.1",
     "typescript": "^5.2.2"
   },
   "bugs": {

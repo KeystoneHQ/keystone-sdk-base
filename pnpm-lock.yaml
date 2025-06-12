@@ -284,6 +284,43 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
 
+  packages/metamask-keystone-usb-keyring:
+    dependencies:
+      '@ethereumjs/rlp':
+        specifier: ^4.0.1
+        version: 4.0.1
+      '@ethereumjs/tx':
+        specifier: 5.4.0
+        version: 5.4.0
+      '@ethereumjs/util':
+        specifier: 8.1.0
+        version: 8.1.0
+      '@keystonehq/base-eth-keyring':
+        specifier: 0.15.1
+        version: 0.15.1
+      '@keystonehq/hw-app-eth':
+        specifier: 0.5.0-alpha.2
+        version: 0.5.0-alpha.2
+      '@keystonehq/hw-transport-webusb':
+        specifier: ^0.5.1
+        version: 0.5.1
+      '@metamask/obs-store':
+        specifier: ^9.0.0
+        version: 9.0.0
+      rlp:
+        specifier: ^2.2.6
+        version: 2.2.7
+      uuid:
+        specifier: ^8.3.2
+        version: 8.3.2
+    devDependencies:
+      '@babel/preset-typescript':
+        specifier: ^7.15.0
+        version: 7.25.9(@babel/core@7.25.9)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
   packages/near-keyring:
     dependencies:
       '@keystonehq/bc-ur-registry':
@@ -1355,6 +1392,9 @@ packages:
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
+  '@ethereumjs/common@2.6.5':
+    resolution: {integrity: sha512-lRyVQOeCDaIVtgfbowla32pzeDv2Obr8oR8Put5RdUBNRGr1VGPGQNGP6elWIpgK3YdpzqTOh4GyUGOureVeeA==}
+
   '@ethereumjs/common@3.2.0':
     resolution: {integrity: sha512-pksvzI0VyLgmuEF2FA/JR/4/y6hcPq8OUail3/AvycBaW1d5VSauOZzqGvJ3RTmR4MU35lWE8KseKOsEhrFRBA==}
 
@@ -1370,6 +1410,9 @@ packages:
     resolution: {integrity: sha512-DziebCdg4JpGlEqEdGgXmjqcFoJi+JGulUXwEjsZGAscAQ7MyD/7LE/GVCP29vEQxKc7AAwjT3A2ywHp2xfoCA==}
     engines: {node: '>=18'}
     hasBin: true
+
+  '@ethereumjs/tx@3.5.2':
+    resolution: {integrity: sha512-gQDNJWKrSDGu2w7w0PzVXVBNMzb7wwdDOmOqczmhNjqFxFuIbhVJDwiGEnxFNC2/b8ifcZzY7MLcluizohRzNw==}
 
   '@ethereumjs/tx@4.2.0':
     resolution: {integrity: sha512-1nc6VO4jtFd172BbSnTnDQVr9IYBFl1y4xPzZdtkrkKIncBCkdbgfdRV+MiTkJYAtTxvV12GRZLqBFT1PNK6Yw==}
@@ -1525,6 +1568,9 @@ packages:
   '@keystonehq/bc-ur-registry-eth@0.19.1':
     resolution: {integrity: sha512-5+skb1zsmMEIGZCbk+4KssZTpLMTriaFlt+Lc6pZLmxexXrX8a/9aHoho3asOqf7GeXXqkB9YKs8i8TN/hbaHA==}
 
+  '@keystonehq/bc-ur-registry-eth@0.21.0':
+    resolution: {integrity: sha512-zINEpmaH+oPwqY6E0qKUvm13AhdOb+BIJ9OVWTGUDhUNltFH4dehicJv6bCg8gTSnBGc9ghWzpGRw5+PflGtMg==}
+
   '@keystonehq/bc-ur-registry-evm@0.5.3':
     resolution: {integrity: sha512-K3tmY1Y2SDImtSnCPFoASMBNernbN/ZRIIkp8iKegDeyHtaPbzfNIdaEL/wUHVoieTgTOUTwyWZspBvvbgrivw==}
 
@@ -1542,6 +1588,18 @@ packages:
 
   '@keystonehq/bc-ur-registry@0.7.0':
     resolution: {integrity: sha512-E6NUd6Y+YYM+IcYGOEXfO9+MU1s63Qjm8brtHftvNhxbdXhGtTYIsa4FQmqZ6q34q91bMkMqUQFsQYPmIxcxfg==}
+
+  '@keystonehq/hw-app-eth@0.5.0-alpha.2':
+    resolution: {integrity: sha512-JfsoQajC2AbxEWYsCnVkOV3CnDsxvNzm1wRYZPVj1ZySIOWDaAnCT+H4mGmzpC4+oVflBzZRMF78vwF+lEuqwA==}
+
+  '@keystonehq/hw-transport-error@0.0.2':
+    resolution: {integrity: sha512-j6rOJU277Cmq9oBiFjtVHJhUZ/gELGYGZMUXBlAom1WyK8pNrD3+I8kCVGp5Ss5oB+Zqo7Az5xCx/z+0i+Y40A==}
+
+  '@keystonehq/hw-transport-usb@0.1.1':
+    resolution: {integrity: sha512-8B5OxLiwI/HHZSlQKtDWQ0AVXOxfYhI37So1/uBwLVSvpKqGC6FN6gG7vIkmZjMs7w5A1ARac5ejRuLzoCQumg==}
+
+  '@keystonehq/hw-transport-webusb@0.5.1':
+    resolution: {integrity: sha512-0Dosdbp3IJw5z6Qr8jUusEKl2E2dNCuLxG+hRGfIkDLwMSXUdc/T4QBODlcJZxdfS0rGN+E1eNv46qxFwy2XAA==}
 
   '@keystonehq/sdk@0.19.2':
     resolution: {integrity: sha512-ilA7xAhPKvpHWlxjzv3hjMehD6IKYda4C1TeG2/DhFgX9VSffzv77Eebf8kVwzPLdYV4LjX1KQ2ZDFoN1MsSFQ==}
@@ -4549,9 +4607,6 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-neverBuiltDependencies:
-  - node-hid
-
 snapshots:
 
   '@ampproject/remapping@2.3.0':
@@ -5374,6 +5429,11 @@ snapshots:
 
   '@eslint/js@8.57.1': {}
 
+  '@ethereumjs/common@2.6.5':
+    dependencies:
+      crc-32: 1.2.2
+      ethereumjs-util: 7.1.5
+
   '@ethereumjs/common@3.2.0':
     dependencies:
       '@ethereumjs/util': 8.1.0
@@ -5386,6 +5446,11 @@ snapshots:
   '@ethereumjs/rlp@4.0.1': {}
 
   '@ethereumjs/rlp@5.0.2': {}
+
+  '@ethereumjs/tx@3.5.2':
+    dependencies:
+      '@ethereumjs/common': 2.6.5
+      ethereumjs-util: 7.1.5
 
   '@ethereumjs/tx@4.2.0':
     dependencies:
@@ -5680,6 +5745,13 @@ snapshots:
       hdkey: 2.1.0
       uuid: 8.3.2
 
+  '@keystonehq/bc-ur-registry-eth@0.21.0':
+    dependencies:
+      '@ethereumjs/util': 9.1.0
+      '@keystonehq/bc-ur-registry': 0.7.0
+      hdkey: 2.1.0
+      uuid: 8.3.2
+
   '@keystonehq/bc-ur-registry-evm@0.5.3':
     dependencies:
       '@keystonehq/bc-ur-registry': 0.6.4
@@ -5715,6 +5787,33 @@ snapshots:
       '@ngraveio/bc-ur': 1.1.13
       bs58check: 2.1.2
       tslib: 2.8.0
+
+  '@keystonehq/hw-app-eth@0.5.0-alpha.2':
+    dependencies:
+      '@ethereumjs/tx': 3.5.2
+      '@ethereumjs/util': 9.1.0
+      '@keystonehq/bc-ur-registry': 0.7.0
+      '@keystonehq/bc-ur-registry-eth': 0.21.0
+      '@keystonehq/hw-transport-error': 0.0.2
+      '@keystonehq/hw-transport-usb': 0.1.1
+      '@ngraveio/bc-ur': 1.1.13
+      buffer: 6.0.3
+      elliptic: 6.5.7
+      rlp: 2.2.7
+      uuid: 8.3.2
+
+  '@keystonehq/hw-transport-error@0.0.2': {}
+
+  '@keystonehq/hw-transport-usb@0.1.1':
+    dependencies:
+      '@keystonehq/hw-transport-error': 0.0.2
+      buffer: 6.0.3
+
+  '@keystonehq/hw-transport-webusb@0.5.1':
+    dependencies:
+      '@keystonehq/hw-transport-error': 0.0.2
+      '@keystonehq/hw-transport-usb': 0.1.1
+      buffer: 6.0.3
 
   '@keystonehq/sdk@0.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
