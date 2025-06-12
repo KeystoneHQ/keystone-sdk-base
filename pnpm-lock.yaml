@@ -304,9 +304,6 @@ importers:
       '@keystonehq/hw-transport-webusb':
         specifier: ^0.5.1
         version: 0.5.1
-      '@metamask/obs-store':
-        specifier: ^9.0.0
-        version: 9.0.0
       rlp:
         specifier: ^2.2.6
         version: 2.2.7
@@ -1595,8 +1592,8 @@ packages:
   '@keystonehq/hw-transport-error@0.0.2':
     resolution: {integrity: sha512-j6rOJU277Cmq9oBiFjtVHJhUZ/gELGYGZMUXBlAom1WyK8pNrD3+I8kCVGp5Ss5oB+Zqo7Az5xCx/z+0i+Y40A==}
 
-  '@keystonehq/hw-transport-usb@0.1.1':
-    resolution: {integrity: sha512-8B5OxLiwI/HHZSlQKtDWQ0AVXOxfYhI37So1/uBwLVSvpKqGC6FN6gG7vIkmZjMs7w5A1ARac5ejRuLzoCQumg==}
+  '@keystonehq/hw-transport-usb@0.1.2':
+    resolution: {integrity: sha512-aAw/BKRAebVUqHECHSudCJiobdfCtz3ZRJrZAk7miVqyAbKMeJ4csko6L6WQ72GFqSeH44ut/iWfOCCkyJuzMg==}
 
   '@keystonehq/hw-transport-webusb@0.5.1':
     resolution: {integrity: sha512-0Dosdbp3IJw5z6Qr8jUusEKl2E2dNCuLxG+hRGfIkDLwMSXUdc/T4QBODlcJZxdfS0rGN+E1eNv46qxFwy2XAA==}
@@ -1796,6 +1793,9 @@ packages:
 
   '@types/uuid@9.0.8':
     resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
+
+  '@types/w3c-web-usb@1.0.10':
+    resolution: {integrity: sha512-CHgUI5kTc/QLMP8hODUHhge0D4vx+9UiAwIGiT0sTy/B2XpdX1U5rJt6JSISgr6ikRT7vxV9EVAFeYZqUnl1gQ==}
 
   '@types/ws@7.4.7':
     resolution: {integrity: sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==}
@@ -5795,7 +5795,7 @@ snapshots:
       '@keystonehq/bc-ur-registry': 0.7.0
       '@keystonehq/bc-ur-registry-eth': 0.21.0
       '@keystonehq/hw-transport-error': 0.0.2
-      '@keystonehq/hw-transport-usb': 0.1.1
+      '@keystonehq/hw-transport-usb': 0.1.2
       '@ngraveio/bc-ur': 1.1.13
       buffer: 6.0.3
       elliptic: 6.5.7
@@ -5804,15 +5804,16 @@ snapshots:
 
   '@keystonehq/hw-transport-error@0.0.2': {}
 
-  '@keystonehq/hw-transport-usb@0.1.1':
+  '@keystonehq/hw-transport-usb@0.1.2':
     dependencies:
       '@keystonehq/hw-transport-error': 0.0.2
+      '@types/w3c-web-usb': 1.0.10
       buffer: 6.0.3
 
   '@keystonehq/hw-transport-webusb@0.5.1':
     dependencies:
       '@keystonehq/hw-transport-error': 0.0.2
-      '@keystonehq/hw-transport-usb': 0.1.1
+      '@keystonehq/hw-transport-usb': 0.1.2
       buffer: 6.0.3
 
   '@keystonehq/sdk@0.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
@@ -6055,6 +6056,8 @@ snapshots:
   '@types/uuid@8.3.4': {}
 
   '@types/uuid@9.0.8': {}
+
+  '@types/w3c-web-usb@1.0.10': {}
 
   '@types/ws@7.4.7':
     dependencies:

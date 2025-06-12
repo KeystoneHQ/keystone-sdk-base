@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/base-eth-keyring",
-  "version": "0.16.0-alpha.0",
+  "version": "0.15.1",
   "description": "base eth keyring",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
