@@ -295,21 +295,28 @@ importers:
       '@ethereumjs/util':
         specifier: 8.1.0
         version: 8.1.0
-      '@keystonehq/base-eth-keyring':
-        specifier: 0.15.1
-        version: 0.15.1
       '@keystonehq/hw-app-eth':
-        specifier: 0.5.0-alpha.2
-        version: 0.5.0-alpha.2
-      '@keystonehq/hw-transport-webusb':
-        specifier: ^0.5.1
-        version: 0.5.1
-      rlp:
-        specifier: ^2.2.6
-        version: 2.2.7
-      uuid:
-        specifier: ^8.3.2
-        version: 8.3.2
+        specifier: 0.5.0-alpha.3
+        version: 0.5.0-alpha.3
+      '@keystonehq/hw-transport-usb':
+        specifier: 0.1.2
+        version: 0.1.2
+    devDependencies:
+      '@babel/preset-typescript':
+        specifier: ^7.15.0
+        version: 7.25.9(@babel/core@7.25.9)
+      '@keystonehq/hw-transport-nodeusb':
+        specifier: 0.1.1
+        version: 0.1.1
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  packages/metamask-keystone-webusb-bridge:
+    dependencies:
+      '@keystonehq/metamask-keystone-usb-keyring':
+        specifier: workspace:*
+        version: 'link:'
     devDependencies:
       '@babel/preset-typescript':
         specifier: ^7.15.0
@@ -1586,17 +1593,17 @@ packages:
   '@keystonehq/bc-ur-registry@0.7.0':
     resolution: {integrity: sha512-E6NUd6Y+YYM+IcYGOEXfO9+MU1s63Qjm8brtHftvNhxbdXhGtTYIsa4FQmqZ6q34q91bMkMqUQFsQYPmIxcxfg==}
 
-  '@keystonehq/hw-app-eth@0.5.0-alpha.2':
-    resolution: {integrity: sha512-JfsoQajC2AbxEWYsCnVkOV3CnDsxvNzm1wRYZPVj1ZySIOWDaAnCT+H4mGmzpC4+oVflBzZRMF78vwF+lEuqwA==}
+  '@keystonehq/hw-app-eth@0.5.0-alpha.3':
+    resolution: {integrity: sha512-rYgxiyhgymP1GOmWK8Lv+uF8kaqPm6s/W/cgfVoSN2DQNNY7UaBUroIZlWNDK3nypVIPkT5hzwUGpJksAwiDoQ==}
 
   '@keystonehq/hw-transport-error@0.0.2':
     resolution: {integrity: sha512-j6rOJU277Cmq9oBiFjtVHJhUZ/gELGYGZMUXBlAom1WyK8pNrD3+I8kCVGp5Ss5oB+Zqo7Az5xCx/z+0i+Y40A==}
 
+  '@keystonehq/hw-transport-nodeusb@0.1.1':
+    resolution: {integrity: sha512-frT2UiagwlQQJvTeBTscDPQVjxAzxxxFJW9Eynkh9FSlNNThnppV/uyXV/0Fu6Cbz6MT2v5UVbuBE8y24wppRQ==}
+
   '@keystonehq/hw-transport-usb@0.1.2':
     resolution: {integrity: sha512-aAw/BKRAebVUqHECHSudCJiobdfCtz3ZRJrZAk7miVqyAbKMeJ4csko6L6WQ72GFqSeH44ut/iWfOCCkyJuzMg==}
-
-  '@keystonehq/hw-transport-webusb@0.5.1':
-    resolution: {integrity: sha512-0Dosdbp3IJw5z6Qr8jUusEKl2E2dNCuLxG+hRGfIkDLwMSXUdc/T4QBODlcJZxdfS0rGN+E1eNv46qxFwy2XAA==}
 
   '@keystonehq/sdk@0.19.2':
     resolution: {integrity: sha512-ilA7xAhPKvpHWlxjzv3hjMehD6IKYda4C1TeG2/DhFgX9VSffzv77Eebf8kVwzPLdYV4LjX1KQ2ZDFoN1MsSFQ==}
@@ -3575,6 +3582,10 @@ packages:
   node-addon-api@5.1.0:
     resolution: {integrity: sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==}
 
+  node-addon-api@8.3.1:
+    resolution: {integrity: sha512-lytcDEdxKjGJPTLEfW4mYMigRezMlyJY8W4wxJK8zE533Jlb8L8dRuObJFWg2P+AuOIxoCgKF+2Oq4d4Zd0OUA==}
+    engines: {node: ^18 || ^20 || >= 21}
+
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
     engines: {node: 4.x || >=6.0.0}
@@ -4399,6 +4410,10 @@ packages:
 
   url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
+
+  usb@2.15.0:
+    resolution: {integrity: sha512-BA9r7PFxyYp99wps1N70lIqdPb2Utcl2KkWohDtWUmhDBeM5hDH1Zl/L/CZvWxd5W3RUCNm1g+b+DEKZ6cHzqg==}
+    engines: {node: '>=12.22.0 <13.0 || >=14.17.0'}
 
   utf-8-validate@5.0.10:
     resolution: {integrity: sha512-Z6czzLq4u8fPOyx7TU6X3dvUZVvoJmxSQ+IcrlmagKhilxlhZgxPK6C5Jqbkw1IDUmFTM+cz9QDnnLTwDz/2gQ==}
@@ -5788,7 +5803,7 @@ snapshots:
       bs58check: 2.1.2
       tslib: 2.8.0
 
-  '@keystonehq/hw-app-eth@0.5.0-alpha.2':
+  '@keystonehq/hw-app-eth@0.5.0-alpha.3':
     dependencies:
       '@ethereumjs/tx': 3.5.2
       '@ethereumjs/util': 9.1.0
@@ -5804,16 +5819,17 @@ snapshots:
 
   '@keystonehq/hw-transport-error@0.0.2': {}
 
+  '@keystonehq/hw-transport-nodeusb@0.1.1':
+    dependencies:
+      '@keystonehq/hw-transport-error': 0.0.2
+      '@keystonehq/hw-transport-usb': 0.1.2
+      buffer: 6.0.3
+      usb: 2.15.0
+
   '@keystonehq/hw-transport-usb@0.1.2':
     dependencies:
       '@keystonehq/hw-transport-error': 0.0.2
       '@types/w3c-web-usb': 1.0.10
-      buffer: 6.0.3
-
-  '@keystonehq/hw-transport-webusb@0.5.1':
-    dependencies:
-      '@keystonehq/hw-transport-error': 0.0.2
-      '@keystonehq/hw-transport-usb': 0.1.2
       buffer: 6.0.3
 
   '@keystonehq/sdk@0.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
@@ -8307,6 +8323,8 @@ snapshots:
 
   node-addon-api@5.1.0: {}
 
+  node-addon-api@8.3.1: {}
+
   node-fetch@2.7.0:
     dependencies:
       whatwg-url: 5.0.0
@@ -9086,6 +9104,12 @@ snapshots:
     dependencies:
       querystringify: 2.2.0
       requires-port: 1.0.0
+
+  usb@2.15.0:
+    dependencies:
+      '@types/w3c-web-usb': 1.0.10
+      node-addon-api: 8.3.1
+      node-gyp-build: 4.8.2
 
   utf-8-validate@5.0.10:
     dependencies:

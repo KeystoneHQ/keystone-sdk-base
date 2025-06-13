@@ -25,16 +25,11 @@
     "build": "pnpm ts-bridge --project tsconfig.build.json --verbose --clean"
   },
   "dependencies": {
-    "@ethereumjs/rlp": "^4.0.1",
-    "@ethereumjs/tx": "5.4.0",
-    "@ethereumjs/util": "8.1.0",
-    "@keystonehq/hw-app-eth": "0.5.0-alpha.3",
-    "@keystonehq/hw-transport-usb": "0.1.2"
+    "@keystonehq/metamask-keystone-usb-keyring": "workspace:*"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
-    "typescript": "^5.2.2",
-    "@keystonehq/hw-transport-nodeusb": "0.1.1"
+    "typescript": "^5.2.2"
   },
   "bugs": {
     "url": "https://github.com/KeystoneHQ/keystone-airgaped-base/issues"
