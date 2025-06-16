@@ -111,7 +111,8 @@ export class KeystoneUSBKeyring {
         path: key.path.replace("m/", "").replace("M/", ""),
       };
     });
-    this.hd_account = keys.find((key) => key.path === "44'/60'/0'")?.xpub || "";
+    const foundKey = keys.find((key) => key.path === "44'/60'/0'");
+    this.hd_account = foundKey ? foundKey.xpub : "";
     const ledger_live_keys = keys.filter((key) =>
       key.path !== "44'/60'/0'"
     );
