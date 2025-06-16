@@ -18,19 +18,15 @@ class KeystoneNodeUSBBridge extends KeystoneUSBBridge {
     KeystoneNodeUSBBridge.transport = await TransportNodeUSB.connect();
     return KeystoneNodeUSBBridge.transport;
   }
-  static async create(): Promise<KeystoneNodeUSBBridge> {
-    const bridge = new KeystoneNodeUSBBridge();
-    await bridge.init();
-    return bridge;
-  }
 }
 
 describe("KeystoneUSBKeyring test", () => {
   it("initial with node usb", async () => {
     try {
       TransportNodeUSB.requestPermission();
-      const bridge = await KeystoneNodeUSBBridge.create();
+      const bridge = new KeystoneNodeUSBBridge();
       const keyring = new KeystoneUSBKeyring(bridge);
+      await keyring.init();
       keyring.setHDPath(KEYSTONE_HD_PATH.LEDGER_LEGACY);
 
       console.log("keyring", await keyring.getFirstPage());

@@ -87,6 +87,10 @@ export class KeystoneUSBKeyring {
     this.bridge = bridge;
   }
 
+  async init() {
+    await this.bridge.init();
+  }
+
   setHDPath(hdPath: string) {
     this.hdPath = hdPath;
   }
