@@ -318,8 +318,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@keystonehq/metamask-keystone-usb-keyring':
-        specifier: ^0.1.0-alpha.4
-        version: 0.1.0-alpha.4
+        specifier: ^0.1.0-alpha.5
+        version: 0.1.0-alpha.5
     devDependencies:
       '@babel/preset-typescript':
         specifier: ^7.15.0
@@ -1611,8 +1611,8 @@ packages:
   '@keystonehq/hw-transport-webusb@0.5.1':
     resolution: {integrity: sha512-0Dosdbp3IJw5z6Qr8jUusEKl2E2dNCuLxG+hRGfIkDLwMSXUdc/T4QBODlcJZxdfS0rGN+E1eNv46qxFwy2XAA==}
 
-  '@keystonehq/metamask-keystone-usb-keyring@0.1.0-alpha.4':
-    resolution: {integrity: sha512-1Ri7olOKvt0TabwDhv69cJo5gBGV8AsB69BrYNk+lYHPeLHc/z12xv5+lak9i5XhyY9IIn9UmZevTMKQkmrkGg==}
+  '@keystonehq/metamask-keystone-usb-keyring@0.1.0-alpha.5':
+    resolution: {integrity: sha512-p6wbo+StXS3GhVshVG5QVeuuvj/Epcm1f+SpIZ6rW+DlpGIDzdQSze39PagjVh/jOyl8yunFr5Sk2VdMi/MPWQ==}
 
   '@keystonehq/sdk@0.19.2':
     resolution: {integrity: sha512-ilA7xAhPKvpHWlxjzv3hjMehD6IKYda4C1TeG2/DhFgX9VSffzv77Eebf8kVwzPLdYV4LjX1KQ2ZDFoN1MsSFQ==}
@@ -5847,7 +5847,7 @@ snapshots:
       '@keystonehq/hw-transport-usb': 0.1.2
       buffer: 6.0.3
 
-  '@keystonehq/metamask-keystone-usb-keyring@0.1.0-alpha.4':
+  '@keystonehq/metamask-keystone-usb-keyring@0.1.0-alpha.5':
     dependencies:
       '@ethereumjs/rlp': 4.0.1
       '@ethereumjs/tx': 5.4.0
