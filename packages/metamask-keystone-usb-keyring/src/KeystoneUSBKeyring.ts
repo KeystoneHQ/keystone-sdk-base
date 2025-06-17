@@ -67,7 +67,13 @@ export class KeystoneUSBKeyring {
 
   private unlockedAccount: number;
 
-  constructor(bridge: KeystoneUSBBridge, opts?: StoredKeyring) {
+  constructor({
+    bridge,
+    opts,
+  }: {
+    bridge: KeystoneUSBBridge;
+    opts?: StoredKeyring;
+  }) {
     //common props
     this.page = 0;
     this.perPage = 5;
@@ -113,9 +119,7 @@ export class KeystoneUSBKeyring {
     });
     const foundKey = keys.find((key) => key.path === "44'/60'/0'");
     this.hd_account = foundKey ? foundKey.xpub : "";
-    const ledger_live_keys = keys.filter((key) =>
-      key.path !== "44'/60'/0'"
-    );
+    const ledger_live_keys = keys.filter((key) => key.path !== "44'/60'/0'");
     this.ledger_live_accounts = ledger_live_keys.reduce((acc, key) => {
       acc[key.address] = key.path;
       return acc;

@@ -3,6 +3,7 @@
     "composite": true,
     "esModuleInterop": true,
     "lib": ["ES2020", "DOM"],
+    "target": "es2020",
     "module": "Node16",
     "moduleResolution": "Node16"
   },
