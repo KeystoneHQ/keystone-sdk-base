@@ -11,7 +11,7 @@ import {
   TransactionFactory,
   TypedTransaction,
 } from "@ethereumjs/tx";
-import { KeystoneUSBBridge } from "./KeystoneUSBBridge";
+import { KeystoneBridge } from "./KeystoneBridge";
 
 const keyringType = "Keystone";
 const pathBase = "m";
@@ -63,7 +63,7 @@ export class KeystoneUSBKeyring {
   //ledger live
   protected ledger_live_accounts: Record<string, string>;
 
-  private bridge: KeystoneUSBBridge;
+  private bridge: KeystoneBridge;
 
   private unlockedAccount: number;
 
@@ -71,7 +71,7 @@ export class KeystoneUSBKeyring {
     bridge,
     opts,
   }: {
-    bridge: KeystoneUSBBridge;
+    bridge: KeystoneBridge;
     opts?: StoredKeyring;
   }) {
     //common props
