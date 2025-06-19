@@ -315,11 +315,11 @@ importers:
   packages/metamask-keystone-webusb-bridge:
     dependencies:
       '@keystonehq/hw-transport-webusb':
-        specifier: 0.5.1
-        version: 0.5.1
+        specifier: ^0.5.2
+        version: 0.5.2
       '@keystonehq/metamask-keystone-usb-keyring':
-        specifier: ^0.1.0-alpha.5
-        version: 0.1.0-alpha.5
+        specifier: ^0.1.0-alpha.6
+        version: 0.1.0-alpha.6
     devDependencies:
       '@babel/preset-typescript':
         specifier: ^7.15.0
@@ -1608,11 +1608,14 @@ packages:
   '@keystonehq/hw-transport-usb@0.1.2':
     resolution: {integrity: sha512-aAw/BKRAebVUqHECHSudCJiobdfCtz3ZRJrZAk7miVqyAbKMeJ4csko6L6WQ72GFqSeH44ut/iWfOCCkyJuzMg==}
 
-  '@keystonehq/hw-transport-webusb@0.5.1':
-    resolution: {integrity: sha512-0Dosdbp3IJw5z6Qr8jUusEKl2E2dNCuLxG+hRGfIkDLwMSXUdc/T4QBODlcJZxdfS0rGN+E1eNv46qxFwy2XAA==}
+  '@keystonehq/hw-transport-usb@0.1.3':
+    resolution: {integrity: sha512-jB1WHb2b+OVxLqoQgtEeWblI/noTimBTXaLrm3/azCftK4Pk4dOhH8cY8zoyqMfkkApRTUhtCNiYZLU2fxCMPg==}
 
-  '@keystonehq/metamask-keystone-usb-keyring@0.1.0-alpha.5':
-    resolution: {integrity: sha512-p6wbo+StXS3GhVshVG5QVeuuvj/Epcm1f+SpIZ6rW+DlpGIDzdQSze39PagjVh/jOyl8yunFr5Sk2VdMi/MPWQ==}
+  '@keystonehq/hw-transport-webusb@0.5.2':
+    resolution: {integrity: sha512-EM31TMFMtrbwJHJOJiIK0yTwhmh8KJERko/QlT8HYvmqyxpe4+cx7TNSLoa1wVGEoe530GpcF7ZKHCwvgvD82Q==}
+
+  '@keystonehq/metamask-keystone-usb-keyring@0.1.0-alpha.6':
+    resolution: {integrity: sha512-qYXxQq8IArKrBsfE0ieZWF0vGI75aOVE/XG6EonUshLvkusosSBQjiFX48Wfc40Rc7zuZ819R7MSG/D9znSliQ==}
 
   '@keystonehq/sdk@0.19.2':
     resolution: {integrity: sha512-ilA7xAhPKvpHWlxjzv3hjMehD6IKYda4C1TeG2/DhFgX9VSffzv77Eebf8kVwzPLdYV4LjX1KQ2ZDFoN1MsSFQ==}
@@ -5841,13 +5844,19 @@ snapshots:
       '@types/w3c-web-usb': 1.0.10
       buffer: 6.0.3
 
-  '@keystonehq/hw-transport-webusb@0.5.1':
+  '@keystonehq/hw-transport-usb@0.1.3':
     dependencies:
       '@keystonehq/hw-transport-error': 0.0.2
-      '@keystonehq/hw-transport-usb': 0.1.2
+      '@types/w3c-web-usb': 1.0.10
       buffer: 6.0.3
 
-  '@keystonehq/metamask-keystone-usb-keyring@0.1.0-alpha.5':
+  '@keystonehq/hw-transport-webusb@0.5.2':
+    dependencies:
+      '@keystonehq/hw-transport-error': 0.0.2
+      '@keystonehq/hw-transport-usb': 0.1.3
+      buffer: 6.0.3
+
+  '@keystonehq/metamask-keystone-usb-keyring@0.1.0-alpha.6':
     dependencies:
       '@ethereumjs/rlp': 4.0.1
       '@ethereumjs/tx': 5.4.0

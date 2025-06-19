@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@keystonehq/metamask-keystone-usb-keyring": "^0.1.0-alpha.6",
-    "@keystonehq/hw-transport-webusb": "0.5.1"
+    "@keystonehq/hw-transport-webusb": "^0.5.2"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
