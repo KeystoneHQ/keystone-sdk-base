@@ -13,7 +13,7 @@ import {
 } from "@ethereumjs/tx";
 import { KeystoneBridge } from "./KeystoneBridge";
 
-const keyringType = "Keystone";
+const keyringType = "Keystone Hardware";
 const pathBase = "m";
 const MAX_INDEX = 1000;
 
@@ -67,6 +67,8 @@ export class KeystoneUSBKeyring {
 
   private unlockedAccount: number;
 
+  private bridgeSetup: boolean;
+
   constructor({
     bridge,
     opts,
@@ -91,10 +93,18 @@ export class KeystoneUSBKeyring {
     this.deserialize(opts);
 
     this.bridge = bridge;
+    this.bridgeSetup = false;
   }
 
   async init() {
-    await this.bridge.init();
+    // await this.bridge.init();
+  }
+
+  async setUpBridge() {
+    if (!this.bridgeSetup) {
+      await this.bridge.init();
+      this.bridgeSetup = true;
+    }
   }
 
   setHDPath(hdPath: string) {
@@ -102,6 +112,7 @@ export class KeystoneUSBKeyring {
   }
 
   async readKeyring(): Promise<void> {
+    await this.setUpBridge();
     const paths = ["m/44'/60'/0'"];
     paths.push(...Array.from({ length: 10 }, (_, i) => `m/44'/60'/${i}'/0/0`));
     const results = [];
@@ -300,6 +311,7 @@ export class KeystoneUSBKeyring {
     address: string,
     tx: TypedTransaction
   ): Promise<TypedTransaction> {
+    await this.setUpBridge();
     let messageToSign: Buffer;
     if (tx.type === 0) {
       messageToSign = Buffer.from(
@@ -338,6 +350,7 @@ export class KeystoneUSBKeyring {
     withAccount: string,
     messageHex: string
   ): Promise<string> {
+    await this.setUpBridge();
     const usignedHex = stripHexPrefix(messageHex);
     const hdPath = await this._pathFromAddress(withAccount);
 
@@ -357,6 +370,7 @@ export class KeystoneUSBKeyring {
   }
 
   async signTypedData(withAccount: string, typedData: any): Promise<string> {
+    await this.setUpBridge();
     const hdPath = await this._pathFromAddress(withAccount);
 
     const { r, s, v } = await this.bridge.signEIP712Message(hdPath, typedData);
