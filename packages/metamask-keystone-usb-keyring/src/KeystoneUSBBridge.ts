@@ -8,9 +8,9 @@ export abstract class KeystoneUSBBridge implements KeystoneBridge {
 
   abstract getTransport(): Promise<TransportHID>;
 
-  async init() {
+  async init(mfp?: string) {
     const transport = await this.getTransport();
-    this.client = new Eth(transport);
+    this.client = new Eth(transport, mfp);
   }
 
   getKeys: (

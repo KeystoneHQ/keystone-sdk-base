@@ -96,13 +96,31 @@ export class KeystoneUSBKeyring {
     this.bridgeSetup = false;
   }
 
+  forgetDevice = () => {
+    //common props
+    this.page = 0;
+    this.perPage = 5;
+    this.accounts = [];
+    this.currentAccount = 0;
+    this.unlockedAccount = 0;
+    this.name = "Keystone";
+    this.initialized = false;
+
+    this.hdPath = KEYSTONE_HD_PATH.STANDARD;
+    this.indexes = {};
+    this.ledger_live_accounts = {};
+    this.hd_account = "";
+
+    this.xfp = undefined;
+  };
+
   async init() {
     // await this.bridge.init();
   }
 
   async setUpBridge() {
     if (!this.bridgeSetup) {
-      await this.bridge.init();
+      await this.bridge.init(this.xfp);
       this.bridgeSetup = true;
     }
   }

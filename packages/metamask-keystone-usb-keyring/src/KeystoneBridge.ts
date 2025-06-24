@@ -1,7 +1,7 @@
 import { ExtendedPubkey } from "@keystonehq/hw-app-eth/lib/types";
 
 export abstract class KeystoneBridge {
-  abstract init(): Promise<void>;
+  abstract init(mfp?: string): Promise<void>;
   abstract getKeys: (paths: string[]) => Promise<{
     keys: ExtendedPubkey[];
     mfp: string;
