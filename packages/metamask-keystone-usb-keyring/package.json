@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/metamask-keystone-usb-keyring",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0-alpha.9",
   "description": "keystone usb eth keyring for metamask",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
