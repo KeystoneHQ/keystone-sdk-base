@@ -372,10 +372,11 @@ export class KeystoneUSBKeyring {
     await this.setUpBridge();
     const usignedHex = stripHexPrefix(messageHex);
     const hdPath = await this._pathFromAddress(withAccount);
+    const message = Buffer.from(usignedHex, "hex").toString("utf-8");
 
     const { r, s, v } = await this.bridge.signPersonalMessage(
       hdPath,
-      usignedHex
+      message
     );
 
     return (
