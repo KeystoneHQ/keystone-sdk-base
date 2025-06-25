@@ -352,6 +352,7 @@ export class KeystoneUSBKeyring {
     return TransactionFactory.fromTxData(
       {
         ...tx,
+        type: tx.type,
         r: Buffer.from(r, "hex"),
         s: Buffer.from(s, "hex"),
         v: Buffer.from(v, "hex"),
