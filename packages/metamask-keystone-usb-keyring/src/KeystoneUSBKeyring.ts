@@ -11,10 +11,9 @@ import {
   TransactionFactory,
   TypedTransaction,
 } from "@ethereumjs/tx";
-import { Eth } from "@keystonehq/hw-app-eth";
-import { TransportWebUSB } from "@keystonehq/hw-transport-webusb";
+import { KeystoneBridge } from "./KeystoneBridge";
 
-const keyringType = "Keystone";
+const keyringType = "Keystone Hardware";
 const pathBase = "m";
 const MAX_INDEX = 1000;
 
@@ -30,9 +29,9 @@ export type StoredKeyring = {
   xfp: string;
 
   hdPath: string;
-  hd_account?: string;
+  hd_account: string;
   indexes: Record<string, number>;
-  ledger_live_accounts?: Record<string, string>;
+  ledger_live_accounts: Record<string, string>;
 };
 
 export type PagedAccount = { address: string; balance: any; index: number };
@@ -59,18 +58,24 @@ export class KeystoneUSBKeyring {
   protected name: string;
 
   //standard and ledger legacy
-  protected hd_account?: string;
+  protected hd_account: string;
   protected indexes: Record<string, number>;
   //ledger live
-  protected ledger_live_accounts?: Record<string, string>;
+  protected ledger_live_accounts: Record<string, string>;
 
-
+  private bridge: KeystoneBridge;
 
   private unlockedAccount: number;
 
-  private client: Eth;
+  private bridgeSetup: boolean;
 
-  constructor(opts?: StoredKeyring) {
+  constructor({
+    bridge,
+    opts,
+  }: {
+    bridge: KeystoneBridge;
+    opts?: StoredKeyring;
+  }) {
     //common props
     this.page = 0;
     this.perPage = 5;
@@ -80,11 +85,44 @@ export class KeystoneUSBKeyring {
     this.name = "Keystone";
     this.initialized = false;
 
+    this.hdPath = KEYSTONE_HD_PATH.STANDARD;
+    this.indexes = {};
+    this.ledger_live_accounts = {};
+    this.hd_account = "";
+
     this.deserialize(opts);
 
-    TransportWebUSB.connect().then((transport) => {
-      this.client = new Eth(transport);
-    });
+    this.bridge = bridge;
+    this.bridgeSetup = false;
+  }
+
+  forgetDevice = () => {
+    //common props
+    this.page = 0;
+    this.perPage = 5;
+    this.accounts = [];
+    this.currentAccount = 0;
+    this.unlockedAccount = 0;
+    this.name = "Keystone";
+    this.initialized = false;
+
+    this.hdPath = KEYSTONE_HD_PATH.STANDARD;
+    this.indexes = {};
+    this.ledger_live_accounts = {};
+    this.hd_account = "";
+
+    this.xfp = undefined;
+  };
+
+  async init() {
+    // await this.bridge.init();
+  }
+
+  async setUpBridge() {
+    if (!this.bridgeSetup) {
+      await this.bridge.init(this.xfp);
+      this.bridgeSetup = true;
+    }
   }
 
   setHDPath(hdPath: string) {
@@ -92,20 +130,30 @@ export class KeystoneUSBKeyring {
   }
 
   async readKeyring(): Promise<void> {
-    if(this.hdPath === KEYSTONE_HD_PATH.STANDARD || this.hdPath === KEYSTONE_HD_PATH.LEDGER_LEGACY) {
-      const paths = ["m/44'/60'/0'"];
-      const keys = await this.client.getKeys(paths);
-      this.xfp = keys.mfp;
-      this.hd_account = keys.keys[0].xpub;
-    } else if(this.hdPath === KEYSTONE_HD_PATH.LEDGER_LIVE) {
-      const paths = Array.from({ length: 10 }, (_, i) => `m/44'/60'/${i}'/0/0`);
-      const result = await this.client.getKeys(paths);
-      this.xfp = result.mfp;
-      this.ledger_live_accounts = result.keys.reduce((acc, key) => {
-        acc[key.address] = key.path;
-        return acc;
-      }, {} as Record<string, string>);
+    await this.setUpBridge();
+    const paths = ["m/44'/60'/0'"];
+    paths.push(...Array.from({ length: 10 }, (_, i) => `m/44'/60'/${i}'/0/0`));
+    const results = [];
+    for (const path of paths) {
+      const result = await this.bridge.getKeys([path]);
+      results.push(result);
     }
+    this.xfp = results[0].mfp;
+    const keys = results.map((result) => {
+      const key = result.keys[0];
+      return {
+        ...key,
+        path: key.path.replace("m/", "").replace("M/", ""),
+      };
+    });
+    const foundKey = keys.find((key) => key.path === "44'/60'/0'");
+    this.hd_account = foundKey ? foundKey.xpub : "";
+    const ledger_live_keys = keys.filter((key) => key.path !== "44'/60'/0'");
+    this.ledger_live_accounts = ledger_live_keys.reduce((acc, key) => {
+      acc[key.address] = key.path;
+      return acc;
+    }, {} as Record<string, string>);
+    this.initialized = true;
   }
 
   public getName = (): string => {
@@ -153,6 +201,7 @@ export class KeystoneUSBKeyring {
       this.hdPath = opts.hdPath;
       this.hd_account = opts.hd_account;
       this.ledger_live_accounts = opts.ledger_live_accounts;
+      this.indexes = opts.indexes;
     }
   }
 
@@ -214,6 +263,7 @@ export class KeystoneUSBKeyring {
 
     for (let i = from; i < to; i++) {
       const address = await this.__addressFromIndex(pathBase, i);
+      console.log("address", address);
       accounts.push({
         address,
         balance: null,
@@ -250,7 +300,10 @@ export class KeystoneUSBKeyring {
     if (!this.initialized) {
       await this.readKeyring();
     }
-    if (this.hdPath === KEYSTONE_HD_PATH.STANDARD || this.hdPath === KEYSTONE_HD_PATH.LEDGER_LEGACY) {
+    if (
+      this.hdPath === KEYSTONE_HD_PATH.STANDARD ||
+      this.hdPath === KEYSTONE_HD_PATH.LEDGER_LEGACY
+    ) {
       return this.__getNormalPage(increment);
     } else {
       return this.__getLedgerLivePage(increment);
@@ -276,6 +329,7 @@ export class KeystoneUSBKeyring {
     address: string,
     tx: TypedTransaction
   ): Promise<TypedTransaction> {
+    await this.setUpBridge();
     let messageToSign: Buffer;
     if (tx.type === 0) {
       messageToSign = Buffer.from(
@@ -289,7 +343,7 @@ export class KeystoneUSBKeyring {
     const hdPath = await this._pathFromAddress(address);
     const isLegacy = tx.type === 0;
 
-    const { r, s, v } = await this.client.signTransaction(
+    const { r, s, v } = await this.bridge.signTransaction(
       hdPath,
       messageToSign.toString("hex"),
       isLegacy
@@ -298,6 +352,7 @@ export class KeystoneUSBKeyring {
     return TransactionFactory.fromTxData(
       {
         ...tx,
+        type: tx.type,
         r: Buffer.from(r, "hex"),
         s: Buffer.from(s, "hex"),
         v: Buffer.from(v, "hex"),
@@ -314,10 +369,15 @@ export class KeystoneUSBKeyring {
     withAccount: string,
     messageHex: string
   ): Promise<string> {
+    await this.setUpBridge();
     const usignedHex = stripHexPrefix(messageHex);
     const hdPath = await this._pathFromAddress(withAccount);
+    const message = Buffer.from(usignedHex, "hex").toString("utf-8");
 
-    const { r, s, v } = await this.client.signPersonalMessage(hdPath, usignedHex);
+    const { r, s, v } = await this.bridge.signPersonalMessage(
+      hdPath,
+      message
+    );
 
     return (
       "0x" +
@@ -330,9 +390,10 @@ export class KeystoneUSBKeyring {
   }
 
   async signTypedData(withAccount: string, typedData: any): Promise<string> {
+    await this.setUpBridge();
     const hdPath = await this._pathFromAddress(withAccount);
 
-    const { r, s, v } = await this.client.signEIP712Message(hdPath, typedData);
+    const { r, s, v } = await this.bridge.signEIP712Message(hdPath, typedData);
 
     return (
       "0x" +
@@ -345,12 +406,16 @@ export class KeystoneUSBKeyring {
   }
 
   __addressFromIndex = async (pb: string, i: number): Promise<string> => {
-    if (this.hdPath === KEYSTONE_HD_PATH.STANDARD || this.hdPath === KEYSTONE_HD_PATH.LEDGER_LEGACY) {
+    if (
+      this.hdPath === KEYSTONE_HD_PATH.STANDARD ||
+      this.hdPath === KEYSTONE_HD_PATH.LEDGER_LEGACY
+    ) {
       this.checkKeyring();
       if (!this.hdk) {
         this.hdk = HDKey.fromExtendedKey(this.hd_account!);
       }
-      const childrenPath = this.hdPath === KEYSTONE_HD_PATH.STANDARD ? `0/${i}` : String(i);
+      const childrenPath =
+        this.hdPath === KEYSTONE_HD_PATH.STANDARD ? `0/${i}` : String(i);
       const dkey = this.hdk.derive(`${pb}/${childrenPath}`);
       const address =
         "0x" + publicToAddress(dkey.publicKey, true).toString("hex");
@@ -366,7 +431,10 @@ export class KeystoneUSBKeyring {
   };
 
   async _pathFromAddress(address: string): Promise<string> {
-    if (this.hdPath === KEYSTONE_HD_PATH.STANDARD || this.hdPath === KEYSTONE_HD_PATH.LEDGER_LEGACY) {
+    if (
+      this.hdPath === KEYSTONE_HD_PATH.STANDARD ||
+      this.hdPath === KEYSTONE_HD_PATH.LEDGER_LEGACY
+    ) {
       const checksummedAddress = toChecksumAddress(address);
       let index = this.indexes[checksummedAddress];
       if (typeof index === "undefined") {
