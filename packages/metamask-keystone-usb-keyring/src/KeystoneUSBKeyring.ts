@@ -136,6 +136,9 @@ export class KeystoneUSBKeyring {
     const results = [];
     for (const path of paths) {
       const result = await this.bridge.getKeys([path]);
+      if (result === undefined) {
+        throw new Error(`KeystoneError#getKeys.user_reject: user rejected the request`);
+      }
       results.push(result);
     }
     this.xfp = results[0].mfp;
