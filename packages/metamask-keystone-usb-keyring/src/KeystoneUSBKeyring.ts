@@ -133,17 +133,12 @@ export class KeystoneUSBKeyring {
     await this.setUpBridge();
     const paths = ["m/44'/60'/0'"];
     paths.push(...Array.from({ length: 10 }, (_, i) => `m/44'/60'/${i}'/0/0`));
-    const results = [];
-    for (const path of paths) {
-      const result = await this.bridge.getKeys([path]);
-      if (result === undefined) {
-        throw new Error(`KeystoneError#getKeys.user_reject: user rejected the request`);
-      }
-      results.push(result);
+    const result = await this.bridge.getKeys(paths);
+    if (result === undefined) {
+      throw new Error(`KeystoneError#getKeys.user_reject: user rejected the request`);
     }
-    this.xfp = results[0].mfp;
-    const keys = results.map((result) => {
-      const key = result.keys[0];
+    this.xfp = result.mfp;
+    const keys = result.keys.map((key) => {
       return {
         ...key,
         path: key.path.replace("m/", "").replace("M/", ""),
