@@ -119,10 +119,7 @@ export class KeystoneUSBKeyring {
   }
 
   async setUpBridge() {
-    if (!this.bridgeSetup) {
-      await this.bridge.init(this.xfp);
-      this.bridgeSetup = true;
-    }
+    await this.bridge.init(this.xfp);
   }
 
   setHDPath(hdPath: string) {
@@ -144,6 +141,7 @@ export class KeystoneUSBKeyring {
         path: key.path.replace("m/", "").replace("M/", ""),
       };
     });
+
     const foundKey = keys.find((key) => key.path === "44'/60'/0'");
     this.hd_account = foundKey ? foundKey.xpub : "";
     const ledger_live_keys = keys.filter((key) => key.path !== "44'/60'/0'");
