@@ -27,7 +27,7 @@ describe("KeystoneUSBKeyring test", () => {
       const bridge = new KeystoneNodeUSBBridge();
       const keyring = new KeystoneUSBKeyring({ bridge });
       await keyring.init();
-      keyring.setHDPath(KEYSTONE_HD_PATH.LEDGER_LEGACY);
+      keyring.setHdPath(KEYSTONE_HD_PATH.LEDGER_LEGACY);
 
       console.log("keyring", await keyring.getFirstPage());
       console.log("keyring", await keyring.getNextPage());
