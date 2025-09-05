@@ -122,7 +122,7 @@ export class KeystoneUSBKeyring {
     await this.bridge.init(this.xfp);
   }
 
-  setHDPath(hdPath: string) {
+  setHdPath(hdPath: string) {
     this.hdPath = hdPath;
   }
 
