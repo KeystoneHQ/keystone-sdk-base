@@ -761,6 +761,25 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
 
+  packages/ur-registry-zcash:
+    dependencies:
+      '@keystonehq/bc-ur-registry':
+        specifier: ^0.7.0
+        version: 0.7.0
+      uuid:
+        specifier: ^9.0.0
+        version: 9.0.1
+    devDependencies:
+      '@babel/preset-typescript':
+        specifier: ^7.15.0
+        version: 7.25.9(@babel/core@7.25.9)
+      '@types/uuid':
+        specifier: ^9.0.0
+        version: 9.0.8
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
 packages:
 
   '@ampproject/remapping@2.3.0':
