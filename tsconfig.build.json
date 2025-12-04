@@ -26,6 +26,7 @@
     { "path": "./packages/ur-registry-sol/tsconfig.build.json" },
     { "path": "./packages/ur-registry-arweave/tsconfig.build.json" },
     { "path": "./packages/ur-registry-stellar/tsconfig.build.json" },
+    { "path": "./packages/ur-registry-zcash/tsconfig.build.json" },
     { "path": "./packages/metamask-keystone-usb-keyring/tsconfig.build.json" },
     { "path": "./packages/metamask-keystone-webusb-bridge/tsconfig.build.json" }
   ],
