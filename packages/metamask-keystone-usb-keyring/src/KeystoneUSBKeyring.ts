@@ -46,15 +46,15 @@ export class KeystoneUSBKeyring {
   // @ts-ignore
   private version = 1;
   static type = keyringType;
-  protected xfp: string;
-  protected type = keyringType;
+  protected xfp: string;  
+  readonly type: string = keyringType;
   protected initialized: boolean;
   protected hdPath: string;
   protected accounts: string[];
   protected currentAccount: number;
   protected page: number;
   protected perPage: number;
-  protected hdk: any;
+  protected hdk: HDKey | undefined;
   protected name: string;
 
   //standard and ledger legacy
@@ -183,7 +183,7 @@ export class KeystoneUSBKeyring {
     });
   }
 
-  deserialize(opts?: StoredKeyring): void {
+ async deserialize(opts?: StoredKeyring): Promise<void> {
     if (opts) {
       //common props;
       this.accounts = opts.accounts;
@@ -306,7 +306,7 @@ export class KeystoneUSBKeyring {
     }
   }
 
-  getAccounts() {
+  async getAccounts(): Promise<string[]>{
     return Promise.resolve(this.accounts);
   }
 
@@ -412,7 +412,7 @@ export class KeystoneUSBKeyring {
       }
       const childrenPath =
         this.hdPath === KEYSTONE_HD_PATH.STANDARD ? `0/${i}` : String(i);
-      const dkey = this.hdk.derive(`${pb}/${childrenPath}`);
+      const dkey = this.hdk!.derive(`${pb}/${childrenPath}`);
       const address =
         "0x" + publicToAddress(dkey.publicKey, true).toString("hex");
       return toChecksumAddress(address);
@@ -457,5 +457,10 @@ export class KeystoneUSBKeyring {
       }
       return path;
     }
+  }
+
+  async destroy(): Promise<void> {
+    this.forgetDevice();
+    this.hdk = undefined;
   }
 }
