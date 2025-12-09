@@ -46,7 +46,7 @@ export class KeystoneUSBKeyring {
   // @ts-ignore
   private version = 1;
   static type = keyringType;
-  protected xfp: string;  
+  protected xfp: string;
   readonly type: string = keyringType;
   protected initialized: boolean;
   protected hdPath: string;
