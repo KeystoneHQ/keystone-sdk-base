@@ -38,7 +38,7 @@
     "build": "pnpm ts-bridge --project tsconfig.build.json --verbose --clean"
   },
   "dependencies": {
-    "@keystonehq/metamask-keystone-usb-keyring": "0.1.4",
+    "@keystonehq/metamask-keystone-usb-keyring": "0.2.0",
     "@keystonehq/hw-transport-webusb": "^0.5.2"
   },
   "devDependencies": {
