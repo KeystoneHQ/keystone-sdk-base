@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/metamask-keystone-webusb-bridge",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "keystone webusb eth keyring for metamask",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
