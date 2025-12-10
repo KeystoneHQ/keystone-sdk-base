@@ -12,6 +12,8 @@ import {
   TypedTransaction,
 } from "@ethereumjs/tx";
 import { KeystoneBridge } from "./KeystoneBridge";
+import { Keyring } from '@metamask/keyring-utils';
+import { Hex, Json } from "@metamask/utils";
 
 const keyringType = "Keystone Hardware";
 const pathBase = "m";
@@ -42,19 +44,19 @@ export enum KEYSTONE_HD_PATH {
   LEDGER_LEGACY = "m/44'/60'/0'/X",
 }
 
-export class KeystoneUSBKeyring {
+export class KeystoneUSBKeyring implements Keyring {
   // @ts-ignore
   private version = 1;
   static type = keyringType;
   protected xfp: string;
-  protected type = keyringType;
+  readonly type: string = keyringType;
   protected initialized: boolean;
   protected hdPath: string;
   protected accounts: string[];
   protected currentAccount: number;
   protected page: number;
   protected perPage: number;
-  protected hdk: any;
+  protected hdk: HDKey | undefined;
   protected name: string;
 
   //standard and ledger legacy
@@ -90,7 +92,7 @@ export class KeystoneUSBKeyring {
     this.ledger_live_accounts = {};
     this.hd_account = "";
 
-    this.deserialize(opts);
+    this.deserialize(opts ?? null);
 
     this.bridge = bridge;
     this.bridgeSetup = false;
@@ -183,9 +185,10 @@ export class KeystoneUSBKeyring {
     });
   }
 
-  deserialize(opts?: StoredKeyring): void {
-    if (opts) {
+ async deserialize(state: Json): Promise<void> {
+    if (state) {
       //common props;
+      const opts = state as StoredKeyring;
       this.accounts = opts.accounts;
       this.currentAccount = opts.currentAccount;
       this.page = opts.page;
@@ -217,19 +220,19 @@ export class KeystoneUSBKeyring {
     this.unlockedAccount = parseInt(index, 10);
   };
 
-  async addAccounts(n = 1): Promise<string[]> {
+  async addAccounts(n = 1): Promise<Hex[]> {
     const from = this.unlockedAccount;
     const to = from + n;
-    const newAccounts = [];
+    const newAccounts: Hex[] = [];
 
     for (let i = from; i < to; i++) {
       const address = await this.__addressFromIndex(pathBase, i);
-      newAccounts.push(address);
+      newAccounts.push(address as Hex);
       this.page = 0;
       this.unlockedAccount++;
     }
     this.accounts = this.accounts.concat(newAccounts);
-    return this.accounts;
+    return this.accounts as Hex[];
   }
 
   getFirstPage(): Promise<PagedAccount[]> {
@@ -306,11 +309,11 @@ export class KeystoneUSBKeyring {
     }
   }
 
-  getAccounts() {
-    return Promise.resolve(this.accounts);
+  async getAccounts(): Promise<Hex[]>{
+    return Promise.resolve(this.accounts as Hex[]);
   }
 
-  removeAccount(address: string): void {
+  removeAccount(address: Hex): void {
     if (
       !this.accounts.map((a) => a.toLowerCase()).includes(address.toLowerCase())
     ) {
@@ -322,7 +325,7 @@ export class KeystoneUSBKeyring {
   }
 
   async signTransaction(
-    address: string,
+    address: Hex,
     tx: TypedTransaction
   ): Promise<TypedTransaction> {
     await this.setUpBridge();
@@ -338,13 +341,11 @@ export class KeystoneUSBKeyring {
     }
     const hdPath = await this._pathFromAddress(address);
     const isLegacy = tx.type === 0;
-
     const { r, s, v } = await this.bridge.signTransaction(
       hdPath,
       messageToSign.toString("hex"),
       isLegacy
     );
-
     return TransactionFactory.fromTxData(
       {
         ...tx,
@@ -357,13 +358,13 @@ export class KeystoneUSBKeyring {
     );
   }
 
-  signMessage(withAccount: string, data: string): Promise<string> {
+  signMessage(withAccount: Hex, data: Hex): Promise<string> {
     return this.signPersonalMessage(withAccount, data);
   }
 
   async signPersonalMessage(
-    withAccount: string,
-    messageHex: string
+    withAccount: Hex,
+    messageHex: Hex
   ): Promise<string> {
     await this.setUpBridge();
     const usignedHex = stripHexPrefix(messageHex);
@@ -385,7 +386,7 @@ export class KeystoneUSBKeyring {
     );
   }
 
-  async signTypedData(withAccount: string, typedData: any): Promise<string> {
+  async signTypedData(withAccount: Hex, typedData: any): Promise<string> {
     await this.setUpBridge();
     const hdPath = await this._pathFromAddress(withAccount);
 
@@ -412,7 +413,7 @@ export class KeystoneUSBKeyring {
       }
       const childrenPath =
         this.hdPath === KEYSTONE_HD_PATH.STANDARD ? `0/${i}` : String(i);
-      const dkey = this.hdk.derive(`${pb}/${childrenPath}`);
+      const dkey = this.hdk!.derive(`${pb}/${childrenPath}`);
       const address =
         "0x" + publicToAddress(dkey.publicKey, true).toString("hex");
       return toChecksumAddress(address);
@@ -457,5 +458,10 @@ export class KeystoneUSBKeyring {
       }
       return path;
     }
+  }
+
+  async destroy(): Promise<void> {
+    this.forgetDevice();
+    this.hdk = undefined;
   }
 }
