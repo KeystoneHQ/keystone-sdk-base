@@ -3,6 +3,7 @@ import {
   RegistryItem,
   extend,
   DataItemMap,
+  CryptoKeypath,
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 import * as uuid from "uuid";
@@ -12,25 +13,18 @@ const { RegistryTypes } = extend;
 type signRequestProps = {
   requestId?: Buffer;
   data: Buffer;
-  mfp: Buffer;
-  xpub: string;
-  walletIndex: number;
+  derivationPath: CryptoKeypath;
 };
 
 enum Keys {
   requestId = 1,
   signData = 2,
-  mfp = 3,
-  xpub = 6,
-  walletIndex = 7,
+  derivationPath = 3,
 }
-
 export class AvalancheSignRequest extends RegistryItem {
   private requestId?: Buffer;
   private data: Buffer;
-  private mfp: Buffer;
-  private xpub: string;
-  private walletIndex: number;
+  private derivationPath: CryptoKeypath;
 
   getRegistryType = () => ExtendedRegistryTypes.AVALANCHE_SIGN_REQUEST;
 
@@ -38,9 +32,7 @@ export class AvalancheSignRequest extends RegistryItem {
     super();
     this.requestId = args.requestId;
     this.data = args.data;
-    this.mfp = args.mfp;
-    this.xpub = args.xpub;
-    this.walletIndex = args.walletIndex;
+    this.derivationPath = args.derivationPath;
   }
 
   public getRequestId = () => this.requestId;
@@ -56,40 +48,30 @@ export class AvalancheSignRequest extends RegistryItem {
     }
 
     map[Keys.signData] = Buffer.from(this.data);
-    map[Keys.mfp] = this.mfp.readUInt32BE(0);
-    map[Keys.xpub] = this.xpub;
-    map[Keys.walletIndex] = Number(this.walletIndex);
+    map[Keys.derivationPath] = this.derivationPath;
 
     return new DataItem(map);
   };
 
   public static fromDataItem = (dataItem: DataItem) => {
     const map = dataItem.getData();
-    const masterFingerprint = Buffer.alloc(4);
-    const _masterFingerprint = map[Keys.mfp];
-    masterFingerprint.writeUInt32BE(_masterFingerprint, 0);
     const requestId = map[Keys.requestId]
       ? map[Keys.requestId].getData()
       : undefined;
     const data = map[Keys.signData];
-    const xpub = map[Keys.xpub];
-    const walletIndex = map[Keys.signData];
+    const derivationPath = map[Keys.signData];
 
     return new AvalancheSignRequest({
       requestId,
       data,
-      xpub,
-      walletIndex,
-      mfp: masterFingerprint,
+      derivationPath,
     });
   };
 
   public static constructAvalancheRequest(
     data: Buffer,
-    mfp: string,
-    xpub: string,
-    walletIndex: number,
-    requestId?: string | Buffer
+    derivationPath: CryptoKeypath,
+    requestId?: string | Buffer,
   ) {
     let _requestId;
     if (typeof requestId === "string") {
@@ -103,9 +85,7 @@ export class AvalancheSignRequest extends RegistryItem {
     return new AvalancheSignRequest({
       data,
       requestId: _requestId,
-      mfp: Buffer.from(mfp, "hex"),
-      xpub,
-      walletIndex,
+      derivationPath
     });
   }
 }
