@@ -61,9 +61,7 @@ import {
   
     public toDataItem = () => {
       const map: DataItemMap = {};
-      if (this.txid) {
-        map[Keys.txid] = this.txid;
-      }
+      map[Keys.txid] = this.txid;
       map[Keys.vout] = this.vout;
       map[Keys.value] = this.value;
   
