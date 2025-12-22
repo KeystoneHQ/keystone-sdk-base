@@ -16,27 +16,26 @@ import {
     path,
   }
   
-  export interface AvalanceUtxoProps {
+  export interface AvalancheUtxoProps {
     txid: Buffer;
     vout: number;
     path: CryptoKeypath;
   }
   
-  export interface AvalanceUtxoData {
+  export interface AvalancheUtxoData {
     txid: string;
     vout: number;
     path: string;
-    xfp: string;
   }
   
-  export class AvalanceUtxo extends RegistryItem {
+  export class AvalancheUtxo extends RegistryItem {
     private txid: Buffer;
     private vout: number;
     private path: CryptoKeypath;
   
     getRegistryType = () => ExtendedRegistryTypes.AVALANCHE_UTXO;
   
-    constructor(args: AvalanceUtxoProps) {
+    constructor(args: AvalancheUtxoProps) {
       super();
       this.txid = args.txid;
       this.vout = args.vout;
@@ -65,7 +64,7 @@ import {
       const vout = map[Keys.vout];
       const path = CryptoKeypath.fromDataItem(map[Keys.path]);
   
-      return new AvalanceUtxo({
+      return new AvalancheUtxo({
         txid,
         vout,
         path,
@@ -74,15 +73,14 @@ import {
   
     public static fromCBOR = (_cborPayload: Buffer) => {
       const dataItem = decodeToDataItem(_cborPayload);
-      return AvalanceUtxo.fromDataItem(dataItem);
+      return AvalancheUtxo.fromDataItem(dataItem);
     };
   
-    public static constructAvalanceUtxo({
+    public static constructAvalancheUtxo({
       txid,
       vout,
-      xfp,
       path,
-    }: AvalanceUtxoData) {
+    }: AvalancheUtxoData) {
       const paths = path.replace(/[m|M]\//, "").split("/");
       const hdPathObject = new CryptoKeypath(
         paths.map((path) => {
@@ -90,10 +88,9 @@ import {
           const isHardened = path.endsWith("'");
           return new PathComponent({ index, hardened: isHardened });
         }),
-        Buffer.from(xfp, "hex")
       );
   
-      return new AvalanceUtxo({
+      return new AvalancheUtxo({
         txid: Buffer.from(txid, "hex"),
         vout,
         path: hdPathObject,
