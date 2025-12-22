@@ -7,7 +7,7 @@ import {
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 import * as uuid from "uuid";
-import { AvalanceUtxo, AvalanceUtxoData } from "./AvalanceUtxo";
+import { AvalancheUtxo, AvalancheUtxoData } from "./AvalancheUtxo";
 
 const { RegistryTypes } = extend;
 
@@ -15,7 +15,7 @@ type signRequestProps = {
   requestId?: Buffer;
   data: Buffer;
   derivationPath: CryptoKeypath;
-  utxos: AvalanceUtxo[];
+  utxos: AvalancheUtxo[];
 };
 
 enum Keys {
@@ -28,7 +28,7 @@ export class AvalancheSignRequest extends RegistryItem {
   private requestId?: Buffer;
   private data: Buffer;
   private derivationPath: CryptoKeypath;
-  private utxos: AvalanceUtxo[];
+  private utxos: AvalancheUtxo[];
 
 
   getRegistryType = () => ExtendedRegistryTypes.AVALANCHE_SIGN_REQUEST;
@@ -73,8 +73,8 @@ export class AvalancheSignRequest extends RegistryItem {
       : undefined;
     const data = map[Keys.signData];
     const derivationPath = map[Keys.signData];
-    const utxos: AvalanceUtxo[] = map[Keys.utxos].map((utxo: DataItem) =>
-      AvalanceUtxo.fromDataItem(utxo)
+    const utxos: AvalancheUtxo[] = map[Keys.utxos].map((utxo: DataItem) =>
+      AvalancheUtxo.fromDataItem(utxo)
     );
 
     return new AvalancheSignRequest({
@@ -88,7 +88,7 @@ export class AvalancheSignRequest extends RegistryItem {
   public static constructAvalancheRequest(
     data: Buffer,
     derivationPath: CryptoKeypath,
-    utxos: AvalanceUtxoData[],
+    utxos: AvalancheUtxoData[],
     requestId?: string | Buffer,
   ) {
     let _requestId;
@@ -99,15 +99,15 @@ export class AvalancheSignRequest extends RegistryItem {
     } else {
       _requestId = Buffer.from(uuid.parse(uuid.v4()) as Uint8Array);
     }
-    const avalanceUtxos = utxos.map((utxo) =>
-      AvalanceUtxo.constructAvalanceUtxo(utxo)
+    const avalancheUtxos = utxos.map((utxo) =>
+      AvalancheUtxo.constructAvalancheUtxo(utxo)
     );
 
     return new AvalancheSignRequest({
       data,
       requestId: _requestId,
       derivationPath,
-      utxos: avalanceUtxos,
+      utxos: avalancheUtxos,
     });
   }
 }
