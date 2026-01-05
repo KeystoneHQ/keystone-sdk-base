@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/metamask-keystone-webusb-bridge",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "keystone webusb eth keyring for metamask",
   "author": "aaronisme <aarondongchen@gmail.com>",
   "homepage": "https://github.com/KeystoneHQ/keystone-airgaped-base#readme",
@@ -38,7 +38,7 @@
     "build": "pnpm ts-bridge --project tsconfig.build.json --verbose --clean"
   },
   "dependencies": {
-    "@keystonehq/metamask-keystone-usb-keyring": "0.1.3",
+    "@keystonehq/metamask-keystone-usb-keyring": "0.2.0",
     "@keystonehq/hw-transport-webusb": "^0.5.2"
   },
   "devDependencies": {

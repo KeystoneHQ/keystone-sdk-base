@@ -2,8 +2,16 @@
   "name": "@keystonehq/sol-keyring",
   "version": "0.20.0",
   "description": "sol-keyring interact with keystone",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.mts"
+    }
+  },
   "files": [
     "dist"
   ],

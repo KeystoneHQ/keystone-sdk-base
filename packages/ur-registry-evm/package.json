@@ -2,8 +2,16 @@
   "name": "@keystonehq/bc-ur-registry-evm",
   "version": "0.5.3",
   "description": "bc-ur-registry extension for EVM",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.mts"
+    }
+  },
   "directories": {
     "lib": "src",
     "test": "__tests__"
