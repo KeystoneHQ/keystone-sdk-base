@@ -8,16 +8,14 @@ describe("avalanche-sign-request", () => {
       "00000000000000000001ed5f38341e436e5d46e2bb00b45d62ae97d1b050c64bc634ae10626739e35c4b0000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000000000089544000000000000000000000000100000001512e7191685398f00663e12197a3d8f6012d9ea300000001db720ad6707915cc4751fb7e5491a3af74e127a1d81817abe9438590c0833fe10000000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000050000000000989680000000010000000000000000",
       "hex"
     );
-    const mfp = "1250B6BC";
-    const xpub =
-      "xpub661MyMwAqRbcFFDMuFiGQmA1EqWxxgDLdtNvxxiucf9qkfoVrvwgnYyshxWoewWtkZ1aLhKoVDrpeDvn1YRqxX2szhGKi3UiSEv1hYRMF8q";
-    const walletIndex = 0;
+    const derivationPath = "m/44'/133'/0'/0/0";
+    const utxos = [];
+    
 
     const avalancheSignRequest = AvalancheSignRequest.constructAvalancheRequest(
       avalancheData,
-      mfp,
-      xpub,
-      walletIndex
+      derivationPath,
+      utxos
     );
 
     const request = AvalancheSignRequest.fromDataItem(
