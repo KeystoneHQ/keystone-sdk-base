@@ -8,6 +8,7 @@ import {
   CryptoAccount,
 } from "@keystonehq/bc-ur-registry-eth";
 import * as uuid from "uuid";
+import { EthAccount } from "node_modules/@keystonehq/base-eth-keyring/dist/InteractionProvider.cjs";
 
 export type IMemState = ObservableStore<{
   _version: number;
@@ -164,4 +165,8 @@ export class MetamaskInteractionProvider
       sign: {},
     });
   };
+
+  requestAccounts: () => Promise<EthAccount[]> = async (): Promise<EthAccount[]> => {
+    throw new Error("Method not implemented.");
+  }
 }

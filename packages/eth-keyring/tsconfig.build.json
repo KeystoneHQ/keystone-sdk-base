@@ -1,10 +1,20 @@
 {
-    "extends": "../../tsconfig.packages.build.json",
-    "compilerOptions": {
-      "baseUrl": "./",
-      "outDir": "./dist",
-      "rootDir": "./src"
+  "extends": "../../tsconfig.packages.build.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": [
+    "./src",
+    "./types"
+  ],
+  "references": [
+    {
+      "path": "../base-eth-keyring/tsconfig.build.json"
     },
-    "include": ["./src", "./types"]
-  }
-  
+    {
+      "path": "../ur-registry-eth/tsconfig.build.json"
+    }
+  ]
+}

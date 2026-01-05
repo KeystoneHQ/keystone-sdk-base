@@ -1,10 +1,17 @@
 {
-    "extends": "../../tsconfig.packages.build.json",
-    "compilerOptions": {
-      "baseUrl": "./",
-      "outDir": "./dist",
-      "rootDir": "./src"
-    },
-    "include": ["./src", "./types"]
-  }
-  
+  "extends": "../../tsconfig.packages.build.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": [
+    "./src",
+    "./types"
+  ],
+  "references": [
+    {
+      "path": "../ur-registry-evm/tsconfig.build.json"
+    }
+  ]
+}
