@@ -29,9 +29,9 @@ describe("KeystoneUSBKeyring test", () => {
       await keyring.init();
       keyring.setHdPath(KEYSTONE_HD_PATH.LEDGER_LEGACY);
 
-      console.log("keyring", await keyring.getFirstPage());
-      console.log("keyring", await keyring.getNextPage());
-      console.log("keyring", await keyring.getNextPage());
+      // console.log("keyring", await keyring.getFirstPage());
+      // console.log("keyring", await keyring.getNextPage());
+      // console.log("keyring", await keyring.getNextPage());
     } catch (error) {
       console.info("connect keystone to run this test");
     }

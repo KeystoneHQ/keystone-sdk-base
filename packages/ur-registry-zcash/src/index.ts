@@ -2,8 +2,6 @@ import { patchTags } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 export * from "@keystonehq/bc-ur-registry";
 
-
-console.log("Registering Zcash UR Registry Types...");
 patchTags(
   Object.values(ExtendedRegistryTypes)
     .filter(rt => !!rt.getTag())

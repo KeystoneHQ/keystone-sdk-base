@@ -262,7 +262,6 @@ export class KeystoneUSBKeyring implements Keyring {
 
     for (let i = from; i < to; i++) {
       const address = await this.__addressFromIndex(pathBase, i);
-      console.log("address", address);
       accounts.push({
         address,
         balance: null,
