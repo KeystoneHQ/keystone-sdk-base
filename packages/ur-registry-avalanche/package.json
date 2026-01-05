@@ -1,6 +1,6 @@
 {
   "name": "@keystonehq/bc-ur-registry-avalanche",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "bc-ur-registry extension for Avalanche",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
