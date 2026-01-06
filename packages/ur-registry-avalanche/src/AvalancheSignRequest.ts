@@ -4,6 +4,7 @@ import {
   extend,
   DataItemMap,
   CryptoKeypath,
+  PathComponent,
 } from "@keystonehq/bc-ur-registry";
 import { ExtendedRegistryTypes } from "./RegistryType";
 import * as uuid from "uuid";
@@ -87,9 +88,10 @@ export class AvalancheSignRequest extends RegistryItem {
 
   public static constructAvalancheRequest(
     data: Buffer,
-    derivationPath: CryptoKeypath,
+    hdPath: string,
     utxos: AvalancheUtxoData[],
-    requestId?: string | Buffer,
+    xfp: string,
+    requestId?: string | Buffer
   ) {
     let _requestId;
     if (typeof requestId === "string") {
@@ -99,14 +101,28 @@ export class AvalancheSignRequest extends RegistryItem {
     } else {
       _requestId = Buffer.from(uuid.parse(uuid.v4()) as Uint8Array);
     }
+    
     const avalancheUtxos = utxos.map((utxo) =>
       AvalancheUtxo.constructAvalancheUtxo(utxo)
+    );
+
+    const paths = hdPath.replace(/[m|M]\//, "").split("/");
+    const hdpathObject = new CryptoKeypath(
+      paths.map((path) => {
+        const index = parseInt(path.replace("'", ""));
+        let isHardened = false;
+        if (path.endsWith("'")) {
+          isHardened = true;
+        }
+        return new PathComponent({ index, hardened: isHardened });
+      }),
+      Buffer.from(xfp, "hex")
     );
 
     return new AvalancheSignRequest({
       data,
       requestId: _requestId,
-      derivationPath,
+      derivationPath: hdpathObject,
       utxos: avalancheUtxos,
     });
   }
