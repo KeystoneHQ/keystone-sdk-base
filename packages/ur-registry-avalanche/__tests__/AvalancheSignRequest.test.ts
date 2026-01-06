@@ -10,12 +10,13 @@ describe("avalanche-sign-request", () => {
     );
     const derivationPath = "m/44'/133'/0'/0/0";
     const utxos = [];
-    
+    const xfp = '2d0bdabc'
 
     const avalancheSignRequest = AvalancheSignRequest.constructAvalancheRequest(
       avalancheData,
       derivationPath,
-      utxos
+      utxos,
+      xfp
     );
 
     const request = AvalancheSignRequest.fromDataItem(
