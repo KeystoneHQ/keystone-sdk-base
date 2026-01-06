@@ -57,7 +57,11 @@ export class AvalancheSignRequest extends RegistryItem {
     }
 
     map[Keys.signData] = Buffer.from(this.data);
-    map[Keys.derivationPath] = this.derivationPath;
+
+    const keyPath = this.derivationPath.toDataItem();
+    keyPath.setTag(this.derivationPath.getRegistryType().getTag());
+    map[Keys.derivationPath] = keyPath;
+
     map[Keys.utxos] = this.utxos.map((utxo) => {
       const res = utxo.toDataItem();
       res.setTag(utxo.getRegistryType().getTag());
@@ -73,7 +77,7 @@ export class AvalancheSignRequest extends RegistryItem {
       ? map[Keys.requestId].getData()
       : undefined;
     const data = map[Keys.signData];
-    const derivationPath = map[Keys.signData];
+    const derivationPath = CryptoKeypath.fromDataItem(map[Keys.derivationPath]);
     const utxos: AvalancheUtxo[] = map[Keys.utxos].map((utxo: DataItem) =>
       AvalancheUtxo.fromDataItem(utxo)
     );
