@@ -15,20 +15,20 @@ const { RegistryTypes } = extend;
 type signRequestProps = {
   requestId?: Buffer;
   data: Buffer;
-  derivationPath: CryptoKeypath;
+  derivationPaths: CryptoKeypath[];
   utxos: AvalancheUtxo[];
 };
 
 enum Keys {
   requestId = 1,
   signData,
-  derivationPath,
+  derivationPaths,
   utxos,
 }
 export class AvalancheSignRequest extends RegistryItem {
   private requestId?: Buffer;
   private data: Buffer;
-  private derivationPath: CryptoKeypath;
+  private derivationPaths: CryptoKeypath[];
   private utxos: AvalancheUtxo[];
 
 
@@ -38,14 +38,14 @@ export class AvalancheSignRequest extends RegistryItem {
     super();
     this.requestId = args.requestId;
     this.data = args.data;
-    this.derivationPath = args.derivationPath;
+    this.derivationPaths = args.derivationPaths;
     this.utxos = args.utxos;
   }
 
   public getRequestId = () => this.requestId;
   public getSignData = () => this.data;
   public getUtxos = () => this.utxos;
-  public getDerivationPath = () => this.derivationPath;
+  public getDerivationPaths = () => this.derivationPaths;
 
   public toDataItem = () => {
     const map: DataItemMap = {};
@@ -58,9 +58,11 @@ export class AvalancheSignRequest extends RegistryItem {
 
     map[Keys.signData] = Buffer.from(this.data);
 
-    const keyPath = this.derivationPath.toDataItem();
-    keyPath.setTag(this.derivationPath.getRegistryType().getTag());
-    map[Keys.derivationPath] = keyPath;
+    map[Keys.derivationPaths] = this.derivationPaths.map((keypath) => {
+      const item = keypath.toDataItem();
+      item.setTag(keypath.getRegistryType().getTag());
+      return item;
+    });
 
     map[Keys.utxos] = this.utxos.map((utxo) => {
       const res = utxo.toDataItem();
@@ -77,7 +79,9 @@ export class AvalancheSignRequest extends RegistryItem {
       ? map[Keys.requestId].getData()
       : undefined;
     const data = map[Keys.signData];
-    const derivationPath = CryptoKeypath.fromDataItem(map[Keys.derivationPath]);
+    const derivationPaths: CryptoKeypath[] = map[Keys.derivationPaths].map(
+      (item: DataItem) => CryptoKeypath.fromDataItem(item)
+    );
     const utxos: AvalancheUtxo[] = map[Keys.utxos].map((utxo: DataItem) =>
       AvalancheUtxo.fromDataItem(utxo)
     );
@@ -85,14 +89,14 @@ export class AvalancheSignRequest extends RegistryItem {
     return new AvalancheSignRequest({
       requestId,
       data,
-      derivationPath,
+      derivationPaths,
       utxos,
     });
   };
 
   public static constructAvalancheRequest(
     data: Buffer,
-    hdPath: string,
+    hdPaths: string[],
     utxos: AvalancheUtxoData[],
     xfp: string,
     requestId?: string | Buffer
@@ -110,23 +114,22 @@ export class AvalancheSignRequest extends RegistryItem {
       AvalancheUtxo.constructAvalancheUtxo(utxo)
     );
 
-    const paths = hdPath.replace(/[m|M]\//, "").split("/");
-    const hdpathObject = new CryptoKeypath(
-      paths.map((path) => {
-        const index = parseInt(path.replace("'", ""));
-        let isHardened = false;
-        if (path.endsWith("'")) {
-          isHardened = true;
-        }
-        return new PathComponent({ index, hardened: isHardened });
-      }),
-      Buffer.from(xfp, "hex")
-    );
+    const derivationPaths = hdPaths.map(hdPath => {
+      const paths = hdPath.replace(/[m|M]\//, "").split("/");
+      return new CryptoKeypath(
+        paths.map((path) => {
+          const index = parseInt(path.replace(/[^0-9]/g, ""));
+          const isHardened = path.endsWith("'") || path.toLowerCase().endsWith("h");
+          return new PathComponent({ index, hardened: isHardened });
+        }),
+        Buffer.from(xfp, "hex")
+      );
+    });
 
     return new AvalancheSignRequest({
       data,
       requestId: _requestId,
-      derivationPath: hdpathObject,
+      derivationPaths: derivationPaths,
       utxos: avalancheUtxos,
     });
   }
