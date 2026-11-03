@@ -108,7 +108,16 @@ describe("Ethereum public key path validation", () => {
       ).not.toThrow();
     });
 
-    it.each(["44'/60'/1'", "44'/0'/0'", "44'/60'/0'/0"])(
+    it.each(["44'/60'", "44'/60'/1'", "44'/60'/0'/0"])(
+      "accepts an Ethereum-prefixed origin %s",
+      (origin) => {
+        expect(() =>
+          CryptoHDKey.fromCBOR(makeHDKey(origin).toCBOR())
+        ).not.toThrow();
+      }
+    );
+
+    it.each(["44'/0'/0'", "49'/60'/0'", "44'/601'/0'"])(
       "rejects unsupported origin %s",
       (origin) => {
         expectAccountDataError(
@@ -118,11 +127,10 @@ describe("Ethereum public key path validation", () => {
       }
     );
 
-    it("rejects unsupported children paths", () => {
-      expectAccountDataError(
-        () => CryptoHDKey.fromCBOR(makeHDKey("44'/60'/0'", 0, "1/*").toCBOR()),
-        "unsupported Ethereum HD key children path"
-      );
+    it("does not restrict children paths", () => {
+      expect(() =>
+        CryptoHDKey.fromCBOR(makeHDKey("44'/60'/0'", 0, "1/*").toCBOR())
+      ).not.toThrow();
     });
 
     it("rejects a private HD key", () => {
@@ -137,55 +145,32 @@ describe("Ethereum public key path validation", () => {
   });
 
   describe("CryptoAccount", () => {
-    it("accepts the 10 Ledger Live public keys", () => {
-      const decoded = CryptoAccount.fromCBOR(
-        makeAccount((index) => `44'/60'/${index}'/0/0`).toCBOR()
-      );
+    it.each([1, 10, 20])(
+      "accepts %i Ethereum-prefixed public keys",
+      (count) => {
+        const decoded = CryptoAccount.fromCBOR(
+          makeAccount((index) => `44'/60'/${index}'/0/0`, count).toCBOR()
+        );
 
-      expect(decoded).toBeInstanceOf(CryptoAccount);
-      expect(decoded.getOutputDescriptors()).toHaveLength(10);
+        expect(decoded).toBeInstanceOf(CryptoAccount);
+        expect(decoded.getOutputDescriptors()).toHaveLength(count);
+      }
+    );
+
+    it("accepts any suffix after the Ethereum prefix", () => {
+      expect(() =>
+        CryptoAccount.fromCBOR(
+          makeAccount((index) => `44'/60'/0'/${index}`).toCBOR()
+        )
+      ).not.toThrow();
     });
 
-    it("rejects an account that does not contain exactly 10 public keys", () => {
-      expectAccountDataError(
-        () =>
-          CryptoAccount.fromCBOR(
-            makeAccount((index) => `44'/60'/${index}'/0/0`, 9).toCBOR()
-          ),
-        "expected 10 Ethereum public keys, received 9"
-      );
-    });
-
-    it("rejects an index outside 0-9", () => {
-      expectAccountDataError(
-        () =>
-          CryptoAccount.fromCBOR(
-            makeAccount((index) =>
-              index === 9 ? "44'/60'/10'/0/0" : `44'/60'/${index}'/0/0`
-            ).toCBOR()
-          ),
-        "unsupported Ethereum account path"
-      );
-    });
-
-    it("rejects duplicate path indexes", () => {
-      expectAccountDataError(
-        () =>
-          CryptoAccount.fromCBOR(
-            makeAccount(
-              (index) => `44'/60'/${index === 9 ? 8 : index}'/0/0`
-            ).toCBOR()
-          ),
-        "duplicate Ethereum account path index: 8"
-      );
-    });
-
-    it("rejects a Ledger Legacy path", () => {
+    it("rejects a descriptor without the Ethereum prefix", () => {
       expectAccountDataError(
         () =>
           CryptoAccount.fromCBOR(
             makeAccount((index) =>
-              index === 9 ? "44'/60'/0'/9" : `44'/60'/${index}'/0/0`
+              index === 9 ? "44'/61'/0'/0/0" : `44'/60'/${index}'/0/0`
             ).toCBOR()
           ),
         "unsupported Ethereum account path"
