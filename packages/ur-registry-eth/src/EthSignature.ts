@@ -28,8 +28,8 @@ export class ETHSignature extends RegistryItem {
     this.origin = origin;
   }
 
-  public getRequestId = () => this.requestId;
-  public getSignature = () => this.signature;
+  public getRequestId = (): Buffer | undefined => this.requestId;
+  public getSignature = (): Buffer => this.signature;
   public getOrigin = () => this.origin;
 
   public toDataItem = () => {

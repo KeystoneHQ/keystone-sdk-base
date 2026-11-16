@@ -60,14 +60,14 @@ export class EthSignRequest extends RegistryItem {
     this.origin = args.origin;
   }
 
-  public getRequestId = () => this.requestId;
-  public getSignData = () => this.signData;
+  public getRequestId = (): Buffer | undefined => this.requestId;
+  public getSignData = (): Buffer => this.signData;
   public getDataType = () => this.dataType;
   public getChainId = () => this.chainId;
   public getDerivationPath = () => this.derivationPath.getPath();
-  public getSourceFingerprint = () =>
+  public getSourceFingerprint = (): Buffer | undefined =>
     this.derivationPath.getSourceFingerprint();
-  public getSignRequestAddress = () => this.address;
+  public getSignRequestAddress = (): Buffer | undefined => this.address;
   public getOrigin = () => this.origin;
 
   public toDataItem = () => {
