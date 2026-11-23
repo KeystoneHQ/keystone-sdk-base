@@ -81,8 +81,8 @@ const expectAccountDataError = (
       reason: expect.stringContaining(reason),
     });
     expect((error as Error).message).toBe(
-      "This QR code contains unsupported Ethereum account data. " +
-        "Please select a supported derivation path on your Keystone device and scan it again."
+      "QR code error. Return to your hardware wallet, select MetaMask as the wallet type, " +
+        "then generate and scan a new QR code."
     );
   }
 };

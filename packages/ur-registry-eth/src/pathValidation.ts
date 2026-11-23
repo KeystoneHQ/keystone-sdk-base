@@ -6,8 +6,8 @@ export const ETH_ACCOUNT_DATA_ERROR_CODE =
   "KeystoneError#invalid_ethereum_account_data";
 
 const ETH_ACCOUNT_DATA_ERROR_MESSAGE =
-  "This QR code contains unsupported Ethereum account data. " +
-  "Please select a supported derivation path on your Keystone device and scan it again.";
+  "QR code error. Return to your hardware wallet, select MetaMask as the wallet type, " +
+  "then generate and scan a new QR code.";
 
 /** Error raised when a Keystone Ethereum account export fails validation. */
 export class EthereumAccountDataError extends Error {
